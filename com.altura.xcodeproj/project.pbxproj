@@ -1,0 +1,589 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		22A9E67520B0F00C0092E555 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9E67420B0F00C0092E555 /* AppDelegate.swift */; };
+		22A9E67720B0F00C0092E555 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9E67620B0F00C0092E555 /* ViewController.swift */; };
+		22A9E67A20B0F00C0092E555 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22A9E67820B0F00C0092E555 /* Main.storyboard */; };
+		22A9E67C20B0F00E0092E555 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22A9E67B20B0F00E0092E555 /* Assets.xcassets */; };
+		22A9E67F20B0F00E0092E555 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22A9E67D20B0F00E0092E555 /* LaunchScreen.storyboard */; };
+		22A9E68A20B0F00E0092E555 /* com_alturaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9E68920B0F00E0092E555 /* com_alturaTests.swift */; };
+		22A9E69520B0F00E0092E555 /* com_alturaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9E69420B0F00E0092E555 /* com_alturaUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		22A9E68620B0F00E0092E555 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22A9E66920B0F00C0092E555 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22A9E67020B0F00C0092E555;
+			remoteInfo = com.altura;
+		};
+		22A9E69120B0F00E0092E555 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22A9E66920B0F00C0092E555 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22A9E67020B0F00C0092E555;
+			remoteInfo = com.altura;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		22A9E67120B0F00C0092E555 /* com.altura.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = com.altura.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		22A9E67420B0F00C0092E555 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		22A9E67620B0F00C0092E555 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		22A9E67920B0F00C0092E555 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		22A9E67B20B0F00E0092E555 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		22A9E67E20B0F00E0092E555 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		22A9E68020B0F00E0092E555 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22A9E68520B0F00E0092E555 /* com.alturaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = com.alturaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		22A9E68920B0F00E0092E555 /* com_alturaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = com_alturaTests.swift; sourceTree = "<group>"; };
+		22A9E68B20B0F00E0092E555 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22A9E69020B0F00E0092E555 /* com.alturaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = com.alturaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		22A9E69420B0F00E0092E555 /* com_alturaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = com_alturaUITests.swift; sourceTree = "<group>"; };
+		22A9E69620B0F00E0092E555 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		22A9E66E20B0F00C0092E555 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22A9E68220B0F00E0092E555 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22A9E68D20B0F00E0092E555 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		22A9E66820B0F00C0092E555 = {
+			isa = PBXGroup;
+			children = (
+				22A9E67320B0F00C0092E555 /* com.altura */,
+				22A9E68820B0F00E0092E555 /* com.alturaTests */,
+				22A9E69320B0F00E0092E555 /* com.alturaUITests */,
+				22A9E67220B0F00C0092E555 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		22A9E67220B0F00C0092E555 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				22A9E67120B0F00C0092E555 /* com.altura.app */,
+				22A9E68520B0F00E0092E555 /* com.alturaTests.xctest */,
+				22A9E69020B0F00E0092E555 /* com.alturaUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		22A9E67320B0F00C0092E555 /* com.altura */ = {
+			isa = PBXGroup;
+			children = (
+				22A9E67420B0F00C0092E555 /* AppDelegate.swift */,
+				22A9E67620B0F00C0092E555 /* ViewController.swift */,
+				22A9E67820B0F00C0092E555 /* Main.storyboard */,
+				22A9E67B20B0F00E0092E555 /* Assets.xcassets */,
+				22A9E67D20B0F00E0092E555 /* LaunchScreen.storyboard */,
+				22A9E68020B0F00E0092E555 /* Info.plist */,
+			);
+			path = com.altura;
+			sourceTree = "<group>";
+		};
+		22A9E68820B0F00E0092E555 /* com.alturaTests */ = {
+			isa = PBXGroup;
+			children = (
+				22A9E68920B0F00E0092E555 /* com_alturaTests.swift */,
+				22A9E68B20B0F00E0092E555 /* Info.plist */,
+			);
+			path = com.alturaTests;
+			sourceTree = "<group>";
+		};
+		22A9E69320B0F00E0092E555 /* com.alturaUITests */ = {
+			isa = PBXGroup;
+			children = (
+				22A9E69420B0F00E0092E555 /* com_alturaUITests.swift */,
+				22A9E69620B0F00E0092E555 /* Info.plist */,
+			);
+			path = com.alturaUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		22A9E67020B0F00C0092E555 /* com.altura */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22A9E69920B0F00E0092E555 /* Build configuration list for PBXNativeTarget "com.altura" */;
+			buildPhases = (
+				22A9E66D20B0F00C0092E555 /* Sources */,
+				22A9E66E20B0F00C0092E555 /* Frameworks */,
+				22A9E66F20B0F00C0092E555 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = com.altura;
+			productName = com.altura;
+			productReference = 22A9E67120B0F00C0092E555 /* com.altura.app */;
+			productType = "com.apple.product-type.application";
+		};
+		22A9E68420B0F00E0092E555 /* com.alturaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22A9E69C20B0F00E0092E555 /* Build configuration list for PBXNativeTarget "com.alturaTests" */;
+			buildPhases = (
+				22A9E68120B0F00E0092E555 /* Sources */,
+				22A9E68220B0F00E0092E555 /* Frameworks */,
+				22A9E68320B0F00E0092E555 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				22A9E68720B0F00E0092E555 /* PBXTargetDependency */,
+			);
+			name = com.alturaTests;
+			productName = com.alturaTests;
+			productReference = 22A9E68520B0F00E0092E555 /* com.alturaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		22A9E68F20B0F00E0092E555 /* com.alturaUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22A9E69F20B0F00E0092E555 /* Build configuration list for PBXNativeTarget "com.alturaUITests" */;
+			buildPhases = (
+				22A9E68C20B0F00E0092E555 /* Sources */,
+				22A9E68D20B0F00E0092E555 /* Frameworks */,
+				22A9E68E20B0F00E0092E555 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				22A9E69220B0F00E0092E555 /* PBXTargetDependency */,
+			);
+			name = com.alturaUITests;
+			productName = com.alturaUITests;
+			productReference = 22A9E69020B0F00E0092E555 /* com.alturaUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		22A9E66920B0F00C0092E555 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0930;
+				LastUpgradeCheck = 0930;
+				ORGANIZATIONNAME = "altura s.a.";
+				TargetAttributes = {
+					22A9E67020B0F00C0092E555 = {
+						CreatedOnToolsVersion = 9.3.1;
+					};
+					22A9E68420B0F00E0092E555 = {
+						CreatedOnToolsVersion = 9.3.1;
+						TestTargetID = 22A9E67020B0F00C0092E555;
+					};
+					22A9E68F20B0F00E0092E555 = {
+						CreatedOnToolsVersion = 9.3.1;
+						TestTargetID = 22A9E67020B0F00C0092E555;
+					};
+				};
+			};
+			buildConfigurationList = 22A9E66C20B0F00C0092E555 /* Build configuration list for PBXProject "com.altura" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 22A9E66820B0F00C0092E555;
+			productRefGroup = 22A9E67220B0F00C0092E555 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				22A9E67020B0F00C0092E555 /* com.altura */,
+				22A9E68420B0F00E0092E555 /* com.alturaTests */,
+				22A9E68F20B0F00E0092E555 /* com.alturaUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		22A9E66F20B0F00C0092E555 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22A9E67F20B0F00E0092E555 /* LaunchScreen.storyboard in Resources */,
+				22A9E67C20B0F00E0092E555 /* Assets.xcassets in Resources */,
+				22A9E67A20B0F00C0092E555 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22A9E68320B0F00E0092E555 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22A9E68E20B0F00E0092E555 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		22A9E66D20B0F00C0092E555 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22A9E67720B0F00C0092E555 /* ViewController.swift in Sources */,
+				22A9E67520B0F00C0092E555 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22A9E68120B0F00E0092E555 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22A9E68A20B0F00E0092E555 /* com_alturaTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22A9E68C20B0F00E0092E555 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22A9E69520B0F00E0092E555 /* com_alturaUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		22A9E68720B0F00E0092E555 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22A9E67020B0F00C0092E555 /* com.altura */;
+			targetProxy = 22A9E68620B0F00E0092E555 /* PBXContainerItemProxy */;
+		};
+		22A9E69220B0F00E0092E555 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22A9E67020B0F00C0092E555 /* com.altura */;
+			targetProxy = 22A9E69120B0F00E0092E555 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		22A9E67820B0F00C0092E555 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				22A9E67920B0F00C0092E555 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		22A9E67D20B0F00E0092E555 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				22A9E67E20B0F00E0092E555 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		22A9E69720B0F00E0092E555 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		22A9E69820B0F00E0092E555 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		22A9E69A20B0F00E0092E555 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JQS4797YPX;
+				INFOPLIST_FILE = com.altura/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.altura.com-altura";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		22A9E69B20B0F00E0092E555 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JQS4797YPX;
+				INFOPLIST_FILE = com.altura/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.altura.com-altura";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		22A9E69D20B0F00E0092E555 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JQS4797YPX;
+				INFOPLIST_FILE = com.alturaTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.altura.com-alturaTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/com.altura.app/com.altura";
+			};
+			name = Debug;
+		};
+		22A9E69E20B0F00E0092E555 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JQS4797YPX;
+				INFOPLIST_FILE = com.alturaTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.altura.com-alturaTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/com.altura.app/com.altura";
+			};
+			name = Release;
+		};
+		22A9E6A020B0F00E0092E555 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JQS4797YPX;
+				INFOPLIST_FILE = com.alturaUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.altura.com-alturaUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = com.altura;
+			};
+			name = Debug;
+		};
+		22A9E6A120B0F00E0092E555 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JQS4797YPX;
+				INFOPLIST_FILE = com.alturaUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.altura.com-alturaUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = com.altura;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		22A9E66C20B0F00C0092E555 /* Build configuration list for PBXProject "com.altura" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22A9E69720B0F00E0092E555 /* Debug */,
+				22A9E69820B0F00E0092E555 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22A9E69920B0F00E0092E555 /* Build configuration list for PBXNativeTarget "com.altura" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22A9E69A20B0F00E0092E555 /* Debug */,
+				22A9E69B20B0F00E0092E555 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22A9E69C20B0F00E0092E555 /* Build configuration list for PBXNativeTarget "com.alturaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22A9E69D20B0F00E0092E555 /* Debug */,
+				22A9E69E20B0F00E0092E555 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22A9E69F20B0F00E0092E555 /* Build configuration list for PBXNativeTarget "com.alturaUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22A9E6A020B0F00E0092E555 /* Debug */,
+				22A9E6A120B0F00E0092E555 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 22A9E66920B0F00C0092E555 /* Project object */;
+}
