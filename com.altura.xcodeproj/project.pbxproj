@@ -14,6 +14,13 @@
 		22A9E67F20B0F00E0092E555 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22A9E67D20B0F00E0092E555 /* LaunchScreen.storyboard */; };
 		22A9E68A20B0F00E0092E555 /* com_alturaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9E68920B0F00E0092E555 /* com_alturaTests.swift */; };
 		22A9E69520B0F00E0092E555 /* com_alturaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9E69420B0F00E0092E555 /* com_alturaUITests.swift */; };
+		22A9E6BA20B0F1670092E555 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A9E6AD20B0F1530092E555 /* SQLite.framework */; };
+		22A9E6BB20B0F1710092E555 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A9E6AD20B0F1530092E555 /* SQLite.framework */; };
+		22A9E6BC20B0F1710092E555 /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22A9E6AD20B0F1530092E555 /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22A9E6C820B0FB450092E555 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9E6C720B0FB450092E555 /* RegisterController.swift */; };
+		22A9E6CA20B0FB580092E555 /* RegisterSecondController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9E6C920B0FB580092E555 /* RegisterSecondController.swift */; };
+		244251CE80250B1BABDF6024 /* Pods_com_alturaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD04EB6EB4DE2B96EA077F75 /* Pods_com_alturaTests.framework */; };
+		8DC85133A78B2ACAC48F3564 /* Pods_com_alturaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D1502CEE0946CFA3899161 /* Pods_com_alturaUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,7 +38,77 @@
 			remoteGlobalIDString = 22A9E67020B0F00C0092E555;
 			remoteInfo = com.altura;
 		};
+		22A9E6AC20B0F1530092E555 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22A9E6A220B0F1530092E555 /* SQLite.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EE247AD31C3F04ED00AE3E12;
+			remoteInfo = "SQLite iOS";
+		};
+		22A9E6AE20B0F1530092E555 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22A9E6A220B0F1530092E555 /* SQLite.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EE247ADD1C3F04ED00AE3E12;
+			remoteInfo = "SQLiteTests iOS";
+		};
+		22A9E6B020B0F1530092E555 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22A9E6A220B0F1530092E555 /* SQLite.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EE247B3C1C3F3ED000AE3E12;
+			remoteInfo = "SQLite Mac";
+		};
+		22A9E6B220B0F1530092E555 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22A9E6A220B0F1530092E555 /* SQLite.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EE247B451C3F3ED000AE3E12;
+			remoteInfo = "SQLiteTests Mac";
+		};
+		22A9E6B420B0F1530092E555 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22A9E6A220B0F1530092E555 /* SQLite.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 03A65E5A1C6BB0F50062603F;
+			remoteInfo = "SQLite tvOS";
+		};
+		22A9E6B620B0F1530092E555 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22A9E6A220B0F1530092E555 /* SQLite.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 03A65E631C6BB0F60062603F;
+			remoteInfo = "SQLiteTests tvOS";
+		};
+		22A9E6B820B0F1530092E555 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22A9E6A220B0F1530092E555 /* SQLite.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A121AC451CA35C79005A31D1;
+			remoteInfo = "SQLite watchOS";
+		};
+		22A9E6BD20B0F1710092E555 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22A9E6A220B0F1530092E555 /* SQLite.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = EE247AD21C3F04ED00AE3E12;
+			remoteInfo = "SQLite iOS";
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		22A9E6BF20B0F1710092E555 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				22A9E6BC20B0F1710092E555 /* SQLite.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		22A9E67120B0F00C0092E555 /* com.altura.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = com.altura.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,6 +124,18 @@
 		22A9E69020B0F00E0092E555 /* com.alturaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = com.alturaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22A9E69420B0F00E0092E555 /* com_alturaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = com_alturaUITests.swift; sourceTree = "<group>"; };
 		22A9E69620B0F00E0092E555 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22A9E6A220B0F1530092E555 /* SQLite.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SQLite.xcodeproj; path = "../SQLite.swift-master/SQLite.xcodeproj"; sourceTree = "<group>"; };
+		22A9E6C720B0FB450092E555 /* RegisterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
+		22A9E6C920B0FB580092E555 /* RegisterSecondController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterSecondController.swift; sourceTree = "<group>"; };
+		285946791D70D0170180E5A6 /* Pods-com.altura.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-com.altura.debug.xcconfig"; path = "Pods/Target Support Files/Pods-com.altura/Pods-com.altura.debug.xcconfig"; sourceTree = "<group>"; };
+		4B40B132115B7728717FC549 /* Pods-com.alturaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-com.alturaUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-com.alturaUITests/Pods-com.alturaUITests.release.xcconfig"; sourceTree = "<group>"; };
+		60B27FDD74928DBB538F9A3F /* Pods-com.altura.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-com.altura.release.xcconfig"; path = "Pods/Target Support Files/Pods-com.altura/Pods-com.altura.release.xcconfig"; sourceTree = "<group>"; };
+		68D1502CEE0946CFA3899161 /* Pods_com_alturaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_com_alturaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6FD02E28B4A4C33542244656 /* Pods_com_altura.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_com_altura.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD04EB6EB4DE2B96EA077F75 /* Pods_com_alturaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_com_alturaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD52E49F0E008705186B2EB1 /* Pods-com.alturaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-com.alturaTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-com.alturaTests/Pods-com.alturaTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E3F75EA6EC4F5AA9CC7FC3F8 /* Pods-com.alturaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-com.alturaTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-com.alturaTests/Pods-com.alturaTests.release.xcconfig"; sourceTree = "<group>"; };
+		F40982D73DFC76D4954884BF /* Pods-com.alturaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-com.alturaUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-com.alturaUITests/Pods-com.alturaUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +143,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22A9E6BA20B0F1670092E555 /* SQLite.framework in Frameworks */,
+				22A9E6BB20B0F1710092E555 /* SQLite.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +152,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				244251CE80250B1BABDF6024 /* Pods_com_alturaTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +160,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DC85133A78B2ACAC48F3564 /* Pods_com_alturaUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +174,9 @@
 				22A9E68820B0F00E0092E555 /* com.alturaTests */,
 				22A9E69320B0F00E0092E555 /* com.alturaUITests */,
 				22A9E67220B0F00C0092E555 /* Products */,
+				22A9E6A220B0F1530092E555 /* SQLite.xcodeproj */,
+				2D5F57DB861FFAF5AE539C06 /* Pods */,
+				8A69A1C968961235C898160F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,6 +195,8 @@
 			children = (
 				22A9E67420B0F00C0092E555 /* AppDelegate.swift */,
 				22A9E67620B0F00C0092E555 /* ViewController.swift */,
+				22A9E6C720B0FB450092E555 /* RegisterController.swift */,
+				22A9E6C920B0FB580092E555 /* RegisterSecondController.swift */,
 				22A9E67820B0F00C0092E555 /* Main.storyboard */,
 				22A9E67B20B0F00E0092E555 /* Assets.xcassets */,
 				22A9E67D20B0F00E0092E555 /* LaunchScreen.storyboard */,
@@ -125,6 +223,43 @@
 			path = com.alturaUITests;
 			sourceTree = "<group>";
 		};
+		22A9E6A320B0F1530092E555 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				22A9E6AD20B0F1530092E555 /* SQLite.framework */,
+				22A9E6AF20B0F1530092E555 /* SQLiteTests iOS.xctest */,
+				22A9E6B120B0F1530092E555 /* SQLite.framework */,
+				22A9E6B320B0F1530092E555 /* SQLiteTests Mac.xctest */,
+				22A9E6B520B0F1530092E555 /* SQLite.framework */,
+				22A9E6B720B0F1530092E555 /* SQLiteTests tvOS.xctest */,
+				22A9E6B920B0F1530092E555 /* SQLite.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2D5F57DB861FFAF5AE539C06 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				285946791D70D0170180E5A6 /* Pods-com.altura.debug.xcconfig */,
+				60B27FDD74928DBB538F9A3F /* Pods-com.altura.release.xcconfig */,
+				CD52E49F0E008705186B2EB1 /* Pods-com.alturaTests.debug.xcconfig */,
+				E3F75EA6EC4F5AA9CC7FC3F8 /* Pods-com.alturaTests.release.xcconfig */,
+				F40982D73DFC76D4954884BF /* Pods-com.alturaUITests.debug.xcconfig */,
+				4B40B132115B7728717FC549 /* Pods-com.alturaUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		8A69A1C968961235C898160F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6FD02E28B4A4C33542244656 /* Pods_com_altura.framework */,
+				AD04EB6EB4DE2B96EA077F75 /* Pods_com_alturaTests.framework */,
+				68D1502CEE0946CFA3899161 /* Pods_com_alturaUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,13 +267,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22A9E69920B0F00E0092E555 /* Build configuration list for PBXNativeTarget "com.altura" */;
 			buildPhases = (
+				1464B8C92F6A9B8B7B99ACA7 /* [CP] Check Pods Manifest.lock */,
 				22A9E66D20B0F00C0092E555 /* Sources */,
 				22A9E66E20B0F00C0092E555 /* Frameworks */,
 				22A9E66F20B0F00C0092E555 /* Resources */,
+				1C2B0305C1493E17290DC0ED /* [CP] Embed Pods Frameworks */,
+				22A9E6BF20B0F1710092E555 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				22A9E6BE20B0F1710092E555 /* PBXTargetDependency */,
 			);
 			name = com.altura;
 			productName = com.altura;
@@ -149,6 +288,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22A9E69C20B0F00E0092E555 /* Build configuration list for PBXNativeTarget "com.alturaTests" */;
 			buildPhases = (
+				5DEAB9BAB3DA69461D766058 /* [CP] Check Pods Manifest.lock */,
 				22A9E68120B0F00E0092E555 /* Sources */,
 				22A9E68220B0F00E0092E555 /* Frameworks */,
 				22A9E68320B0F00E0092E555 /* Resources */,
@@ -167,6 +307,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22A9E69F20B0F00E0092E555 /* Build configuration list for PBXNativeTarget "com.alturaUITests" */;
 			buildPhases = (
+				03CA113E60EC322D12227711 /* [CP] Check Pods Manifest.lock */,
 				22A9E68C20B0F00E0092E555 /* Sources */,
 				22A9E68D20B0F00E0092E555 /* Frameworks */,
 				22A9E68E20B0F00E0092E555 /* Resources */,
@@ -189,7 +330,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0930;
 				LastUpgradeCheck = 0930;
-				ORGANIZATIONNAME = "altura s.a.";
+				ORGANIZATIONNAME = "Altura S.A.";
 				TargetAttributes = {
 					22A9E67020B0F00C0092E555 = {
 						CreatedOnToolsVersion = 9.3.1;
@@ -215,6 +356,12 @@
 			mainGroup = 22A9E66820B0F00C0092E555;
 			productRefGroup = 22A9E67220B0F00C0092E555 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 22A9E6A320B0F1530092E555 /* Products */;
+					ProjectRef = 22A9E6A220B0F1530092E555 /* SQLite.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				22A9E67020B0F00C0092E555 /* com.altura */,
@@ -223,6 +370,58 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		22A9E6AD20B0F1530092E555 /* SQLite.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SQLite.framework;
+			remoteRef = 22A9E6AC20B0F1530092E555 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		22A9E6AF20B0F1530092E555 /* SQLiteTests iOS.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SQLiteTests iOS.xctest";
+			remoteRef = 22A9E6AE20B0F1530092E555 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		22A9E6B120B0F1530092E555 /* SQLite.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SQLite.framework;
+			remoteRef = 22A9E6B020B0F1530092E555 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		22A9E6B320B0F1530092E555 /* SQLiteTests Mac.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SQLiteTests Mac.xctest";
+			remoteRef = 22A9E6B220B0F1530092E555 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		22A9E6B520B0F1530092E555 /* SQLite.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SQLite.framework;
+			remoteRef = 22A9E6B420B0F1530092E555 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		22A9E6B720B0F1530092E555 /* SQLiteTests tvOS.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SQLiteTests tvOS.xctest";
+			remoteRef = 22A9E6B620B0F1530092E555 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		22A9E6B920B0F1530092E555 /* SQLite.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SQLite.framework;
+			remoteRef = 22A9E6B820B0F1530092E555 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		22A9E66F20B0F00C0092E555 /* Resources */ = {
@@ -251,6 +450,81 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		03CA113E60EC322D12227711 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-com.alturaUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1464B8C92F6A9B8B7B99ACA7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-com.altura-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1C2B0305C1493E17290DC0ED /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-com.altura/Pods-com.altura-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-com.altura/Pods-com.altura-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5DEAB9BAB3DA69461D766058 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-com.alturaTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		22A9E66D20B0F00C0092E555 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -258,6 +532,8 @@
 			files = (
 				22A9E67720B0F00C0092E555 /* ViewController.swift in Sources */,
 				22A9E67520B0F00C0092E555 /* AppDelegate.swift in Sources */,
+				22A9E6CA20B0FB580092E555 /* RegisterSecondController.swift in Sources */,
+				22A9E6C820B0FB450092E555 /* RegisterController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,6 +565,11 @@
 			isa = PBXTargetDependency;
 			target = 22A9E67020B0F00C0092E555 /* com.altura */;
 			targetProxy = 22A9E69120B0F00E0092E555 /* PBXContainerItemProxy */;
+		};
+		22A9E6BE20B0F1710092E555 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "SQLite iOS";
+			targetProxy = 22A9E6BD20B0F1710092E555 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -428,7 +709,9 @@
 		};
 		22A9E69A20B0F00E0092E555 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 285946791D70D0170180E5A6 /* Pods-com.altura.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JQS4797YPX;
@@ -446,7 +729,9 @@
 		};
 		22A9E69B20B0F00E0092E555 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 60B27FDD74928DBB538F9A3F /* Pods-com.altura.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JQS4797YPX;
@@ -464,6 +749,7 @@
 		};
 		22A9E69D20B0F00E0092E555 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD52E49F0E008705186B2EB1 /* Pods-com.alturaTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -485,6 +771,7 @@
 		};
 		22A9E69E20B0F00E0092E555 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E3F75EA6EC4F5AA9CC7FC3F8 /* Pods-com.alturaTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -506,6 +793,7 @@
 		};
 		22A9E6A020B0F00E0092E555 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F40982D73DFC76D4954884BF /* Pods-com.alturaUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -526,6 +814,7 @@
 		};
 		22A9E6A120B0F00E0092E555 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4B40B132115B7728717FC549 /* Pods-com.alturaUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
