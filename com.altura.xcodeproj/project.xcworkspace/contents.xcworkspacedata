@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:com.altura.xcodeproj">
+      location = "self:/Users/adrianaguilar/Desktop/altura apps/com.altura/com.altura.xcodeproj">
    </FileRef>
 </Workspace>

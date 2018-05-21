@@ -86,6 +86,7 @@ class ViewController: UIViewController {
             if(status_t){
                 self.btn_in.isEnabled = true
                 self.btn_reg.isEnabled = true
+                self.printAllUsers()
                 print("Tablas creadas correctamente")
             }else{
                 self.btn_in.isEnabled = false
@@ -162,8 +163,14 @@ class ViewController: UIViewController {
                 txt_alert = "Error.."
                 self.showAlert();
             }else{
-                txt_alert = "Ingresa"
-                self.showAlert();
+                // entra e la app
+                navigateToApp()
+                
+                //let indexController = IndexController()
+                //self.present(indexController, animated: true)
+                
+                //txt_alert = "Ingresa"
+                //self.showAlert();
                 //ingresa a las ventadas  como usuario registrado
             }
             
@@ -181,8 +188,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func optionTwo(_ sender: Any) {
-        txt_alert = "Opcion 2";
-        self.showAlert();
+        let number = "0997396690"
+        Utils.call(number: number)
+        //txt_alert = "Opcion 2";
+        //self.showAlert();
     }
     
     @IBAction func optionOne(_ sender: Any) {
@@ -204,7 +213,7 @@ class ViewController: UIViewController {
             .filter(email_user_T == usr)
         do{
             let request = Array(try self.db.prepare(sql))
-            print(request)
+            //print(request)
             if(request.count > 0){
                 for us in request {
                     do {
@@ -224,13 +233,13 @@ class ViewController: UIViewController {
                     }
                 }
                 if (self.user.pass == pass){
-                    return 1
+                    return 1 //usuario existe y esta correcto
                 }else{
-                    return 2
+                    return 2 // contraseña incorrecta
                 }
                 
             }else{
-                return 3
+                return 3 // usuario no existe
             }
             
         }catch{
@@ -288,6 +297,7 @@ class ViewController: UIViewController {
         sleep(4)
     }
     
+    //funcion que se ejcuta cuando no existe mucha memoria en el dispositivo
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -308,6 +318,51 @@ class ViewController: UIViewController {
     }
     
     
+    //imprime todos los usuarios registrados
+    func printAllUsers(){
+        print("entra todos usuarios")
+        do{
+            for user in try db.prepare(usersT) {
+                print("id: \(user[id_usersT]), email: \(user[email_user_T]), name: \(user[name_userT]),  pass: \(user[password_user_T])")
+                // id: 1, email: alice@mac.com, name: Optional("Alice")
+            }
+        }catch{
+            print("error whi")
+            print(error)
+        }
+    }
+    
+    private func navigateToApp(){
+        
+        /*let mainStoryBoard = UIStoryboard(name: "main", bundle: Bundle.main)
+        
+        guard let mainNavigaion: UIViewController?  = mainStoryBoard.instantiateViewController(withIdentifier: "mainNavigationController") else{
+            return
+        }
+        
+        self.present(mainNavigaion!, animated: true, completion: nil)*/
+        
+        
+        let mainNavigationController = self.storyboard?.instantiateViewController(withIdentifier: "mainNavigationController") as! MainNavigationController
+        self.present(mainNavigationController, animated: true, completion: nil)
+    }
+    
+    
 }
 
+class Utils: NSObject {
+    class func call(number: String) {
+        print("entra en llamada")
+        let num = "tel://" + number
+        //if let url = NSURL(string: num) {
+        if let url = URL(string: num) {
+            
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(url , options: [:], completionHandler: nil)
+            } else {
+                UIApplication.shared.openURL(url)
+            }
+        }
+    }
+}
 

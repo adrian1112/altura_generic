@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		225772F220B25E85006CFB3B /* IndexController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225772F120B25E85006CFB3B /* IndexController.swift */; };
+		225772F420B26AC6006CFB3B /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225772F320B26AC6006CFB3B /* MainNavigationController.swift */; };
 		22A9E67520B0F00C0092E555 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9E67420B0F00C0092E555 /* AppDelegate.swift */; };
 		22A9E67720B0F00C0092E555 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9E67620B0F00C0092E555 /* ViewController.swift */; };
 		22A9E67A20B0F00C0092E555 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22A9E67820B0F00C0092E555 /* Main.storyboard */; };
@@ -111,6 +113,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		225772F120B25E85006CFB3B /* IndexController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexController.swift; sourceTree = "<group>"; };
+		225772F320B26AC6006CFB3B /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		22A9E67120B0F00C0092E555 /* com.altura.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = com.altura.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22A9E67420B0F00C0092E555 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22A9E67620B0F00C0092E555 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -201,6 +205,8 @@
 				22A9E67B20B0F00E0092E555 /* Assets.xcassets */,
 				22A9E67D20B0F00E0092E555 /* LaunchScreen.storyboard */,
 				22A9E68020B0F00E0092E555 /* Info.plist */,
+				225772F120B25E85006CFB3B /* IndexController.swift */,
+				225772F320B26AC6006CFB3B /* MainNavigationController.swift */,
 			);
 			path = com.altura;
 			sourceTree = "<group>";
@@ -530,10 +536,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				225772F420B26AC6006CFB3B /* MainNavigationController.swift in Sources */,
 				22A9E67720B0F00C0092E555 /* ViewController.swift in Sources */,
 				22A9E67520B0F00C0092E555 /* AppDelegate.swift in Sources */,
 				22A9E6CA20B0FB580092E555 /* RegisterSecondController.swift in Sources */,
 				22A9E6C820B0FB450092E555 /* RegisterController.swift in Sources */,
+				225772F220B25E85006CFB3B /* IndexController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
