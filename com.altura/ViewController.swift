@@ -12,11 +12,15 @@ import SQLite
 
 
 struct User: Decodable {
-    let id: Int?
-    let name: String?
+    let id_user: Int?
+    let document: String?
+    let person: String?
     let email: String?
-    let gender: String?
-    let pass: String?
+    let phone: String?
+    let sync_date: String?
+    let adress: String?
+    let status: Int?
+    let error: String?
     
 }
 
@@ -152,7 +156,8 @@ class ViewController: UIViewController {
         let user_name = user_txt.text!
         let pass = pass_txt.text!
         if(user_name != "" && pass != ""){
-            let ok = self.loadUsersDB(usr: user_name, pass: pass)
+            let ok = self.loadUsers(usr_id: user_name, pass: pass)
+            //let ok = self.loadUsersDB(usr: user_name, pass: pass)
             if(ok == 2){
                 txt_alert = "Usuario o Contraseña Inválidos"
                 self.showAlert();
@@ -165,13 +170,6 @@ class ViewController: UIViewController {
             }else{
                 // entra e la app
                 navigateToApp()
-                
-                //let indexController = IndexController()
-                //self.present(indexController, animated: true)
-                
-                //txt_alert = "Ingresa"
-                //self.showAlert();
-                //ingresa a las ventadas  como usuario registrado
             }
             
         }
@@ -194,10 +192,6 @@ class ViewController: UIViewController {
         //self.showAlert();
     }
     
-    @IBAction func optionOne(_ sender: Any) {
-        txt_alert = "Opcion 1";
-        self.showAlert();
-    }
     @IBAction func optionThree(_ sender: Any) {
         txt_alert = "Opcion 3";
         self.showAlert();
@@ -207,6 +201,7 @@ class ViewController: UIViewController {
         self.showAlert();
     }
     
+    //Cargar usuario mediante DB
     func loadUsersDB(usr:String , pass:String) -> Int {
         
         let sql = self.usersT.select(id_usersT,name_userT,email_user_T,identifier_user_T,address_user_T,telephone_user_T,contract_user_T,password_user_T)
@@ -251,15 +246,17 @@ class ViewController: UIViewController {
     
     
     //funcion para cargar todos los usuarios mediante webservices json
-    func loadUsers(usr_id:String){
+    func loadUsers(usr_id:String , pass: String) -> Int{
         print("entra en load user")
         
-        let jsn_url = "http://localhost:3004/Users/"+usr_id
+        let jsn_url = "http://54.86.88.196/aclientTest/e?q=action%3Dlogin%26mail%3D\(usr_id)%26pass%3D\(pass)%26os_type%3D1%26imei%3D111"
         
         
         guard let url = URL(string: jsn_url)
-            else{return}
+            else{return 4}
         print(url)
+        
+        var req = 4;
         
         //con sem detengo toda la aplicacion hasta que  termine la funcion que contiene sem.signal() , esto no puede ser util si  se depende de internet ya que detendria todo y se quedara congelado
         //let sem = DispatchSemaphore(value: 0)
@@ -273,11 +270,20 @@ class ViewController: UIViewController {
             
             do{
                 let user =  try JSONDecoder().decode(User.self, from: data)
-                print(user.name as Any)
-                if((user.id) != nil){
-                    self.txt_alert = "usuario:"+user.name!
+                print(user.person as Any)
+                if((user.status) != nil && user.status! > 0){
+                    
+                    if(user.status == 1 ){
+                        req = 2
+                        //self.txt_alert = "Cuenta no validada mediante correo"
+                    }else{
+                        req = 1
+                        //self.txt_alert = "usuario:"+user.person!
+                    }
+                    
                 }else{
-                    self.txt_alert = "El usuario no existe"
+                    req = 3
+                    //self.txt_alert = "El usuario no existe"
                 }
                 
                 /*
@@ -287,14 +293,17 @@ class ViewController: UIViewController {
                  */
             }catch let errJson {
                 print(errJson);
-                self.txt_alert = "El usuario no existe"
+                req = 4
+                //self.txt_alert = "El usuario no existe"
             }
             //sem.signal()
             
             }.resume()
         
         //sem.wait()
+        
         sleep(4)
+        return req
     }
     
     //funcion que se ejcuta cuando no existe mucha memoria en el dispositivo
@@ -333,16 +342,6 @@ class ViewController: UIViewController {
     }
     
     private func navigateToApp(){
-        
-        /*let mainStoryBoard = UIStoryboard(name: "main", bundle: Bundle.main)
-        
-        guard let mainNavigaion: UIViewController?  = mainStoryBoard.instantiateViewController(withIdentifier: "mainNavigationController") else{
-            return
-        }
-        
-        self.present(mainNavigaion!, animated: true, completion: nil)*/
-        
-        
         let mainNavigationController = self.storyboard?.instantiateViewController(withIdentifier: "mainNavigationController") as! MainNavigationController
         self.present(mainNavigationController, animated: true, completion: nil)
     }
