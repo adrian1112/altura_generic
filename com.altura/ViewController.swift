@@ -24,6 +24,11 @@ struct User: Decodable {
     
 }
 
+struct UserLogin {
+    let id_user: Int?
+    let email: String?
+}
+
 struct UserDB {
     var id: Int?
     var name: String?
@@ -46,6 +51,7 @@ class ViewController: UIViewController {
     
     let status: Bool = false
     var db: Connection!
+    //tabla Usuarios-----------------------------------------------
     let usersT = Table("usuarios")
     let id_usersT = Expression<Int>("id")
     let name_userT = Expression<String>("nombre")
@@ -55,7 +61,14 @@ class ViewController: UIViewController {
     let telephone_user_T = Expression<String>("telefono")
     let contract_user_T = Expression<String>("contrato")
     let password_user_T = Expression<String>("contrasena")
+    //tabla usuario logeados--------------------------------------
+    let usersLoginT = Table("usuarios_logeados")
+    let id_users_l_T = Expression<Int>("id")
+    let person_l_T = Expression<String>("persona")
+    var email_l_T = Expression<String>("email")
+    let date_l_T = Expression<String>("fecha_ingreso")
     
+    var user_in = User(id_user: 0, document: "", person: "", email: "", phone: "", sync_date: "", adress: "", status: 0, error: "")
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
@@ -134,8 +147,30 @@ class ViewController: UIViewController {
             table.column(self.password_user_T)
         }
         
+        let createTableUsersLogin = self.usersLoginT.create { (table) in
+            table.column(self.id_users_l_T)
+            table.column(self.person_l_T)
+            table.column(self.email_l_T)
+            table.column(self.date_l_T)
+        }
+        
         do{
             try self.db.run(createTableUsers)
+            print("Tabla creada")
+        }catch let Result.error(message, code, statement){
+            if( code == 1){
+                print("tabla ya existe")
+            }else{
+                ok = false
+                print(" * constraint failed: \(message), in \(statement) , code \(code)")
+            }
+        }catch{
+            ok = false
+            print(error)
+        }
+        
+        do{
+            try self.db.run(createTableUsersLogin)
             print("Tabla creada")
         }catch let Result.error(message, code, statement){
             if( code == 1){
@@ -169,7 +204,8 @@ class ViewController: UIViewController {
                 self.showAlert();
             }else{
                 // entra e la app
-                navigateToApp()
+                self.inserUserLogin()
+                self.navigateToApp()
             }
             
         }
@@ -192,10 +228,6 @@ class ViewController: UIViewController {
         //self.showAlert();
     }
     
-    @IBAction func optionThree(_ sender: Any) {
-        txt_alert = "Opcion 3";
-        self.showAlert();
-    }
     @IBAction func optionFour(_ sender: Any) {
         txt_alert = "Opcion 4";
         self.showAlert();
@@ -272,7 +304,7 @@ class ViewController: UIViewController {
                 let user =  try JSONDecoder().decode(User.self, from: data)
                 print(user.person as Any)
                 if((user.status) != nil && user.status! > 0){
-                    
+                    self.user_in = user
                     if(user.status == 1 ){
                         req = 2
                         //self.txt_alert = "Cuenta no validada mediante correo"
@@ -344,6 +376,24 @@ class ViewController: UIViewController {
     private func navigateToApp(){
         let mainNavigationController = self.storyboard?.instantiateViewController(withIdentifier: "mainNavigationController") as! MainNavigationController
         self.present(mainNavigationController, animated: true, completion: nil)
+    }
+    
+    
+    func inserUserLogin(){
+        print("entra log")
+        print("usuario: \(self.user_in.id_user) ,email: \(self.user_txt.text), persona: \(self.user_in.person), fecha: \(self.user_in.sync_date)")
+        
+        let insertUser_l = self.usersLoginT.insert(self.id_users_l_T <- self.user_in.id_user!,self.email_l_T <- self.user_txt.text!, self.person_l_T <- self.user_in.person!, self.date_l_T <- self.user_in.sync_date!)
+        do{
+            try self.db.run(insertUser_l)
+            print("sSe ingreso el usuario log correctamente")
+        }catch let Result.error(message, code, statement){
+            print("mensaje: \(message), codigo: \(code), statment: \(statement) ")
+        }catch {
+            print(error)
+        }
+        
+        
     }
     
     

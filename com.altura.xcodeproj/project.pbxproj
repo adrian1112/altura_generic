@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		221CC55820BBA4EA00CFC265 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221CC55720BBA4EA00CFC265 /* SecondViewController.swift */; };
 		225772F220B25E85006CFB3B /* IndexController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225772F120B25E85006CFB3B /* IndexController.swift */; };
 		225772F420B26AC6006CFB3B /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225772F320B26AC6006CFB3B /* MainNavigationController.swift */; };
 		225772F820B3C841006CFB3B /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225772F720B3C841006CFB3B /* CustomCollectionViewCell.swift */; };
@@ -115,6 +116,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		221CC55720BBA4EA00CFC265 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		225772F120B25E85006CFB3B /* IndexController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexController.swift; sourceTree = "<group>"; };
 		225772F320B26AC6006CFB3B /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		225772F720B3C841006CFB3B /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				225772F320B26AC6006CFB3B /* MainNavigationController.swift */,
 				225772F720B3C841006CFB3B /* CustomCollectionViewCell.swift */,
 				225772F920B3C8BB006CFB3B /* FirstOptionViewController.swift */,
+				221CC55720BBA4EA00CFC265 /* SecondViewController.swift */,
 			);
 			path = com.altura;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				22A9E66F20B0F00C0092E555 /* Resources */,
 				1C2B0305C1493E17290DC0ED /* [CP] Embed Pods Frameworks */,
 				22A9E6BF20B0F1710092E555 /* Embed Frameworks */,
+				4C5FBF73B16E8746F9421516 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -517,6 +521,26 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-com.altura/Pods-com.altura-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		4C5FBF73B16E8746F9421516 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-com.altura/Pods-com.altura-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-com.altura/Pods-com.altura-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		5DEAB9BAB3DA69461D766058 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -545,6 +569,7 @@
 				225772F420B26AC6006CFB3B /* MainNavigationController.swift in Sources */,
 				225772F820B3C841006CFB3B /* CustomCollectionViewCell.swift in Sources */,
 				225772FA20B3C8BB006CFB3B /* FirstOptionViewController.swift in Sources */,
+				221CC55820BBA4EA00CFC265 /* SecondViewController.swift in Sources */,
 				22A9E67720B0F00C0092E555 /* ViewController.swift in Sources */,
 				22A9E67520B0F00C0092E555 /* AppDelegate.swift in Sources */,
 				22A9E6CA20B0FB580092E555 /* RegisterSecondController.swift in Sources */,

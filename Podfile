@@ -4,8 +4,12 @@
 target 'com.altura' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
-  pod 'SQLite.swift', '~> 0.11.5'
   # Pods for com.altura
+  pod 'SQLite.swift', '~> 0.11.5'
+  source 'https://github.com/CocoaPods/Specs.git'
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
+
 
   target 'com.alturaTests' do
     inherit! :search_paths
