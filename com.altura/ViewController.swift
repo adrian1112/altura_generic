@@ -361,10 +361,21 @@ class ViewController: UIViewController {
     
     //imprime todos los usuarios registrados
     func printAllUsers(){
-        print("entra todos usuarios")
+        print("muestra todos usuarios")
         do{
             for user in try db.prepare(usersT) {
                 print("id: \(user[id_usersT]), email: \(user[email_user_T]), name: \(user[name_userT]),  pass: \(user[password_user_T])")
+                // id: 1, email: alice@maVc.com, name: Optional("Alice")
+            }
+        }catch{
+            print("error whi")
+            print(error)
+        }
+        
+        print("muestra todos logins")
+        do{
+            for user in try db.prepare(usersLoginT) {
+                print("id: \(user[id_users_l_T]), email: \(user[email_l_T]), name: \(user[person_l_T]),  date: \(user[date_l_T])")
                 // id: 1, email: alice@mac.com, name: Optional("Alice")
             }
         }catch{

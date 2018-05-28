@@ -107,9 +107,8 @@ class RegisterSecondController: UIViewController {
     
     func redirectLogin(status: Int){
         if(status == 1){
-            let viewController = self.storyboard?.instantiateViewController(withIdentifier: "ViewController") as! ViewController
-            self.present(viewController, animated: true)
-            
+            let viewController = self.storyboard?.instantiateViewController(withIdentifier: "initController") as! InitController
+            self.present(viewController, animated: true, completion: nil)
         }else if( status == 2){
             
         }else{

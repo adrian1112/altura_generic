@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		221CC55820BBA4EA00CFC265 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221CC55720BBA4EA00CFC265 /* SecondViewController.swift */; };
+		221CC56220BC481000CFC265 /* InitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221CC56120BC481000CFC265 /* InitController.swift */; };
 		225772F220B25E85006CFB3B /* IndexController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225772F120B25E85006CFB3B /* IndexController.swift */; };
 		225772F420B26AC6006CFB3B /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225772F320B26AC6006CFB3B /* MainNavigationController.swift */; };
 		225772F820B3C841006CFB3B /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225772F720B3C841006CFB3B /* CustomCollectionViewCell.swift */; };
@@ -117,6 +118,7 @@
 
 /* Begin PBXFileReference section */
 		221CC55720BBA4EA00CFC265 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		221CC56120BC481000CFC265 /* InitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitController.swift; sourceTree = "<group>"; };
 		225772F120B25E85006CFB3B /* IndexController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexController.swift; sourceTree = "<group>"; };
 		225772F320B26AC6006CFB3B /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		225772F720B3C841006CFB3B /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				225772F720B3C841006CFB3B /* CustomCollectionViewCell.swift */,
 				225772F920B3C8BB006CFB3B /* FirstOptionViewController.swift */,
 				221CC55720BBA4EA00CFC265 /* SecondViewController.swift */,
+				221CC56120BC481000CFC265 /* InitController.swift */,
 			);
 			path = com.altura;
 			sourceTree = "<group>";
@@ -573,6 +576,7 @@
 				22A9E67720B0F00C0092E555 /* ViewController.swift in Sources */,
 				22A9E67520B0F00C0092E555 /* AppDelegate.swift in Sources */,
 				22A9E6CA20B0FB580092E555 /* RegisterSecondController.swift in Sources */,
+				221CC56220BC481000CFC265 /* InitController.swift in Sources */,
 				22A9E6C820B0FB450092E555 /* RegisterController.swift in Sources */,
 				225772F220B25E85006CFB3B /* IndexController.swift in Sources */,
 			);
@@ -757,6 +761,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JQS4797YPX;
 				INFOPLIST_FILE = com.altura/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -777,6 +782,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JQS4797YPX;
 				INFOPLIST_FILE = com.altura/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
