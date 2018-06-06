@@ -25,7 +25,7 @@ class IndexController: UIViewController {
     
     @IBAction func LogOut(_ sender: Any) {
         
-        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "ViewController") as! ViewController
+        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "initController") as! InitController
         self.present(viewController, animated: true)
     }
 

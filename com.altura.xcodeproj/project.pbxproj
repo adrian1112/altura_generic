@@ -13,6 +13,10 @@
 		225772F420B26AC6006CFB3B /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225772F320B26AC6006CFB3B /* MainNavigationController.swift */; };
 		225772F820B3C841006CFB3B /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225772F720B3C841006CFB3B /* CustomCollectionViewCell.swift */; };
 		225772FA20B3C8BB006CFB3B /* FirstOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225772F920B3C8BB006CFB3B /* FirstOptionViewController.swift */; };
+		228804CE20C8462100C94AAC /* WService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228804CD20C8462100C94AAC /* WService.swift */; };
+		228804D020C84CDB00C94AAC /* DBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228804CF20C84CDB00C94AAC /* DBase.swift */; };
+		228804D420C8622C00C94AAC /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 228804D320C8622C00C94AAC /* CryptoSwift.framework */; };
+		228804DE20C8636D00C94AAC /* Crypt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228804DD20C8636D00C94AAC /* Crypt.swift */; };
 		22A9E67520B0F00C0092E555 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9E67420B0F00C0092E555 /* AppDelegate.swift */; };
 		22A9E67720B0F00C0092E555 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9E67620B0F00C0092E555 /* ViewController.swift */; };
 		22A9E67A20B0F00C0092E555 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22A9E67820B0F00C0092E555 /* Main.storyboard */; };
@@ -26,6 +30,7 @@
 		22A9E6C820B0FB450092E555 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9E6C720B0FB450092E555 /* RegisterController.swift */; };
 		22A9E6CA20B0FB580092E555 /* RegisterSecondController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9E6C920B0FB580092E555 /* RegisterSecondController.swift */; };
 		244251CE80250B1BABDF6024 /* Pods_com_alturaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD04EB6EB4DE2B96EA077F75 /* Pods_com_alturaTests.framework */; };
+		48C78DCA3A554E1AD8F2E8F0 /* Pods_com_altura.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD02E28B4A4C33542244656 /* Pods_com_altura.framework */; };
 		8DC85133A78B2ACAC48F3564 /* Pods_com_alturaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D1502CEE0946CFA3899161 /* Pods_com_alturaUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -123,6 +128,10 @@
 		225772F320B26AC6006CFB3B /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		225772F720B3C841006CFB3B /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
 		225772F920B3C8BB006CFB3B /* FirstOptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstOptionViewController.swift; sourceTree = "<group>"; };
+		228804CD20C8462100C94AAC /* WService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WService.swift; sourceTree = "<group>"; };
+		228804CF20C84CDB00C94AAC /* DBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBase.swift; sourceTree = "<group>"; };
+		228804D320C8622C00C94AAC /* CryptoSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CryptoSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		228804DD20C8636D00C94AAC /* Crypt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypt.swift; sourceTree = "<group>"; };
 		22A9E67120B0F00C0092E555 /* com.altura.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = com.altura.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22A9E67420B0F00C0092E555 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22A9E67620B0F00C0092E555 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -155,8 +164,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				228804D420C8622C00C94AAC /* CryptoSwift.framework in Frameworks */,
 				22A9E6BA20B0F1670092E555 /* SQLite.framework in Frameworks */,
 				22A9E6BB20B0F1710092E555 /* SQLite.framework in Frameworks */,
+				48C78DCA3A554E1AD8F2E8F0 /* Pods_com_altura.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,6 +190,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		228804C620C845C300C94AAC /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				228804CD20C8462100C94AAC /* WService.swift */,
+				228804CF20C84CDB00C94AAC /* DBase.swift */,
+				228804DD20C8636D00C94AAC /* Crypt.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		22A9E66820B0F00C0092E555 = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +226,7 @@
 		22A9E67320B0F00C0092E555 /* com.altura */ = {
 			isa = PBXGroup;
 			children = (
+				228804C620C845C300C94AAC /* Utils */,
 				22A9E67420B0F00C0092E555 /* AppDelegate.swift */,
 				22A9E67620B0F00C0092E555 /* ViewController.swift */,
 				22A9E6C720B0FB450092E555 /* RegisterController.swift */,
@@ -271,6 +293,7 @@
 		8A69A1C968961235C898160F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				228804D320C8622C00C94AAC /* CryptoSwift.framework */,
 				6FD02E28B4A4C33542244656 /* Pods_com_altura.framework */,
 				AD04EB6EB4DE2B96EA077F75 /* Pods_com_alturaTests.framework */,
 				68D1502CEE0946CFA3899161 /* Pods_com_alturaUITests.framework */,
@@ -513,10 +536,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-com.altura/Pods-com.altura-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -570,12 +595,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				225772F420B26AC6006CFB3B /* MainNavigationController.swift in Sources */,
+				228804DE20C8636D00C94AAC /* Crypt.swift in Sources */,
+				228804D020C84CDB00C94AAC /* DBase.swift in Sources */,
 				225772F820B3C841006CFB3B /* CustomCollectionViewCell.swift in Sources */,
 				225772FA20B3C8BB006CFB3B /* FirstOptionViewController.swift in Sources */,
 				221CC55820BBA4EA00CFC265 /* SecondViewController.swift in Sources */,
 				22A9E67720B0F00C0092E555 /* ViewController.swift in Sources */,
 				22A9E67520B0F00C0092E555 /* AppDelegate.swift in Sources */,
 				22A9E6CA20B0FB580092E555 /* RegisterSecondController.swift in Sources */,
+				228804CE20C8462100C94AAC /* WService.swift in Sources */,
 				221CC56220BC481000CFC265 /* InitController.swift in Sources */,
 				22A9E6C820B0FB450092E555 /* RegisterController.swift in Sources */,
 				225772F220B25E85006CFB3B /* IndexController.swift in Sources */,

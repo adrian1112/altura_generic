@@ -1,4 +1,5 @@
 PODS:
+  - CryptoSwift (0.9.0)
   - GoogleMaps (2.7.0):
     - GoogleMaps/Maps (= 2.7.0)
   - GoogleMaps/Base (2.7.0)
@@ -11,21 +12,24 @@ PODS:
   - SQLite.swift/standard (0.11.5)
 
 DEPENDENCIES:
+  - CryptoSwift
   - GoogleMaps
   - GooglePlaces
   - SQLite.swift (~> 0.11.5)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - CryptoSwift
     - GoogleMaps
     - GooglePlaces
     - SQLite.swift
 
 SPEC CHECKSUMS:
+  CryptoSwift: bca8c5b653dcc2d9734409242a070ff53bafac86
   GoogleMaps: f79af95cb24d869457b1f961c93d3ce8b2f3b848
   GooglePlaces: 3d06e6c99654545b4738ce49648745779c25f2ef
   SQLite.swift: 6e5356850bb1791459f8c16d6ee9195b28714a2e
 
-PODFILE CHECKSUM: c69655217276fbaa644a98653e204bc5beb2d208
+PODFILE CHECKSUM: 1778f2f944a1caa0e2d06870e717ba5cb197fe0e
 
 COCOAPODS: 1.5.2

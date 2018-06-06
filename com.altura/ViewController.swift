@@ -9,6 +9,7 @@
 import UIKit
 import SQLite
 // import Alamofire
+import CryptoSwift
 
 
 struct User: Decodable {
@@ -42,6 +43,10 @@ struct UserDB {
 
 class ViewController: UIViewController {
     
+    //dependencias
+    let ws = WService();
+    let dbase = DBase();
+    
     @IBOutlet weak var user_txt: UITextField!
     @IBOutlet weak var pass_txt: UITextField!
     @IBOutlet weak var btn_in: UIButton!
@@ -51,22 +56,7 @@ class ViewController: UIViewController {
     
     let status: Bool = false
     var db: Connection!
-    //tabla Usuarios-----------------------------------------------
-    let usersT = Table("usuarios")
-    let id_usersT = Expression<Int>("id")
-    let name_userT = Expression<String>("nombre")
-    var email_user_T = Expression<String>("email")
-    let identifier_user_T = Expression<String>("cedula")
-    let address_user_T = Expression<String>("direccion")
-    let telephone_user_T = Expression<String>("telefono")
-    let contract_user_T = Expression<String>("contrato")
-    let password_user_T = Expression<String>("contrasena")
-    //tabla usuario logeados--------------------------------------
-    let usersLoginT = Table("usuarios_logeados")
-    let id_users_l_T = Expression<Int>("id")
-    let person_l_T = Expression<String>("persona")
-    var email_l_T = Expression<String>("email")
-    let date_l_T = Expression<String>("fecha_ingreso")
+    
     
     var user_in = User(id_user: 0, document: "", person: "", email: "", phone: "", sync_date: "", adress: "", status: 0, error: "")
     
@@ -81,7 +71,7 @@ class ViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "login_register" {
             let login = segue.destination as! RegisterController
-            login.db = self.db
+            //login.db = self.db
         }
     }
     
@@ -97,13 +87,17 @@ class ViewController: UIViewController {
         btn_reg.layer.borderColor = UIColor(red:28/255, green:81/255, blue:221/255, alpha: 1).cgColor
         // Do any additional setup after loading the view, typically from a nib.
         
-        let status = self.connect_db()
-        if( status ){
-            let status_t = self.createTables()
+        
+        
+        let status = dbase.connect_db()
+        if( status.value ){
+            self.db = status.conec;
+            
+            let status_t = dbase.createTables()
             if(status_t){
                 self.btn_in.isEnabled = true
                 self.btn_reg.isEnabled = true
-                self.printAllUsers()
+                dbase.printAllUsers()
                 print("Tablas creadas correctamente")
             }else{
                 self.btn_in.isEnabled = false
@@ -117,94 +111,40 @@ class ViewController: UIViewController {
         }
     }
     
-    //creo conexion a la base
-    func connect_db() -> Bool{
-        do{
-            let directoryBase = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-            let file_db = directoryBase.appendingPathComponent("altura").appendingPathExtension("sqlite3")
-            
-            let database = try Connection(file_db.path)
-            self.db = database
-            return true
-        }catch{
-            print(error)
-            return false
-        }
-    }
+       
     
-    func createTables() -> Bool{
-        var ok = true
-        
-        print("Creando tablas ..")
-        let createTableUsers = self.usersT.create { (table) in
-            table.column(self.id_usersT, primaryKey: .autoincrement)
-            table.column(self.name_userT)
-            table.column(self.email_user_T, unique: true)
-            table.column(self.identifier_user_T)
-            table.column(self.address_user_T)
-            table.column(self.telephone_user_T)
-            table.column(self.contract_user_T)
-            table.column(self.password_user_T)
-        }
-        
-        let createTableUsersLogin = self.usersLoginT.create { (table) in
-            table.column(self.id_users_l_T)
-            table.column(self.person_l_T)
-            table.column(self.email_l_T)
-            table.column(self.date_l_T)
-        }
-        
-        do{
-            try self.db.run(createTableUsers)
-            print("Tabla creada")
-        }catch let Result.error(message, code, statement){
-            if( code == 1){
-                print("tabla ya existe")
-            }else{
-                ok = false
-                print(" * constraint failed: \(message), in \(statement) , code \(code)")
-            }
-        }catch{
-            ok = false
-            print(error)
-        }
-        
-        do{
-            try self.db.run(createTableUsersLogin)
-            print("Tabla creada")
-        }catch let Result.error(message, code, statement){
-            if( code == 1){
-                print("tabla ya existe")
-            }else{
-                ok = false
-                print(" * constraint failed: \(message), in \(statement) , code \(code)")
-            }
-        }catch{
-            ok = false
-            print(error)
-        }
-        
-        return ok
-    }
     
     @IBAction func logIn(_ sender: Any) {
         let user_name = user_txt.text!
         let pass = pass_txt.text!
+        print(user_name,pass)
         if(user_name != "" && pass != ""){
-            let ok = self.loadUsers(usr_id: user_name, pass: pass)
+            let usr_encrypt = user_name;
+            let pass_encrypt = pass;
+            
+            let key = "AlturaServicesSA" // length == 32
+            let iv = "gqLOHUioQ0QjhuvI" // length == 16
+            let s = "string to encrypt"
+            let enc = try! usr_encrypt.aesEncrypt(key: key, iv: iv)
+            let enc2 = try! enc.aesDecrypt(key: key, iv: iv)
+            
+            print(enc,enc2)
+            
+            let ok = ws.loadUser(usr_id: user_name, pass: pass)
             //let ok = self.loadUsersDB(usr: user_name, pass: pass)
-            if(ok == 2){
+            if(ok.value == 2){
                 txt_alert = "Usuario o Contraseña Inválidos"
                 self.showAlert();
-            }else if( ok == 3){
+            }else if( ok.value == 3){
                 txt_alert = "Usuario no registrado"
                 self.showAlert();
-            }else if( ok == 4){
+            }else if( ok.value == 5){
                 txt_alert = "Error.."
                 self.showAlert();
             }else{
                 // entra e la app
-                self.inserUserLogin()
+                self.user_in = ok.user;
+                dbase.inserUserLogin(user_in: self.user_in)
                 self.navigateToApp()
             }
             
@@ -233,110 +173,10 @@ class ViewController: UIViewController {
         self.showAlert();
     }
     
-    //Cargar usuario mediante DB
-    func loadUsersDB(usr:String , pass:String) -> Int {
-        
-        let sql = self.usersT.select(id_usersT,name_userT,email_user_T,identifier_user_T,address_user_T,telephone_user_T,contract_user_T,password_user_T)
-            .filter(email_user_T == usr)
-        do{
-            let request = Array(try self.db.prepare(sql))
-            //print(request)
-            if(request.count > 0){
-                for us in request {
-                    do {
-                        print("name: \(try us.get(id_usersT))")
-                        self.user.id = try us.get(id_usersT)
-                        self.user.addresss = try us.get(address_user_T)
-                        self.user.contract = try us.get(contract_user_T)
-                        self.user.email = try us.get(email_user_T)
-                        self.user.identifier = try us.get(identifier_user_T)
-                        self.user.name = try us.get(name_userT)
-                        self.user.telephone = try us.get(telephone_user_T)
-                        self.user.pass = try us.get(password_user_T)
-                        
-                    } catch {
-                        print(error)
-                        return 4
-                    }
-                }
-                if (self.user.pass == pass){
-                    return 1 //usuario existe y esta correcto
-                }else{
-                    return 2 // contraseña incorrecta
-                }
-                
-            }else{
-                return 3 // usuario no existe
-            }
-            
-        }catch{
-            print(error)
-        }
-        
-        return 1
-    }
     
     
-    //funcion para cargar todos los usuarios mediante webservices json
-    func loadUsers(usr_id:String , pass: String) -> Int{
-        print("entra en load user")
-        
-        let jsn_url = "http://54.86.88.196/aclientTest/e?q=action%3Dlogin%26mail%3D\(usr_id)%26pass%3D\(pass)%26os_type%3D1%26imei%3D111"
-        
-        
-        guard let url = URL(string: jsn_url)
-            else{return 4}
-        print(url)
-        
-        var req = 4;
-        
-        //con sem detengo toda la aplicacion hasta que  termine la funcion que contiene sem.signal() , esto no puede ser util si  se depende de internet ya que detendria todo y se quedara congelado
-        //let sem = DispatchSemaphore(value: 0)
-        
-        URLSession.shared.dataTask(with: url){ (data , response ,err ) in
-            
-            guard let data = data else {return}
-            
-            let dataAsString = String(data: data, encoding: .utf8)
-            // print(dataAsString)
-            
-            do{
-                let user =  try JSONDecoder().decode(User.self, from: data)
-                print(user.person as Any)
-                if((user.status) != nil && user.status! > 0){
-                    self.user_in = user
-                    if(user.status == 1 ){
-                        req = 2
-                        //self.txt_alert = "Cuenta no validada mediante correo"
-                    }else{
-                        req = 1
-                        //self.txt_alert = "usuario:"+user.person!
-                    }
-                    
-                }else{
-                    req = 3
-                    //self.txt_alert = "El usuario no existe"
-                }
-                
-                /*
-                 // swift 2/3/objetice C
-                 let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
-                 print(json)
-                 */
-            }catch let errJson {
-                print(errJson);
-                req = 4
-                //self.txt_alert = "El usuario no existe"
-            }
-            //sem.signal()
-            
-            }.resume()
-        
-        //sem.wait()
-        
-        sleep(4)
-        return req
-    }
+    
+    
     
     //funcion que se ejcuta cuando no existe mucha memoria en el dispositivo
     override func didReceiveMemoryWarning() {
@@ -359,30 +199,7 @@ class ViewController: UIViewController {
     }
     
     
-    //imprime todos los usuarios registrados
-    func printAllUsers(){
-        print("muestra todos usuarios")
-        do{
-            for user in try db.prepare(usersT) {
-                print("id: \(user[id_usersT]), email: \(user[email_user_T]), name: \(user[name_userT]),  pass: \(user[password_user_T])")
-                // id: 1, email: alice@maVc.com, name: Optional("Alice")
-            }
-        }catch{
-            print("error whi")
-            print(error)
-        }
-        
-        print("muestra todos logins")
-        do{
-            for user in try db.prepare(usersLoginT) {
-                print("id: \(user[id_users_l_T]), email: \(user[email_l_T]), name: \(user[person_l_T]),  date: \(user[date_l_T])")
-                // id: 1, email: alice@mac.com, name: Optional("Alice")
-            }
-        }catch{
-            print("error whi")
-            print(error)
-        }
-    }
+    
     
     private func navigateToApp(){
         let mainNavigationController = self.storyboard?.instantiateViewController(withIdentifier: "mainNavigationController") as! MainNavigationController
@@ -390,22 +207,7 @@ class ViewController: UIViewController {
     }
     
     
-    func inserUserLogin(){
-        print("entra log")
-        print("usuario: \(self.user_in.id_user) ,email: \(self.user_txt.text), persona: \(self.user_in.person), fecha: \(self.user_in.sync_date)")
-        
-        let insertUser_l = self.usersLoginT.insert(self.id_users_l_T <- self.user_in.id_user!,self.email_l_T <- self.user_txt.text!, self.person_l_T <- self.user_in.person!, self.date_l_T <- self.user_in.sync_date!)
-        do{
-            try self.db.run(insertUser_l)
-            print("sSe ingreso el usuario log correctamente")
-        }catch let Result.error(message, code, statement){
-            print("mensaje: \(message), codigo: \(code), statment: \(statement) ")
-        }catch {
-            print(error)
-        }
-        
-        
-    }
+    
     
     
 }

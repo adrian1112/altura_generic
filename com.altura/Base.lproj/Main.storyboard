@@ -35,7 +35,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <state key="normal" title="¿Ya tienes una cuenta?"/>
                                 <connections>
-                                    <segue destination="xFa-il-a7N" kind="unwind" unwindAction="fromRegisterViewWithSegue:" id="Rnt-wz-AzE"/>
+                                    <segue destination="pRB-sR-G55" kind="show" id="xy5-7f-Dgu"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="equalSpacing" alignment="center" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="yBy-S5-Ezy">
@@ -136,7 +136,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cDr-bG-Xhh" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="xFa-il-a7N" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="754" y="-681"/>
         </scene>

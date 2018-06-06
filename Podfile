@@ -9,7 +9,7 @@ target 'com.altura' do
   source 'https://github.com/CocoaPods/Specs.git'
   pod 'GoogleMaps'
   pod 'GooglePlaces'
-
+  pod 'CryptoSwift'
 
   target 'com.alturaTests' do
     inherit! :search_paths
