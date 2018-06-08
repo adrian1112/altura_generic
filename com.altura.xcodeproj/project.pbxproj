@@ -9,18 +9,21 @@
 /* Begin PBXBuildFile section */
 		221CC55820BBA4EA00CFC265 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221CC55720BBA4EA00CFC265 /* SecondViewController.swift */; };
 		221CC56220BC481000CFC265 /* InitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221CC56120BC481000CFC265 /* InitController.swift */; };
+		224419C620CB183D008D90C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 224419BF20CB183D008D90C4 /* Assets.xcassets */; };
+		224419ED20CB1EE6008D90C4 /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 224419E420CB1EAB008D90C4 /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		225772F220B25E85006CFB3B /* IndexController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225772F120B25E85006CFB3B /* IndexController.swift */; };
 		225772F420B26AC6006CFB3B /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225772F320B26AC6006CFB3B /* MainNavigationController.swift */; };
 		225772F820B3C841006CFB3B /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225772F720B3C841006CFB3B /* CustomCollectionViewCell.swift */; };
 		225772FA20B3C8BB006CFB3B /* FirstOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225772F920B3C8BB006CFB3B /* FirstOptionViewController.swift */; };
 		228804CE20C8462100C94AAC /* WService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228804CD20C8462100C94AAC /* WService.swift */; };
 		228804D020C84CDB00C94AAC /* DBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228804CF20C84CDB00C94AAC /* DBase.swift */; };
-		228804D420C8622C00C94AAC /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 228804D320C8622C00C94AAC /* CryptoSwift.framework */; };
 		228804DE20C8636D00C94AAC /* Crypt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228804DD20C8636D00C94AAC /* Crypt.swift */; };
+		228804E420C9D4C500C94AAC /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228804E320C9D4C500C94AAC /* ThirdViewController.swift */; };
+		228804E620C9DEF300C94AAC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 228804E520C9DEF300C94AAC /* MapKit.framework */; };
+		228804E820C9E4F600C94AAC /* PinMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228804E720C9E4F600C94AAC /* PinMap.swift */; };
 		22A9E67520B0F00C0092E555 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9E67420B0F00C0092E555 /* AppDelegate.swift */; };
 		22A9E67720B0F00C0092E555 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9E67620B0F00C0092E555 /* ViewController.swift */; };
 		22A9E67A20B0F00C0092E555 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22A9E67820B0F00C0092E555 /* Main.storyboard */; };
-		22A9E67C20B0F00E0092E555 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22A9E67B20B0F00E0092E555 /* Assets.xcassets */; };
 		22A9E67F20B0F00E0092E555 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22A9E67D20B0F00E0092E555 /* LaunchScreen.storyboard */; };
 		22A9E68A20B0F00E0092E555 /* com_alturaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9E68920B0F00E0092E555 /* com_alturaTests.swift */; };
 		22A9E69520B0F00E0092E555 /* com_alturaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9E69420B0F00E0092E555 /* com_alturaUITests.swift */; };
@@ -30,11 +33,52 @@
 		22A9E6C820B0FB450092E555 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9E6C720B0FB450092E555 /* RegisterController.swift */; };
 		22A9E6CA20B0FB580092E555 /* RegisterSecondController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9E6C920B0FB580092E555 /* RegisterSecondController.swift */; };
 		244251CE80250B1BABDF6024 /* Pods_com_alturaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD04EB6EB4DE2B96EA077F75 /* Pods_com_alturaTests.framework */; };
-		48C78DCA3A554E1AD8F2E8F0 /* Pods_com_altura.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD02E28B4A4C33542244656 /* Pods_com_altura.framework */; };
 		8DC85133A78B2ACAC48F3564 /* Pods_com_alturaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D1502CEE0946CFA3899161 /* Pods_com_alturaUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		224419E320CB1EAB008D90C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 224419DB20CB1EAB008D90C4 /* CryptoSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 754BE45519693E190098E6F3;
+			remoteInfo = CryptoSwift;
+		};
+		224419E520CB1EAB008D90C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 224419DB20CB1EAB008D90C4 /* CryptoSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 75211F92207249D8004E41F8;
+			remoteInfo = "CryptoSwift-TestHostApp";
+		};
+		224419E720CB1EAB008D90C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 224419DB20CB1EAB008D90C4 /* CryptoSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 754BE46019693E190098E6F3;
+			remoteInfo = Tests;
+		};
+		224419E920CB1EAB008D90C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 224419DB20CB1EAB008D90C4 /* CryptoSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7595C14A2072E48C00EA1A5F;
+			remoteInfo = "TestsPerformance-Mac";
+		};
+		224419EB20CB1EAB008D90C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 224419DB20CB1EAB008D90C4 /* CryptoSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7564F0602072EAEB00CA5A96;
+			remoteInfo = "TestsPerformance-iOS";
+		};
+		224419EE20CB1F03008D90C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 224419DB20CB1EAB008D90C4 /* CryptoSwift.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 754BE45419693E190098E6F3;
+			remoteInfo = CryptoSwift;
+		};
 		22A9E68620B0F00E0092E555 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 22A9E66920B0F00C0092E555 /* Project object */;
@@ -114,6 +158,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				224419ED20CB1EE6008D90C4 /* CryptoSwift.framework in Embed Frameworks */,
 				22A9E6BC20B0F1710092E555 /* SQLite.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -124,6 +169,8 @@
 /* Begin PBXFileReference section */
 		221CC55720BBA4EA00CFC265 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		221CC56120BC481000CFC265 /* InitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitController.swift; sourceTree = "<group>"; };
+		224419BF20CB183D008D90C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		224419DB20CB1EAB008D90C4 /* CryptoSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CryptoSwift.xcodeproj; path = CryptoSwift/CryptoSwift.xcodeproj; sourceTree = "<group>"; };
 		225772F120B25E85006CFB3B /* IndexController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexController.swift; sourceTree = "<group>"; };
 		225772F320B26AC6006CFB3B /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		225772F720B3C841006CFB3B /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -132,11 +179,13 @@
 		228804CF20C84CDB00C94AAC /* DBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBase.swift; sourceTree = "<group>"; };
 		228804D320C8622C00C94AAC /* CryptoSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CryptoSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		228804DD20C8636D00C94AAC /* Crypt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypt.swift; sourceTree = "<group>"; };
+		228804E320C9D4C500C94AAC /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
+		228804E520C9DEF300C94AAC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		228804E720C9E4F600C94AAC /* PinMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinMap.swift; sourceTree = "<group>"; };
 		22A9E67120B0F00C0092E555 /* com.altura.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = com.altura.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22A9E67420B0F00C0092E555 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22A9E67620B0F00C0092E555 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		22A9E67920B0F00C0092E555 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		22A9E67B20B0F00E0092E555 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22A9E67E20B0F00E0092E555 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		22A9E68020B0F00E0092E555 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22A9E68520B0F00E0092E555 /* com.alturaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = com.alturaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -164,10 +213,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				228804D420C8622C00C94AAC /* CryptoSwift.framework in Frameworks */,
+				228804E620C9DEF300C94AAC /* MapKit.framework in Frameworks */,
 				22A9E6BA20B0F1670092E555 /* SQLite.framework in Frameworks */,
 				22A9E6BB20B0F1710092E555 /* SQLite.framework in Frameworks */,
-				48C78DCA3A554E1AD8F2E8F0 /* Pods_com_altura.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,12 +238,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		224419DC20CB1EAB008D90C4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				224419E420CB1EAB008D90C4 /* CryptoSwift.framework */,
+				224419E620CB1EAB008D90C4 /* CryptoSwift-TestHostApp.app */,
+				224419E820CB1EAB008D90C4 /* Tests.xctest */,
+				224419EA20CB1EAB008D90C4 /* TestsPerformance-Mac.xctest */,
+				224419EC20CB1EAB008D90C4 /* TestsPerformance-iOS.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		228804C620C845C300C94AAC /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 				228804CD20C8462100C94AAC /* WService.swift */,
 				228804CF20C84CDB00C94AAC /* DBase.swift */,
 				228804DD20C8636D00C94AAC /* Crypt.swift */,
+				228804E720C9E4F600C94AAC /* PinMap.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -203,6 +264,7 @@
 		22A9E66820B0F00C0092E555 = {
 			isa = PBXGroup;
 			children = (
+				224419DB20CB1EAB008D90C4 /* CryptoSwift.xcodeproj */,
 				22A9E67320B0F00C0092E555 /* com.altura */,
 				22A9E68820B0F00E0092E555 /* com.alturaTests */,
 				22A9E69320B0F00E0092E555 /* com.alturaUITests */,
@@ -232,15 +294,16 @@
 				22A9E6C720B0FB450092E555 /* RegisterController.swift */,
 				22A9E6C920B0FB580092E555 /* RegisterSecondController.swift */,
 				22A9E67820B0F00C0092E555 /* Main.storyboard */,
-				22A9E67B20B0F00E0092E555 /* Assets.xcassets */,
 				22A9E67D20B0F00E0092E555 /* LaunchScreen.storyboard */,
-				22A9E68020B0F00E0092E555 /* Info.plist */,
 				225772F120B25E85006CFB3B /* IndexController.swift */,
 				225772F320B26AC6006CFB3B /* MainNavigationController.swift */,
 				225772F720B3C841006CFB3B /* CustomCollectionViewCell.swift */,
 				225772F920B3C8BB006CFB3B /* FirstOptionViewController.swift */,
 				221CC55720BBA4EA00CFC265 /* SecondViewController.swift */,
 				221CC56120BC481000CFC265 /* InitController.swift */,
+				228804E320C9D4C500C94AAC /* ThirdViewController.swift */,
+				22A9E68020B0F00E0092E555 /* Info.plist */,
+				224419BF20CB183D008D90C4 /* Assets.xcassets */,
 			);
 			path = com.altura;
 			sourceTree = "<group>";
@@ -293,6 +356,7 @@
 		8A69A1C968961235C898160F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				228804E520C9DEF300C94AAC /* MapKit.framework */,
 				228804D320C8622C00C94AAC /* CryptoSwift.framework */,
 				6FD02E28B4A4C33542244656 /* Pods_com_altura.framework */,
 				AD04EB6EB4DE2B96EA077F75 /* Pods_com_alturaTests.framework */,
@@ -319,6 +383,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				224419EF20CB1F03008D90C4 /* PBXTargetDependency */,
 				22A9E6BE20B0F1710092E555 /* PBXTargetDependency */,
 			);
 			name = com.altura;
@@ -400,6 +465,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 224419DC20CB1EAB008D90C4 /* Products */;
+					ProjectRef = 224419DB20CB1EAB008D90C4 /* CryptoSwift.xcodeproj */;
+				},
+				{
 					ProductGroup = 22A9E6A320B0F1530092E555 /* Products */;
 					ProjectRef = 22A9E6A220B0F1530092E555 /* SQLite.xcodeproj */;
 				},
@@ -414,6 +483,41 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		224419E420CB1EAB008D90C4 /* CryptoSwift.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CryptoSwift.framework;
+			remoteRef = 224419E320CB1EAB008D90C4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		224419E620CB1EAB008D90C4 /* CryptoSwift-TestHostApp.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "CryptoSwift-TestHostApp.app";
+			remoteRef = 224419E520CB1EAB008D90C4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		224419E820CB1EAB008D90C4 /* Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Tests.xctest;
+			remoteRef = 224419E720CB1EAB008D90C4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		224419EA20CB1EAB008D90C4 /* TestsPerformance-Mac.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "TestsPerformance-Mac.xctest";
+			remoteRef = 224419E920CB1EAB008D90C4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		224419EC20CB1EAB008D90C4 /* TestsPerformance-iOS.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "TestsPerformance-iOS.xctest";
+			remoteRef = 224419EB20CB1EAB008D90C4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		22A9E6AD20B0F1530092E555 /* SQLite.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -471,7 +575,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22A9E67F20B0F00E0092E555 /* LaunchScreen.storyboard in Resources */,
-				22A9E67C20B0F00E0092E555 /* Assets.xcassets in Resources */,
+				224419C620CB183D008D90C4 /* Assets.xcassets in Resources */,
 				22A9E67A20B0F00C0092E555 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -536,12 +640,10 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-com.altura/Pods-com.altura-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -597,6 +699,7 @@
 				225772F420B26AC6006CFB3B /* MainNavigationController.swift in Sources */,
 				228804DE20C8636D00C94AAC /* Crypt.swift in Sources */,
 				228804D020C84CDB00C94AAC /* DBase.swift in Sources */,
+				228804E820C9E4F600C94AAC /* PinMap.swift in Sources */,
 				225772F820B3C841006CFB3B /* CustomCollectionViewCell.swift in Sources */,
 				225772FA20B3C8BB006CFB3B /* FirstOptionViewController.swift in Sources */,
 				221CC55820BBA4EA00CFC265 /* SecondViewController.swift in Sources */,
@@ -604,6 +707,7 @@
 				22A9E67520B0F00C0092E555 /* AppDelegate.swift in Sources */,
 				22A9E6CA20B0FB580092E555 /* RegisterSecondController.swift in Sources */,
 				228804CE20C8462100C94AAC /* WService.swift in Sources */,
+				228804E420C9D4C500C94AAC /* ThirdViewController.swift in Sources */,
 				221CC56220BC481000CFC265 /* InitController.swift in Sources */,
 				22A9E6C820B0FB450092E555 /* RegisterController.swift in Sources */,
 				225772F220B25E85006CFB3B /* IndexController.swift in Sources */,
@@ -629,6 +733,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		224419EF20CB1F03008D90C4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CryptoSwift;
+			targetProxy = 224419EE20CB1F03008D90C4 /* PBXContainerItemProxy */;
+		};
 		22A9E68720B0F00E0092E555 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 22A9E67020B0F00C0092E555 /* com.altura */;

@@ -122,13 +122,18 @@ class ViewController: UIViewController {
             let usr_encrypt = user_name;
             let pass_encrypt = pass;
             
-            let key = "AlturaServicesSA" // length == 32
+            let key = "Altura" // length == 32
+            let n_key = key.md5()
+            print(n_key)
             let iv = "gqLOHUioQ0QjhuvI" // length == 16
-            let s = "string to encrypt"
-            let enc = try! usr_encrypt.aesEncrypt(key: key, iv: iv)
-            let enc2 = try! enc.aesDecrypt(key: key, iv: iv)
+            let s = "action=login&mail=\(usr_encrypt)&pass=\(usr_encrypt)&os=2&imei=111"
+            let enc = try! usr_encrypt.aesEncrypt(key: n_key, iv: iv)
+            let enc2 = try! enc.aesDecrypt(key: n_key, iv: iv)
+            let s2 = try! s.aesEncrypt(key: n_key, iv: iv)
             
             print(enc,enc2)
+            print(s2)
+            
             
             let ok = ws.loadUser(usr_id: user_name, pass: pass)
             //let ok = self.loadUsersDB(usr: user_name, pass: pass)

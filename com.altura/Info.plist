@@ -66,5 +66,9 @@
 		<string>googlechromes</string>
 		<string>comgooglemaps</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Permitir acceso a la cámara</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Permitir acceso a galería</string>
 </dict>
 </plist>
