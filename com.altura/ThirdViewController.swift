@@ -25,6 +25,11 @@ class ThirdViewController: UIViewController, CLLocationManagerDelegate, MKMapVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.hidesBarsOnSwipe = true
+        //navigationController?.hidesBarsOnTap = true
+        navigationController?.hidesBarsWhenKeyboardAppears = false
+        
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
@@ -151,6 +156,11 @@ class ThirdViewController: UIViewController, CLLocationManagerDelegate, MKMapVie
         let btn_alert = UIAlertAction(title: "Cerrar", style: .cancel)
         alert.addAction(btn_alert);
         self.present(alert, animated: true, completion: nil);
+    }
+    
+    //HABILITA LA OPCION DE OCULTAR EL TECLADO CUANDO SE LE DA EN CUALQUIER PARTE DE LA PANTALLA
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
  
 

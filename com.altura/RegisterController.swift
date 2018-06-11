@@ -30,6 +30,7 @@ class RegisterController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+     
         print("first")
         print(self.db)
         identifier_txt.text = self.identifier

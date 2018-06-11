@@ -79,6 +79,12 @@ class ViewController: UIViewController {
     // print(string) -> imprime en consola el dato
     override func viewDidLoad() {
         super.viewDidLoad();
+        
+        navigationController?.hidesBarsOnSwipe = true
+        //navigationController?.hidesBarsOnTap = true
+        navigationController?.hidesBarsWhenKeyboardAppears = false
+        
+        
         btn_in.layer.cornerRadius = 20
         btn_in.clipsToBounds = true
         btn_reg.layer.cornerRadius = 20
@@ -207,8 +213,8 @@ class ViewController: UIViewController {
     
     
     private func navigateToApp(){
-        let mainNavigationController = self.storyboard?.instantiateViewController(withIdentifier: "mainNavigationController") as! MainNavigationController
-        self.present(mainNavigationController, animated: true, completion: nil)
+        let mainTabViewController = self.storyboard?.instantiateViewController(withIdentifier: "mainTabViewController") as! MainTabViewController
+        self.present(mainTabViewController, animated: true, completion: nil)
     }
     
     

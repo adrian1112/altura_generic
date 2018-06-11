@@ -17,6 +17,10 @@ class FirstOptionViewController: UIViewController, UICollectionViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.hidesBarsOnSwipe = true
+        //navigationController?.hidesBarsOnTap = true
+        navigationController?.hidesBarsWhenKeyboardAppears = false
+        
         collectionView.dataSource = self
 
         // Do any additional setup after loading the view.

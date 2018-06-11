@@ -13,6 +13,10 @@ class InitController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationController?.hidesBarsOnSwipe = true
+        //navigationController?.hidesBarsOnTap = true
+        navigationController?.hidesBarsWhenKeyboardAppears = false
+        
         // Do any additional setup after loading the view.
     }
 
