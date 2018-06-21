@@ -7,14 +7,15 @@
 //
 
 import UIKit
-import GoogleMaps
+import MapKit
 import CoreLocation
 
-class SecondViewController: UIViewController, CLLocationManagerDelegate {
-    var mapView: GMSMapView?
-    let locationManager = CLLocationManager()
-    var userLatLong: CLLocationCoordinate2D = CLLocationCoordinate2DMake(-2.162870,-79.898407)
+class SecondViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UINavigationControllerDelegate {
     
+    let locationManager = CLLocationManager()
+    var userLatLong = CLLocationCoordinate2D(latitude: -2.162870, longitude: -79.898407)
+    
+    @IBOutlet weak var map: MKMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,27 +23,9 @@ class SecondViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         
-        GMSServices.provideAPIKey("AIzaSyD9zVbkyxSGE0swMdmBeQ2-8G9fz1zghZQ");
+        map.setRegion(MKCoordinateRegionMakeWithDistance(userLatLong, 1500, 1500), animated: true)
+        map.showsUserLocation = true
         
-        let camera = GMSCameraPosition.camera(withLatitude: -2.162870, longitude: -79.898407, zoom: 14.0)
-        mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
-        mapView?.isMyLocationEnabled = true
-        view = mapView
-        
-        // Creates a marker in the center of the map.
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: -2.162870, longitude: -79.898407)
-        marker.title = "Altura S.A."
-        marker.snippet = "Altura Services"
-        marker.map = mapView
-        
-        
-        //navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Buscar", style: .plain, target: self, action: Selector("search"))
-        
-    }
-    
-    func search(){
-            print("Buscandooo...")
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -51,18 +34,22 @@ class SecondViewController: UIViewController, CLLocationManagerDelegate {
         
         print(locations[0].coordinate.latitude)
         print(locations[0].coordinate.longitude)
-        
-        self.setMapCamera()
      
     }
     
     private func setMapCamera(){
         CATransaction.begin()
         CATransaction.setValue(2, forKey: kCATransactionAnimationDuration)
-        mapView?.animate(toLocation: userLatLong)
+        let center = CLLocationCoordinate2D(latitude: userLatLong.latitude, longitude: userLatLong.longitude)
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        
+        self.map.setRegion(region, animated: true)
         
         CATransaction.commit();
         
     }
 
+    @IBAction func findMyLocation(_ sender: Any) {
+        self.setMapCamera()
+    }
 }

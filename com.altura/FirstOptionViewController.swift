@@ -14,10 +14,14 @@ class FirstOptionViewController: UIViewController, UICollectionViewDataSource {
     
     let items = ["item1","item2","item3","item4","item5","item6","item7","item8"]
     
+    let urls = ["https://www.switchorm.com/es/index.php/es/","https://www.westernunion.com","https://www.switchorm.com/es/index.php/es/","https://www.westernunion.com","https://www.switchorm.com/es/index.php/es/","https://www.westernunion.com","https://www.switchorm.com/es/index.php/es/","https://www.westernunion.com"];
+    
+    var selectItem = 0;
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.hidesBarsOnSwipe = true
+        navigationController?.hidesBarsOnSwipe = false
         //navigationController?.hidesBarsOnTap = true
         navigationController?.hidesBarsWhenKeyboardAppears = false
         
@@ -39,11 +43,30 @@ class FirstOptionViewController: UIViewController, UICollectionViewDataSource {
         return cell
     }
     
+    @IBAction func actionPage(_ sender: Any) {
+        
+    }
+    
     @objc func action_btn(sender:UIButton! ) {
         print("entra en funcion de boton")
         let btnsendtag: UIButton = sender
-        
-        print("Button Clicked \(btnsendtag.tag)")
+        self.selectItem = btnsendtag.tag
+        //abre la url en el navegador por defecto en est caso safari
+        if let url = URL(string: self.urls[self.selectItem]) {
+            UIApplication.shared.open(url, options: [:])
+        }
+        //print("Button Clicked \(btnsendtag.tag)")
+    }
+    
+    //SE ELIMINO  EL SEGUE O CONEXION ENTRE ESTE VIEW Y EL VIEW PageUrlViewController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showPageWebIni" {
+            let paginaUrl = segue.destination as! PageUrlViewController
+            let btnsendtag: UIButton = sender as! UIButton
+            self.selectItem = btnsendtag.tag
+            paginaUrl.url = self.urls[self.selectItem]
+            
+        }
     }
 
 

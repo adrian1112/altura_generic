@@ -76,7 +76,7 @@ class DBase {
                 print("tabla ya existe")
             }else{
                 ok = false
-                print(" * constraint failed: \(message), in \(statement) , code \(code)")
+                print(" * constraint failed: \(message), in \(String(describing: statement)) , code \(code)")
             }
         }catch{
             ok = false
@@ -91,7 +91,7 @@ class DBase {
                 print("tabla ya existe")
             }else{
                 ok = false
-                print(" * constraint failed: \(message), in \(statement) , code \(code)")
+                print(" * constraint failed: \(message), in \(String(describing: statement)) , code \(code)")
             }
         }catch{
             ok = false
@@ -148,14 +148,14 @@ class DBase {
     //inserta en base el usuario logeado
     func inserUserLogin(user_in:User){
         print("entra log")
-        print("usuario: \(user_in.id_user) ,email: \(user_in.email), persona: \(user_in.person), fecha: \(user_in.sync_date)")
+        print("usuario: \(String(describing: user_in.id_user)) ,email: \(String(describing: user_in.email)), persona: \(String(describing: user_in.person)), fecha: \(String(describing: user_in.sync_date))")
         
         let insertUser_l = usersLoginT.insert(self.id_users_l_T <- user_in.id_user!,self.email_l_T <- user_in.email!, self.person_l_T <- user_in.person!, self.date_l_T <- user_in.sync_date!)
         do{
             try self.db.run(insertUser_l)
             print("Se ingreso el usuario log correctamente")
         }catch let Result.error(message, code, statement){
-            print("mensaje: \(message), codigo: \(code), statment: \(statement) ")
+            print("mensaje: \(message), codigo: \(code), statment: \(String(describing: statement)) ")
         }catch {
             print(error)
         }

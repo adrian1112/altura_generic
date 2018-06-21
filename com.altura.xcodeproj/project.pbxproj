@@ -21,6 +21,7 @@
 		22441A0120CF0957008D90C4 /* BarSixTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22441A0020CF0957008D90C4 /* BarSixTableViewController.swift */; };
 		22441A0420CF1879008D90C4 /* CustomTableViewCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22441A0220CF1879008D90C4 /* CustomTableViewCell2.swift */; };
 		22441A0520CF1879008D90C4 /* CustomTableViewCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22441A0320CF1879008D90C4 /* CustomTableViewCell2.xib */; };
+		22441A0720D80DF5008D90C4 /* PageUrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22441A0620D80DF5008D90C4 /* PageUrlViewController.swift */; };
 		225772F820B3C841006CFB3B /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225772F720B3C841006CFB3B /* CustomCollectionViewCell.swift */; };
 		225772FA20B3C8BB006CFB3B /* FirstOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225772F920B3C8BB006CFB3B /* FirstOptionViewController.swift */; };
 		228804CE20C8462100C94AAC /* WService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228804CD20C8462100C94AAC /* WService.swift */; };
@@ -189,6 +190,7 @@
 		22441A0020CF0957008D90C4 /* BarSixTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarSixTableViewController.swift; sourceTree = "<group>"; };
 		22441A0220CF1879008D90C4 /* CustomTableViewCell2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell2.swift; sourceTree = "<group>"; };
 		22441A0320CF1879008D90C4 /* CustomTableViewCell2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTableViewCell2.xib; sourceTree = "<group>"; };
+		22441A0620D80DF5008D90C4 /* PageUrlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageUrlViewController.swift; sourceTree = "<group>"; };
 		225772F720B3C841006CFB3B /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
 		225772F920B3C8BB006CFB3B /* FirstOptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstOptionViewController.swift; sourceTree = "<group>"; };
 		228804CD20C8462100C94AAC /* WService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WService.swift; sourceTree = "<group>"; };
@@ -344,6 +346,7 @@
 				228804E320C9D4C500C94AAC /* ThirdViewController.swift */,
 				22A9E68020B0F00E0092E555 /* Info.plist */,
 				224419BF20CB183D008D90C4 /* Assets.xcassets */,
+				22441A0620D80DF5008D90C4 /* PageUrlViewController.swift */,
 			);
 			path = com.altura;
 			sourceTree = "<group>";
@@ -756,6 +759,7 @@
 				228804E420C9D4C500C94AAC /* ThirdViewController.swift in Sources */,
 				221CC56220BC481000CFC265 /* InitController.swift in Sources */,
 				224419F420CE0340008D90C4 /* BarOneViewController.swift in Sources */,
+				22441A0720D80DF5008D90C4 /* PageUrlViewController.swift in Sources */,
 				224419FA20CE0653008D90C4 /* BarFourViewController.swift in Sources */,
 				224419FC20CE0672008D90C4 /* BarFiveViewController.swift in Sources */,
 				22A9E6C820B0FB450092E555 /* RegisterController.swift in Sources */,
@@ -946,7 +950,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JQS4797YPX;
 				INFOPLIST_FILE = com.altura/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -967,7 +971,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JQS4797YPX;
 				INFOPLIST_FILE = com.altura/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -95,7 +95,7 @@ class RegisterSecondController: UIViewController {
             }else{
                 self.txt_alert = "Error al crear el usuario"
                 self.showAlert(status: 3)
-                print(" * constraint failed: \(message), in \(statement) , code \(code)")
+                print(" * constraint failed: \(message), in \(String(describing: statement)) , code \(code)")
             }
         }catch{
             self.txt_alert = "Error al crear el usuario"

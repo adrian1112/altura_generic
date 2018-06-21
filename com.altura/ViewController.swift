@@ -10,6 +10,7 @@ import UIKit
 import SQLite
 // import Alamofire
 import CryptoSwift
+import UserNotifications
 
 
 struct User: Decodable {
@@ -70,7 +71,7 @@ class ViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "login_register" {
-            let login = segue.destination as! RegisterController
+            _ = segue.destination as! RegisterController
             //login.db = self.db
         }
     }
@@ -80,6 +81,17 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad();
         
+        //** opcion de notificacion **
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+                if granted == true {
+                    self.notificationPop()
+                    print("Se autorizó las notificaciones")
+                }else{
+                    print("Se denegaron los permisos para recibir notificaciones")
+                }
+            }
+        
+        //** opciones de navegacion **
         navigationController?.hidesBarsOnSwipe = true
         //navigationController?.hidesBarsOnTap = true
         navigationController?.hidesBarsWhenKeyboardAppears = false
@@ -132,13 +144,18 @@ class ViewController: UIViewController {
             let n_key = key.md5()
             print(n_key)
             let iv = "gqLOHUioQ0QjhuvI" // length == 16
-            let s = "action=login&mail=\(usr_encrypt)&pass=\(usr_encrypt)&os=2&imei=111"
+            //let iv = n_key;
+            let s = "action=login&mail=\(usr_encrypt)&pass=\(pass_encrypt)&os=2&imei=111"
             let enc = try! usr_encrypt.aesEncrypt(key: n_key, iv: iv)
             let enc2 = try! enc.aesDecrypt(key: n_key, iv: iv)
             let s2 = try! s.aesEncrypt(key: n_key, iv: iv)
+            let s3 = try! s2.aesDecrypt(key: n_key, iv: iv)
+            
+            
             
             print(enc,enc2)
-            print(s2)
+            print(s2,s3)
+            //print(s4, s5)
             
             
             let ok = ws.loadUser(usr_id: user_name, pass: pass)
@@ -215,6 +232,40 @@ class ViewController: UIViewController {
     private func navigateToApp(){
         let mainTabViewController = self.storyboard?.instantiateViewController(withIdentifier: "mainTabViewController") as! MainTabViewController
         self.present(mainTabViewController, animated: true, completion: nil)
+    }
+    
+    private func notificationPop(){
+        //se accede a la central de notificaciones
+        let notificationCenter = UNUserNotificationCenter.current()
+        //se crea el contenido de la notificacion
+        let content = UNMutableNotificationContent()
+        content.title = "Titulo de mi notificación"
+        content.subtitle = "Subtitulo de la notificación"
+        content.body = "Descripción de notificacion"
+        
+        /*Ahora debemos crear un Schedule de disparo de nuestra notificación. Para
+         ello, usaremos UNTimeIntervalNotificationTrigger, el cual recibe un
+         "timeInterval". Este parámetro indica cuantos segundos a partir de ser
+         agregada nuestra notificación ésta será disparada. El siguiente parámetro
+         "repeats" sirve para indicar si la notificación se repetirá después de
+         su primer disparo.*/
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 2, repeats: false)
+        
+        /*Ahora crearemos una petición, la cual debe tener un "identifier" que
+         puede ser el de nuestra preferencia, un "content" y un "trigger" que
+         hemos generado lineas arriba.*/
+        let notofi = UNNotificationRequest.init(identifier: "initNotification", content: content, trigger: trigger)
+        
+        /*El siguiente paso será agregar nuestra petición a la central
+         de notificaciones de nuestra aplicación.*/
+        notificationCenter.add(notofi) { (error) in
+            
+            if error == nil {
+                print("Se agrego correctamente")
+            }else{
+                print("Se presento un problema")
+            }
+        }
     }
     
     
