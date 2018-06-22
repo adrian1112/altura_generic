@@ -52,6 +52,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var pass_txt: UITextField!
     @IBOutlet weak var btn_in: UIButton!
     @IBOutlet weak var btn_reg: UIButton!
+    
+    
+    
     var txt_alert=""
     var user = UserDB(id: nil, name: nil, email: nil, identifier: nil, addresss: nil, telephone: nil, contract: nil, pass: nil )
     
@@ -82,12 +85,12 @@ class ViewController: UIViewController {
         super.viewDidLoad();
         
         //** opcion de notificacion **
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (granted, error) in
-                if granted == true {
-                    self.notificationPop()
-                    print("Se autorizó las notificaciones")
-                }else{
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge,  .sound]) { (success, error) in
+                if error != nil {
                     print("Se denegaron los permisos para recibir notificaciones")
+                }else{
+                    //self.notificationPop()
+                    print("Se autorizó las notificaciones")
                 }
             }
         
@@ -183,6 +186,7 @@ class ViewController: UIViewController {
     @IBAction func resetPass(_ sender: Any) {
         txt_alert = " Recuperar Contraseña para usuario:" + user_txt.text!;
         self.showAlert();
+        
     }
     @IBAction func register(_ sender: Any) {
         txt_alert = " Registrando usuario:";
@@ -216,7 +220,9 @@ class ViewController: UIViewController {
     func showAlert(){
         print("entra a alerta")
         let alert = UIAlertController(title: nil, message: self.txt_alert, preferredStyle: .alert);
-        let btn_alert = UIAlertAction(title: "Reintentar", style: .default) { (UIAlertAction) in  self.setValues();
+        let btn_alert = UIAlertAction(title: "Reintentar", style: .default) { (UIAlertAction) in
+            self.setValues()
+            self.notificationPop()
         }
         alert.addAction(btn_alert);
         self.present(alert, animated: true, completion: nil);
@@ -234,7 +240,7 @@ class ViewController: UIViewController {
         self.present(mainTabViewController, animated: true, completion: nil)
     }
     
-    private func notificationPop(){
+    func notificationPop(){
         //se accede a la central de notificaciones
         let notificationCenter = UNUserNotificationCenter.current()
         //se crea el contenido de la notificacion
@@ -254,11 +260,11 @@ class ViewController: UIViewController {
         /*Ahora crearemos una petición, la cual debe tener un "identifier" que
          puede ser el de nuestra preferencia, un "content" y un "trigger" que
          hemos generado lineas arriba.*/
-        let notofi = UNNotificationRequest.init(identifier: "initNotification", content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: "initNotification", content: content, trigger: trigger)
         
         /*El siguiente paso será agregar nuestra petición a la central
          de notificaciones de nuestra aplicación.*/
-        notificationCenter.add(notofi) { (error) in
+        notificationCenter.add(request) { (error) in
             
             if error == nil {
                 print("Se agrego correctamente")

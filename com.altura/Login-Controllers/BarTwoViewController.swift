@@ -12,6 +12,15 @@ class BarTwoViewController: UIViewController {
 
     weak var activeField: UITextField?
     
+    @IBOutlet weak var leftConstrain: NSLayoutConstraint!
+    @IBOutlet weak var blurView: UIVisualEffectView!
+    @IBOutlet weak var leftView: UIView!
+    
+    let image_l = UIImage(named: "flecha_izq.png")
+    let image_r = UIImage(named: "flecha_der.png")
+    
+    @IBOutlet weak var menuButton: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -19,9 +28,48 @@ class BarTwoViewController: UIViewController {
         //navigationController?.hidesBarsOnTap = true
         navigationController?.hidesBarsWhenKeyboardAppears = false
         
+        blurView.layer.cornerRadius = 15
+        leftView.layer.shadowColor = UIColor.black.cgColor
+        leftView.layer.shadowOpacity = 0.8
+        leftView.layer.shadowOffset = CGSize(width: 5, height: 0)
+        
+        leftConstrain.constant = -80
+        
+        
+        
     }
 
-
+    @IBAction func menuActions(_ sender: Any) {
+        
+        
+        
+        
+        if(self.leftConstrain.constant == -80){
+            self.showMenu()
+        }else{
+            self.hiddenMenu()
+        }
+        
+    }
+    
+    func showMenu(){
+        
+        UIView.animate(withDuration: 0.2) {
+            self.leftConstrain.constant = 0
+            self.view.layoutIfNeeded()
+            self.menuButton.image = self.image_l
+        }
+    }
+    
+    func hiddenMenu(){
+        
+        UIView.animate(withDuration: 0.2) {
+            self.leftConstrain.constant = -80
+            self.view.layoutIfNeeded()
+            self.menuButton.image = self.image_r
+        }
+    }
+    
     @IBAction func Logout(_ sender: Any) {
         let viewController = self.storyboard?.instantiateViewController(withIdentifier: "initController") as! InitController
         self.present(viewController, animated: true)
@@ -30,6 +78,7 @@ class BarTwoViewController: UIViewController {
     //HABILITA LA OPCION DE OCULTAR EL TECLADO CUANDO SE LE DA EN CUALQUIER PARTE DE LA PANTALLA Y PARA MOVER LA VIEW SI EL TECLADO OCULTA EL TEXTFIELD
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+        self.hiddenMenu()
     }
     
     

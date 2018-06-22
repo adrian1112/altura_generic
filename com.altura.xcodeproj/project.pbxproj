@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2201C02B20DDB8BD003BF608 /* ItemMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201C02920DDB8BD003BF608 /* ItemMenuView.swift */; };
+		2201C02C20DDB8BD003BF608 /* ItemMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2201C02A20DDB8BD003BF608 /* ItemMenuViewController.xib */; };
 		221CC55820BBA4EA00CFC265 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221CC55720BBA4EA00CFC265 /* SecondViewController.swift */; };
 		221CC56220BC481000CFC265 /* InitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221CC56120BC481000CFC265 /* InitController.swift */; };
 		224419C620CB183D008D90C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 224419BF20CB183D008D90C4 /* Assets.xcassets */; };
@@ -24,6 +26,7 @@
 		22441A0720D80DF5008D90C4 /* PageUrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22441A0620D80DF5008D90C4 /* PageUrlViewController.swift */; };
 		225772F820B3C841006CFB3B /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225772F720B3C841006CFB3B /* CustomCollectionViewCell.swift */; };
 		225772FA20B3C8BB006CFB3B /* FirstOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225772F920B3C8BB006CFB3B /* FirstOptionViewController.swift */; };
+		227D7ECE20DD5D60003E11BB /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227D7ECD20DD5D60003E11BB /* AboutViewController.swift */; };
 		228804CE20C8462100C94AAC /* WService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228804CD20C8462100C94AAC /* WService.swift */; };
 		228804D020C84CDB00C94AAC /* DBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228804CF20C84CDB00C94AAC /* DBase.swift */; };
 		228804DE20C8636D00C94AAC /* Crypt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228804DD20C8636D00C94AAC /* Crypt.swift */; };
@@ -176,6 +179,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2201C02920DDB8BD003BF608 /* ItemMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemMenuView.swift; sourceTree = "<group>"; };
+		2201C02A20DDB8BD003BF608 /* ItemMenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemMenuViewController.xib; sourceTree = "<group>"; };
 		221CC55720BBA4EA00CFC265 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		221CC56120BC481000CFC265 /* InitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitController.swift; sourceTree = "<group>"; };
 		224419BF20CB183D008D90C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -193,6 +198,7 @@
 		22441A0620D80DF5008D90C4 /* PageUrlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageUrlViewController.swift; sourceTree = "<group>"; };
 		225772F720B3C841006CFB3B /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
 		225772F920B3C8BB006CFB3B /* FirstOptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstOptionViewController.swift; sourceTree = "<group>"; };
+		227D7ECD20DD5D60003E11BB /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		228804CD20C8462100C94AAC /* WService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WService.swift; sourceTree = "<group>"; };
 		228804CF20C84CDB00C94AAC /* DBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBase.swift; sourceTree = "<group>"; };
 		228804D320C8622C00C94AAC /* CryptoSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CryptoSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -289,6 +295,8 @@
 				224419FE20CEFEA2008D90C4 /* CustomTableViewCell.swift */,
 				22441A0220CF1879008D90C4 /* CustomTableViewCell2.swift */,
 				22441A0320CF1879008D90C4 /* CustomTableViewCell2.xib */,
+				2201C02920DDB8BD003BF608 /* ItemMenuView.swift */,
+				2201C02A20DDB8BD003BF608 /* ItemMenuViewController.xib */,
 			);
 			path = CustomElements;
 			sourceTree = "<group>";
@@ -347,6 +355,7 @@
 				22A9E68020B0F00E0092E555 /* Info.plist */,
 				224419BF20CB183D008D90C4 /* Assets.xcassets */,
 				22441A0620D80DF5008D90C4 /* PageUrlViewController.swift */,
+				227D7ECD20DD5D60003E11BB /* AboutViewController.swift */,
 			);
 			path = com.altura;
 			sourceTree = "<group>";
@@ -618,6 +627,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22A9E67F20B0F00E0092E555 /* LaunchScreen.storyboard in Resources */,
+				2201C02C20DDB8BD003BF608 /* ItemMenuViewController.xib in Resources */,
 				22441A0520CF1879008D90C4 /* CustomTableViewCell2.xib in Resources */,
 				224419C620CB183D008D90C4 /* Assets.xcassets in Resources */,
 				22A9E67A20B0F00C0092E555 /* Main.storyboard in Resources */,
@@ -745,7 +755,9 @@
 				228804DE20C8636D00C94AAC /* Crypt.swift in Sources */,
 				22441A0120CF0957008D90C4 /* BarSixTableViewController.swift in Sources */,
 				228804D020C84CDB00C94AAC /* DBase.swift in Sources */,
+				2201C02B20DDB8BD003BF608 /* ItemMenuView.swift in Sources */,
 				228804E820C9E4F600C94AAC /* PinMap.swift in Sources */,
+				227D7ECE20DD5D60003E11BB /* AboutViewController.swift in Sources */,
 				225772F820B3C841006CFB3B /* CustomCollectionViewCell.swift in Sources */,
 				225772FA20B3C8BB006CFB3B /* FirstOptionViewController.swift in Sources */,
 				224419FF20CEFEA2008D90C4 /* CustomTableViewCell.swift in Sources */,
