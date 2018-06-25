@@ -14,5 +14,4 @@ class CustomTableViewCell2: UITableViewCell {
     @IBOutlet weak var mainTitle: UILabel!
     @IBOutlet weak var mainMessage: UILabel!
     
-    
 }

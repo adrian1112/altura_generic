@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct cellData {
+struct cellData1 {
     let image : UIImage?
     let message : String?
     let title : String?

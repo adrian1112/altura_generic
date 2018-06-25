@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ExP-kh-gtU">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Second View Controller-->
+        <scene sceneID="ar1-W0-JMC">
+            <objects>
+                <viewController storyboardIdentifier="secondViewController" id="ExP-kh-gtU" customClass="SecondViewController" customModule="com_altura" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Bqh-Hq-Fdd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="g6T-pD-loi" userLabel="map">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VTp-Rd-xe3">
+                                <rect key="frame" x="323" y="615" width="32" height="32"/>
+                                <state key="normal" image="find_me"/>
+                                <connections>
+                                    <action selector="findMyLocation:" destination="ExP-kh-gtU" eventType="touchUpInside" id="1Wq-Ru-7vu"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="7pN-iU-a6i" firstAttribute="trailing" secondItem="g6T-pD-loi" secondAttribute="trailing" id="829-qe-T5m"/>
+                            <constraint firstItem="7pN-iU-a6i" firstAttribute="bottom" secondItem="VTp-Rd-xe3" secondAttribute="bottom" constant="20" id="Blw-Or-CTX"/>
+                            <constraint firstItem="g6T-pD-loi" firstAttribute="leading" secondItem="7pN-iU-a6i" secondAttribute="leading" id="I78-s2-eYj"/>
+                            <constraint firstItem="7pN-iU-a6i" firstAttribute="bottom" secondItem="g6T-pD-loi" secondAttribute="bottom" id="Xpa-Fa-wbO"/>
+                            <constraint firstItem="g6T-pD-loi" firstAttribute="top" secondItem="7pN-iU-a6i" secondAttribute="top" id="Yll-Do-QOG"/>
+                            <constraint firstItem="g6T-pD-loi" firstAttribute="centerY" secondItem="7pN-iU-a6i" secondAttribute="centerY" id="dZs-ab-xNY"/>
+                            <constraint firstItem="7pN-iU-a6i" firstAttribute="trailing" secondItem="VTp-Rd-xe3" secondAttribute="trailing" constant="20" id="hi6-tS-kaD"/>
+                            <constraint firstItem="g6T-pD-loi" firstAttribute="centerX" secondItem="7pN-iU-a6i" secondAttribute="centerX" id="nhf-iU-lSP"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="7pN-iU-a6i"/>
+                    </view>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="map" destination="g6T-pD-loi" id="ZZ6-i9-cyd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="709-fS-lsB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="459" y="961"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="find_me" width="32" height="32"/>
+    </resources>
+</document>

@@ -41,15 +41,17 @@ class BarTwoViewController: UIViewController {
 
     @IBAction func menuActions(_ sender: Any) {
         
-        
-        
-        
         if(self.leftConstrain.constant == -80){
             self.showMenu()
         }else{
             self.hiddenMenu()
         }
         
+    }
+    
+    @IBAction func callCenter(_ sender: UIButton) {
+        let number = "0997396690"
+        Utils.call(number: number)
     }
     
     func showMenu(){
