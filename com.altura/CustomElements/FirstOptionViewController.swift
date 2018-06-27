@@ -30,6 +30,11 @@ class FirstOptionViewController: UIViewController, UICollectionViewDataSource {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func Back(_ sender: UIBarButtonItem) {
+        dismiss(animated: true)
+    }
+    
+    
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
         return items.count
     }

@@ -13,5 +13,6 @@ class CustomTableViewCell2: UITableViewCell {
     @IBOutlet weak var mainImage: UIImageView!
     @IBOutlet weak var mainTitle: UILabel!
     @IBOutlet weak var mainMessage: UILabel!
+    @IBOutlet weak var mainDate: UILabel!
     
 }

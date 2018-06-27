@@ -52,4 +52,8 @@ class SecondViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     @IBAction func findMyLocation(_ sender: Any) {
         self.setMapCamera()
     }
+    
+    @IBAction func Back(_ sender: UIBarButtonItem) {
+        dismiss(animated: true)
+    }
 }

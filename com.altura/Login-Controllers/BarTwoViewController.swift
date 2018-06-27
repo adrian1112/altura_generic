@@ -98,6 +98,7 @@ class BarTwoViewController: UIViewController {
         // Siempre hay que dejar de escuchar las notificaciones.
         NotificationCenter.default.removeObserver(self)
     }
+    
     @IBAction func startTextFieldEditing(_ sender: UITextField) {
         activeField = sender
         print("entra")

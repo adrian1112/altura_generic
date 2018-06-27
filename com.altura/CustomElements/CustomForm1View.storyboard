@@ -18,21 +18,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Reporte" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f0q-tz-Qa3">
-                                <rect key="frame" x="0.0" y="20" width="320" height="20.5"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Reporte" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f0q-tz-Qa3">
+                                <rect key="frame" x="0.0" y="65" width="367" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.078431372549019607" green="0.36862745098039218" blue="0.95686274509803915" alpha="0.79419948630136983" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="DDI-oe-ByA" userLabel="cabecera">
-                                <rect key="frame" x="0.0" y="48" width="375" height="326"/>
+                                <rect key="frame" x="0.0" y="93" width="375" height="281"/>
                                 <subviews>
                                     <mapView multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qhU-QE-m3G">
-                                        <rect key="frame" x="7" y="-4" width="359" height="336"/>
+                                        <rect key="frame" x="7" y="-4" width="359" height="291"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </mapView>
                                     <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5TL-FM-0ND">
-                                        <rect key="frame" x="265" y="55" width="25" height="27"/>
+                                        <rect key="frame" x="320" y="246" width="25" height="27"/>
                                         <state key="normal" image="find_me"/>
                                         <connections>
                                             <action selector="myUbication:" destination="XbA-wB-aSU" eventType="touchUpInside" id="5cj-c8-tYD"/>
@@ -187,6 +187,19 @@
                                     <constraint firstAttribute="trailing" secondItem="o3p-9h-UqN" secondAttribute="trailing" constant="20" id="zkU-32-hqs"/>
                                 </constraints>
                             </view>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hYG-7O-ReG">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Yo reporto" id="82I-7B-noa">
+                                        <barButtonItem key="leftBarButtonItem" image="flecha_izq" id="n5x-2a-1qq">
+                                            <connections>
+                                                <action selector="Back:" destination="XbA-wB-aSU" id="VXV-pB-fqg"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -198,7 +211,7 @@
                             <constraint firstItem="bbc-0z-txk" firstAttribute="trailing" secondItem="lCW-WI-Pt2" secondAttribute="trailing" id="WeL-Lw-XrQ"/>
                             <constraint firstItem="DDI-oe-ByA" firstAttribute="trailing" secondItem="lCW-WI-Pt2" secondAttribute="trailing" id="ZaI-Nh-MhM"/>
                             <constraint firstItem="bbc-0z-txk" firstAttribute="leading" secondItem="lCW-WI-Pt2" secondAttribute="leading" id="iwc-n8-cKU"/>
-                            <constraint firstItem="f0q-tz-Qa3" firstAttribute="top" secondItem="lCW-WI-Pt2" secondAttribute="top" id="mxU-kS-ejZ"/>
+                            <constraint firstItem="f0q-tz-Qa3" firstAttribute="top" secondItem="lCW-WI-Pt2" secondAttribute="top" constant="45" id="mxU-kS-ejZ"/>
                             <constraint firstItem="DDI-oe-ByA" firstAttribute="bottom" secondItem="bbc-0z-txk" secondAttribute="top" constant="8" id="ohZ-YN-BRH"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="lCW-WI-Pt2"/>
@@ -214,12 +227,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZlI-5l-mA5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1273" y="961"/>
+            <point key="canvasLocation" x="1272.8" y="960.2698650674663"/>
         </scene>
     </scenes>
     <resources>
         <image name="camara" width="65" height="65"/>
         <image name="enviar-boton" width="65" height="65"/>
         <image name="find_me" width="32" height="32"/>
+        <image name="flecha_izq" width="24" height="24"/>
     </resources>
 </document>

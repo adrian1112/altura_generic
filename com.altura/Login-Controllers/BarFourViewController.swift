@@ -45,7 +45,7 @@ class BarFourViewController: UIViewController, UITableViewDataSource, UITableVie
         
         leftConstrain.constant = -80
         
-        self.hiddenMenu()
+        //self.hiddenMenu()
         
         //Tabla
         data = [ cellData.init(image: #imageLiteral(resourceName: "tramite"), message: "tramite numero 23 detallado asd asd asd asd asd asd asd a ramite numero 23 detallado asd asd asd asd asd asd asd a", title: "tramite 23"),cellData.init(image: #imageLiteral(resourceName: "tramite"), message: "tramite numero 2ramite numero 23 detallado asd asd asd asd asd asd asd a ramite numero 23 detallado asd asd asd asd asd asd asd a ramite numero 23 detallado asd asd asd asd asd asd asd a2 detallado", title: "tramite 22")]

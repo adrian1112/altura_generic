@@ -27,6 +27,8 @@ class ThirdViewController: UIViewController, CLLocationManagerDelegate, MKMapVie
     
     var pins = [PinMap]()
     
+    let myBackgroundColor = UIColor(red: 235/255.0, green: 235/255.0, blue: 235/255.0, alpha: 1.0)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,8 +50,13 @@ class ThirdViewController: UIViewController, CLLocationManagerDelegate, MKMapVie
         
         pickerView.delegate = self
         pickerView.dataSource = self
+        pickerView.backgroundColor = myBackgroundColor
         select.inputView = pickerView
         
+    }
+    
+    @IBAction func Back(_ sender: UIBarButtonItem) {
+        dismiss(animated: true)
     }
     
     @objc func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
@@ -130,6 +137,20 @@ class ThirdViewController: UIViewController, CLLocationManagerDelegate, MKMapVie
     
     public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
         return self.options.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        var pickerLabel: UILabel? = (view as? UILabel)
+        if pickerLabel == nil {
+            pickerLabel = UILabel()
+            pickerLabel?.font = UIFont(name: "System", size: 12)
+            pickerLabel?.textAlignment = .center
+        }
+        
+        pickerLabel?.textColor = UIColor.blue
+        pickerLabel?.text = self.options[row]
+ 
+        return pickerLabel!
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {

@@ -11,13 +11,17 @@ import UIKit
 class AboutViewController: UIViewController {
 
     @IBOutlet weak var popupView: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
     
+    @IBOutlet weak var AceptButton: UIButton!
     @IBOutlet weak var labelVersion: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         popupView.layer.cornerRadius = 15
+        //titleLabel.layer.cornerRadius = 15
+        AceptButton.layer.cornerRadius = 15
         popupView.layer.shadowColor = UIColor.black.cgColor
         popupView.layer.shadowOpacity = 0.8
         popupView.layer.shadowOffset = CGSize(width: 5, height: 0)

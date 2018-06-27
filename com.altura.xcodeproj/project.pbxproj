@@ -13,6 +13,9 @@
 		2201C03D20E130D7003BF608 /* CustomForm1View.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2201C03C20E130D7003BF608 /* CustomForm1View.storyboard */; };
 		2201C03F20E1468C003BF608 /* BarSixViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201C03E20E1468C003BF608 /* BarSixViewController.swift */; };
 		2201C04220E1556A003BF608 /* AboutViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2201C04020E1556A003BF608 /* AboutViewController.storyboard */; };
+		2201C04420E2B9A8003BF608 /* SuggestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201C04320E2B9A8003BF608 /* SuggestionViewController.swift */; };
+		2201C04720E2DA30003BF608 /* SuggestionView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2201C04520E2DA30003BF608 /* SuggestionView.storyboard */; };
+		2201C04920E3D6A9003BF608 /* TechRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201C04820E3D6A9003BF608 /* TechRequestViewController.swift */; };
 		221CC55820BBA4EA00CFC265 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221CC55720BBA4EA00CFC265 /* SecondViewController.swift */; };
 		221CC56220BC481000CFC265 /* InitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221CC56120BC481000CFC265 /* InitController.swift */; };
 		224419C620CB183D008D90C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 224419BF20CB183D008D90C4 /* Assets.xcassets */; };
@@ -23,7 +26,6 @@
 		224419F820CE063D008D90C4 /* BarThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224419F720CE063D008D90C4 /* BarThreeViewController.swift */; };
 		224419FA20CE0653008D90C4 /* BarFourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224419F920CE0653008D90C4 /* BarFourViewController.swift */; };
 		224419FC20CE0672008D90C4 /* BarFiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224419FB20CE0672008D90C4 /* BarFiveViewController.swift */; };
-		22441A0120CF0957008D90C4 /* BarSixTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22441A0020CF0957008D90C4 /* BarSixTableViewController.swift */; };
 		22441A0420CF1879008D90C4 /* CustomTableViewCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22441A0220CF1879008D90C4 /* CustomTableViewCell2.swift */; };
 		22441A0520CF1879008D90C4 /* CustomTableViewCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22441A0320CF1879008D90C4 /* CustomTableViewCell2.xib */; };
 		22441A0720D80DF5008D90C4 /* PageUrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22441A0620D80DF5008D90C4 /* PageUrlViewController.swift */; };
@@ -188,6 +190,9 @@
 		2201C03C20E130D7003BF608 /* CustomForm1View.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CustomForm1View.storyboard; sourceTree = "<group>"; };
 		2201C03E20E1468C003BF608 /* BarSixViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarSixViewController.swift; sourceTree = "<group>"; };
 		2201C04120E1556A003BF608 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = com.altura/Base.lproj/AboutViewController.storyboard; sourceTree = "<group>"; };
+		2201C04320E2B9A8003BF608 /* SuggestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionViewController.swift; sourceTree = "<group>"; };
+		2201C04620E2DA30003BF608 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = com.altura/Base.lproj/SuggestionView.storyboard; sourceTree = "<group>"; };
+		2201C04820E3D6A9003BF608 /* TechRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechRequestViewController.swift; sourceTree = "<group>"; };
 		221CC55720BBA4EA00CFC265 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		221CC56120BC481000CFC265 /* InitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitController.swift; sourceTree = "<group>"; };
 		224419BF20CB183D008D90C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -198,7 +203,6 @@
 		224419F720CE063D008D90C4 /* BarThreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarThreeViewController.swift; sourceTree = "<group>"; };
 		224419F920CE0653008D90C4 /* BarFourViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarFourViewController.swift; sourceTree = "<group>"; };
 		224419FB20CE0672008D90C4 /* BarFiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarFiveViewController.swift; sourceTree = "<group>"; };
-		22441A0020CF0957008D90C4 /* BarSixTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarSixTableViewController.swift; sourceTree = "<group>"; };
 		22441A0220CF1879008D90C4 /* CustomTableViewCell2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell2.swift; sourceTree = "<group>"; };
 		22441A0320CF1879008D90C4 /* CustomTableViewCell2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTableViewCell2.xib; sourceTree = "<group>"; };
 		22441A0620D80DF5008D90C4 /* PageUrlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageUrlViewController.swift; sourceTree = "<group>"; };
@@ -289,7 +293,6 @@
 				224419F720CE063D008D90C4 /* BarThreeViewController.swift */,
 				224419F920CE0653008D90C4 /* BarFourViewController.swift */,
 				224419FB20CE0672008D90C4 /* BarFiveViewController.swift */,
-				22441A0020CF0957008D90C4 /* BarSixTableViewController.swift */,
 				2201C03E20E1468C003BF608 /* BarSixViewController.swift */,
 			);
 			path = "Login-Controllers";
@@ -310,6 +313,8 @@
 				2201C02920DDB8BD003BF608 /* ItemMenuView.swift */,
 				2201C04020E1556A003BF608 /* AboutViewController.storyboard */,
 				227D7ECD20DD5D60003E11BB /* AboutViewController.swift */,
+				2201C04520E2DA30003BF608 /* SuggestionView.storyboard */,
+				2201C04320E2B9A8003BF608 /* SuggestionViewController.swift */,
 			);
 			path = CustomElements;
 			sourceTree = "<group>";
@@ -365,6 +370,7 @@
 				22A9E68020B0F00E0092E555 /* Info.plist */,
 				224419BF20CB183D008D90C4 /* Assets.xcassets */,
 				22441A0620D80DF5008D90C4 /* PageUrlViewController.swift */,
+				2201C04820E3D6A9003BF608 /* TechRequestViewController.swift */,
 			);
 			path = com.altura;
 			sourceTree = "<group>";
@@ -636,6 +642,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2201C03820E12AA5003BF608 /* CustomCollectionView.storyboard in Resources */,
+				2201C04720E2DA30003BF608 /* SuggestionView.storyboard in Resources */,
 				22A9E67F20B0F00E0092E555 /* LaunchScreen.storyboard in Resources */,
 				2201C03B20E130A4003BF608 /* CustomMapView.storyboard in Resources */,
 				2201C03D20E130D7003BF608 /* CustomForm1View.storyboard in Resources */,
@@ -764,12 +771,13 @@
 			files = (
 				224419F120CDF9CE008D90C4 /* MainTabViewController.swift in Sources */,
 				22441A0420CF1879008D90C4 /* CustomTableViewCell2.swift in Sources */,
+				2201C04420E2B9A8003BF608 /* SuggestionViewController.swift in Sources */,
 				228804DE20C8636D00C94AAC /* Crypt.swift in Sources */,
-				22441A0120CF0957008D90C4 /* BarSixTableViewController.swift in Sources */,
 				228804D020C84CDB00C94AAC /* DBase.swift in Sources */,
 				2201C02B20DDB8BD003BF608 /* ItemMenuView.swift in Sources */,
 				228804E820C9E4F600C94AAC /* PinMap.swift in Sources */,
 				227D7ECE20DD5D60003E11BB /* AboutViewController.swift in Sources */,
+				2201C04920E3D6A9003BF608 /* TechRequestViewController.swift in Sources */,
 				225772F820B3C841006CFB3B /* CustomCollectionViewCell.swift in Sources */,
 				225772FA20B3C8BB006CFB3B /* FirstOptionViewController.swift in Sources */,
 				221CC55820BBA4EA00CFC265 /* SecondViewController.swift in Sources */,
@@ -846,6 +854,14 @@
 				2201C04120E1556A003BF608 /* Base */,
 			);
 			name = AboutViewController.storyboard;
+			sourceTree = "<group>";
+		};
+		2201C04520E2DA30003BF608 /* SuggestionView.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2201C04620E2DA30003BF608 /* Base */,
+			);
+			name = SuggestionView.storyboard;
 			sourceTree = "<group>";
 		};
 		22A9E67820B0F00C0092E555 /* Main.storyboard */ = {

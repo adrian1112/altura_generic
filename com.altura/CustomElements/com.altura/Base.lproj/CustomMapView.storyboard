@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="g6T-pD-loi" userLabel="map">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VTp-Rd-xe3">
                                 <rect key="frame" x="323" y="615" width="32" height="32"/>
@@ -27,6 +27,19 @@
                                     <action selector="findMyLocation:" destination="ExP-kh-gtU" eventType="touchUpInside" id="1Wq-Ru-7vu"/>
                                 </connections>
                             </button>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a3C-Tw-lcW">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Agencias" id="bzW-ZV-W0k">
+                                        <barButtonItem key="leftBarButtonItem" image="flecha_izq" id="OoX-aL-SLi">
+                                            <connections>
+                                                <action selector="Back:" destination="ExP-kh-gtU" id="zSy-IR-8IG"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -34,7 +47,7 @@
                             <constraint firstItem="7pN-iU-a6i" firstAttribute="bottom" secondItem="VTp-Rd-xe3" secondAttribute="bottom" constant="20" id="Blw-Or-CTX"/>
                             <constraint firstItem="g6T-pD-loi" firstAttribute="leading" secondItem="7pN-iU-a6i" secondAttribute="leading" id="I78-s2-eYj"/>
                             <constraint firstItem="7pN-iU-a6i" firstAttribute="bottom" secondItem="g6T-pD-loi" secondAttribute="bottom" id="Xpa-Fa-wbO"/>
-                            <constraint firstItem="g6T-pD-loi" firstAttribute="top" secondItem="7pN-iU-a6i" secondAttribute="top" id="Yll-Do-QOG"/>
+                            <constraint firstItem="g6T-pD-loi" firstAttribute="top" secondItem="7pN-iU-a6i" secondAttribute="top" constant="44" id="Yll-Do-QOG"/>
                             <constraint firstItem="g6T-pD-loi" firstAttribute="centerY" secondItem="7pN-iU-a6i" secondAttribute="centerY" id="dZs-ab-xNY"/>
                             <constraint firstItem="7pN-iU-a6i" firstAttribute="trailing" secondItem="VTp-Rd-xe3" secondAttribute="trailing" constant="20" id="hi6-tS-kaD"/>
                             <constraint firstItem="g6T-pD-loi" firstAttribute="centerX" secondItem="7pN-iU-a6i" secondAttribute="centerX" id="nhf-iU-lSP"/>
@@ -53,5 +66,6 @@
     </scenes>
     <resources>
         <image name="find_me" width="32" height="32"/>
+        <image name="flecha_izq" width="24" height="24"/>
     </resources>
 </document>

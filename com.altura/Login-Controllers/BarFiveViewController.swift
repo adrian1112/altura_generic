@@ -43,10 +43,11 @@ class BarFiveViewController: UIViewController, UITableViewDataSource, UITableVie
         
         leftConstrain.constant = -80
         
-        self.hiddenMenu()
+        //self.hiddenMenu()
         
         //Tabla
-        data = [ cellData.init(image: #imageLiteral(resourceName: "tramite"), message: "tramite numero 23 detallado asd asd asd asd asd asd asd a ramite numero 23 detallado asd asd asd asd asd asd asd a", title: "tramite 23"),cellData.init(image: #imageLiteral(resourceName: "tramite"), message: "tramite numero 2ramite numero 23 detallado asd asd asd asd asd asd asd a ramite numero 23 detallado asd asd asd asd asd asd asd a ramite numero 23 detallado asd asd asd asd asd asd asd a2 detallado", title: "tramite 22")]
+        data = [ cellData.init(image: #imageLiteral(resourceName: "documento_3"), message: "Ingrese su reclamo técnico", title: "SOLICITUDES TÉCNICAS"),cellData.init(image: #imageLiteral(resourceName: "reclamo_3"), message: "Ingrese su reclamo de primera instancia", title: "RECLAMOS POR FACTURACIÓN")]
+        
         
         self.tableView.register(CustomTableViewCell2.self, forCellReuseIdentifier: "customCell")
         self.tableView.rowHeight = UITableViewAutomaticDimension
@@ -104,6 +105,7 @@ class BarFiveViewController: UIViewController, UITableViewDataSource, UITableVie
         cell.mainImage.image = data[indexPath.row].image
         cell.mainTitle.text = data[indexPath.row].title
         cell.mainMessage.text = data[indexPath.row].message
+        cell.mainDate.text = ""
         return cell
     }
     
@@ -113,6 +115,20 @@ class BarFiveViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("selected", indexPath.row)
+        
+        switch indexPath.row {
+        case 0:
+            let viewController = self.storyboard?.instantiateViewController(withIdentifier: "techRequestViewController") as! TechRequestViewController
+            self.present(viewController, animated: true, completion: nil)
+        case 1:
+            let viewController = self.storyboard?.instantiateViewController(withIdentifier: "techRequestViewController") as! TechRequestViewController
+            self.present(viewController, animated: true, completion: nil)
+        default:
+            break
+        }
+        
+        
+        
     }
     
     //HABILITA LA OPCION DE OCULTAR EL TECLADO CUANDO SE LE DA EN CUALQUIER PARTE DE LA PANTALLA Y PARA MOVER LA VIEW SI EL TECLADO OCULTA EL TEXTFIELD
