@@ -19,12 +19,12 @@ class AboutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        popupView.layer.cornerRadius = 15
+        //popupView.layer.cornerRadius = 15
         //titleLabel.layer.cornerRadius = 15
-        AceptButton.layer.cornerRadius = 15
+        //AceptButton.layer.cornerRadius = 15
         popupView.layer.shadowColor = UIColor.black.cgColor
-        popupView.layer.shadowOpacity = 0.8
-        popupView.layer.shadowOffset = CGSize(width: 5, height: 0)
+        //popupView.layer.shadowOpacity = 0.8
+        //popupView.layer.shadowOffset = CGSize(width: 5, height: 0)
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
             self.labelVersion.text = version
         }

@@ -37,6 +37,7 @@ class ThirdViewController: UIViewController, CLLocationManagerDelegate, MKMapVie
         navigationController?.hidesBarsWhenKeyboardAppears = false
         
         locationManager.delegate = self
+        self.map.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         
@@ -45,8 +46,8 @@ class ThirdViewController: UIViewController, CLLocationManagerDelegate, MKMapVie
         gesture.delaysTouchesBegan = true
         gesture.delegate = self
         self.map.addGestureRecognizer(gesture)
-        map.setRegion(MKCoordinateRegionMakeWithDistance(userLatLong, 1500, 1500), animated: true)
-        map.showsUserLocation = true
+        self.map.setRegion(MKCoordinateRegionMakeWithDistance(userLatLong, 1500, 1500), animated: true)
+        self.map.showsUserLocation = true
         
         pickerView.delegate = self
         pickerView.dataSource = self
@@ -54,6 +55,26 @@ class ThirdViewController: UIViewController, CLLocationManagerDelegate, MKMapVie
         select.inputView = pickerView
         
     }
+    
+    //****funciones de mapa****
+    /*func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        if annotation is MKUserLocation{
+            return nil
+        }
+        
+        let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "customannotation")
+        //annotationView.image = UIImage(named:"user-2")
+        annotationView.canShowCallout = true
+        return annotationView
+        
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        print("seleccionado: \(view.annotation?.coordinate)")
+    }*/
+    
+    //*************
     
     @IBAction func Back(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
@@ -75,6 +96,7 @@ class ThirdViewController: UIViewController, CLLocationManagerDelegate, MKMapVie
             
             return
         }
+        
         if gestureReconizer.state != UIGestureRecognizerState.began {
             return
         }

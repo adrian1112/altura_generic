@@ -48,7 +48,7 @@ class BarFourViewController: UIViewController, UITableViewDataSource, UITableVie
         //self.hiddenMenu()
         
         //Tabla
-        data = [ cellData.init(image: #imageLiteral(resourceName: "tramite"), message: "tramite numero 23 detallado asd asd asd asd asd asd asd a ramite numero 23 detallado asd asd asd asd asd asd asd a", title: "tramite 23"),cellData.init(image: #imageLiteral(resourceName: "tramite"), message: "tramite numero 2ramite numero 23 detallado asd asd asd asd asd asd asd a ramite numero 23 detallado asd asd asd asd asd asd asd a ramite numero 23 detallado asd asd asd asd asd asd asd a2 detallado", title: "tramite 22")]
+        data = [ cellData.init(image: #imageLiteral(resourceName: "alerta_mensaje"), message: "Interrupción Programada del servicio: A partir del 01/01/1991 se realizarán trabajos en RECINTO POSORJA por trabajo programado. Agradecemos si compresion", title: "INTERRUPCIÓN PROGRAMADA DE SERVICIO", date: "29 Jun"),cellData.init(image: #imageLiteral(resourceName: "info_mensaje_2"), message: "INTERAGUA,informa que se ha generado en su contrato No.111 -222-3333333 por el valor de USD 15.26 correspondiente a JUNIO de 2018 con fecha de vencimiento 01/01/1991", title: "EMISIÓN DE FACTURA", date: "29 Jun")]
         
         self.tableView.register(CustomTableViewCell2.self, forCellReuseIdentifier: "customCell")
         self.tableView.rowHeight = UITableViewAutomaticDimension
@@ -113,6 +113,15 @@ class BarFourViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("selected", indexPath.row)
+        let title_string = data[indexPath.row].title
+        let body_string = data[indexPath.row].message
+        let image_string =  data[indexPath.row].image
+        
+        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "popUpCustomViewController") as! PopUpCustomViewController
+        viewController.title_string = title_string!
+        viewController.image = image_string
+        viewController.body_string = body_string!
+        self.present(viewController, animated: true, completion: nil)
     }
     
     //HABILITA LA OPCION DE OCULTAR EL TECLADO CUANDO SE LE DA EN CUALQUIER PARTE DE LA PANTALLA Y PARA MOVER LA VIEW SI EL TECLADO OCULTA EL TEXTFIELD

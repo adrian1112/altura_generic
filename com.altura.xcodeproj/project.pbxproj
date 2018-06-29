@@ -16,6 +16,13 @@
 		2201C04420E2B9A8003BF608 /* SuggestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201C04320E2B9A8003BF608 /* SuggestionViewController.swift */; };
 		2201C04720E2DA30003BF608 /* SuggestionView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2201C04520E2DA30003BF608 /* SuggestionView.storyboard */; };
 		2201C04920E3D6A9003BF608 /* TechRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201C04820E3D6A9003BF608 /* TechRequestViewController.swift */; };
+		2201C04B20E52213003BF608 /* BillRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201C04A20E52213003BF608 /* BillRequestViewController.swift */; };
+		2201C04E20E52F12003BF608 /* CustomTableViewCell3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201C04C20E52F12003BF608 /* CustomTableViewCell3.swift */; };
+		2201C04F20E52F12003BF608 /* CustomTableViewCell3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2201C04D20E52F12003BF608 /* CustomTableViewCell3.xib */; };
+		2201C05320E58734003BF608 /* CustomPinMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201C05220E58734003BF608 /* CustomPinMap.swift */; };
+		2201C06520E6D130003BF608 /* CellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201C06420E6D130003BF608 /* CellData.swift */; };
+		2201C07120E6E8CC003BF608 /* PopUpCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201C07020E6E8CC003BF608 /* PopUpCustomViewController.swift */; };
+		2201C07420E6EBA6003BF608 /* PopupCustom.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2201C07220E6EBA6003BF608 /* PopupCustom.storyboard */; };
 		221CC55820BBA4EA00CFC265 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221CC55720BBA4EA00CFC265 /* SecondViewController.swift */; };
 		221CC56220BC481000CFC265 /* InitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221CC56120BC481000CFC265 /* InitController.swift */; };
 		224419C620CB183D008D90C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 224419BF20CB183D008D90C4 /* Assets.xcassets */; };
@@ -193,6 +200,13 @@
 		2201C04320E2B9A8003BF608 /* SuggestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionViewController.swift; sourceTree = "<group>"; };
 		2201C04620E2DA30003BF608 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = com.altura/Base.lproj/SuggestionView.storyboard; sourceTree = "<group>"; };
 		2201C04820E3D6A9003BF608 /* TechRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechRequestViewController.swift; sourceTree = "<group>"; };
+		2201C04A20E52213003BF608 /* BillRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillRequestViewController.swift; sourceTree = "<group>"; };
+		2201C04C20E52F12003BF608 /* CustomTableViewCell3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell3.swift; sourceTree = "<group>"; };
+		2201C04D20E52F12003BF608 /* CustomTableViewCell3.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTableViewCell3.xib; sourceTree = "<group>"; };
+		2201C05220E58734003BF608 /* CustomPinMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPinMap.swift; sourceTree = "<group>"; };
+		2201C06420E6D130003BF608 /* CellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellData.swift; sourceTree = "<group>"; };
+		2201C07020E6E8CC003BF608 /* PopUpCustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpCustomViewController.swift; sourceTree = "<group>"; };
+		2201C07320E6EBA6003BF608 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = com.altura/Base.lproj/PopupCustom.storyboard; sourceTree = "<group>"; };
 		221CC55720BBA4EA00CFC265 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		221CC56120BC481000CFC265 /* InitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitController.swift; sourceTree = "<group>"; };
 		224419BF20CB183D008D90C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -315,6 +329,12 @@
 				227D7ECD20DD5D60003E11BB /* AboutViewController.swift */,
 				2201C04520E2DA30003BF608 /* SuggestionView.storyboard */,
 				2201C04320E2B9A8003BF608 /* SuggestionViewController.swift */,
+				2201C04C20E52F12003BF608 /* CustomTableViewCell3.swift */,
+				2201C04D20E52F12003BF608 /* CustomTableViewCell3.xib */,
+				2201C05220E58734003BF608 /* CustomPinMap.swift */,
+				2201C06420E6D130003BF608 /* CellData.swift */,
+				2201C07220E6EBA6003BF608 /* PopupCustom.storyboard */,
+				2201C07020E6E8CC003BF608 /* PopUpCustomViewController.swift */,
 			);
 			path = CustomElements;
 			sourceTree = "<group>";
@@ -371,6 +391,7 @@
 				224419BF20CB183D008D90C4 /* Assets.xcassets */,
 				22441A0620D80DF5008D90C4 /* PageUrlViewController.swift */,
 				2201C04820E3D6A9003BF608 /* TechRequestViewController.swift */,
+				2201C04A20E52213003BF608 /* BillRequestViewController.swift */,
 			);
 			path = com.altura;
 			sourceTree = "<group>";
@@ -645,8 +666,10 @@
 				2201C04720E2DA30003BF608 /* SuggestionView.storyboard in Resources */,
 				22A9E67F20B0F00E0092E555 /* LaunchScreen.storyboard in Resources */,
 				2201C03B20E130A4003BF608 /* CustomMapView.storyboard in Resources */,
+				2201C04F20E52F12003BF608 /* CustomTableViewCell3.xib in Resources */,
 				2201C03D20E130D7003BF608 /* CustomForm1View.storyboard in Resources */,
 				22441A0520CF1879008D90C4 /* CustomTableViewCell2.xib in Resources */,
+				2201C07420E6EBA6003BF608 /* PopupCustom.storyboard in Resources */,
 				224419C620CB183D008D90C4 /* Assets.xcassets in Resources */,
 				22A9E67A20B0F00C0092E555 /* Main.storyboard in Resources */,
 				2201C04220E1556A003BF608 /* AboutViewController.storyboard in Resources */,
@@ -772,6 +795,7 @@
 				224419F120CDF9CE008D90C4 /* MainTabViewController.swift in Sources */,
 				22441A0420CF1879008D90C4 /* CustomTableViewCell2.swift in Sources */,
 				2201C04420E2B9A8003BF608 /* SuggestionViewController.swift in Sources */,
+				2201C04B20E52213003BF608 /* BillRequestViewController.swift in Sources */,
 				228804DE20C8636D00C94AAC /* Crypt.swift in Sources */,
 				228804D020C84CDB00C94AAC /* DBase.swift in Sources */,
 				2201C02B20DDB8BD003BF608 /* ItemMenuView.swift in Sources */,
@@ -782,18 +806,22 @@
 				225772FA20B3C8BB006CFB3B /* FirstOptionViewController.swift in Sources */,
 				221CC55820BBA4EA00CFC265 /* SecondViewController.swift in Sources */,
 				22A9E67720B0F00C0092E555 /* ViewController.swift in Sources */,
+				2201C06520E6D130003BF608 /* CellData.swift in Sources */,
 				22A9E67520B0F00C0092E555 /* AppDelegate.swift in Sources */,
 				224419F820CE063D008D90C4 /* BarThreeViewController.swift in Sources */,
 				22A9E6CA20B0FB580092E555 /* RegisterSecondController.swift in Sources */,
 				224419F620CE0370008D90C4 /* BarTwoViewController.swift in Sources */,
 				228804CE20C8462100C94AAC /* WService.swift in Sources */,
 				228804E420C9D4C500C94AAC /* ThirdViewController.swift in Sources */,
+				2201C07120E6E8CC003BF608 /* PopUpCustomViewController.swift in Sources */,
+				2201C05320E58734003BF608 /* CustomPinMap.swift in Sources */,
 				221CC56220BC481000CFC265 /* InitController.swift in Sources */,
 				224419F420CE0340008D90C4 /* BarOneViewController.swift in Sources */,
 				2201C03F20E1468C003BF608 /* BarSixViewController.swift in Sources */,
 				22441A0720D80DF5008D90C4 /* PageUrlViewController.swift in Sources */,
 				224419FA20CE0653008D90C4 /* BarFourViewController.swift in Sources */,
 				224419FC20CE0672008D90C4 /* BarFiveViewController.swift in Sources */,
+				2201C04E20E52F12003BF608 /* CustomTableViewCell3.swift in Sources */,
 				22A9E6C820B0FB450092E555 /* RegisterController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -862,6 +890,14 @@
 				2201C04620E2DA30003BF608 /* Base */,
 			);
 			name = SuggestionView.storyboard;
+			sourceTree = "<group>";
+		};
+		2201C07220E6EBA6003BF608 /* PopupCustom.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2201C07320E6EBA6003BF608 /* Base */,
+			);
+			name = PopupCustom.storyboard;
 			sourceTree = "<group>";
 		};
 		22A9E67820B0F00C0092E555 /* Main.storyboard */ = {

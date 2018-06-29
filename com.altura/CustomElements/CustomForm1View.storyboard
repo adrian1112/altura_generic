@@ -33,7 +33,7 @@
                                     </mapView>
                                     <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5TL-FM-0ND">
                                         <rect key="frame" x="320" y="246" width="25" height="27"/>
-                                        <state key="normal" image="find_me"/>
+                                        <state key="normal" image="gps_2"/>
                                         <connections>
                                             <action selector="myUbication:" destination="XbA-wB-aSU" eventType="touchUpInside" id="5cj-c8-tYD"/>
                                         </connections>
@@ -233,7 +233,7 @@
     <resources>
         <image name="camara" width="65" height="65"/>
         <image name="enviar-boton" width="65" height="65"/>
-        <image name="find_me" width="32" height="32"/>
         <image name="flecha_izq" width="24" height="24"/>
+        <image name="gps_2" width="32" height="32"/>
     </resources>
 </document>

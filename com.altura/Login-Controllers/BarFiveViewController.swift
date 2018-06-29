@@ -46,7 +46,7 @@ class BarFiveViewController: UIViewController, UITableViewDataSource, UITableVie
         //self.hiddenMenu()
         
         //Tabla
-        data = [ cellData.init(image: #imageLiteral(resourceName: "documento_3"), message: "Ingrese su reclamo técnico", title: "SOLICITUDES TÉCNICAS"),cellData.init(image: #imageLiteral(resourceName: "reclamo_3"), message: "Ingrese su reclamo de primera instancia", title: "RECLAMOS POR FACTURACIÓN")]
+        data = [ cellData.init(image: #imageLiteral(resourceName: "proceso"), message: "Ingrese su reclamo técnico", title: "SOLICITUDES TÉCNICAS", date: ""),cellData.init(image: #imageLiteral(resourceName: "proceso"), message: "Ingrese su reclamo de primera instancia", title: "RECLAMOS POR FACTURACIÓN", date: "")]
         
         
         self.tableView.register(CustomTableViewCell2.self, forCellReuseIdentifier: "customCell")
@@ -121,7 +121,7 @@ class BarFiveViewController: UIViewController, UITableViewDataSource, UITableVie
             let viewController = self.storyboard?.instantiateViewController(withIdentifier: "techRequestViewController") as! TechRequestViewController
             self.present(viewController, animated: true, completion: nil)
         case 1:
-            let viewController = self.storyboard?.instantiateViewController(withIdentifier: "techRequestViewController") as! TechRequestViewController
+            let viewController = self.storyboard?.instantiateViewController(withIdentifier: "billRequestViewController") as! BillRequestViewController
             self.present(viewController, animated: true, completion: nil)
         default:
             break
