@@ -47,7 +47,7 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
         //self.hiddenMenu()
         
         //Tabla
-        data = [ cellData.init(image: #imageLiteral(resourceName: "contrato-1"), message: "tramite numero 23 detallado asd asd asd asd asd asd asd a ramite numero 23 detallado asd asd asd asd asd asd asd a", title: "tramite 23", date: ""),cellData.init(image: #imageLiteral(resourceName: "contrato-1"), message: "tramite numero 2ramite numero 23 detallado asd asd asd asd asd asd asd a ramite numero 23 detallado asd asd asd asd asd asd asd a ramite numero 23 detallado asd asd asd asd asd asd asd a2 detallado", title: "tramite 22", date: "")]
+        data = [ cellData.init(image: #imageLiteral(resourceName: "contrato-1"), message: "tramite numero 23 detallado asd asd asd asd asd asd asd a ramite numero 23 detallado asd asd asd asd asd asd asd a", title: "Contrato 1", date: ""),cellData.init(image: #imageLiteral(resourceName: "contrato-1"), message: "tramite numero 2ramite numero 23 detallado asd asd asd asd asd asd asd a ramite numero 23 detallado asd asd asd asd asd asd asd a ramite numero 23 detallado asd asd asd asd asd asd asd a2 detallado", title: "Contrato 2", date: "")]
         
         self.tableView.register(CustomTableViewCell2.self, forCellReuseIdentifier: "customCell")
         self.tableView.rowHeight = UITableViewAutomaticDimension
@@ -116,6 +116,11 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("selected", indexPath.row)
+        
+        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "detaillsTabBarController") as! UIViewController
+        self.present(viewController, animated: true)
+        
+        
     }
     
     //HABILITA LA OPCION DE OCULTAR EL TECLADO CUANDO SE LE DA EN CUALQUIER PARTE DE LA PANTALLA Y PARA MOVER LA VIEW SI EL TECLADO OCULTA EL TEXTFIELD

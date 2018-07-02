@@ -148,12 +148,15 @@ class SecondViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         print("end: \(destinationLocation)")
         
         
-        let startPlacemark = MKPlacemark(coordinate: startLocation, addressDictionary: nil)
-        let start = MKMapItem(placemark: startPlacemark)
+        //let startPlacemark = MKPlacemark(coordinate: startLocation, addressDictionary: nil)
+        //let start = MKMapItem(placemark: startPlacemark)
+        let options = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
         let destinationPlacemark = MKPlacemark(coordinate: destinationLocation, addressDictionary: nil)
         let destination = MKMapItem(placemark: destinationPlacemark)
-        let options = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeTransit]
-        MKMapItem.openMaps(with: [start, destination], launchOptions: options)
+        destination.name = "Destino"
+        destination.openInMaps(launchOptions: options)
+        
+        //MKMapItem.openMaps(with: [start, destination], launchOptions: options)
         
         self.navigateButton.setImage(UIImage(named: "navigation_enabled_2"), for: .normal)
         

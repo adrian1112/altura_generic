@@ -111,6 +111,8 @@
                 <outlet property="date_second" destination="wnp-3z-UR5" id="h8a-Xn-EI4"/>
                 <outlet property="img" destination="rj1-4M-wau" id="Xqa-bg-M4k"/>
                 <outlet property="label_cost" destination="ODW-DA-w2U" id="yaO-Fg-JGn"/>
+                <outlet property="label_date_first" destination="x3E-wU-f18" id="8Kn-3S-kdI"/>
+                <outlet property="label_date_second" destination="9ee-6G-lwK" id="Oin-zo-5M7"/>
                 <outlet property="title" destination="a3P-FQ-8VH" id="2L5-w6-dQj"/>
             </connections>
             <point key="canvasLocation" x="31" y="67"/>

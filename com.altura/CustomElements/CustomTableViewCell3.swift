@@ -17,4 +17,7 @@ class CustomTableViewCell3: UITableViewCell {
     
     @IBOutlet weak var date_first: UILabel!
     @IBOutlet weak var date_second: UILabel!
+    
+    @IBOutlet weak var label_date_first: UILabel!
+    @IBOutlet weak var label_date_second: UILabel!
 }
