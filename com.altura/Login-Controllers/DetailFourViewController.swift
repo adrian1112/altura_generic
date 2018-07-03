@@ -9,6 +9,8 @@
 import UIKit
 
 class DetailFourViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    @IBOutlet weak var navigationBar: UINavigationItem!
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -38,6 +40,11 @@ class DetailFourViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let detailController = tabBarController as! DetailsTabBarViewController
+        
+        let titleView = String(describing: detailController.contrato)
+        navigationBar.title = titleView
 
         tableView.delegate = self
         tableView.dataSource = self

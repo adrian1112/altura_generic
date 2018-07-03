@@ -14,21 +14,13 @@
 		</dict>
 		<dict>
 			<key>FooterText</key>
-			<string>Copyright 2018 Google</string>
+			<string>This is the repository for Highcharts iOS, a Objective-C wrapper for the JavaScript charting library: Highcharts.
+For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
+In case of questions, please contact sales@highsoft.com</string>
 			<key>License</key>
-			<string>Copyright</string>
+			<string>Custom</string>
 			<key>Title</key>
-			<string>GoogleMaps</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>Copyright 2018 Google</string>
-			<key>License</key>
-			<string>Copyright</string>
-			<key>Title</key>
-			<string>GooglePlaces</string>
+			<string>Highcharts</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>

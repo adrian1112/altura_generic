@@ -22,6 +22,8 @@ class DetailTwoViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
+    @IBOutlet weak var navigationBar: UINavigationItem!
+    
     @IBOutlet weak var tableBills: UITableView!
     
     var bills : [Bill] = [Bill]() // list of options
@@ -31,6 +33,11 @@ class DetailTwoViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let detailController = tabBarController as! DetailsTabBarViewController
+        
+        let titleView = String(describing: detailController.contrato)
+        navigationBar.title = titleView
 
         tableBills.delegate = self
         tableBills.dataSource = self

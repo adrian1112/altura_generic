@@ -117,8 +117,9 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("selected", indexPath.row)
         
-        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "detaillsTabBarController") as! UIViewController
-        self.present(viewController, animated: true)
+        let tabBarViewController = self.storyboard?.instantiateViewController(withIdentifier: "detaillsTabBarController") as! DetailsTabBarViewController
+        tabBarViewController.contrato = data[indexPath.row].title!
+        self.present(tabBarViewController, animated: true)
         
         
     }

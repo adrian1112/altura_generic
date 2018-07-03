@@ -7,8 +7,9 @@ target 'com.altura' do
   # Pods for com.altura
   pod 'SQLite.swift', '~> 0.11.5'
   source 'https://github.com/CocoaPods/Specs.git'
-  pod 'GoogleMaps'
-  pod 'GooglePlaces'
+  pod 'Highcharts', '~> 6.1.0'
+  #pod 'GoogleMaps'
+  #pod 'GooglePlaces'
   #pod 'CryptoSwift'
 
   target 'com.alturaTests' do
