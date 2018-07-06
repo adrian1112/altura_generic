@@ -8,6 +8,7 @@
 
 import UIKit
 import UserNotifications
+import GoogleMaps
 import Highcharts
 
 
@@ -21,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         UNUserNotificationCenter.current().delegate = self
         HIChartView.preload()
+        GMSServices.provideAPIKey("AIzaSyD9zVbkyxSGE0swMdmBeQ2-8G9fz1zghZQ")
         
         return true
     }

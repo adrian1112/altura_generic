@@ -49,8 +49,8 @@ class DetailFourViewController: UIViewController, UITableViewDelegate, UITableVi
         tableView.delegate = self
         tableView.dataSource = self
         
-        self.process_list = [Process.init("SUSPENSION POR NO PAGO", "REC-CORTE DEL SERVICIO (1/2''-3/4''-1)","13718514","ATENDIDO","11/10/1991",UIImage(named: "pago1_2")!, false),
-        Process.init("VENTA DE SERVICIOS DE INGENIERIA", "PRUEBA DE GEOFONO","13718514","ATENDIDO","11/10/1991",UIImage(named: "pago1_2")!, false)
+        self.process_list = [Process.init("SUSPENSION POR NO PAGO", "REC-CORTE DEL SERVICIO (1/2''-3/4''-1)","13718514","ATENDIDO","11/10/1991",UIImage(named: "proceso")!, false),
+        Process.init("VENTA DE SERVICIOS DE INGENIERIA", "PRUEBA DE GEOFONO","13718514","ATENDIDO","11/10/1991",UIImage(named: "proceso")!, false)
         ]
         
     }
@@ -84,5 +84,21 @@ class DetailFourViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
-
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "statusProcessViewController") as! StatusProcessViewController
+        viewController.titleView = self.navigationBar.title!
+        self.present(viewController, animated: true)
+    }
+    
+    @IBAction func NewProcess(_ sender: Any) {
+        
+        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "optionsProcessViewController") as! OptionsProcessViewController
+        viewController.contrato =  self.navigationBar.title!
+        self.present(viewController, animated: true)
+        
+    }
+    
+    
 }

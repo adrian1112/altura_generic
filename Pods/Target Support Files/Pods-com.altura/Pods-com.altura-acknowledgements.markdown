@@ -1,6 +1,14 @@
 # Acknowledgements
 This application makes use of the following third party libraries:
 
+## GoogleMaps
+
+Copyright 2018 Google
+
+## GooglePlaces
+
+Copyright 2018 Google
+
 ## Highcharts
 
 This is the repository for Highcharts iOS, a Objective-C wrapper for the JavaScript charting library: Highcharts.

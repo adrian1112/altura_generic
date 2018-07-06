@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import GoogleMaps
 import CoreLocation
 
 struct place{
@@ -26,7 +27,9 @@ struct place{
     }
 }
 
-class SecondViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UINavigationControllerDelegate {
+
+
+class SecondViewController: UIViewController, CLLocationManagerDelegate, UINavigationControllerDelegate, GMSMapViewDelegate {
     
     let locationManager = CLLocationManager()
     var userLatLong = CLLocationCoordinate2D(latitude: -2.162870, longitude: -79.898407)
@@ -39,6 +42,7 @@ class SecondViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     ]
     
     //variables de los detalles
+    @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var attentionLabel: UILabel!
@@ -47,11 +51,19 @@ class SecondViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     //
     
-    @IBOutlet weak var map: MKMapView!
-    @IBOutlet weak var navigateButton: UIButton!
+    //@IBOutlet weak var map: MKMapView!
+    
+    @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet weak var navigateButton: UIBarButtonItem!
     
     var isInRoute = false;
     
+    //para rutas
+    let baseURLDirections = "https://maps.googleapis.com/maps/api/directions/json?"
+    
+    var  coordenadas : [CLLocationCoordinate2D] = []
+   
+    //----------
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,30 +71,46 @@ class SecondViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         
-        self.map.delegate = self
-        self.map.setRegion(MKCoordinateRegionMakeWithDistance(userLatLong, 6000, 6000), animated: true)
-        self.map.showsUserLocation = true
-        
+        self.mapView.delegate = self
+
+        DispatchQueue.main.async {
+            
+            self.mapView.camera = GMSCameraPosition(target: self.userLatLong, zoom: 12, bearing: 0, viewingAngle: 0)
+            
+            self.mapView.settings.compassButton = true;
+            
+            self.mapView.settings.zoomGestures = true
+            self.mapView.settings.myLocationButton = true;
+            self.mapView.isMyLocationEnabled = true;
+            
+            
+            
+        }
         self.showPins()
         
-        self.blurViewTop.constant = 0.0
+            self.mapView.addSubview(navigationBar)
+        self.mapView.addSubview(blurView)
+        
         
     }
+    
     
     func showPins(){
         
         for place in places{
             
-            let pin1 = CustomPinMap(title: place.name, subtitle: place.street, location: place.coordinate)
-
-            map.addAnnotation(pin1)
+            let marker = GMSMarker(position: place.coordinate)
+            marker.icon = UIImage(named: "place3")
+            marker.title = place.name
+            marker.map = self.mapView
+            
         }
         
         return
     }
     
     //****funciones de mapa****
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+    /*func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
      
      if annotation is MKUserLocation{
      return nil
@@ -93,9 +121,9 @@ class SecondViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
      annotationView.canShowCallout = true
      return annotationView
      
-     }
+     }*/
      
-     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+     /*func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         print("seleccionado: \(view.annotation?.coordinate)")
        
         self.placeLatLong = (view.annotation?.coordinate)!
@@ -120,7 +148,41 @@ class SecondViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         self.navigateButton.setImage(UIImage(named: "navigation_enabled_2"), for: .normal)
         self.navigateButton.isEnabled = true
         
-     }
+     }*/
+    
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        print("seleccionado: \(marker.position)")
+        
+        var index = 0
+        for place in places{
+            if place.coordinate.latitude == marker.position.latitude && place.coordinate.longitude == marker.position.longitude{
+                
+                self.placeLatLong = marker.position
+                
+                self.titleLabel.text = place.name
+                self.addressLabel.text = place.street
+                self.attentionLabel.text = place.attention
+                self.blurViewTop.constant = -131
+                
+                places[index].selected = true
+                let camera = GMSCameraPosition.camera(withLatitude: place.coordinate.latitude, longitude: place.coordinate.longitude, zoom: 16)
+                mapView.camera = camera
+                
+                self.navigateButton.isEnabled = true
+                //marker.icon = UIImage(named: "place2")
+                
+            }else{
+                places[index].selected = false
+            }
+            index = index + 1;
+        }
+        
+        return true
+        
+    }
+    
+    
+    
     
     
     @IBAction func CloseDetailPin(_ sender: UIButton) {
@@ -130,37 +192,136 @@ class SecondViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             places[index].selected = false
         }
         
-        self.navigateButton.setImage(UIImage(named: "navigation_disabled_2"), for: .normal)
+        let camera = GMSCameraPosition.camera(withLatitude: self.mapView.camera.target.latitude, longitude: self.mapView.camera.target.longitude, zoom: 12)
+        self.mapView.camera = camera
+        
         self.navigateButton.isEnabled = false
     }
     
-    @IBAction func navigateStart(_ sender: UIButton) {
-        
-        
-        //self.isInRoute = false
-        self.navigateButton.setImage(UIImage(named: "navigation_start_2"), for: .normal)
-    
+    @IBAction func navigateStart(_ sender: UIBarButtonItem) {
+
         self.isInRoute = true
-        let destinationLocation = placeLatLong
-        let startLocation = userLatLong
+        self.obtainCoordinate()
         
-        print("start: \(startLocation)")
-        print("end: \(destinationLocation)")
-        
-        
-        //let startPlacemark = MKPlacemark(coordinate: startLocation, addressDictionary: nil)
-        //let start = MKMapItem(placemark: startPlacemark)
-        let options = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
-        let destinationPlacemark = MKPlacemark(coordinate: destinationLocation, addressDictionary: nil)
-        let destination = MKMapItem(placemark: destinationPlacemark)
-        destination.name = "Destino"
-        destination.openInMaps(launchOptions: options)
-        
-        //MKMapItem.openMaps(with: [start, destination], launchOptions: options)
-        
-        self.navigateButton.setImage(UIImage(named: "navigation_enabled_2"), for: .normal)
         
     }
+    
+    
+    func obtainCoordinate(){
+        
+            if let start_location = self.mapView.myLocation?.coordinate {
+            
+                let end_location = placeLatLong
+            
+                var url_request = baseURLDirections
+                
+                url_request += "origin=\(start_location.latitude),\(start_location.longitude)&destination=\(end_location.latitude),\(end_location.longitude)"
+                
+                print(url_request)
+                
+                DispatchQueue.main.async {
+                    
+                    let url = URL(string: url_request)
+                    
+                    URLSession.shared.dataTask(with: url!){ (data , response ,err ) in
+                        
+                        guard let data = data else {return}
+
+                        do{
+                            let dictionary: Dictionary<NSObject, AnyObject> = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as! Dictionary<NSObject, AnyObject>
+                            
+                            var routes: Dictionary<NSObject, AnyObject> = [:]
+                            var coord: Dictionary<NSObject, AnyObject> = [:]
+                            var ok = false
+                            for (key,value) in dictionary {
+                                if key as! String == "status" && value as! String == "OK" {
+                                    ok = true
+                                    print("\(key) = \(value)")
+                                }
+                                if key as! String == "routes"{
+                                    routes = value as! Dictionary<NSObject, AnyObject>
+                                }
+                            }
+                            
+                            if ok{
+                                for (key,value) in routes {
+                                    if key as! String == "legs"{
+                                        for (key1,value1) in dictionary {
+                                            if key1 as! String == "steps"{
+                                                coord = value1 as! Dictionary<NSObject, AnyObject>
+                                                
+                                            }
+                                        }
+                                    }
+                                }
+                                
+                                for (key,value) in coord {
+                                    if key as! String == "start_location"{
+                                        var pos = CLLocationCoordinate2D(latitude: -2.162870, longitude: -79.898407)
+                                        
+                                        
+                                    }
+                                }
+                                
+                                
+                                
+                            }
+                            
+                            //print(user.person as Any)
+                            /*if((user.status) != nil && user.status! > 0){
+                                
+                                if(user.status == 1 ){
+                                    
+                                    //self.txt_alert = "Cuenta no validada mediante correo"
+                                }else{
+                                    
+                                    //self.txt_alert = "usuario:"+user.person!
+                                }
+                                
+                            }else{
+                                
+                            }*/
+                            
+                        }catch let errJson {
+                            print(errJson);
+                            
+                            //self.txt_alert = "El usuario no existe"
+                        }
+                        //sem.signal()
+                        
+                        }.resume()
+                }
+                
+                self.drawRoute()
+            
+        }else{
+            print("no se pudo obtener rutas")
+        }
+    }
+    
+    
+    
+    func drawRoute() {
+        let path = GMSMutablePath()
+        
+        if let mylocation = self.mapView.myLocation {
+            print("User's location: \(mylocation)")
+            path.add(mylocation.coordinate)
+            path.add(placeLatLong)
+            let polyline = GMSPolyline(path: path)
+            polyline.map = self.mapView
+            polyline.strokeColor = .blue
+            polyline.strokeWidth = 2.0
+            
+        } else {
+            print("User's location is unknown")
+        }
+        
+        
+    }
+    
+    
+    
     
     //*************
     
@@ -176,24 +337,29 @@ class SecondViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     private func setMapCamera(){
         CATransaction.begin()
         CATransaction.setValue(2, forKey: kCATransactionAnimationDuration)
-        let center = CLLocationCoordinate2D(latitude: placeLatLong.latitude, longitude: placeLatLong.longitude)
-        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        //let center = CLLocationCoordinate2D(latitude: placeLatLong.latitude, longitude: placeLatLong.longitude)
+        //let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         
-        self.map.setRegion(region, animated: true)
+        //self.map.setRegion(region, animated: true)
         
         CATransaction.commit();
         
     }
     
     private func setMapCameraUser(){
-        CATransaction.begin()
-        CATransaction.setValue(2, forKey: kCATransactionAnimationDuration)
-        let center = CLLocationCoordinate2D(latitude: userLatLong.latitude, longitude: userLatLong.longitude)
-        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        //CATransaction.begin()
+        //CATransaction.setValue(2, forKey: kCATransactionAnimationDuration)
+        //let center = CLLocationCoordinate2D(latitude: userLatLong.latitude, longitude: userLatLong.longitude)
+        //let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         
-        self.map.setRegion(region, animated: true)
+        //self.map.setRegion(region, animated: true)
         
-        CATransaction.commit();
+        //self.mapViewPrincipal.animate(toLocation: CLLocationCoordinate2D(latitude: userLatLong.latitude, longitude: userLatLong.longitude))
+        
+        //let target = CLLocationCoordinate2D(latitude: userLatLong.latitude, longitude: userLatLong.longitude)
+        //self.mapView.camera = GMSCameraPosition.camera(withTarget: target, zoom: 6)
+        
+        //CATransaction.commit();
         
     }
 
@@ -205,3 +371,5 @@ class SecondViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         dismiss(animated: true)
     }
 }
+
+

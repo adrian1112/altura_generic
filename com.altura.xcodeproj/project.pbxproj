@@ -33,6 +33,9 @@
 		22112FA120EC007C00689974 /* Highcharts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22112FA020EC007C00689974 /* Highcharts.framework */; };
 		22112FA220EC008E00689974 /* Highcharts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22112FA020EC007C00689974 /* Highcharts.framework */; };
 		22112FA320EC008E00689974 /* Highcharts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22112FA020EC007C00689974 /* Highcharts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22112FB720ED596600689974 /* StatusProcessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22112FB620ED596600689974 /* StatusProcessViewController.swift */; };
+		22112FB920ED6DD000689974 /* OptionsProcessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22112FB820ED6DD000689974 /* OptionsProcessViewController.swift */; };
+		22112FBB20ED78FF00689974 /* NewContractViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22112FBA20ED78FF00689974 /* NewContractViewController.swift */; };
 		221CC55820BBA4EA00CFC265 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221CC55720BBA4EA00CFC265 /* SecondViewController.swift */; };
 		221CC56220BC481000CFC265 /* InitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221CC56120BC481000CFC265 /* InitController.swift */; };
 		224419C620CB183D008D90C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 224419BF20CB183D008D90C4 /* Assets.xcassets */; };
@@ -225,6 +228,9 @@
 		2201C07E20EAB955003BF608 /* CustomTableViewCell4.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTableViewCell4.xib; sourceTree = "<group>"; };
 		2201C08120EADA09003BF608 /* DetailsTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTabBarViewController.swift; sourceTree = "<group>"; };
 		22112FA020EC007C00689974 /* Highcharts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Highcharts.framework; path = Pods/Highcharts/development/Highcharts.framework; sourceTree = "<group>"; };
+		22112FB620ED596600689974 /* StatusProcessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusProcessViewController.swift; sourceTree = "<group>"; };
+		22112FB820ED6DD000689974 /* OptionsProcessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsProcessViewController.swift; sourceTree = "<group>"; };
+		22112FBA20ED78FF00689974 /* NewContractViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewContractViewController.swift; sourceTree = "<group>"; };
 		221CC55720BBA4EA00CFC265 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		221CC56120BC481000CFC265 /* InitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitController.swift; sourceTree = "<group>"; };
 		224419BF20CB183D008D90C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -331,6 +337,7 @@
 				2201C07720EAB117003BF608 /* DetailTwoViewController.swift */,
 				2201C07920EAB127003BF608 /* DetailThreeViewController.swift */,
 				2201C07B20EAB137003BF608 /* DetailFourViewController.swift */,
+				22112FB620ED596600689974 /* StatusProcessViewController.swift */,
 			);
 			path = "Login-Controllers";
 			sourceTree = "<group>";
@@ -360,6 +367,8 @@
 				2201C07020E6E8CC003BF608 /* PopUpCustomViewController.swift */,
 				2201C07D20EAB955003BF608 /* CustomTableViewCell4.swift */,
 				2201C07E20EAB955003BF608 /* CustomTableViewCell4.xib */,
+				22112FB820ED6DD000689974 /* OptionsProcessViewController.swift */,
+				22112FBA20ED78FF00689974 /* NewContractViewController.swift */,
 			);
 			path = CustomElements;
 			sourceTree = "<group>";
@@ -493,6 +502,7 @@
 				22A9E66F20B0F00C0092E555 /* Resources */,
 				1C2B0305C1493E17290DC0ED /* [CP] Embed Pods Frameworks */,
 				22A9E6BF20B0F1710092E555 /* Embed Frameworks */,
+				37153D959719CDDE10B89B09 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -776,6 +786,26 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-com.altura/Pods-com.altura-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		37153D959719CDDE10B89B09 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-com.altura/Pods-com.altura-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-com.altura/Pods-com.altura-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		5DEAB9BAB3DA69461D766058 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -812,6 +842,7 @@
 				228804E820C9E4F600C94AAC /* PinMap.swift in Sources */,
 				227D7ECE20DD5D60003E11BB /* AboutViewController.swift in Sources */,
 				2201C04920E3D6A9003BF608 /* TechRequestViewController.swift in Sources */,
+				22112FB920ED6DD000689974 /* OptionsProcessViewController.swift in Sources */,
 				2201C07820EAB117003BF608 /* DetailTwoViewController.swift in Sources */,
 				225772F820B3C841006CFB3B /* CustomCollectionViewCell.swift in Sources */,
 				225772FA20B3C8BB006CFB3B /* FirstOptionViewController.swift in Sources */,
@@ -821,6 +852,7 @@
 				22A9E67520B0F00C0092E555 /* AppDelegate.swift in Sources */,
 				224419F820CE063D008D90C4 /* BarThreeViewController.swift in Sources */,
 				22A9E6CA20B0FB580092E555 /* RegisterSecondController.swift in Sources */,
+				22112FB720ED596600689974 /* StatusProcessViewController.swift in Sources */,
 				2201C08220EADA09003BF608 /* DetailsTabBarViewController.swift in Sources */,
 				224419F620CE0370008D90C4 /* BarTwoViewController.swift in Sources */,
 				2201C07C20EAB137003BF608 /* DetailFourViewController.swift in Sources */,
@@ -832,6 +864,7 @@
 				2201C07F20EAB955003BF608 /* CustomTableViewCell4.swift in Sources */,
 				224419F420CE0340008D90C4 /* BarOneViewController.swift in Sources */,
 				2201C07620EAB101003BF608 /* DetailOneViewController.swift in Sources */,
+				22112FBB20ED78FF00689974 /* NewContractViewController.swift in Sources */,
 				2201C03F20E1468C003BF608 /* BarSixViewController.swift in Sources */,
 				22441A0720D80DF5008D90C4 /* PageUrlViewController.swift in Sources */,
 				224419FA20CE0653008D90C4 /* BarFourViewController.swift in Sources */,

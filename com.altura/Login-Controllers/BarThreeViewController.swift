@@ -124,6 +124,11 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
         
     }
     
+    @IBAction func NewContract(_ sender: Any) {
+        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "newContractViewController") as! NewContractViewController
+        self.present(viewController, animated: true)
+    }
+    
     //HABILITA LA OPCION DE OCULTAR EL TECLADO CUANDO SE LE DA EN CUALQUIER PARTE DE LA PANTALLA Y PARA MOVER LA VIEW SI EL TECLADO OCULTA EL TEXTFIELD
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)

@@ -8,8 +8,8 @@ target 'com.altura' do
   pod 'SQLite.swift', '~> 0.11.5'
   source 'https://github.com/CocoaPods/Specs.git'
   pod 'Highcharts', '~> 6.1.0'
-  #pod 'GoogleMaps'
-  #pod 'GooglePlaces'
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
   #pod 'CryptoSwift'
 
   target 'com.alturaTests' do

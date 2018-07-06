@@ -28,6 +28,11 @@ class DetailOneViewController: UIViewController {
     let options = HIOptions()
     let chart = HIChart()
     
+    @IBOutlet weak var widthView1: NSLayoutConstraint!
+    @IBOutlet weak var widthView2: NSLayoutConstraint!
+    @IBOutlet weak var heigthViewBotton: NSLayoutConstraint!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,6 +48,10 @@ class DetailOneViewController: UIViewController {
         print(bound)
         self.chartView = HIChartView(frame: bound)
         
+        //setea el ancho y alto de los view de la secicon detalles
+        widthView1.constant = (self.view.bounds.width/2)-12
+        widthView2.constant = (self.view.bounds.width/2)-12
+        heigthViewBotton.constant = (self.view.bounds.height/2)-20
         
         
         
@@ -53,8 +62,11 @@ class DetailOneViewController: UIViewController {
         
         //options.chart = chart
         
-        let legend = HILegend()
-        legend.enabled = false
+        let exporting = HIExporting()
+        exporting.enabled = true
+        
+        let credits = HICredits()
+        credits.enabled = false
         
         //-----
         let title = HITitle()
@@ -81,9 +93,9 @@ class DetailOneViewController: UIViewController {
         //tooltip.pointFormat = @"{series.name}: <b>{point.percentage:.1f}%</b>";
         
         let tooltip = HITooltip()
-        //tooltip.headerFormat = "<span style=\"0font-size: 15px\";\">{point.key}</span>"
-        tooltip.pointFormat = "{series.name}: <b>{point.percentage:.1f}%</b>"
-        //tooltip.footerFormat = "<table><tbody><tr><td style=\"0color: {series.color}; padding: 0\";\">{series.name}:</td><td style=\"0padding: 0\";\"><b>{point.y}</b></td></tr></tbody></table>"
+        tooltip.headerFormat = "<span style=\"0font-size: 12px\";\">{point.percentage:.2f}%</span>"
+        tooltip.pointFormat = "Valor: <b>{point.y}</b>"
+        //tooltip.footerFormat = "<table><tbody><tr><td style=\"0color: {series.color}; padding: 0\";\">Valor:</td><td style=\"0padding: 0\";\"><b>{point.y}</b></td></tr></tbody></table>"
         tooltip.shared = true
         tooltip.useHTML = true
         //options.tooltip = tooltip
@@ -93,39 +105,48 @@ class DetailOneViewController: UIViewController {
         plotoptions.pie.allowPointSelect = true
         plotoptions.pie.cursor = "pointer"
         plotoptions.pie.dataLabels = HIDataLabels()
-        plotoptions.pie.dataLabels.enabled = false
+        plotoptions.pie.dataLabels.enabled = true
+        plotoptions.pie.dataLabels.format = "<b>$ {point.y}</b>"
+        plotoptions.pie.dataLabels.style = HIStyle()
+        plotoptions.pie.dataLabels.style.color = "black"
         plotoptions.pie.showInLegend = true
         
         var pie = HIPie()
-        pie.name = "Microsoft Internet Explorer";
-        pie.data = [ 56.33]
+        pie.name = "Brands";
+        pie.data = [
+            [
+                "name" : "INTERAGUA",
+                "y" : 56.33
+                
+            ],[
+                "name" : "CEM",
+                "y": 24.03
+                
+            ],[
+                "name" : "INTERES",
+                "y": 10.38
+                
+            ],[
+                "name" : "TBR",
+                "y": 4.97
+                
+            ],[
+                "name" : "IVA",
+                "y": 0.91
+                
+            ]
+        ];
         
-        var pie1 = HIPie()
-        pie1.name = "Chrome";
-        pie1.data = [ 24.03]
+        var colors = [HIColor(radialGradient: ["cx": 0.5, "cy": 0.3, "r": 0.7], stops: [[0, "#7cb5ec"], [1, "rgb(48,105,160)"]]), HIColor(radialGradient: ["cx": 0.5, "cy": 0.3, "r": 0.7], stops: [[0, "#434348"], [1, "rgb(0,0,0)"]]), HIColor(radialGradient: ["cx": 0.5, "cy": 0.3, "r": 0.7], stops: [[0, "#90ed7d"], [1, "rgb(68,161,49)"]]), HIColor(radialGradient: ["cx": 0.5, "cy": 0.3, "r": 0.7], stops: [[0, "#f7a35c"], [1, "rgb(171,87,16)"]]), HIColor(radialGradient: ["cx": 0.5, "cy": 0.3, "r": 0.7], stops: [[0, "#8085e9"], [1, "rgb(52,57,157)"]]), HIColor(radialGradient: ["cx": 0.5, "cy": 0.3, "r": 0.7], stops: [[0, "#f15c80"], [1, "rgb(165,16,52)"]]), HIColor(radialGradient: ["cx": 0.5, "cy": 0.3, "r": 0.7], stops: [[0, "#e4d354"], [1, "rgb(152,135,8)"]]), HIColor(radialGradient: ["cx": 0.5, "cy": 0.3, "r": 0.7], stops: [[0, "#2b908f"], [1, "rgb(0,68,67)"]]), HIColor(radialGradient: ["cx": 0.5, "cy": 0.3, "r": 0.7], stops: [[0, "#f45b5b"], [1, "rgb(168,15,15)"]]), HIColor(radialGradient: ["cx": 0.5, "cy": 0.3, "r": 0.7], stops: [[0, "#91e8e1"], [1, "rgb(69,156,149)"]])]
         
-        var pie2 = HIPie()
-        pie2.name = "Firefox";
-        pie2.data = [ 10.38]
-        
-        var pie3 = HIPie()
-        pie3.name = "Safari";
-        pie3.data = [ 4.77]
-        
-        var pie4 = HIPie()
-        pie4.name = "Opera";
-        pie4.data = [ 0.91]
-        
-        var pie5 = HIPie()
-        pie5.name = "Proprietary or Undetectable";
-        pie5.data = [ 0.2]
-        
-        
-        options.chart = chart;
-        options.title = title;
-        options.tooltip = tooltip;
-        options.plotOptions = plotoptions;
-        options.series = [pie,pie1,pie2,pie3,pie4,pie5];
+        options.chart = chart
+        options.title = title
+        options.colors = colors as! [HIColor]
+        options.tooltip = tooltip
+        options.plotOptions = plotoptions
+        options.series = [pie]
+        options.exporting = exporting
+        options.credits = credits
         
         //chartView.options = options;
         
@@ -141,4 +162,14 @@ class DetailOneViewController: UIViewController {
         dismiss(animated: true)
     }
 
+    @IBAction func changeView(_ sender: UISegmentedControl) {
+        print( sender.selectedSegmentIndex)
+        if sender.selectedSegmentIndex == 0{
+            self.dataView.isHidden = true
+            self.chartView.isHidden = false
+        }else{
+            self.dataView.isHidden = false
+            self.chartView.isHidden = true
+        }
+    }
 }

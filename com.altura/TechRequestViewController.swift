@@ -22,6 +22,8 @@ class TechRequestViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     @IBOutlet weak var obsText: UITextView!
     
+    var contrato = ""
+    
     let options2=["","Falta de tapa de alcantarilla","Fuga de agua en cajetin de medidor","Fuga de agua en la guía","Limpieza de caja de alcantarillado"]
     
     let options3=["","Instalación de tapa de alcantarilla domiciliaria.","Se observa fuga en el interior del cajetín medidor.","Se observa fuga en la guía domiciliaria, usualmente ubicada después del medidor o en a vereda","Limpieza de la caja que se encuentra fuera del domicilio y que corresponde a aguas servidas."]
@@ -54,6 +56,11 @@ class TechRequestViewController: UIViewController, UIPickerViewDelegate, UIPicke
         
         obsText.layer.borderWidth = 1
         obsText.layer.borderColor = UIColor.lightGray.cgColor
+        
+        if contrato != "" {
+            select1.text = contrato
+            select1.isEnabled = false
+        }
         
     }
     

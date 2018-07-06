@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -11,11 +14,11 @@
             <objects>
                 <viewController storyboardIdentifier="popUpCustomViewController" modalPresentationStyle="overFullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Bkm-Fm-5u3" customClass="PopUpCustomViewController" customModule="com_altura" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="L0K-3d-gyt">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eY2-x0-RHL">
-                                <rect key="frame" x="16" y="150" width="288" height="200"/>
+                                <rect key="frame" x="43.5" y="243.5" width="288" height="200"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="l1r-WT-Qn0">
                                         <rect key="frame" x="8" y="8" width="40" height="40"/>
@@ -70,7 +73,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="0.61948844179999996" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.66274509800000003" green="0.66274509800000003" blue="0.66274509800000003" alpha="0.5060199058" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="eY2-x0-RHL" firstAttribute="centerY" secondItem="yke-AP-Jwg" secondAttribute="centerY" id="39V-Mx-gEK"/>
                             <constraint firstItem="eY2-x0-RHL" firstAttribute="centerX" secondItem="yke-AP-Jwg" secondAttribute="centerX" id="HsV-td-1rt"/>

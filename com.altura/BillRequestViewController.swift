@@ -49,6 +49,8 @@ class BillRequestViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     var pickerView1 = UIPickerView()
     var pickerView2 = UIPickerView()
+    
+    var contrato = ""
 
     @IBOutlet weak var tickButton: UIButton!
     
@@ -77,7 +79,10 @@ class BillRequestViewController: UIViewController, UIPickerViewDelegate, UIPicke
         obsText.layer.borderWidth = 1
         obsText.layer.borderColor = UIColor.lightGray.cgColor
         
-        
+        if contrato != "" {
+            select1.text = contrato
+            select1.isEnabled = false
+        }
         
     }
     

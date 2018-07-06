@@ -45,7 +45,7 @@ class DetailTwoViewController: UIViewController, UITableViewDelegate, UITableVie
         
         self.bills = [Bill.init("Factura1", false,1),Bill.init("Factura2", false,2),Bill.init("Factura3", false,3),Bill.init("Factura4", false,4)]
         
-        self.bills_money = [Bill.init("Factura1", false,1),Bill.init("Factura2", false,2),Bill.init("Factura3", false,3),Bill.init("Factura4", false,4)]
+        self.bills_money = [Bill.init("Pago1", false,1),Bill.init("Pago2", false,2),Bill.init("Pago3", false,3),Bill.init("Pago4", false,4)]
         
     }
 
