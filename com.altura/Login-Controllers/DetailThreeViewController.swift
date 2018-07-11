@@ -8,12 +8,14 @@
 
 import UIKit
 import Highcharts
+import Charts
 
 class DetailThreeViewController: UIViewController {
 
     @IBOutlet weak var navigationBar: UINavigationItem!
+    @IBOutlet weak var barView: BarChartView!
     
-    var chartView: HIChartView!
+    /*var chartView: HIChartView!
     let options = HIOptions()
     let chart = HIChart()
     let meses = HIColumn()
@@ -23,7 +25,9 @@ class DetailThreeViewController: UIViewController {
     let xAxis = HIXAxis()
     let yAxis = HIYAxis()
     let tooltip = HITooltip()
-    let plotOptions = HIPlotOptions()
+    let plotOptions = HIPlotOptions()*/
+    
+    var data = [BarChartDataEntry]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,12 +37,67 @@ class DetailThreeViewController: UIViewController {
         let titleView = String(describing: detailController.contrato)
         navigationBar.title = titleView
         
+        //barView.delegate = self
+        barView.drawBarShadowEnabled = false
+        barView.drawValueAboveBarEnabled = false
         
-        let bound = CGRect(x: self.view.bounds.minX, y: self.view.bounds.minY, width: self.view.bounds.width, height: self.view.bounds.height-100)
+        let xAxis = barView.xAxis
+        xAxis.labelPosition = .bottom
+        xAxis.labelFont = .systemFont(ofSize: 10)
+        xAxis.granularity = 1
+        xAxis.labelCount = 7
+        //xAxis.valueFormatter = DayAxisValueFormatter(chart: barView)
+        
+        let leftAxisFormatter = NumberFormatter()
+        leftAxisFormatter.minimumFractionDigits = 0
+        leftAxisFormatter.maximumFractionDigits = 1
+        leftAxisFormatter.negativeSuffix = " $"
+        leftAxisFormatter.positiveSuffix = " $"
+        
+        let leftAxis = barView.leftAxis
+        leftAxis.labelFont = .systemFont(ofSize: 10)
+        leftAxis.labelCount = 8
+        leftAxis.valueFormatter = DefaultAxisValueFormatter(formatter: leftAxisFormatter)
+        leftAxis.labelPosition = .outsideChart
+        leftAxis.spaceTop = 0.15
+        leftAxis.axisMinimum = 0 // FIXME: HUH?? this replaces startAtZero = YES
+        
+        let rightAxis = barView.rightAxis
+        rightAxis.enabled = true
+        rightAxis.labelFont = .systemFont(ofSize: 10)
+        rightAxis.labelCount = 8
+        rightAxis.valueFormatter = leftAxis.valueFormatter
+        rightAxis.spaceTop = 0.15
+        rightAxis.axisMinimum = 0
+        
+        let l = barView.legend
+        l.horizontalAlignment = .left
+        l.verticalAlignment = .bottom
+        l.orientation = .horizontal
+        l.drawInside = false
+        l.form = .circle
+        l.formSize = 9
+        l.font = UIFont(name: "HelveticaNeue-Light", size: 11)!
+        l.xEntrySpace = 4
+        //        chartView.legend = l
+        
+        for i in [1,2,3,4]{
+            let val = i*20
+            let detail = BarChartDataEntry(x: Double(i), y: Double(val))
+            data.append(detail)
+            
+        }
+        
+       
+        updateChartData()
+        
+        
+        //let bound = CGRect(x: self.view.bounds.minX, y: self.view.bounds.minY, width: self.view.bounds.width, height: self.view.bounds.height-100)
         
         //dataView.isHidden = true
-        print(bound)
+        //print(bound)
         
+        /*
         //###### CONSUMO EN METRO CUBICOS
         self.chartView = HIChartView(frame: bound)
         
@@ -114,9 +173,21 @@ class DetailThreeViewController: UIViewController {
         
         self.view.addSubview(self.chartView)
 
+        */
         
+    }
+    
+    func updateChartData(){
+        let dataSet = BarChartDataSet(values: self.data, label: nil)
+        let charData = BarChartData(dataSet: dataSet)
         
+        //let colors = [HIColor(radialGradient: ["cx": 0.5, "cy": 0.3, "r": 0.7], stops: [[0, "#7cb5ec"], [1, "rgb(48,105,160)"]]), HIColor(radialGradient: ["cx": 0.5, "cy": 0.3, "r": 0.7], stops: [[0, "#434348"], [1, "rgb(0,0,0)"]]), HIColor(radialGradient: ["cx": 0.5, "cy": 0.3, "r": 0.7], stops: [[0, "#90ed7d"], [1, "rgb(68,161,49)"]]), HIColor(radialGradient: ["cx": 0.5, "cy": 0.3, "r": 0.7], stops: [[0, "#f7a35c"], [1, "rgb(171,87,16)"]])]
         
+        //dataSet.colors = colors as! [NSUIColor]
+        
+        barView.data = charData
+        //barView.centerText = "prueba data"
+        //barView.drawCenterTextEnabled = true
         
     }
 
@@ -131,45 +202,45 @@ class DetailThreeViewController: UIViewController {
                 print("1111")
                 viewWithTag.removeFromSuperview()
                 
-                title_c.text = "Consumo Dólares"
+                //title_c.text = "Consumo Dólares"
                 //let subtitle = HISubtitle()
                 //subtitle.text = "Team statistics"
-                options.title = title_c
+                //options.title = title_c
                 //options.subtitle = subtitle
-                yAxis.min = 0
-                yAxis.title = HITitle()
-                yAxis.title.text = "$ Dólares"
-                options.yAxis = [yAxis]
-                meses.data = [12,22,13,55]
-                options.series = [meses]
-                self.chartView.options = options
-                self.view.addSubview(self.chartView)
+                //yAxis.min = 0
+                //yAxis.title = HITitle()
+                //yAxis.title.text = "$ Dólares"
+                //options.yAxis = [yAxis]
+                //meses.data = [12,22,13,55]
+                //options.series = [meses]
+                //self.chartView.options = options
+                //self.view.addSubview(self.chartView)
             }
             else {
-                self.view.addSubview(self.chartView)
+                //self.view.addSubview(self.chartView)
             }
             
         }else{
             if let viewWithTag = self.view.viewWithTag(1111) {
                 print("1111")
-                viewWithTag.removeFromSuperview()
+                //viewWithTag.removeFromSuperview()
                 
-                title_c.text = "Consumo m3"
+                //title_c.text = "Consumo m3"
                 //let subtitle = HISubtitle()
                 //subtitle.text = "Team statistics"
-                options.title = title_c
+                //options.title = title_c
                 //options.subtitle = subtitle
-                yAxis.min = 0
-                yAxis.title = HITitle()
-                yAxis.title.text = "m3"
-                options.yAxis = [yAxis]
-                meses.data = [36,22,50,15]
-                options.series = [meses]
-                self.chartView.options = options
-                self.view.addSubview(self.chartView)
+                //yAxis.min = 0
+                //yAxis.title = HITitle()
+                //yAxis.title.text = "m3"
+                //options.yAxis = [yAxis]
+                //meses.data = [36,22,50,15]
+                //options.series = [meses]
+                //self.chartView.options = options
+                //self.view.addSubview(self.chartView)
             }
             else {
-                self.view.addSubview(self.chartView)
+                //self.view.addSubview(self.chartView)
             }
         }
     }

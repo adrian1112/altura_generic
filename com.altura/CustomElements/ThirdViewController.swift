@@ -7,11 +7,11 @@
 //
 
 import UIKit
-import MapKit
+import GoogleMaps
 import CoreLocation
 
-class ThirdViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    @IBOutlet weak var map: MKMapView!
+class ThirdViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    @IBOutlet weak var map: GMSMapView!
     @IBOutlet weak var select: UITextField!
     @IBOutlet weak var picture: UIImageView!
     
@@ -46,8 +46,13 @@ class ThirdViewController: UIViewController, CLLocationManagerDelegate, MKMapVie
         gesture.delaysTouchesBegan = true
         gesture.delegate = self
         self.map.addGestureRecognizer(gesture)
-        self.map.setRegion(MKCoordinateRegionMakeWithDistance(userLatLong, 1500, 1500), animated: true)
-        self.map.showsUserLocation = true
+        let camera = GMSCameraPosition.camera(withLatitude: userLatLong.latitude,
+                                              longitude: userLatLong.longitude,
+                                              zoom: 18)
+        self.map.camera = camera
+        map.settings.zoomGestures = true
+        map.settings.myLocationButton = true
+        map.isMyLocationEnabled = true
         
         pickerView.delegate = self
         pickerView.dataSource = self
@@ -83,15 +88,15 @@ class ThirdViewController: UIViewController, CLLocationManagerDelegate, MKMapVie
     @objc func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
         if gestureReconizer.state != UIGestureRecognizerState.ended {
             let touchLocation = gestureReconizer.location(in: map)
-            let locationCoordinate = map.convert(touchLocation,toCoordinateFrom: map)
-            print("Tapped at lat: \(locationCoordinate.latitude) long: \(locationCoordinate.longitude)")
+            //let locationCoordinate = map.convert(touchLocation,toCoordinateFrom: map)
+            //print("Tapped at lat: \(locationCoordinate.latitude) long: \(locationCoordinate.longitude)")
             
-            let pin1 = PinMap(title: "Reporte", subtitle: "Ubicacion del problema", coordinate: locationCoordinate)
+            //let pin1 = PinMap(title: "Reporte", subtitle: "Ubicacion del problema", coordinate: locationCoordinate)
             
-            map.removeAnnotations(pins as [MKAnnotation])
-            pins = []
-            pins.append(pin1)
-            map.addAnnotation(pin1)
+            //map.removeAnnotations(pins as [MKAnnotation])
+            //pins = []
+            //pins.append(pin1)
+            //map.addAnnotation(pin1)
             
             
             return
@@ -131,12 +136,17 @@ class ThirdViewController: UIViewController, CLLocationManagerDelegate, MKMapVie
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         userLatLong = locations[0].coordinate
-        //print(locations[0].coordinate.latitude)
-        //print(locations[0].coordinate.longitude)
+        print(locations[0].coordinate.latitude)
+        print(locations[0].coordinate.longitude)
+        
+        let camera = GMSCameraPosition.camera(withLatitude: userLatLong.latitude,
+                                              longitude: userLatLong.longitude,
+                                              zoom: 18)
+        self.map.camera = camera
         
     }
     
-    private func setMapCamera(){
+    /*private func setMapCamera(){
         CATransaction.begin()
         CATransaction.setValue(2, forKey: kCATransactionAnimationDuration)
         let center = CLLocationCoordinate2D(latitude: userLatLong.latitude, longitude: userLatLong.longitude)
@@ -146,12 +156,12 @@ class ThirdViewController: UIViewController, CLLocationManagerDelegate, MKMapVie
         
         CATransaction.commit();
         
-    }
+    }*/
     
-    @IBAction func myUbication(_ sender: Any) {
+    /*@IBAction func myUbication(_ sender: Any) {
         
         self.setMapCamera()
-    }
+    }*/
     
     public func numberOfComponents(in pickerView: UIPickerView) -> Int{
         return 1

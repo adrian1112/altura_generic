@@ -56,11 +56,15 @@ class FirstOptionViewController: UIViewController, UICollectionViewDataSource {
         print("entra en funcion de boton")
         let btnsendtag: UIButton = sender
         self.selectItem = btnsendtag.tag
-        //abre la url en el navegador por defecto en est caso safari
+        /*//abre la url en el navegador por defecto en est caso safari
         if let url = URL(string: self.urls[self.selectItem]) {
             UIApplication.shared.open(url, options: [:])
-        }
-        //print("Button Clicked \(btnsendtag.tag)")
+        }*/
+        
+        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "customWebViewController") as! CustomWebViewController
+        viewController.url_string = self.urls[self.selectItem]
+        self.present(viewController, animated: true)
+        
     }
     
     //SE ELIMINO  EL SEGUE O CONEXION ENTRE ESTE VIEW Y EL VIEW PageUrlViewController

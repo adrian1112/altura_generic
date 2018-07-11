@@ -194,8 +194,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func optionTwo(_ sender: Any) {
-        let number = "0997396690"
-        Utils.call(number: number)
+        
+        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "contactViewController") as! ContactViewController
+        self.present(viewController, animated: true)
+        
         //txt_alert = "Opcion 2";
         //self.showAlert();
     }
@@ -280,19 +282,5 @@ class ViewController: UIViewController {
     
 }
 
-class Utils: NSObject {
-    class func call(number: String) {
-        print("entra en llamada")
-        let num = "tel://" + number
-        //if let url = NSURL(string: num) {
-        if let url = URL(string: num) {
-            
-            if #available(iOS 10.0, *) {
-                UIApplication.shared.open(url , options: [:], completionHandler: nil)
-            } else {
-                UIApplication.shared.openURL(url)
-            }
-        }
-    }
-}
+
 

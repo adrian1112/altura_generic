@@ -67,8 +67,9 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     @IBAction func callCenter(_ sender: UIButton) {
-        let number = "0997396690"
-        Utils.call(number: number)
+        self.hiddenMenu()
+        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "contactViewController") as! ContactViewController
+        self.present(viewController, animated: true)
     }
     
     func showMenu(){

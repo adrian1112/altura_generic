@@ -8,6 +8,7 @@
 
 import UIKit
 import Highcharts
+import Charts
 
 struct data_pie {
     var name : String
@@ -22,16 +23,23 @@ struct data_pie {
 class DetailOneViewController: UIViewController {
 
     @IBOutlet weak var dataView: UIView!
+    @IBOutlet weak var container: UIView!
     @IBOutlet weak var navigationBar: UINavigationItem!
+    @IBOutlet weak var pieChart: PieChartView!
     
-    var chartView: HIChartView!
-    let options = HIOptions()
-    let chart = HIChart()
+    //var chartView: HIChartView!
+    //let options = HIOptions()
+    //let chart = HIChart()
     
     @IBOutlet weak var widthView1: NSLayoutConstraint!
     @IBOutlet weak var widthView2: NSLayoutConstraint!
     @IBOutlet weak var heigthViewBotton: NSLayoutConstraint!
     
+    @IBOutlet weak var heigthPieView: NSLayoutConstraint!
+    
+    //var data = PieChartDataEntry(value: 0)
+    //var data2 = PieChartDataEntry(value: 0)
+    var data = [PieChartDataEntry]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,12 +49,26 @@ class DetailOneViewController: UIViewController {
         let titleView = String(describing: detailController.contrato)
         navigationBar.title = titleView
         
-        //setea los limites del view hichart
-        let bound = CGRect(x: self.view.bounds.minX, y: self.view.bounds.minY, width: self.view.bounds.width, height: self.view.bounds.height-100)
+        //self.heigthPieView.constant = self.container.bounds.height
         
-        dataView.isHidden = true
-        print(bound)
-        self.chartView = HIChartView(frame: bound)
+        //print(self.container.bounds.height)
+        
+        //pieChart.chartDescription?.text = "Detalle de Deudas"
+        
+        for i in [1,2,3,4]{
+            var detail_data = PieChartDataEntry(value: 25)
+            detail_data.label = "label\(i)"
+            data.append(detail_data)
+        }
+        
+        updateChartData()
+        
+        //setea los limites del view hichart
+        //let bound = CGRect(x: self.view.bounds.minX, y: self.view.bounds.minY, width: self.view.bounds.width, height: self.view.bounds.height-100)
+        
+        //dataView.isHidden = true
+        //print(bound)
+        //self.chartView = HIChartView(frame: bound)
         
         //setea el ancho y alto de los view de la secicon detalles
         widthView1.constant = (self.view.bounds.width/2)-12
@@ -55,65 +77,44 @@ class DetailOneViewController: UIViewController {
         
         
         
-        chart.plotBackgroundColor = HIColor()
-        chart.plotBorderWidth = NSNumber()
-        chart.plotShadow = false
-        chart.type = "pie"
+        //chart.plotBackgroundColor = HIColor()
+        //chart.plotBorderWidth = NSNumber()
+        //chart.plotShadow = false
+        //chart.type = "pie"
         
-        //options.chart = chart
         
-        let exporting = HIExporting()
-        exporting.enabled = true
         
-        let credits = HICredits()
-        credits.enabled = false
+        //let exporting = HIExporting()
+        //exporting.enabled = true
         
-        //-----
-        let title = HITitle()
-        title.text = "Detalle de Deudas"
-        
-        //let subtitle = HISubtitle()
-        //subtitle.text = "Team statistics"
-        //options.title = title
-        //options.subtitle = subtitle
+        //let credits = HICredits()
+        //credits.enabled = false
         
         //-----
-        //let xAxis = HIXAxis()
-        //xAxis.categories = ["Goals","Assists","Shots On Goal","Shots"]
-        //options.xAxis = [xAxis]
+        //let title = HITitle()
+        //title.text = "Detalle de Deudas"
         
-        //let yAxis = HIYAxis()
-        //yAxis.min = 0
-        //yAxis.title = HITitle()
-        //yAxis.title.text = "Number"
-        //options.yAxis = [yAxis]
         
-        //-----
-     
-        //tooltip.pointFormat = @"{series.name}: <b>{point.percentage:.1f}%</b>";
+        //let tooltip = HITooltip()
+        //tooltip.headerFormat = "<span style=\"0font-size: 12px\";\">{point.percentage:.2f}%</span>"
+        //tooltip.pointFormat = "Valor: <b>{point.y}</b>"
+        //tooltip.shared = true
+        //tooltip.useHTML = true
         
-        let tooltip = HITooltip()
-        tooltip.headerFormat = "<span style=\"0font-size: 12px\";\">{point.percentage:.2f}%</span>"
-        tooltip.pointFormat = "Valor: <b>{point.y}</b>"
-        //tooltip.footerFormat = "<table><tbody><tr><td style=\"0color: {series.color}; padding: 0\";\">Valor:</td><td style=\"0padding: 0\";\"><b>{point.y}</b></td></tr></tbody></table>"
-        tooltip.shared = true
-        tooltip.useHTML = true
-        //options.tooltip = tooltip
+        //var plotoptions = HIPlotOptions()
+        //plotoptions.pie = HIPie()
+        //plotoptions.pie.allowPointSelect = true
+        //plotoptions.pie.cursor = "pointer"
+        //plotoptions.pie.dataLabels = HIDataLabels()
+        //plotoptions.pie.dataLabels.enabled = true
+        //plotoptions.pie.dataLabels.format = "<b>$ {point.y}</b>"
+        //plotoptions.pie.dataLabels.style = HIStyle()
+        //plotoptions.pie.dataLabels.style.color = "black"
+        //plotoptions.pie.showInLegend = true
         
-        var plotoptions = HIPlotOptions()
-        plotoptions.pie = HIPie()
-        plotoptions.pie.allowPointSelect = true
-        plotoptions.pie.cursor = "pointer"
-        plotoptions.pie.dataLabels = HIDataLabels()
-        plotoptions.pie.dataLabels.enabled = true
-        plotoptions.pie.dataLabels.format = "<b>$ {point.y}</b>"
-        plotoptions.pie.dataLabels.style = HIStyle()
-        plotoptions.pie.dataLabels.style.color = "black"
-        plotoptions.pie.showInLegend = true
-        
-        var pie = HIPie()
-        pie.name = "Brands";
-        pie.data = [
+        //var pie = HIPie()
+        //pie.name = "Brands";
+        /*pie.data = [
             [
                 "name" : "INTERAGUA",
                 "y" : 56.33
@@ -156,6 +157,21 @@ class DetailOneViewController: UIViewController {
         //self.dataView = self.chartView
         self.view.addSubview(self.chartView)
         // Do any additional setup after loading the view.
+        */
+    }
+    
+    func updateChartData(){
+        let dataSet = PieChartDataSet(values: self.data, label: nil)
+        let charData = PieChartData(dataSet: dataSet)
+        
+        //let colors = [HIColor(radialGradient: ["cx": 0.5, "cy": 0.3, "r": 0.7], stops: [[0, "#7cb5ec"], [1, "rgb(48,105,160)"]]), HIColor(radialGradient: ["cx": 0.5, "cy": 0.3, "r": 0.7], stops: [[0, "#434348"], [1, "rgb(0,0,0)"]]), HIColor(radialGradient: ["cx": 0.5, "cy": 0.3, "r": 0.7], stops: [[0, "#90ed7d"], [1, "rgb(68,161,49)"]]), HIColor(radialGradient: ["cx": 0.5, "cy": 0.3, "r": 0.7], stops: [[0, "#f7a35c"], [1, "rgb(171,87,16)"]])]
+        
+        //dataSet.colors = colors as! [NSUIColor]
+        
+        pieChart.data = charData
+        pieChart.centerText = "prueba data"
+        pieChart.drawCenterTextEnabled = true
+        
     }
 
     @IBAction func exit(_ sender: UIBarButtonItem) {
@@ -166,10 +182,12 @@ class DetailOneViewController: UIViewController {
         print( sender.selectedSegmentIndex)
         if sender.selectedSegmentIndex == 0{
             self.dataView.isHidden = true
-            self.chartView.isHidden = false
+            self.container.isHidden = false
+            //self.chartView.isHidden = false
         }else{
             self.dataView.isHidden = false
-            self.chartView.isHidden = true
+            self.container.isHidden = true
+            //self.chartView.isHidden = true
         }
     }
 }

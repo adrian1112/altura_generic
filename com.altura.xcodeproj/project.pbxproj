@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		2201C02B20DDB8BD003BF608 /* ItemMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201C02920DDB8BD003BF608 /* ItemMenuView.swift */; };
 		2201C03820E12AA5003BF608 /* CustomCollectionView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2201C03720E12AA5003BF608 /* CustomCollectionView.storyboard */; };
-		2201C03B20E130A4003BF608 /* CustomMapView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2201C03920E130A4003BF608 /* CustomMapView.storyboard */; };
-		2201C03D20E130D7003BF608 /* CustomForm1View.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2201C03C20E130D7003BF608 /* CustomForm1View.storyboard */; };
 		2201C03F20E1468C003BF608 /* BarSixViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201C03E20E1468C003BF608 /* BarSixViewController.swift */; };
 		2201C04220E1556A003BF608 /* AboutViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2201C04020E1556A003BF608 /* AboutViewController.storyboard */; };
 		2201C04420E2B9A8003BF608 /* SuggestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201C04320E2B9A8003BF608 /* SuggestionViewController.swift */; };
@@ -36,7 +34,6 @@
 		22112FB720ED596600689974 /* StatusProcessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22112FB620ED596600689974 /* StatusProcessViewController.swift */; };
 		22112FB920ED6DD000689974 /* OptionsProcessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22112FB820ED6DD000689974 /* OptionsProcessViewController.swift */; };
 		22112FBB20ED78FF00689974 /* NewContractViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22112FBA20ED78FF00689974 /* NewContractViewController.swift */; };
-		221CC55820BBA4EA00CFC265 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221CC55720BBA4EA00CFC265 /* SecondViewController.swift */; };
 		221CC56220BC481000CFC265 /* InitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221CC56120BC481000CFC265 /* InitController.swift */; };
 		224419C620CB183D008D90C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 224419BF20CB183D008D90C4 /* Assets.xcassets */; };
 		224419ED20CB1EE6008D90C4 /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 224419E420CB1EAB008D90C4 /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -58,6 +55,9 @@
 		228804E420C9D4C500C94AAC /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228804E320C9D4C500C94AAC /* ThirdViewController.swift */; };
 		228804E620C9DEF300C94AAC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 228804E520C9DEF300C94AAC /* MapKit.framework */; };
 		228804E820C9E4F600C94AAC /* PinMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228804E720C9E4F600C94AAC /* PinMap.swift */; };
+		229D62D320F4F55500B0DE7C /* CustomMap2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229D62D220F4F55500B0DE7C /* CustomMap2ViewController.swift */; };
+		229D630420F54FA400B0DE7C /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 229D62F720F54F7700B0DE7C /* Charts.framework */; };
+		229D630520F54FA400B0DE7C /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 229D62F720F54F7700B0DE7C /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		22A9E67520B0F00C0092E555 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9E67420B0F00C0092E555 /* AppDelegate.swift */; };
 		22A9E67720B0F00C0092E555 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9E67620B0F00C0092E555 /* ViewController.swift */; };
 		22A9E67A20B0F00C0092E555 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22A9E67820B0F00C0092E555 /* Main.storyboard */; };
@@ -68,6 +68,10 @@
 		22A9E6BC20B0F1710092E555 /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22A9E6AD20B0F1530092E555 /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		22A9E6C820B0FB450092E555 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9E6C720B0FB450092E555 /* RegisterController.swift */; };
 		22A9E6CA20B0FB580092E555 /* RegisterSecondController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9E6C920B0FB580092E555 /* RegisterSecondController.swift */; };
+		22D5623620F65BC80098526C /* PBEwithMD5andDes.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D5623520F65BC80098526C /* PBEwithMD5andDes.m */; };
+		22D5623B20F666D20098526C /* include in Resources */ = {isa = PBXBuildFile; fileRef = 22D5623A20F666D20098526C /* include */; };
+		22D5623D20F688D00098526C /* CustomWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D5623C20F688D00098526C /* CustomWebViewController.swift */; };
+		22D5623F20F6A1F50098526C /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D5623E20F6A1F50098526C /* ContactViewController.swift */; };
 		244251CE80250B1BABDF6024 /* Pods_com_alturaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD04EB6EB4DE2B96EA077F75 /* Pods_com_alturaTests.framework */; };
 		8DC85133A78B2ACAC48F3564 /* Pods_com_alturaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D1502CEE0946CFA3899161 /* Pods_com_alturaUITests.framework */; };
 /* End PBXBuildFile section */
@@ -114,6 +118,27 @@
 			proxyType = 1;
 			remoteGlobalIDString = 754BE45419693E190098E6F3;
 			remoteInfo = CryptoSwift;
+		};
+		229D62F620F54F7700B0DE7C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 229D62F120F54F7700B0DE7C /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 65AD9E95D9ED4DC0BD73A743;
+			remoteInfo = Charts;
+		};
+		229D62F820F54F7700B0DE7C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 229D62F120F54F7700B0DE7C /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1CBBC58C6CE1EBEE9852CE41;
+			remoteInfo = ChartsTests;
+		};
+		229D630620F54FA400B0DE7C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 229D62F120F54F7700B0DE7C /* Charts.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A58A4ED274A941CA248EA921;
+			remoteInfo = Charts;
 		};
 		22A9E68620B0F00E0092E555 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -195,6 +220,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				22112FA320EC008E00689974 /* Highcharts.framework in Embed Frameworks */,
+				229D630520F54FA400B0DE7C /* Charts.framework in Embed Frameworks */,
 				224419ED20CB1EE6008D90C4 /* CryptoSwift.framework in Embed Frameworks */,
 				22A9E6BC20B0F1710092E555 /* SQLite.framework in Embed Frameworks */,
 			);
@@ -206,8 +232,6 @@
 /* Begin PBXFileReference section */
 		2201C02920DDB8BD003BF608 /* ItemMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemMenuView.swift; sourceTree = "<group>"; };
 		2201C03720E12AA5003BF608 /* CustomCollectionView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CustomCollectionView.storyboard; sourceTree = "<group>"; };
-		2201C03A20E130A4003BF608 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = com.altura/Base.lproj/CustomMapView.storyboard; sourceTree = "<group>"; };
-		2201C03C20E130D7003BF608 /* CustomForm1View.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CustomForm1View.storyboard; sourceTree = "<group>"; };
 		2201C03E20E1468C003BF608 /* BarSixViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarSixViewController.swift; sourceTree = "<group>"; };
 		2201C04120E1556A003BF608 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = com.altura/Base.lproj/AboutViewController.storyboard; sourceTree = "<group>"; };
 		2201C04320E2B9A8003BF608 /* SuggestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionViewController.swift; sourceTree = "<group>"; };
@@ -231,7 +255,6 @@
 		22112FB620ED596600689974 /* StatusProcessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusProcessViewController.swift; sourceTree = "<group>"; };
 		22112FB820ED6DD000689974 /* OptionsProcessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsProcessViewController.swift; sourceTree = "<group>"; };
 		22112FBA20ED78FF00689974 /* NewContractViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewContractViewController.swift; sourceTree = "<group>"; };
-		221CC55720BBA4EA00CFC265 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		221CC56120BC481000CFC265 /* InitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitController.swift; sourceTree = "<group>"; };
 		224419BF20CB183D008D90C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		224419DB20CB1EAB008D90C4 /* CryptoSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CryptoSwift.xcodeproj; path = CryptoSwift/CryptoSwift.xcodeproj; sourceTree = "<group>"; };
@@ -254,6 +277,8 @@
 		228804E320C9D4C500C94AAC /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
 		228804E520C9DEF300C94AAC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		228804E720C9E4F600C94AAC /* PinMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinMap.swift; sourceTree = "<group>"; };
+		229D62D220F4F55500B0DE7C /* CustomMap2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMap2ViewController.swift; sourceTree = "<group>"; };
+		229D62F120F54F7700B0DE7C /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = Charts/Charts.xcodeproj; sourceTree = "<group>"; };
 		22A9E67120B0F00C0092E555 /* com.altura.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = com.altura.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22A9E67420B0F00C0092E555 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22A9E67620B0F00C0092E555 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -269,11 +294,16 @@
 		22A9E6A220B0F1530092E555 /* SQLite.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SQLite.xcodeproj; path = "../SQLite.swift-master/SQLite.xcodeproj"; sourceTree = "<group>"; };
 		22A9E6C720B0FB450092E555 /* RegisterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
 		22A9E6C920B0FB580092E555 /* RegisterSecondController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterSecondController.swift; sourceTree = "<group>"; };
+		22D5623120F65B590098526C /* PBEwithMD5andDes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PBEwithMD5andDes.h; sourceTree = "<group>"; };
+		22D5623520F65BC80098526C /* PBEwithMD5andDes.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PBEwithMD5andDes.m; sourceTree = "<group>"; };
+		22D5623920F662770098526C /* com.altura-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "com.altura-Bridging-Header.h"; sourceTree = "<group>"; };
+		22D5623A20F666D20098526C /* include */ = {isa = PBXFileReference; lastKnownFileType = folder; path = include; sourceTree = "<group>"; };
+		22D5623C20F688D00098526C /* CustomWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWebViewController.swift; sourceTree = "<group>"; };
+		22D5623E20F6A1F50098526C /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		285946791D70D0170180E5A6 /* Pods-com.altura.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-com.altura.debug.xcconfig"; path = "Pods/Target Support Files/Pods-com.altura/Pods-com.altura.debug.xcconfig"; sourceTree = "<group>"; };
 		4B40B132115B7728717FC549 /* Pods-com.alturaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-com.alturaUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-com.alturaUITests/Pods-com.alturaUITests.release.xcconfig"; sourceTree = "<group>"; };
 		60B27FDD74928DBB538F9A3F /* Pods-com.altura.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-com.altura.release.xcconfig"; path = "Pods/Target Support Files/Pods-com.altura/Pods-com.altura.release.xcconfig"; sourceTree = "<group>"; };
 		68D1502CEE0946CFA3899161 /* Pods_com_alturaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_com_alturaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6FD02E28B4A4C33542244656 /* Pods_com_altura.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_com_altura.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD04EB6EB4DE2B96EA077F75 /* Pods_com_alturaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_com_alturaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD52E49F0E008705186B2EB1 /* Pods-com.alturaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-com.alturaTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-com.alturaTests/Pods-com.alturaTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E3F75EA6EC4F5AA9CC7FC3F8 /* Pods-com.alturaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-com.alturaTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-com.alturaTests/Pods-com.alturaTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -288,6 +318,7 @@
 				228804E620C9DEF300C94AAC /* MapKit.framework in Frameworks */,
 				22112FA120EC007C00689974 /* Highcharts.framework in Frameworks */,
 				22A9E6BA20B0F1670092E555 /* SQLite.framework in Frameworks */,
+				229D630420F54FA400B0DE7C /* Charts.framework in Frameworks */,
 				22112FA220EC008E00689974 /* Highcharts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -345,12 +376,10 @@
 		224419FD20CEFE4E008D90C4 /* CustomElements */ = {
 			isa = PBXGroup;
 			children = (
-				2201C03C20E130D7003BF608 /* CustomForm1View.storyboard */,
 				228804E320C9D4C500C94AAC /* ThirdViewController.swift */,
-				2201C03920E130A4003BF608 /* CustomMapView.storyboard */,
-				221CC55720BBA4EA00CFC265 /* SecondViewController.swift */,
 				2201C03720E12AA5003BF608 /* CustomCollectionView.storyboard */,
 				225772F920B3C8BB006CFB3B /* FirstOptionViewController.swift */,
+				22D5623C20F688D00098526C /* CustomWebViewController.swift */,
 				225772F720B3C841006CFB3B /* CustomCollectionViewCell.swift */,
 				22441A0220CF1879008D90C4 /* CustomTableViewCell2.swift */,
 				22441A0320CF1879008D90C4 /* CustomTableViewCell2.xib */,
@@ -376,6 +405,7 @@
 		228804C620C845C300C94AAC /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				22D5622520F65B130098526C /* Utilidad */,
 				228804CD20C8462100C94AAC /* WService.swift */,
 				228804CF20C84CDB00C94AAC /* DBase.swift */,
 				228804DD20C8636D00C94AAC /* Crypt.swift */,
@@ -384,15 +414,26 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		229D62F220F54F7700B0DE7C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				229D62F720F54F7700B0DE7C /* Charts.framework */,
+				229D62F920F54F7700B0DE7C /* ChartsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		22A9E66820B0F00C0092E555 = {
 			isa = PBXGroup;
 			children = (
+				22D5623A20F666D20098526C /* include */,
+				22A9E6A220B0F1530092E555 /* SQLite.xcodeproj */,
+				229D62F120F54F7700B0DE7C /* Charts.xcodeproj */,
 				224419DB20CB1EAB008D90C4 /* CryptoSwift.xcodeproj */,
 				22A9E67320B0F00C0092E555 /* com.altura */,
 				22A9E68820B0F00E0092E555 /* com.alturaTests */,
 				22A9E69320B0F00E0092E555 /* com.alturaUITests */,
 				22A9E67220B0F00C0092E555 /* Products */,
-				22A9E6A220B0F1530092E555 /* SQLite.xcodeproj */,
 				2D5F57DB861FFAF5AE539C06 /* Pods */,
 				8A69A1C968961235C898160F /* Frameworks */,
 			);
@@ -427,6 +468,8 @@
 				2201C04820E3D6A9003BF608 /* TechRequestViewController.swift */,
 				2201C04A20E52213003BF608 /* BillRequestViewController.swift */,
 				2201C08120EADA09003BF608 /* DetailsTabBarViewController.swift */,
+				229D62D220F4F55500B0DE7C /* CustomMap2ViewController.swift */,
+				22D5623E20F6A1F50098526C /* ContactViewController.swift */,
 			);
 			path = com.altura;
 			sourceTree = "<group>";
@@ -463,6 +506,16 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		22D5622520F65B130098526C /* Utilidad */ = {
+			isa = PBXGroup;
+			children = (
+				22D5623120F65B590098526C /* PBEwithMD5andDes.h */,
+				22D5623520F65BC80098526C /* PBEwithMD5andDes.m */,
+				22D5623920F662770098526C /* com.altura-Bridging-Header.h */,
+			);
+			path = Utilidad;
+			sourceTree = "<group>";
+		};
 		2D5F57DB861FFAF5AE539C06 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -482,7 +535,6 @@
 				22112FA020EC007C00689974 /* Highcharts.framework */,
 				228804E520C9DEF300C94AAC /* MapKit.framework */,
 				228804D320C8622C00C94AAC /* CryptoSwift.framework */,
-				6FD02E28B4A4C33542244656 /* Pods_com_altura.framework */,
 				AD04EB6EB4DE2B96EA077F75 /* Pods_com_alturaTests.framework */,
 				68D1502CEE0946CFA3899161 /* Pods_com_alturaUITests.framework */,
 			);
@@ -509,6 +561,7 @@
 			dependencies = (
 				224419EF20CB1F03008D90C4 /* PBXTargetDependency */,
 				22A9E6BE20B0F1710092E555 /* PBXTargetDependency */,
+				229D630720F54FA400B0DE7C /* PBXTargetDependency */,
 			);
 			name = com.altura;
 			productName = com.altura;
@@ -565,6 +618,7 @@
 				TargetAttributes = {
 					22A9E67020B0F00C0092E555 = {
 						CreatedOnToolsVersion = 9.3.1;
+						LastSwiftMigration = 0940;
 					};
 					22A9E68420B0F00E0092E555 = {
 						CreatedOnToolsVersion = 9.3.1;
@@ -588,6 +642,10 @@
 			productRefGroup = 22A9E67220B0F00C0092E555 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = 229D62F220F54F7700B0DE7C /* Products */;
+					ProjectRef = 229D62F120F54F7700B0DE7C /* Charts.xcodeproj */;
+				},
 				{
 					ProductGroup = 224419DC20CB1EAB008D90C4 /* Products */;
 					ProjectRef = 224419DB20CB1EAB008D90C4 /* CryptoSwift.xcodeproj */;
@@ -640,6 +698,20 @@
 			fileType = wrapper.cfbundle;
 			path = "TestsPerformance-iOS.xctest";
 			remoteRef = 224419EB20CB1EAB008D90C4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		229D62F720F54F7700B0DE7C /* Charts.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Charts.framework;
+			remoteRef = 229D62F620F54F7700B0DE7C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		229D62F920F54F7700B0DE7C /* ChartsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ChartsTests.xctest;
+			remoteRef = 229D62F820F54F7700B0DE7C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		22A9E6AD20B0F1530092E555 /* SQLite.framework */ = {
@@ -702,10 +774,9 @@
 				2201C04720E2DA30003BF608 /* SuggestionView.storyboard in Resources */,
 				22A9E67F20B0F00E0092E555 /* LaunchScreen.storyboard in Resources */,
 				2201C08020EAB955003BF608 /* CustomTableViewCell4.xib in Resources */,
-				2201C03B20E130A4003BF608 /* CustomMapView.storyboard in Resources */,
 				2201C04F20E52F12003BF608 /* CustomTableViewCell3.xib in Resources */,
-				2201C03D20E130D7003BF608 /* CustomForm1View.storyboard in Resources */,
 				22441A0520CF1879008D90C4 /* CustomTableViewCell2.xib in Resources */,
+				22D5623B20F666D20098526C /* include in Resources */,
 				2201C07420E6EBA6003BF608 /* PopupCustom.storyboard in Resources */,
 				224419C620CB183D008D90C4 /* Assets.xcassets in Resources */,
 				22A9E67A20B0F00C0092E555 /* Main.storyboard in Resources */,
@@ -846,12 +917,13 @@
 				2201C07820EAB117003BF608 /* DetailTwoViewController.swift in Sources */,
 				225772F820B3C841006CFB3B /* CustomCollectionViewCell.swift in Sources */,
 				225772FA20B3C8BB006CFB3B /* FirstOptionViewController.swift in Sources */,
-				221CC55820BBA4EA00CFC265 /* SecondViewController.swift in Sources */,
 				22A9E67720B0F00C0092E555 /* ViewController.swift in Sources */,
 				2201C06520E6D130003BF608 /* CellData.swift in Sources */,
 				22A9E67520B0F00C0092E555 /* AppDelegate.swift in Sources */,
+				22D5623620F65BC80098526C /* PBEwithMD5andDes.m in Sources */,
 				224419F820CE063D008D90C4 /* BarThreeViewController.swift in Sources */,
 				22A9E6CA20B0FB580092E555 /* RegisterSecondController.swift in Sources */,
+				229D62D320F4F55500B0DE7C /* CustomMap2ViewController.swift in Sources */,
 				22112FB720ED596600689974 /* StatusProcessViewController.swift in Sources */,
 				2201C08220EADA09003BF608 /* DetailsTabBarViewController.swift in Sources */,
 				224419F620CE0370008D90C4 /* BarTwoViewController.swift in Sources */,
@@ -859,11 +931,13 @@
 				228804CE20C8462100C94AAC /* WService.swift in Sources */,
 				228804E420C9D4C500C94AAC /* ThirdViewController.swift in Sources */,
 				2201C07120E6E8CC003BF608 /* PopUpCustomViewController.swift in Sources */,
+				22D5623D20F688D00098526C /* CustomWebViewController.swift in Sources */,
 				2201C05320E58734003BF608 /* CustomPinMap.swift in Sources */,
 				221CC56220BC481000CFC265 /* InitController.swift in Sources */,
 				2201C07F20EAB955003BF608 /* CustomTableViewCell4.swift in Sources */,
 				224419F420CE0340008D90C4 /* BarOneViewController.swift in Sources */,
 				2201C07620EAB101003BF608 /* DetailOneViewController.swift in Sources */,
+				22D5623F20F6A1F50098526C /* ContactViewController.swift in Sources */,
 				22112FBB20ED78FF00689974 /* NewContractViewController.swift in Sources */,
 				2201C03F20E1468C003BF608 /* BarSixViewController.swift in Sources */,
 				22441A0720D80DF5008D90C4 /* PageUrlViewController.swift in Sources */,
@@ -898,6 +972,11 @@
 			name = CryptoSwift;
 			targetProxy = 224419EE20CB1F03008D90C4 /* PBXContainerItemProxy */;
 		};
+		229D630720F54FA400B0DE7C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Charts;
+			targetProxy = 229D630620F54FA400B0DE7C /* PBXContainerItemProxy */;
+		};
 		22A9E68720B0F00E0092E555 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 22A9E67020B0F00C0092E555 /* com.altura */;
@@ -916,14 +995,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		2201C03920E130A4003BF608 /* CustomMapView.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2201C03A20E130A4003BF608 /* Base */,
-			);
-			name = CustomMapView.storyboard;
-			sourceTree = "<group>";
-		};
 		2201C04020E1556A003BF608 /* AboutViewController.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1087,6 +1158,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JQS4797YPX;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1096,14 +1168,18 @@
 					"$(PROJECT_DIR)/highcharts-ios-master/release",
 					"$(PROJECT_DIR)/Pods/Highcharts/development",
 				);
+				"HEADER_SEARCH_PATHS[arch=*]" = "include/**";
 				INFOPLIST_FILE = com.altura/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				"LIBRARY_SEARCH_PATHS[arch=*]" = "$(SRCROOT)/lib";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.altura.com-altura";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "com.altura/Utils/Utilidad/com.altura-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1115,6 +1191,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JQS4797YPX;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1124,14 +1201,17 @@
 					"$(PROJECT_DIR)/highcharts-ios-master/release",
 					"$(PROJECT_DIR)/Pods/Highcharts/development",
 				);
+				"HEADER_SEARCH_PATHS[arch=*]" = "include/**";
 				INFOPLIST_FILE = com.altura/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				"LIBRARY_SEARCH_PATHS[arch=*]" = "$(SRCROOT)/lib";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.altura.com-altura";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "com.altura/Utils/Utilidad/com.altura-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
