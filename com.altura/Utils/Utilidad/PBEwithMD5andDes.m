@@ -102,7 +102,7 @@
                 char errbuff[256];
                 errbuff[0] = 0;
                 ERR_error_string_n(err, errbuff, sizeof(errbuff));
-                NSLog(@"OpenSLL ERROR:\n\tlib:%d\n\tfunction:%d\n\treason:%d\n",
+                NSLog(@"OpenSLL ERROR:\n\tlib:%s\n\tfunction:%s\n\treason:%s\n",
                       ERR_lib_error_string(err),
                       ERR_func_error_string(err),
                       ERR_reason_error_string(err));

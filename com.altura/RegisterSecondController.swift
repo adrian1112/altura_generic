@@ -50,7 +50,6 @@ class RegisterSecondController: UIViewController {
         address_txt.text = self.address
         telephone_txt.text = self.telephone
         
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -81,28 +80,81 @@ class RegisterSecondController: UIViewController {
         let address = self.address_txt.text!
         let telephone = self.telephone_txt.text!
         
-        let insertUser = self.usersT.insert(self.identifier_user_T <- identifier,self.email_user_T <- email, self.password_user_T <- pass, self.contract_user_T <- contract, self.name_userT <- names, self.address_user_T <- address, self.telephone_user_T <- telephone)
-        do{
-            try self.db.run(insertUser)
-            self.txt_alert = "Se creo el usuario correctamente"
-            self.showAlert(status: 1)
-            print("se creo el usuario")
-        }catch let Result.error(message, code, statement){
-            if( code == 19){
-                self.txt_alert = "Ya existe un usuario con el correo ingresado"
-                self.showAlert(status: 2)
-                print("usuario ya existe, \(message)")
+        let myColor = UIColor.red
+        var texto = "* "
+        
+        if(contract == "" ){
+            self.contract_txt.layer.borderColor = myColor.cgColor
+            self.contract_txt.layer.borderWidth = 1.0
+        }else{
+            self.contract_txt.layer.borderWidth = 0
+        }
+        if(names == "" ){
+            self.names_txt.layer.borderColor = myColor.cgColor
+            self.names_txt.layer.borderWidth = 1.0
+        }else{
+            self.names_txt.layer.borderWidth = 0
+        }
+        if(address == "" ){
+            self.address_txt.layer.borderColor = myColor.cgColor
+            self.address_txt.layer.borderWidth = 1.0
+        }else{
+            self.address_txt.layer.borderWidth = 0
+        }
+        if(telephone == "" ){
+            self.telephone_txt.layer.borderColor = myColor.cgColor
+            self.telephone_txt.layer.borderWidth = 1.0
+        }else{
+            self.telephone_txt.layer.borderWidth = 0
+        }
+        
+        var term_ok = false
+        if send_data_select.isOn && acept_term_select.isOn{
+            term_ok = true
+            self.send_data_select.layer.borderWidth = 0
+            self.acept_term_select.layer.borderWidth = 0
+        }else{
+            if !send_data_select.isOn {
+                self.send_data_select.layer.borderColor = myColor.cgColor
+                self.send_data_select.layer.borderWidth = 1.0
             }else{
+                self.send_data_select.layer.borderWidth = 0
+            }
+            if !acept_term_select.isOn {
+                self.acept_term_select.layer.borderColor = myColor.cgColor
+                self.acept_term_select.layer.borderWidth = 1.0
+            }else{
+                self.acept_term_select.layer.borderWidth = 0
+            }
+            
+        }
+        
+        if(contract != "" && names != "" && address != "" && telephone != "" && term_ok){
+            let insertUser = self.usersT.insert(self.identifier_user_T <- identifier,self.email_user_T <- email, self.password_user_T <- pass, self.contract_user_T <- contract, self.name_userT <- names, self.address_user_T <- address, self.telephone_user_T <- telephone)
+            do{
+                try self.db.run(insertUser)
+                self.txt_alert = "Se creo el usuario correctamente"
+                self.showAlert(status: 1)
+                print("se creo el usuario")
+            }catch let Result.error(message, code, statement){
+                if( code == 19){
+                    self.txt_alert = "Ya existe un usuario con el correo ingresado"
+                    self.showAlert(status: 2)
+                    print("usuario ya existe, \(message)")
+                }else{
+                    self.txt_alert = "Error al crear el usuario"
+                    self.showAlert(status: 3)
+                    print(" * constraint failed: \(message), in \(String(describing: statement)) , code \(code)")
+                }
+            }catch{
                 self.txt_alert = "Error al crear el usuario"
                 self.showAlert(status: 3)
-                print(" * constraint failed: \(message), in \(String(describing: statement)) , code \(code)")
+                print(error)
+                print("no se creo el usuario")
             }
-        }catch{
-            self.txt_alert = "Error al crear el usuario"
-            self.showAlert(status: 3)
-            print(error)
-            print("no se creo el usuario")
         }
+        
+        
     }
     
     func redirectLogin(status: Int){

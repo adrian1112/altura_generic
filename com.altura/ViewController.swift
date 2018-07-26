@@ -13,35 +13,6 @@ import CryptoSwift
 import UserNotifications
 
 
-struct User: Decodable {
-    let id_user: Int?
-    let document: String?
-    let person: String?
-    let email: String?
-    let phone: String?
-    let sync_date: String?
-    let adress: String?
-    let status: Int?
-    let error: String?
-    
-}
-
-struct UserLogin {
-    let id_user: Int?
-    let email: String?
-}
-
-struct UserDB {
-    var id: Int?
-    var name: String?
-    var email: String?
-    var identifier: String?
-    var addresss: String?
-    var telephone: String?
-    var contract: String?
-    var pass: String?
-}
-
 class ViewController: UIViewController {
     
     //dependencias
@@ -60,6 +31,10 @@ class ViewController: UIViewController {
     
     let status: Bool = false
     var db: Connection!
+    
+    var complete = false
+    var error = true
+    
     
     
     var user_in = User(id_user: 0, document: "", person: "", email: "", phone: "", sync_date: "", adress: "", status: 0, error: "")
@@ -139,48 +114,73 @@ class ViewController: UIViewController {
         let user_name = user_txt.text!
         let pass = pass_txt.text!
         print(user_name,pass)
-        if(user_name != "" && pass != ""){
+        
+        var internet = false
+        if Connectivity.isConnectedToInternet {
+            print("Connected")
+            internet = true
+            
+        } else {
+            print("No Internet")
+            let alert = UIAlertController(title: nil, message: "No tiene acceso a Internet", preferredStyle: .alert);
+            let btn_alert = UIAlertAction(title: "Cerrar", style: .default) { (UIAlertAction) in
+            }
+            alert.addAction(btn_alert);
+            self.present(alert, animated: true, completion: nil);
+        }
+        
+        if(user_name != "" && pass != "" && internet){
             let usr_encrypt = user_name;
             let pass_encrypt = pass;
             
-            let key = "Altura" // length == 32
-            let n_key = key.md5()
-            print(n_key)
-            let iv = "gqLOHUioQ0QjhuvI" // length == 16
-            //let iv = n_key;
-            let s = "action=login&mail=\(usr_encrypt)&pass=\(pass_encrypt)&os=2&imei=111"
-            let enc = try! usr_encrypt.aesEncrypt(key: n_key, iv: iv)
-            let enc2 = try! enc.aesDecrypt(key: n_key, iv: iv)
-            let s2 = try! s.aesEncrypt(key: n_key, iv: iv)
-            let s3 = try! s2.aesDecrypt(key: n_key, iv: iv)
+            print("usuario: \(user_name) , contraseña: \(pass)")
             
             
+            self.user_txt.text = ""
+            self.pass_txt.text = ""
             
-            print(enc,enc2)
-            print(s2,s3)
-            //print(s4, s5)
+            self.complete = false
+            self.error = true
             
+            ws.loadUser(usr_id: user_name, pass: pass, success: {
+                (value,user) -> Void in
+                print("entra en success: \(value) , \(user)")
+                self.user_in = user
+                self.user_in.email = user_name
+                self.error = false
+                self.complete = true
+                
+            }, error: {
+                (value,user) -> Void in
+                print("entra en error: \(value) , \(user)")
+                if(value == 2){
+                    self.txt_alert = "Usuario o Contraseña Inválidos"
+                    
+                }else if( value == 3){
+                    self.txt_alert = "Usuario no registrado"
+                    
+                }else{
+                    self.txt_alert = "Error.."
+                }
+                self.error = true
+                self.complete = true
+                print("sale en error: \(value) , \(user)")
+            })
             
-            let ok = ws.loadUser(usr_id: user_name, pass: pass)
-            //let ok = self.loadUsersDB(usr: user_name, pass: pass)
-            if(ok.value == 2){
-                txt_alert = "Usuario o Contraseña Inválidos"
-                self.showAlert();
-            }else if( ok.value == 3){
-                txt_alert = "Usuario no registrado"
-                self.showAlert();
-            }else if( ok.value == 5){
-                txt_alert = "Error.."
-                self.showAlert();
-            }else{
-                // entra e la app
-                self.user_in = ok.user;
-                dbase.inserUserLogin(user_in: self.user_in)
-                self.navigateToApp()
-            }
-            
+            repeat {
+                //print("complete: \(complete) ,error \(error)")
+                if complete{
+                    if error{
+                        print("entra en alerta")
+                        self.showAlert();
+                    }else{
+                        print("entra navigate app")
+                        self.dbase.inserUserLogin(user_in: self.user_in)
+                        self.navigateToApp()
+                    }
+                }
+            } while(!complete)
         }
-        
     }
     
     @IBAction func resetPass(_ sender: Any) {
@@ -233,9 +233,6 @@ class ViewController: UIViewController {
     func setValues(){
         self.pass_txt.text = "";
     }
-    
-    
-    
     
     private func navigateToApp(){
         let mainTabViewController = self.storyboard?.instantiateViewController(withIdentifier: "mainTabViewController") as! MainTabViewController

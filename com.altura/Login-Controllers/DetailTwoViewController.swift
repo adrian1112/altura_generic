@@ -10,17 +10,7 @@ import UIKit
 
 class DetailTwoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    struct Bill {
-        let name : String
-        let index : Int
-        var enabled : Bool
-        
-        init(_ name : String, _ enabled : Bool, _ index : Int) {
-            self.name = name
-            self.enabled = enabled
-            self.index = index
-        }
-    }
+    
     
     @IBOutlet weak var navigationBar: UINavigationItem!
     

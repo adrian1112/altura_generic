@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import SystemConfiguration
 
 class CustomWebViewController: UIViewController,WKNavigationDelegate {
     
@@ -22,9 +23,17 @@ class CustomWebViewController: UIViewController,WKNavigationDelegate {
         
         webView.navigationDelegate = self
         
+        
         let url = URL(string: url_string)!
         webView.load(URLRequest(url: url))
         webView.allowsBackForwardNavigationGestures = true
+        
+        
+        
+            
+        
+        
+        
         
         titleV.title = url_string
         

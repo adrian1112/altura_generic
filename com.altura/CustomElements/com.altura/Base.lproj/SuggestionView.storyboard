@@ -54,7 +54,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Sugerencias" id="D7l-EU-ybN">
-                                        <barButtonItem key="leftBarButtonItem" tag="2" title="Item" image="flecha_izq" id="vL3-3A-6JZ">
+                                        <barButtonItem key="leftBarButtonItem" tag="2" title="Item" image="regresar" id="vL3-3A-6JZ">
                                             <connections>
                                                 <action selector="Back:" destination="gXY-HW-J8e" id="Rf1-if-LP3"/>
                                             </connections>
@@ -108,7 +108,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="flecha_izq" width="24" height="24"/>
         <image name="logo" width="338" height="216"/>
+        <image name="regresar" width="32" height="32"/>
     </resources>
 </document>

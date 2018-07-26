@@ -15,7 +15,7 @@ class DetailsTabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var contrato = ""
+        //contrato = ""
         // Do any additional setup after loading the view.
     }
 

@@ -24,4 +24,16 @@ extension String {
         let decryptedData = Data(decrypted)
         return String(bytes: decryptedData.bytes, encoding: .utf8) ?? "Error"
     }
+    
+    func urlEncode() -> CFString {
+        return CFURLCreateStringByAddingPercentEscapes(
+            nil,
+            self as CFString,
+            nil,
+            "!*'();:@&=+$,/?%#[]" as CFString,
+            CFStringBuiltInEncodings.UTF8.rawValue
+        )
+    }
+    
+    
 }

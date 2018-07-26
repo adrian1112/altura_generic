@@ -10,15 +10,7 @@ import UIKit
 import Highcharts
 import Charts
 
-struct data_pie {
-    var name : String
-    var y : Double
-    
-    init(name:String, y:Double) {
-        self.name = name
-        self.y = y
-    }
-}
+
 
 class DetailOneViewController: UIViewController {
 

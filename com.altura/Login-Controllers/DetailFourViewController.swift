@@ -14,27 +14,6 @@ class DetailFourViewController: UIViewController, UITableViewDelegate, UITableVi
 
     @IBOutlet weak var tableView: UITableView!
     
-    struct Process {
-        let title : String
-        let subtitle : String
-        let code: String
-        let status: String
-        let date: String
-        let img: UIImage
-        var enabled : Bool
-        
-        init(_ title : String, _ subtitle : String, _ code : String,_ status: String,_ date: String,_ img: UIImage,_ enabled: Bool) {
-            self.title = title
-            self.subtitle = subtitle
-            self.code = code
-            self.status = status
-            self.date = date
-            self.img = img
-            self.enabled = enabled
-            
-        }
-    }
-    
     
     var process_list : [Process] = [Process]()
     

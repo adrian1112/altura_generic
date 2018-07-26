@@ -16,9 +16,7 @@ class StatusProcessViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navigationBar.title = titleView
-        
         
     }
 

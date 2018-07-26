@@ -10,33 +10,12 @@ import UIKit
 import GoogleMaps
 import CoreLocation
 
-struct place{
-    let name: String!
-    let street: String!
-    let attention: String!
-    let coordinate: CLLocationCoordinate2D
-    var selected: Bool
-    
-    init(name: String, street: String, attention: String, coordinate : CLLocationCoordinate2D, selected: Bool) {
-        self.name = name
-        self.street = street
-        self.attention = attention
-        self.coordinate = coordinate
-        self.selected = selected
-    }
-}
 
-struct location{
-    var lat: NSNumber?
-    var lng: NSNumber?
-    
-    init(lat: NSNumber, lng: NSNumber) {
-        self.lat = lat
-        self.lng = lng
-    }
-}
 
-class CustomMap2ViewController: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate {
+class CustomMap2ViewController: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, UISearchBarDelegate,UITableViewDataSource, UITableViewDelegate {
+    
+    
+    
 
     let locationManager = CLLocationManager()
     @IBOutlet weak var mapView: GMSMapView!
@@ -50,6 +29,10 @@ class CustomMap2ViewController: UIViewController,CLLocationManagerDelegate, GMSM
     @IBOutlet weak var addressView: UILabel!
     @IBOutlet weak var timeView: UILabel!
     
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var result: UITableView!
+    var searchActive : Bool = false
+    
     
     var userLatLong = CLLocationCoordinate2D(latitude: -2.162870, longitude: -79.898407)
     var placeLatLong = CLLocationCoordinate2D(latitude: -2.162870, longitude: -79.898407)
@@ -58,6 +41,8 @@ class CustomMap2ViewController: UIViewController,CLLocationManagerDelegate, GMSM
         place.init(name: "Agencia Centro", street: "Coronel y Maldonado", attention: "Lunes a viernes: 07:30 a 17:00 y Sábados: 09:00 a 13:00", coordinate: CLLocationCoordinate2D(latitude: -2.204457, longitude: -79.886952),selected: false),
         place.init(name: "Municipio de Guayaquil", street: "10 de Agosto y Pichincha, entrando por el callejon arosemena", attention: "Lunes a viernes: 08:30 a 16:30", coordinate: CLLocationCoordinate2D(latitude: -2.195159, longitude: -79.880961),selected: false)
     ]
+    
+    var filteredPlaces = [place]()
     
     let baseURLDirections = "https://maps.googleapis.com/maps/api/directions/json?"
     
@@ -68,6 +53,9 @@ class CustomMap2ViewController: UIViewController,CLLocationManagerDelegate, GMSM
         super.viewDidLoad()
         
         mapView.delegate = self
+        searchBar.delegate = self
+        result.delegate = self
+        result.dataSource = self
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
@@ -84,8 +72,127 @@ class CustomMap2ViewController: UIViewController,CLLocationManagerDelegate, GMSM
         mapViewBotton.constant = 0.0
         self.showPins()
         
+        filteredPlaces = places
+        result.isHidden = true
+        
+        
+        
         
     }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        result.isHidden = false
+        searchActive = true;
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        result.isHidden = false
+        searchActive = false;
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.view.endEditing(true)
+        result.isHidden = true
+        searchActive = false;
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.view.endEditing(true)
+        result.isHidden = false
+        searchActive = false;
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        print("entra en busqueda")
+        filteredPlaces = places.filter({ (place) -> Bool in
+            let tmp: NSString = place.name as! NSString
+            
+            print(tmp)
+            
+            return tmp.localizedCaseInsensitiveContains(searchText)
+            
+            //return range.location != NSNotFound
+        })
+        if(filteredPlaces.count == 0){
+            print("places cero")
+            searchActive = false;
+        } else {
+            print("places \(filteredPlaces.count)")
+            searchActive = true;
+        }
+        self.result.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if(searchActive) {
+            return filteredPlaces.count
+        }
+        return places.count;
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! UITableViewCell
+        if(searchActive){
+            cell.textLabel?.text = filteredPlaces[indexPath.row].name
+        } else {
+            cell.textLabel?.text = places[indexPath.row].name
+        }
+        
+        return cell;
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        var temp_places = [place]()
+        
+        if(searchActive){
+            temp_places = filteredPlaces
+        } else {
+            temp_places = places
+        }
+        
+        print(temp_places[indexPath.row])
+        self.view.endEditing(true)
+        var index = 0
+        for place in places{
+            if temp_places[indexPath.row].coordinate.latitude == place.coordinate.latitude && temp_places[indexPath.row].coordinate.longitude == place.coordinate.longitude {
+                    places[index].selected = true
+                    self.placeLatLong = place.coordinate
+                
+                    self.titleView.text = place.name
+                    self.addressView.text = place.street
+                    self.timeView.text = place.attention
+                    self.blurViewTop.constant = -131
+                    mapViewBotton.constant = -131
+                
+                    let camera = GMSCameraPosition.camera(withLatitude: place.coordinate.latitude, longitude: place.coordinate.longitude, zoom: 16)
+                    self.mapView.camera = camera
+                
+                    self.navigateButton.isEnabled = true
+                    self.googleButton.isEnabled = true
+                
+                    result.isHidden = true
+                    searchActive = false;
+                    self.obtainCoordinate()
+                
+            }else{
+                places[index].selected = false
+            }
+            index = index+1
+        }
+        
+        
+        
+    }
+    
+    //HABILITA LA OPCION DE OCULTAR EL TECLADO CUANDO SE LE DA EN CUALQUIER PARTE DE LA PANTALLA
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    // ####### MAPAS
+    
 
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         print("tap item")
@@ -167,8 +274,12 @@ class CustomMap2ViewController: UIViewController,CLLocationManagerDelegate, GMSM
         for place in places{
             
             let marker = GMSMarker(position: place.coordinate)
-            marker.icon = UIImage(named: "place3")
+            let imagePlace = UIImage(named: "place3")
+            let markerView = UIImageView(image: imagePlace)
+            //markerView.tintColor = .red
+            marker.iconView = markerView
             marker.title = place.name
+            marker.snippet = place.street
             marker.map = self.mapView
             
         }
@@ -308,7 +419,9 @@ class CustomMap2ViewController: UIViewController,CLLocationManagerDelegate, GMSM
     func drawRoute() {
         print("entra")
         let path = GMSMutablePath()
-         
+        self.mapView.clear()
+        self.showPins()
+        
          if let mylocation = self.mapView.myLocation {
              print("User's location: \(mylocation)")
              for coord in self.coordenadas{

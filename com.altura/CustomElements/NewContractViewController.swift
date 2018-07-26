@@ -23,5 +23,10 @@ class NewContractViewController: UIViewController {
         dismiss(animated: true)
     }
     
+    //HABILITA LA OPCION DE OCULTAR EL TECLADO CUANDO SE LE DA EN CUALQUIER PARTE DE LA PANTALLA
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        dismiss(animated: true)
+    }
+    
 
 }

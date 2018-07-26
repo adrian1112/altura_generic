@@ -52,6 +52,8 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
         self.tableView.register(CustomTableViewCell2.self, forCellReuseIdentifier: "customCell")
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
+        self.hiddenMenu()
+        
     }
     
     
@@ -66,11 +68,44 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
         
     }
     
+    @IBAction func puntosRecaudo(_ sender: Any) {
+        self.hiddenMenu()
+        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "firstOptionController") as! FirstOptionViewController
+        self.present(viewController, animated: true)
+    }
+    
     @IBAction func callCenter(_ sender: UIButton) {
         self.hiddenMenu()
         let viewController = self.storyboard?.instantiateViewController(withIdentifier: "contactViewController") as! ContactViewController
         self.present(viewController, animated: true)
     }
+    
+    @IBAction func ubicarAgencias(_ sender: Any) {
+        self.hiddenMenu()
+        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "customMap2ViewController") as! CustomMap2ViewController
+        self.present(viewController, animated: true)
+    }
+    
+    @IBAction func yoReporto(_ sender: Any) {
+        self.hiddenMenu()
+        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "thirdViewController") as! ThirdViewController
+        self.present(viewController, animated: true)
+    }
+    
+    @IBAction func sugerencias(_ sender: Any) {
+        self.hiddenMenu()
+        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "SuggestionViewController") as! SuggestionViewController
+        self.present(viewController, animated: true)
+    }
+    
+    @IBAction func acercaDe(_ sender: Any) {
+        self.hiddenMenu()
+        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "aboutViewController") as! AboutViewController
+        self.present(viewController, animated: true)
+    }
+    
+    
+    
     
     func showMenu(){
         
@@ -92,8 +127,19 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
 
 
     @IBAction func Logout(_ sender: Any) {
-        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "initController") as! InitController
-        self.present(viewController, animated: true)
+        
+        
+        let alert = UIAlertController(title: nil, message: "Seguro que desea Cerrar Sesión?", preferredStyle: .alert);
+        let btn_alert = UIAlertAction(title: "Aceptar", style: .default) { (UIAlertAction) in
+            self.dismiss(animated: true, completion: nil)
+        }
+        let btn_cancel = UIAlertAction(title: "Cancelar", style: .cancel) { (UIAlertAction) in
+            
+        }
+        alert.addAction(btn_alert);
+        alert.addAction(btn_cancel);
+        self.present(alert, animated: true, completion: nil);
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
