@@ -28,6 +28,16 @@ class DBase {
     var email_l_T = Expression<String>("email")
     let date_l_T = Expression<String>("fecha_ingreso")
     
+    //tabla usuario logeados--------------------------------------
+    let agenciesT = Table("agencias")
+    let name_agencies_T = Expression<String>("nombre")
+    let street_agencies_T = Expression<String>("calle")
+    var attention_agencies_T = Expression<String>("atencion")
+    let latitude_agencies_T = Expression<Double>("latitud")
+    let longitude_agencies_T = Expression<Double>("longitud")
+    
+    
+    
     var db: Connection!
     
     //creo conexion a la base
@@ -61,13 +71,6 @@ class DBase {
             table.column(self.password_user_T)
         }
         
-        let createTableUsersLogin = self.usersLoginT.create { (table) in
-            table.column(self.id_users_l_T)
-            table.column(self.person_l_T)
-            table.column(self.email_l_T)
-            table.column(self.date_l_T)
-        }
-        
         do{
             try self.db.run(createTableUsers)
             print("Tabla creada")
@@ -81,6 +84,14 @@ class DBase {
         }catch{
             ok = false
             print(error)
+        }
+        
+        
+        let createTableUsersLogin = self.usersLoginT.create { (table) in
+            table.column(self.id_users_l_T)
+            table.column(self.person_l_T)
+            table.column(self.email_l_T)
+            table.column(self.date_l_T)
         }
         
         do{
@@ -97,6 +108,31 @@ class DBase {
             ok = false
             print(error)
         }
+        
+        let createTableAgencies = self.agenciesT.create { (table) in
+            table.column(self.name_agencies_T)
+            table.column(self.street_agencies_T)
+            table.column(self.attention_agencies_T)
+            table.column(self.latitude_agencies_T)
+            table.column(self.longitude_agencies_T)
+        }
+        
+        do{
+            try self.db.run(createTableAgencies)
+            print("Tabla agencias creada")
+        }catch let Result.error(message, code, statement){
+            if( code == 1){
+                print("tabla agencias ya existe")
+            }else{
+                ok = false
+                print(" * constraint failed: \(message), in \(String(describing: statement)) , code \(code)")
+            }
+        }catch{
+            ok = false
+            print(error)
+        }
+        
+        
         
         return ok
     }
@@ -146,7 +182,7 @@ class DBase {
     }
     
     //inserta en base el usuario logeado
-    func inserUserLogin(user_in:User){
+    func insertUserLogin(user_in:User){
         print("entra log")
         print("usuario: \(String(describing: user_in.id_user)) ,email: \(String(describing: user_in.email)), persona: \(String(describing: user_in.person)), fecha: \(String(describing: user_in.sync_date))")
         
@@ -185,6 +221,24 @@ class DBase {
         }catch{
             print("error whi")
             print(error)
+        }
+    }
+    
+    //inserta las agencias obtenidas del ws
+    func insertAgencies(places:[place]){
+        print("entra insert places")
+        
+        for placeItem in places{
+            
+            let insertagency = agenciesT.insert(self.name_agencies_T <- placeItem.name!,self.street_agencies_T <- placeItem.street!, self.attention_agencies_T <- placeItem.attention!, self.latitude_agencies_T <- placeItem.coordinate.latitude, self.longitude_agencies_T <- placeItem.coordinate.longitude)
+            do{
+                try self.db.run(insertagency)
+                print("Se ingreso la agencia \(placeItem.name) correctamente")
+            }catch let Result.error(message, code, statement){
+                print("mensaje: \(message), codigo: \(code), statment: \(String(describing: statement)) ")
+            }catch {
+                print(error)
+            }
         }
     }
     

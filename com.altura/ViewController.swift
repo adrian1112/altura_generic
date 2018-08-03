@@ -95,6 +95,25 @@ class ViewController: UIViewController {
                 self.btn_reg.isEnabled = true
                 dbase.printAllUsers()
                 print("Tablas creadas correctamente")
+                
+                ws.loadAgencies(success: {
+                    (agencies) -> Void in
+                    
+                    do{
+                        try self.db.execute("DROP TABLE IF EXISTS agencias;")
+                        print("Se vacio la tabla agenicas correctamente")
+                    }catch let Result.error(message, code, statement){
+                        print("mensaje: \(message), codigo: \(code), statment: \(String(describing: statement)) ")
+                    }catch {
+                        print(error)
+                    }
+                    
+                    self.dbase.insertAgencies(places: agencies as! [place])
+                    print("se inserto correctamente las agencias")
+                }, error: {
+                    (agencies,message) -> Void in
+                        print("devolvio null en las agencias")
+                })
             }else{
                 self.btn_in.isEnabled = false
                 self.btn_reg.isEnabled = false
@@ -175,11 +194,12 @@ class ViewController: UIViewController {
                         self.showAlert();
                     }else{
                         print("entra navigate app")
-                        self.dbase.inserUserLogin(user_in: self.user_in)
+                        self.dbase.insertUserLogin(user_in: self.user_in)
                         self.navigateToApp()
                     }
                 }
             } while(!complete)
+            
         }
     }
     
@@ -273,6 +293,20 @@ class ViewController: UIViewController {
         }
     }
     
+    
+    func loadCore(){
+        var places: [place] = []
+        ws.loadAgencies(success: {
+            
+            (agencias) -> Void in
+            places = agencias as! [place]
+            print("se obtuvieron las agencias")
+            
+        }, error: {
+            (agencies, message) -> Void in
+            print(message)
+        })
+    }
     
     
     

@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import GoogleMaps
 
 class WService {
-    let url_master = "http://54.86.88.196/aclientAES/w?c&q=";
+    let url_master = "http://54.86.88.196/aclientAES2/w?c&q="
     var user_in = User(id_user: 0, document: "", person: "", email: "", phone: "", sync_date: "", adress: "", status: 0, error: "")
     
     let key = "Altura"
@@ -23,13 +24,10 @@ class WService {
         user_in = User(id_user: 0, document: "", person: "", email: "", phone: "", sync_date: "", adress: "", status: 0, error: "")
         
         let url_part = "action=login&mail=\(usr_id)&pass=\(pass)&os=2&imei=111"
-        //let url_part = "{\"sync_date\":\"2018-07-25 10:35:50\",\"phone\":\"\",\"person\":\"Mi Nombre\",\"document\":\"0000000000\",\"adress\":\"Mi dirección\",\"id_user\":22,\"status\":2}"
         let encode = try! url_part.aesEncrypt(key: n_key, iv: iv)
         
         print("codificado: \(encode)")
-        let a_deco = "6Et4NJTliocEoSKYwBMxBA2IPrfkRA2GOypIbLLBDuNU28thbPFk8ewob/CdG7iQYoz7fBDFw3wxKFA9w9gXtTRp43ZRCJTmzJb5eqADRDA6fGf5YvzTbofF7SnSG1xS9CaIE868Ekhj54R3G73ZXYqzKaNALzepquuDHuAGMaYl2dHIsJ5JYQ84OqXXVMTq"
-        let deco = try! a_deco.aesDecrypt(key: n_key, iv: iv)
-        print("decodificado: \(deco)")
+        
         let jsn_url = url_master + (encode.urlEncode() as String)
         
         print(jsn_url)
@@ -40,31 +38,21 @@ class WService {
         
         
         var req = 4;
-        
-        //con sem detengo toda la aplicacion hasta que  termine la funcion que contiene sem.signal() , esto no puede ser util si  se depende de internet ya que detendria todo y se quedara congelado
-        //let sem = DispatchSemaphore(value: 0)
-        
-        
+
         URLSession.shared.dataTask(with: url!){ (data , response ,err ) in
                 
                 print("entra en shared")
                 
                 guard let data = data else {return error(4,self.user_in)}
                 
-                //print("datos: \(data.base64EncodedString())")
-                // let dataAsString = String(data: data, encoding: .utf8)
-                // print(dataAsString)
-                
                 do{
                     guard let data_received = String(data: data, encoding: .utf8) else{ return error(4,self.user_in) }
                     print("data received: \(data_received)")
                     
-                    let data_text = "6Et4NJTliocEoSKYwBMxBA2IPrfkRA2GOypIbLLBDuNU28thbPFk8ewob/CdG7iQYoz7fBDFw3wxKFA9w9gXtTRp43ZRCJTmzJb5eqADRDA6fGf5YvzTbofF7SnSG1xS9CaIE868Ekhj54R3G73ZXYqzKaNALzepquuDHuAGMaYl2dHIsJ5JYQ84OqXXVMTq"
-                    let data2 = try! data_text.aesDecrypt(key: n_key, iv: self.iv)
+                    let data2 = try! data_received.aesDecrypt(key: n_key, iv: self.iv)
                     print("datos decript \(data2)")
                     let user =  try JSONDecoder().decode(User.self, from: data2.data(using: .utf8)!)
                     print("usuario en funcion: \(user)")
-                    //print(user.person as Any)
                     if((user.status) != nil && user.status! > 0){
                         self.user_in = user
                         print("usuario en funcion despues de if: \(user)")
@@ -103,6 +91,75 @@ class WService {
         //sem.wait()
         
         //sleep(4)
+    }
+    
+    
+    func loadAgencies( success: @escaping (_ list: Array<Any>) -> Void, error: @escaping (_ list: Array<Any>, _ message: String) -> Void){
+        print("entra en loadagencies")
+        let n_key = key.md5()
+        
+        var places: [place] = []
+        
+        let url_part="action=query&id_query=60"
+        let encode = try! url_part.aesEncrypt(key: n_key, iv: iv)
+        
+        print("codificado: \(encode)")
+        
+        let jsn_url = url_master + (encode.urlEncode() as String)
+        print(jsn_url)
+        
+        guard let url = try? URL(string: jsn_url) else {
+            error(places, "Error al general la url")
+        }
+        
+        URLSession.shared.dataTask(with: url!){ (data , response ,err ) in
+            
+            print("entra en shared")
+            
+            guard let data = data else {return error(places, "data recibida invalida")}
+            
+            do{
+                guard let data_received = String(data: data, encoding: .utf8) else{ return error(places, "data recibida invalida") }
+                print("data received: \(data_received)")
+                
+                let data2 = try! data_received.aesDecrypt(key: n_key, iv: self.iv)
+                print("datos decript agencias \(data2)")
+                
+                //let user =  try JSONDecoder().decode(User.self, from: data2.data(using: .utf8)!)
+                let dictionary: Dictionary<NSObject, AnyObject> = try JSONSerialization.jsonObject(with: data2.data(using: .utf8)!, options: JSONSerialization.ReadingOptions.mutableContainers) as! Dictionary<NSObject, AnyObject>
+                
+                var date_sync = ""
+                var list: NSArray = []
+                for (key,value) in dictionary {
+                    if key as! String == "sync_date" {
+                        date_sync = value as! String
+                    }
+                    if key as! String == "row"{
+                        list = value as! NSArray
+                    }
+                }
+                
+                print(date_sync)
+                
+                for value in list {
+                    let val = value as! NSArray
+                    if val[4] as! String != "-"{
+                        
+                        let place_temp = place.init(name: val[1] as! String, street: val[2] as! String, attention: val[6] as! String, coordinate: CLLocationCoordinate2D(latitude: Double(val[4] as! String)!, longitude: Double(val[5] as! String)!), selected: false)
+                        
+                        places.append(place_temp)
+                    }
+                }
+                
+                success(places)
+                
+            }catch let errJson {
+                print(errJson)
+                error(places, "data recibida invalida")
+                //self.txt_alert = "El usuario no existe"
+            }
+        }.resume()
+        
     }
     
 }
