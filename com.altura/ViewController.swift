@@ -100,7 +100,7 @@ class ViewController: UIViewController {
                     (agencies) -> Void in
                     
                     do{
-                        try self.db.execute("DROP TABLE IF EXISTS agencias;")
+                        try self.db.execute("DELETE FROM agencias;")
                         print("Se vacio la tabla agenicas correctamente")
                     }catch let Result.error(message, code, statement){
                         print("mensaje: \(message), codigo: \(code), statment: \(String(describing: statement)) ")
@@ -114,6 +114,8 @@ class ViewController: UIViewController {
                     (agencies,message) -> Void in
                         print("devolvio null en las agencias")
                 })
+                
+                
             }else{
                 self.btn_in.isEnabled = false
                 self.btn_reg.isEnabled = false
@@ -124,6 +126,8 @@ class ViewController: UIViewController {
             self.btn_reg.isEnabled = false
             print("No se pudo conectar a la base")
         }
+        
+        //self.db = nil
     }
     
        
@@ -163,45 +167,125 @@ class ViewController: UIViewController {
             
             ws.loadUser(usr_id: user_name, pass: pass, success: {
                 (value,user) -> Void in
-                print("entra en success: \(value) , \(user)")
-                self.user_in = user
-                self.user_in.email = user_name
-                self.error = false
-                self.complete = true
+                DispatchQueue.main.async {
+                    print("entra en success: \(value) , \(user)")
+                    self.user_in = user
+                    self.user_in.email = user_name
+                    //self.error = false
+                    //self.complete = true
+                    //self.navigateToApp()
+                    self.syncAllDataInit()
+                }
+                
+                //DispatchQueue.global(qos: .background).async{
+                        
+                //}
+                
                 
             }, error: {
                 (value,user) -> Void in
-                print("entra en error: \(value) , \(user)")
-                if(value == 2){
-                    self.txt_alert = "Usuario o Contraseña Inválidos"
-                    
-                }else if( value == 3){
-                    self.txt_alert = "Usuario no registrado"
-                    
-                }else{
-                    self.txt_alert = "Error.."
+                DispatchQueue.main.async {
+                    print("entra en error: \(value) , \(user)")
+                    if(value == 2){
+                        self.txt_alert = "Usuario o Contraseña Inválidos"
+                        
+                    }else if( value == 3){
+                        self.txt_alert = "Usuario no registrado"
+                        
+                    }else{
+                        self.txt_alert = "Error.."
+                    }
+                    //self.error = true
+                    //self.complete = true
+                    print("sale en error: \(value) , \(user)")
+                    print("entra en alerta")
+                    self.showAlert()
                 }
-                self.error = true
-                self.complete = true
-                print("sale en error: \(value) , \(user)")
+                
             })
             
-            repeat {
+            /*repeat {
                 //print("complete: \(complete) ,error \(error)")
                 if complete{
                     if error{
                         print("entra en alerta")
-                        self.showAlert();
+                        self.showAlert()
                     }else{
                         print("entra navigate app")
-                        self.dbase.insertUserLogin(user_in: self.user_in)
                         self.navigateToApp()
                     }
                 }
-            } while(!complete)
+            } while(!complete)*/
             
         }
     }
+    
+    
+    func syncAllDataInit(){
+        var status = false
+        var status1 = false
+        var status2 = false
+        
+        self.dbase.insertUserLogin(user_in: self.user_in)
+        self.ws.loadNotifications(id_user: String(describing: self.user_in.id_user), date: self.user_in.sync_date,
+                            success: {
+                                (notifications) -> Void in
+                                print("ok notificacion")
+                                status2 = true
+                                
+                                DispatchQueue.main.async {
+                                    self.dbase.insertNotifications(notificationsList: notifications as! [notification])
+                                    self.navigateToApp()
+                                }
+                                
+                                
+        },error: {
+            (accounts,message) -> Void in
+            self.txt_alert = message;
+            self.showAlert();
+        })
+        
+        self.ws.loadAcounts(id_user: String(describing: self.user_in.id_user), date: self.user_in.sync_date,
+                            success: {
+                                (accounts) -> Void in
+                                DispatchQueue.main.async {
+                                    self.dbase.insertAccounts(accounts: accounts as! [account])
+                                    self.syncAllDataCore(accounts: accounts as! [account])
+                                }
+                                
+        },error: {
+            (accounts,message) -> Void in
+            self.txt_alert = message;
+            self.showAlert();
+        })
+        
+    }
+    
+    func syncAllDataCore( accounts: [account]){
+        var status = false
+        var status1 = false
+        var status2 = false
+        
+        self.ws.loadCore(id_user: String(describing: self.user_in.id_user), accounts: accounts,
+                                  success: {
+                                    (notifications) -> Void in
+                                    print("ok notificacion")
+                                    status2 = true
+                                    
+                                    DispatchQueue.main.async {
+                                        //self.dbase.insertNotifications(notificationsList: notifications as! [notification])
+                                        self.navigateToApp()
+                                    }
+                                    
+                                    
+        },error: {
+            (accounts,message) -> Void in
+            self.txt_alert = message;
+            self.showAlert();
+        })
+        
+    }
+    
     
     @IBAction func resetPass(_ sender: Any) {
         txt_alert = " Recuperar Contraseña para usuario:" + user_txt.text!;

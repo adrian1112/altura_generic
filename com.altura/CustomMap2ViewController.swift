@@ -38,8 +38,8 @@ class CustomMap2ViewController: UIViewController,CLLocationManagerDelegate, GMSM
     var placeLatLong = CLLocationCoordinate2D(latitude: -2.162870, longitude: -79.898407)
     
     var places = [
-        place.init(name: "Agencia Centro", street: "Coronel y Maldonado", attention: "Lunes a viernes: 07:30 a 17:00 y Sábados: 09:00 a 13:00", coordinate: CLLocationCoordinate2D(latitude: -2.204457, longitude: -79.886952),selected: false),
-        place.init(name: "Municipio de Guayaquil", street: "10 de Agosto y Pichincha, entrando por el callejon arosemena", attention: "Lunes a viernes: 08:30 a 16:30", coordinate: CLLocationCoordinate2D(latitude: -2.195159, longitude: -79.880961),selected: false)
+        place.init(name: "Agencia Centro", street: "Coronel y Maldonado", attention: "Lunes a viernes: 07:30 a 17:00 y Sábados: 09:00 a 13:00", coordinate: CLLocationCoordinate2D(latitude: -2.204457, longitude: -79.886952),selected: false, date_sync: ""),
+        place.init(name: "Municipio de Guayaquil", street: "10 de Agosto y Pichincha, entrando por el callejon arosemena", attention: "Lunes a viernes: 08:30 a 16:30", coordinate: CLLocationCoordinate2D(latitude: -2.195159, longitude: -79.880961),selected: false, date_sync: "")
     ]
     
     var filteredPlaces = [place]()
@@ -48,9 +48,13 @@ class CustomMap2ViewController: UIViewController,CLLocationManagerDelegate, GMSM
     
     var  coordenadas : [CLLocationCoordinate2D] = []
     
+    let dbase = DBase()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let status = dbase.connect_db()
         
         mapView.delegate = self
         searchBar.delegate = self
@@ -70,13 +74,14 @@ class CustomMap2ViewController: UIViewController,CLLocationManagerDelegate, GMSM
         
         blurViewTop.constant = 0.0
         mapViewBotton.constant = 0.0
-        self.showPins()
         
+        if status.value {
+            places = dbase.getAgencies()
+        }
+        
+        self.showPins()
         filteredPlaces = places
         result.isHidden = true
-        
-        
-        
         
     }
     

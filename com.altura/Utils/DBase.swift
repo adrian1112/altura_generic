@@ -8,6 +8,7 @@
 
 import Foundation
 import SQLite
+import GoogleMaps
 
 class DBase {
     
@@ -21,6 +22,7 @@ class DBase {
     let telephone_user_T = Expression<String>("telefono")
     let contract_user_T = Expression<String>("contrato")
     let password_user_T = Expression<String>("contrasena")
+    
     //tabla usuario logeados--------------------------------------
     let usersLoginT = Table("usuarios_logeados")
     let id_users_l_T = Expression<Int>("id")
@@ -28,13 +30,32 @@ class DBase {
     var email_l_T = Expression<String>("email")
     let date_l_T = Expression<String>("fecha_ingreso")
     
-    //tabla usuario logeados--------------------------------------
+    //tabla agencias--------------------------------------
     let agenciesT = Table("agencias")
-    let name_agencies_T = Expression<String>("nombre")
-    let street_agencies_T = Expression<String>("calle")
-    var attention_agencies_T = Expression<String>("atencion")
-    let latitude_agencies_T = Expression<Double>("latitud")
-    let longitude_agencies_T = Expression<Double>("longitud")
+    let name_agenciesT = Expression<String>("nombre")
+    let street_agenciesT = Expression<String>("calle")
+    let attention_agenciesT = Expression<String>("atencion")
+    let latitude_agenciesT = Expression<Double>("latitud")
+    let longitude_agenciesT = Expression<Double>("longitud")
+    let date_sync_agenciesT = Expression<String>("date_sync")
+    
+    //tabla cuentas----------------------------------------------
+    let accountsT = Table("cuentas")
+    let service_accountsT = Expression<String>("servicio")
+    let alias_accountsT = Expression<String>("nombre")
+    let document_accountsT = Expression<String>("documento")
+    let date_sync_accountsT = Expression<String>("date_sync")
+    
+    //tabla notificaciones----------------------------------------------
+    let notificationsT = Table("notificaciones")
+    let contract_notificationsT = Expression<String>("contrato")
+    let type_notificationsT = Expression<String>("tipo")
+    let document_code_notificationsT = Expression<String>("cod_documento")
+    let message_notificationsT = Expression<String>("mensaje")
+    let date_gen_notificationsT = Expression<String>("fecha_generacion")
+    let date_sync_notificationsT = Expression<String>("date_sync")
+    
+    
     
     
     
@@ -110,11 +131,12 @@ class DBase {
         }
         
         let createTableAgencies = self.agenciesT.create { (table) in
-            table.column(self.name_agencies_T)
-            table.column(self.street_agencies_T)
-            table.column(self.attention_agencies_T)
-            table.column(self.latitude_agencies_T)
-            table.column(self.longitude_agencies_T)
+            table.column(self.name_agenciesT)
+            table.column(self.street_agenciesT)
+            table.column(self.attention_agenciesT)
+            table.column(self.latitude_agenciesT)
+            table.column(self.longitude_agenciesT)
+            table.column(self.date_sync_agenciesT)
         }
         
         do{
@@ -132,6 +154,51 @@ class DBase {
             print(error)
         }
         
+        let createTableAccounts = self.accountsT.create { (table) in
+            table.column(self.service_accountsT)
+            table.column(self.alias_accountsT)
+            table.column(self.document_accountsT)
+            table.column(self.date_sync_accountsT)
+        }
+        
+        do{
+            try self.db.run(createTableAccounts)
+            print("Tabla cuentas creada")
+        }catch let Result.error(message, code, statement){
+            if( code == 1){
+                print("tabla cuentas ya existe")
+            }else{
+                ok = false
+                print(" * constraint failed: \(message), in \(String(describing: statement)) , code \(code)")
+            }
+        }catch{
+            ok = false
+            print(error)
+        }
+        
+        let createTableNotifications = self.notificationsT.create { (table) in
+            table.column(self.contract_notificationsT)
+            table.column(self.type_notificationsT)
+            table.column(self.document_code_notificationsT)
+            table.column(self.message_notificationsT)
+            table.column(self.date_gen_notificationsT)
+            table.column(self.date_sync_notificationsT)
+        }
+        
+        do{
+            try self.db.run(createTableNotifications)
+            print("Tabla notificaciones creada")
+        }catch let Result.error(message, code, statement){
+            if( code == 1){
+                print("tabla notificaciones ya existe")
+            }else{
+                ok = false
+                print(" * constraint failed: \(message), in \(String(describing: statement)) , code \(code)")
+            }
+        }catch{
+            ok = false
+            print(error)
+        }
         
         
         return ok
@@ -186,7 +253,7 @@ class DBase {
         print("entra log")
         print("usuario: \(String(describing: user_in.id_user)) ,email: \(String(describing: user_in.email)), persona: \(String(describing: user_in.person)), fecha: \(String(describing: user_in.sync_date))")
         
-        let insertUser_l = usersLoginT.insert(self.id_users_l_T <- user_in.id_user!,self.email_l_T <- user_in.email!, self.person_l_T <- user_in.person!, self.date_l_T <- user_in.sync_date!)
+        let insertUser_l = usersLoginT.insert(self.id_users_l_T <- user_in.id_user,self.email_l_T <- user_in.email!, self.person_l_T <- user_in.person, self.date_l_T <- user_in.sync_date)
         do{
             try self.db.run(insertUser_l)
             print("Se ingreso el usuario log correctamente")
@@ -222,6 +289,17 @@ class DBase {
             print("error whi")
             print(error)
         }
+        
+        print("muestra todas agencias")
+        do{
+            for agency in try db.prepare(agenciesT) {
+                print("nombre: \(agency[name_agenciesT]), calle: \(agency[street_agenciesT]), atencion: \(agency[attention_agenciesT]),  latitud: \(agency[latitude_agenciesT]), longitud: \(agency[longitude_agenciesT]), date_sync: \(agency[date_sync_agenciesT])")
+                // id: 1, email: alice@mac.com, name: Optional("Alice")
+            }
+        }catch{
+            print("error whi")
+            print(error)
+        }
     }
     
     //inserta las agencias obtenidas del ws
@@ -229,8 +307,9 @@ class DBase {
         print("entra insert places")
         
         for placeItem in places{
+            //print(placeItem)
             
-            let insertagency = agenciesT.insert(self.name_agencies_T <- placeItem.name!,self.street_agencies_T <- placeItem.street!, self.attention_agencies_T <- placeItem.attention!, self.latitude_agencies_T <- placeItem.coordinate.latitude, self.longitude_agencies_T <- placeItem.coordinate.longitude)
+            let insertagency = agenciesT.insert(self.name_agenciesT <- placeItem.name!,self.street_agenciesT <- placeItem.street!, self.attention_agenciesT <- placeItem.attention!, self.latitude_agenciesT <- placeItem.coordinate.latitude, self.longitude_agenciesT <- placeItem.coordinate.longitude, self.date_sync_agenciesT <- placeItem.date_sync)
             do{
                 try self.db.run(insertagency)
                 print("Se ingreso la agencia \(placeItem.name) correctamente")
@@ -240,6 +319,57 @@ class DBase {
                 print(error)
             }
         }
+    }
+    
+    //inserta las cuentas obtenidas del ws
+    func insertAccounts(accounts:[account]){
+        print("entra insert acoount")
+        
+        for acountItem in accounts{
+            
+            let insertaccount = accountsT.insert(self.service_accountsT <- acountItem.service,self.alias_accountsT <- acountItem.alias, self.document_accountsT <- acountItem.document, self.date_sync_accountsT <- acountItem.date_sync)
+            do{
+                try self.db.run(insertaccount)
+                print("Se ingreso la cuenta \(acountItem.alias) correctamente")
+            }catch let Result.error(message, code, statement){
+                print("mensaje: \(message), codigo: \(code), statment: \(String(describing: statement)) ")
+            }catch {
+                print(error)
+            }
+        }
+    }
+    
+    //inserta las notificaciones obtenidas del ws
+    func insertNotifications(notificationsList:[notification]){
+        print("entra insert notifications")
+        
+        for notificationItem in notificationsList{
+            
+            let insertNotification = notificationsT.insert(self.contract_notificationsT <- notificationItem.contract,self.type_notificationsT <- notificationItem.type, self.document_code_notificationsT <- notificationItem.document_code, self.message_notificationsT <- notificationItem.message, self.date_gen_notificationsT <- notificationItem.date_gen, self.date_sync_notificationsT <- notificationItem.date_sync)
+            do{
+                try self.db.run(insertNotification)
+                print("Se ingreso la notiificacion \(notificationItem.message) correctamente")
+            }catch let Result.error(message, code, statement){
+                print("mensaje: \(message), codigo: \(code), statment: \(String(describing: statement)) ")
+            }catch {
+                print(error)
+            }
+        }
+    }
+    
+    //imprime todos los usuarios registrados
+    func getAgencies() -> [place]{
+        print("consulta de agencias")
+        var places:[place] = []
+        do{
+            for agency in try db.prepare(agenciesT) {
+                places.append( place.init(name: agency[name_agenciesT], street: agency[street_agenciesT], attention: agency[attention_agenciesT], coordinate: CLLocationCoordinate2D(latitude: agency[latitude_agenciesT], longitude: agency[longitude_agenciesT]), selected: false, date_sync: agency[date_sync_agenciesT]))
+            }
+        }catch{
+            print("error get places")
+            print(error)
+        }
+        return places
     }
     
 }
