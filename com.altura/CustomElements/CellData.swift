@@ -13,4 +13,5 @@ struct cellData {
     let message : String?
     let title : String?
     let date : String?
+    let service : String?
 }

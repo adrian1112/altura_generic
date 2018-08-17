@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     //dependencias
     let ws = WService();
     let dbase = DBase();
+    var db: Connection!
     
     @IBOutlet weak var user_txt: UITextField!
     @IBOutlet weak var pass_txt: UITextField!
@@ -30,7 +31,7 @@ class ViewController: UIViewController {
     var user = UserDB(id: nil, name: nil, email: nil, identifier: nil, addresss: nil, telephone: nil, contract: nil, pass: nil )
     
     let status: Bool = false
-    var db: Connection!
+    
     
     var complete = false
     var error = true
@@ -101,6 +102,13 @@ class ViewController: UIViewController {
                     
                     do{
                         try self.db.execute("DELETE FROM agencias;")
+                        try self.db.execute("DELETE FROM notificaciones;")
+                        try self.db.execute("DELETE FROM cuentas;")
+                        try self.db.execute("DELETE FROM cuenta_detalle;")
+                        try self.db.execute("DELETE FROM facturas;")
+                        try self.db.execute("DELETE FROM deudas;")
+                        try self.db.execute("DELETE FROM tramites;")
+                        try self.db.execute("DELETE FROM pagos;")
                         print("Se vacio la tabla agenicas correctamente")
                     }catch let Result.error(message, code, statement){
                         print("mensaje: \(message), codigo: \(code), statment: \(String(describing: statement)) ")
@@ -128,6 +136,8 @@ class ViewController: UIViewController {
         }
         
         //self.db = nil
+        
+        
     }
     
        

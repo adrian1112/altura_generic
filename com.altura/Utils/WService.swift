@@ -8,6 +8,7 @@
 
 import Foundation
 import GoogleMaps
+import SQLite
 
 class WService {
     let url_master = "http://54.86.88.196/aclientAES2/w?c&q="
@@ -15,6 +16,8 @@ class WService {
     
     let key = "Altura"
     let iv = "gqLOHUioQ0QjhuvI"
+    let dbase = DBase();
+    var db: Connection!
     
     //funcion para cargar todo mediante webservices json
     func loadUser(usr_id:String , pass: String, success: @escaping (_ value:Int, _ user:User) -> Void, error: @escaping (_ value:Int,_ user:User) -> Void ){
@@ -177,7 +180,11 @@ class WService {
             let url_part = "action=querys&id_query=2,3,5,9,48&id_user=\(id_user)&ID_USER=\(id_user)&CONTRATO=\(accountItem.service)&NS=\(accountItem.service)&ID=\(accountItem.document)&os=2"
             let encode = try! url_part.aesEncrypt(key: n_key, iv: iv)
             
-            var accounts:[account] = []
+            var detailPaymentList:[detailPayment] = []
+            var detailProcedureList:[detailProcedure] = []
+            var detailDebsList:[detailDebs] = []
+            var billsAccountList:[billsAccount] = []
+            var detailAccountList:[detailAccount] = []
             
             print("codificado: \(encode)")
             
@@ -225,43 +232,154 @@ class WService {
                                 }
                             }
                             for value in list {
-                                let val = value as! NSArray
-                                let account_temp = account.init(service: val[0] as! String, alias: val[1] as! String, document: val[2] as! String, date_sync: date_sync )
-                                //accounts.append(account_temp)
+                                let value = value as! NSArray
+                                var val:[String] = []
+                                for i in 0..<value.count  {
+                                    if(value[i] is NSNull){
+                                        val.append("")
+                                    }else{
+                                        val.append(value[i] as! String)
+                                    }
+                                }
+                                
+                                let detailAccount_temp = detailAccount.init( facturas_vencidas: val[0] as! String, deuda_diferida: val[1] as! String, max_fecha_pago: val[2] as! String, tipo_medidor: val[3] as! String, serie_medidor: val[4] as! String, consumo: val[5] as! String, estado_corte: val[6] as! String, contrato: val[7] as! String, cliente: val[8] as! String, uso_servicio: val[9] as! String, direccion: val[10] as! String, ci_ruc: val[11] as! String, id_direccion: val[12] as! String, id_direccion_contrato: val[13] as! String, id_producto: val[14] as! String, id_cliente: val[15] as! String, deuda_pendiente: val[16] as! String, servicio: accountItem.service, alias: accountItem.alias)
+                                detailAccountList.append(detailAccount_temp)
                             }
                             
                             //enviar a guardar el detalle de contratos en la base
                         }
                         // query 3  facturas del contrato
-                        if keyT as! String == "3" {}
+                        if keyT as! String == "3" {
+                            let data_temp = valueT as! Dictionary<NSObject, AnyObject>
+                            var date_sync = ""
+                            var list: NSArray = []
+                            for (key,value) in data_temp {
+                                if key as! String == "sync_date" {
+                                    date_sync = value as! String
+                                }
+                                if key as! String == "row"{
+                                    list = value as! NSArray
+                                }
+                            }
+                            for value in list {
+                                let value = value as! NSArray
+                                var val:[String] = []
+                                for i in 0..<value.count  {
+                                    if(value[i] is NSNull){
+                                        val.append("")
+                                    }else{
+                                        val.append(value[i] as! String)
+                                    }
+                                }
+                                
+                                let billsAccount_temp = billsAccount.init( codigo_factura: val[0] as! String, fecha_emision: val[1] as! String, fecha_vencimiento: val[2] as! String, monto_factura: val[3] as! String, saldo_factura: val[4] as! String, estado_factura: val[5] as! String, consumo_kwh: val[6] as! String, lectura_actual: val[7] as! String, servicio: accountItem.service)
+                                billsAccountList.append(billsAccount_temp)
+                            }
+                        }
                         // query 5  detalle de deuda
-                        if keyT as! String == "5" {}
+                        if keyT as! String == "5" {
+                            let data_temp = valueT as! Dictionary<NSObject, AnyObject>
+                            var date_sync = ""
+                            var list: NSArray = []
+                            for (key,value) in data_temp {
+                                if key as! String == "sync_date" {
+                                    date_sync = value as! String
+                                }
+                                if key as! String == "row"{
+                                    list = value as! NSArray
+                                }
+                            }
+                            for value in list {
+                                let value = value as! NSArray
+                                var val:[String] = []
+                                for i in 0..<value.count  {
+                                    if(value[i] is NSNull){
+                                        val.append("")
+                                    }else{
+                                        val.append(value[i] as! String)
+                                    }
+                                }
+                                
+                                let detailDebs_temp = detailDebs.init(nombre: val[0] as! String, descripcion: val[1] as! String, valor: val[2] as! String, servicio: accountItem.service)
+                                detailDebsList.append(detailDebs_temp)
+                            }
+                        }
                         // query 9  tramites realizados
-                        if keyT as! String == "9" {}
+                        if keyT as! String == "9" {
+                            let data_temp = valueT as! Dictionary<NSObject, AnyObject>
+                            var date_sync = ""
+                            var list: NSArray = []
+                            for (key,value) in data_temp {
+                                if key as! String == "sync_date" {
+                                    date_sync = value as! String
+                                }
+                                if key as! String == "row"{
+                                    list = value as! NSArray
+                                }
+                            }
+                            for value in list {
+                                let value = value as! NSArray
+                                var val:[String] = []
+                                for i in 0..<value.count  {
+                                    if(value[i] is NSNull){
+                                        val.append("")
+                                    }else{
+                                        val.append(value[i] as! String)
+                                    }
+                                }
+                                
+                                let detailProcedure_temp = detailProcedure.init(codigo: val[0] as! String, descripcion: val[1] as! String, fecha_inicio: val[2] as! String, fecha_fin: val[3] as! String, estado: val[4] as! String, json: val[5] as! String, descripcion2: val[6] as! String, descripcion3: val[7] as! String, servicio: accountItem.service)
+                                detailProcedureList.append(detailProcedure_temp)
+                            }
+                        }
                         // query 48  lista de pagos
-                        if keyT as! String == "48" {}
+                        if keyT as! String == "48" {
+                            let data_temp = valueT as! Dictionary<NSObject, AnyObject>
+                            var date_sync = ""
+                            var list: NSArray = []
+                            for (key,value) in data_temp {
+                                if key as! String == "sync_date" {
+                                    date_sync = value as! String
+                                }
+                                if key as! String == "row"{
+                                    list = value as! NSArray
+                                }
+                            }
+                            for value in list {
+                                let value = value as! NSArray
+                                var val:[String] = []
+                                for i in 0..<value.count  {
+                                    if(value[i] is NSNull){
+                                        val.append("")
+                                    }else{
+                                        val.append(value[i] as! String)
+                                    }
+                                }
+                                
+                                let detailPayment_temp = detailPayment.init(meses: val[0] as! String, monto_pago: val[1] as! String, codigo_pago: val[2] as! String, tipo_recaudacion: val[3] as! String, fecha_pago: val[4] as! String, estado_pago: val[5] as! String, numero_servicio: val[6] as! String, terminal: val[7] as! String, sync_date: date_sync, servicio: accountItem.service)
+                                detailPaymentList.append(detailPayment_temp)
+                            }
+                        }
                         
                     }
-                    var date_sync = ""
-                    var list: NSArray = []
-                    for (key,value) in dictionary {
-                        if key as! String == "sync_date" {
-                            date_sync = value as! String
-                        }
-                        if key as! String == "row"{
-                            list = value as! NSArray
-                            
-                        }
-                    }
                     
-                    for value in list {
-                        let val = value as! NSArray
+                    let status = dbase.connect_db()
+                    if( status.value ){
+                        self.db = status.conec
+                        self.dbase.insertDetailsAccounts(list: detailAccountList)
+                        self.dbase.insertDebs(list: detailDebsList)
+                        self.dbase.insertDetailPaymentT(list: detailPaymentList)
+                        self.dbase.insertDetailProcedure(list: detailProcedureList)
+                        self.dbase.insertBillsAccount(list: billsAccountList)
                         
-                        let account_temp = account.init(service: val[0] as! String, alias: val[1] as! String, document: val[2] as! String, date_sync: date_sync )
-                        accounts.append(account_temp)
                     }
                     
-                    
+                    print(detailAccountList)
+                    print(billsAccountList)
+                    print(detailDebsList)
+                    print(detailProcedureList)
+                    print(detailPaymentList)
+
                     
                 }catch let errJson {
                     print(errJson)
@@ -274,13 +392,6 @@ class WService {
         }//end for
         
         success(true)
-        
-        
-        
-        
-        
-        
-        
         
     }
     

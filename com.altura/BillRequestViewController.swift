@@ -187,7 +187,7 @@ class BillRequestViewController: UIViewController, UIPickerViewDelegate, UIPicke
             self.select2.resignFirstResponder()
             self.textView_label.text = self.options3[row]
             
-            self.bills = [Bill.init("Factura1", false,1),Bill.init("Factura2", false,2),Bill.init("Factura3", false,3),Bill.init("Factura4", false,4)]
+            self.bills = [Bill.init(name: "Factura1", enabled: false,index: 1, date_ini: "", date_end: "", value: "", type: ""),Bill.init(name: "Factura2", enabled: false,index: 2, date_ini: "", date_end: "", value: "", type: ""),Bill.init(name: "Factura3", enabled: false,index: 3, date_ini: "", date_end: "", value: "", type: ""),Bill.init(name: "Factura4", enabled: false,index: 4, date_ini: "", date_end: "", value: "", type: "")]
             self.tableBills.reloadData()
         }
         

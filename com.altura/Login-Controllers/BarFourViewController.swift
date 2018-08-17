@@ -48,7 +48,7 @@ class BarFourViewController: UIViewController, UITableViewDataSource, UITableVie
         //self.hiddenMenu()
         
         //Tabla
-        data = [ cellData.init(image: #imageLiteral(resourceName: "alerta_mensaje"), message: "Interrupción Programada del servicio: A partir del 01/01/1991 se realizarán trabajos en RECINTO POSORJA por trabajo programado. Agradecemos si compresion", title: "INTERRUPCIÓN PROGRAMADA DE SERVICIO", date: "29 Jun"),cellData.init(image: #imageLiteral(resourceName: "info_mensaje_2"), message: "INTERAGUA,informa que se ha generado en su contrato No.111 -222-3333333 por el valor de USD 15.26 correspondiente a JUNIO de 2018 con fecha de vencimiento 01/01/1991", title: "EMISIÓN DE FACTURA", date: "29 Jun")]
+        data = [ cellData.init(image: #imageLiteral(resourceName: "alerta_mensaje"), message: "Interrupción Programada del servicio: A partir del 01/01/1991 se realizarán trabajos en RECINTO POSORJA por trabajo programado. Agradecemos si compresion", title: "INTERRUPCIÓN PROGRAMADA DE SERVICIO", date: "29 Jun", service: ""),cellData.init(image: #imageLiteral(resourceName: "info_mensaje_2"), message: "INTERAGUA,informa que se ha generado en su contrato No.111 -222-3333333 por el valor de USD 15.26 correspondiente a JUNIO de 2018 con fecha de vencimiento 01/01/1991", title: "EMISIÓN DE FACTURA", date: "29 Jun", service: "")]
         
         self.tableView.register(CustomTableViewCell2.self, forCellReuseIdentifier: "customCell")
         self.tableView.rowHeight = UITableViewAutomaticDimension

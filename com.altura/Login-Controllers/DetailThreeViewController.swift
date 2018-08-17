@@ -9,9 +9,13 @@
 import UIKit
 import Highcharts
 import Charts
+import SQLite
 
 class DetailThreeViewController: UIViewController {
 
+    let dbase = DBase();
+    var db: Connection!
+    
     @IBOutlet weak var navigationBar: UINavigationItem!
     @IBOutlet weak var barView: BarChartView!
     
@@ -28,6 +32,15 @@ class DetailThreeViewController: UIViewController {
     let plotOptions = HIPlotOptions()*/
     
     var data = [BarChartDataEntry]()
+    var money:[Double] = []
+    var money_month:[String] = []
+    var consumo:[Double] = []
+    var consumo_month:[String] = []
+    
+    var colors:[UIColor] = []
+    var type = true
+    
+    let meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,10 +49,67 @@ class DetailThreeViewController: UIViewController {
         
         let titleView = String(describing: detailController.contrato)
         navigationBar.title = titleView
+        let detailAccountItem = detailController.detailtAccountItem
+        
+        
+        let status = dbase.connect_db()
+        if( status.value ){
+            print("entra a buscar detalles faturas")
+            
+            let bills_list = self.dbase.getBillsAccount(service: detailAccountItem.servicio)
+            
+            for item in bills_list{
+                print(item.consumo_kwh)
+                print(Double(item.consumo_kwh)!)
+                
+                money.append(Double(item.monto_factura)!)
+                money_month.append(getOnlyMonthString(date: item.fecha_emision,2))
+                
+                consumo.append(Double(item.consumo_kwh)!)
+                consumo_month.append(getOnlyMonthString(date: item.fecha_emision,2))
+                
+            }
+            
+        }
+        print(money)
+        print(consumo)
+        
+        colors.append(UIColor(red:103.00/255.00, green:58.00/255.00, blue:183.00/255.00, alpha: 1))
+        colors.append(UIColor(red:255.00/255.00, green:152.00/255.00, blue:0.00/255.00, alpha: 1))
+        colors.append(UIColor(red:63.00/255.00, green:81.00/255.00, blue:181.00/255.00, alpha: 1))
+        colors.append(UIColor(red:33.00/255.00, green:150.00/255.00, blue:243.00/255.00, alpha: 1))
+        colors.append(UIColor(red:255.00/255.00, green:193.00/255.00, blue:7.00/255.00, alpha: 1))
+        colors.append(UIColor(red:0.00/255.00, green:188.00/255.00, blue:212.00/255.00, alpha: 1))
+        colors.append(UIColor(red:205.00/255.00, green:220.00/255.00, blue:57.00/255.00, alpha: 1))
+        colors.append(UIColor(red:49.00/255.00, green:27.00/255.00, blue:146.00/255.00, alpha: 1))
+        colors.append(UIColor(red:230.00/255.00, green:81.00/255.00, blue:0.00/255.00, alpha: 1))       //#E65100
+        colors.append(UIColor(red:26.00/255.00, green:35.00/255.00, blue:126.00/255.00, alpha: 1))      //#1A237E
+        colors.append(UIColor(red:21.00/255.00, green:101.00/255.00, blue:192.00/255.00, alpha: 1))     //#1565C0
+        colors.append(UIColor(red:255.00/255.00, green:111.00/255.00, blue:0.00/255.00, alpha: 1))      //#FF6F00
+        colors.append(UIColor(red:230.00/255.00, green:81.00/255.00, blue:0.00/255.00, alpha: 1))       //#E65100
+        colors.append(UIColor(red:26.00/255.00, green:35.00/255.00, blue:126.00/255.00, alpha: 1))      //#1A237E
+        colors.append(UIColor(red:21.00/255.00, green:101.00/255.00, blue:192.00/255.00, alpha: 1))     //#1565C0
+        colors.append(UIColor(red:255.00/255.00, green:111.00/255.00, blue:0.00/255.00, alpha: 1))      //#FF6F00
+        colors.append(UIColor(red:230.00/255.00, green:81.00/255.00, blue:0.00/255.00, alpha: 1))       //#E65100
+        colors.append(UIColor(red:26.00/255.00, green:35.00/255.00, blue:126.00/255.00, alpha: 1))      //#1A237E
+        colors.append(UIColor(red:21.00/255.00, green:101.00/255.00, blue:192.00/255.00, alpha: 1))     //#1565C0
+        colors.append(UIColor(red:255.00/255.00, green:111.00/255.00, blue:0.00/255.00, alpha: 1))      //#FF6F00
         
         //barView.delegate = self
         barView.drawBarShadowEnabled = false
         barView.drawValueAboveBarEnabled = false
+        
+        
+        //        chartView.legend = l
+        
+        
+        
+       
+        updateChartData()
+        
+    }
+    
+    func updateChartData(){
         
         let xAxis = barView.xAxis
         xAxis.labelPosition = .bottom
@@ -48,11 +118,47 @@ class DetailThreeViewController: UIViewController {
         xAxis.labelCount = 7
         //xAxis.valueFormatter = DayAxisValueFormatter(chart: barView)
         
+        
+        let l = barView.legend
+        l.horizontalAlignment = .left
+        l.verticalAlignment = .bottom
+        l.orientation = .horizontal
+        l.drawInside = false
+        l.form = .circle
+        l.formSize = 9
+        l.font = UIFont(name: "HelveticaNeue-Light", size: 11)!
+        l.xEntrySpace = 4
+        
         let leftAxisFormatter = NumberFormatter()
-        leftAxisFormatter.minimumFractionDigits = 0
-        leftAxisFormatter.maximumFractionDigits = 1
-        leftAxisFormatter.negativeSuffix = " $"
-        leftAxisFormatter.positiveSuffix = " $"
+        
+        var i = 0
+        data = []
+        if type {
+            
+            leftAxisFormatter.minimumFractionDigits = 0
+            leftAxisFormatter.maximumFractionDigits = 1
+            leftAxisFormatter.positivePrefix = ""
+            leftAxisFormatter.negativePrefix = ""
+            
+            for item in consumo{
+                let label = consumo_month[i]
+                let detail = BarChartDataEntry(x: Double(i), y: item)
+                data.append(detail)
+                i+=1
+            }
+        }else{
+            
+            leftAxisFormatter.minimumFractionDigits = 0
+            leftAxisFormatter.maximumFractionDigits = 1
+            leftAxisFormatter.negativePrefix = "$ "
+            leftAxisFormatter.positivePrefix = "$ "
+            
+            for item in money{
+                let detail = BarChartDataEntry(x: Double(i), y: item)
+                data.append(detail)
+                i+=1
+            }
+        }
         
         let leftAxis = barView.leftAxis
         leftAxis.labelFont = .systemFont(ofSize: 10)
@@ -70,120 +176,10 @@ class DetailThreeViewController: UIViewController {
         rightAxis.spaceTop = 0.15
         rightAxis.axisMinimum = 0
         
-        let l = barView.legend
-        l.horizontalAlignment = .left
-        l.verticalAlignment = .bottom
-        l.orientation = .horizontal
-        l.drawInside = false
-        l.form = .circle
-        l.formSize = 9
-        l.font = UIFont(name: "HelveticaNeue-Light", size: 11)!
-        l.xEntrySpace = 4
-        //        chartView.legend = l
-        
-        for i in [1,2,3,4]{
-            let val = i*20
-            let detail = BarChartDataEntry(x: Double(i), y: Double(val))
-            data.append(detail)
-            
-        }
-        
-       
-        updateChartData()
-        
-        
-        //let bound = CGRect(x: self.view.bounds.minX, y: self.view.bounds.minY, width: self.view.bounds.width, height: self.view.bounds.height-100)
-        
-        //dataView.isHidden = true
-        //print(bound)
-        
-        /*
-        //###### CONSUMO EN METRO CUBICOS
-        self.chartView = HIChartView(frame: bound)
-        
-        chart.type = "column"
-        options.chart = chart
-        title_c.text = "Consumo m3"
-        
-        //let subtitle = HISubtitle()
-        //subtitle.text = "Team statistics"
-        options.title = title_c
-        //options.subtitle = subtitle
-        
-        
-        credits.enabled = false
-        
-        
-        exporting.enabled = true
-        
-        //-----
-        
-        xAxis.categories = ["Enero","Febrero","Marzo","Abril"]
-        options.xAxis = [xAxis]
-        
-        
-        yAxis.min = 0
-        yAxis.title = HITitle()
-        yAxis.title.text = "m3"
-        options.yAxis = [yAxis]
-        
-        
-        tooltip.headerFormat = "<span style=\"0font-size: 15px\";\">{point.key}</span>"
-        tooltip.pointFormat = "" + ""
-        tooltip.footerFormat = "<table><tbody><tr><td style=\"0color: {series.color}; padding: 0\";\">{series.name}:</td><td style=\"0padding: 0\";\"><b>{point.y}</b></td></tr></tbody></table>"
-        tooltip.shared = true
-        tooltip.useHTML = true
-        options.tooltip = tooltip
-        
-        //--
-        
-        plotOptions.column = HIColumn()
-        plotOptions.column.pointPadding = 0.2
-        plotOptions.column.borderWidth = 0
-        options.plotOptions = plotOptions
-        options.credits = credits
-        options.exporting = exporting
-        
-        options.plotOptions = plotOptions
-        
-        //--
-        
-        meses.name = "Consumo"
-        meses.data = [36,22,50,15]
-        meses.dataLabels = HIDataLabels()
-        meses.dataLabels.enabled = true
-        meses.dataLabels.rotation = -90;
-        meses.dataLabels.color = HIColor(hexValue: "FFFFFF")
-        meses.dataLabels.align = "right";
-        meses.dataLabels.format = "{point.y}";
-        meses.dataLabels.y = 10;
-        meses.dataLabels.style = HIStyle()
-        meses.dataLabels.style.fontSize = "11px";
-        meses.dataLabels.style.fontFamily = "Verdana, sans-serif";
-        
-        
-        
-        options.series = [meses]
-        
-        //--
-        
-        self.chartView.options = options
-        //self.dataView = self.chartView
-        self.chartView.tag = 1111
-        
-        self.view.addSubview(self.chartView)
-
-        */
-        
-    }
-    
-    func updateChartData(){
         let dataSet = BarChartDataSet(values: self.data, label: nil)
         let charData = BarChartData(dataSet: dataSet)
         
-        //let colors = [HIColor(radialGradient: ["cx": 0.5, "cy": 0.3, "r": 0.7], stops: [[0, "#7cb5ec"], [1, "rgb(48,105,160)"]]), HIColor(radialGradient: ["cx": 0.5, "cy": 0.3, "r": 0.7], stops: [[0, "#434348"], [1, "rgb(0,0,0)"]]), HIColor(radialGradient: ["cx": 0.5, "cy": 0.3, "r": 0.7], stops: [[0, "#90ed7d"], [1, "rgb(68,161,49)"]]), HIColor(radialGradient: ["cx": 0.5, "cy": 0.3, "r": 0.7], stops: [[0, "#f7a35c"], [1, "rgb(171,87,16)"]])]
-        
-        //dataSet.colors = colors as! [NSUIColor]
+        dataSet.colors = colors
         
         barView.data = charData
         //barView.centerText = "prueba data"
@@ -197,52 +193,14 @@ class DetailThreeViewController: UIViewController {
 
     @IBAction func changeView(_ sender: UISegmentedControl) {
         print(sender.selectedSegmentIndex)
-        if sender.selectedSegmentIndex == 1{
-            if let viewWithTag = self.view.viewWithTag(1111) {
-                print("1111")
-                viewWithTag.removeFromSuperview()
-                
-                //title_c.text = "Consumo Dólares"
-                //let subtitle = HISubtitle()
-                //subtitle.text = "Team statistics"
-                //options.title = title_c
-                //options.subtitle = subtitle
-                //yAxis.min = 0
-                //yAxis.title = HITitle()
-                //yAxis.title.text = "$ Dólares"
-                //options.yAxis = [yAxis]
-                //meses.data = [12,22,13,55]
-                //options.series = [meses]
-                //self.chartView.options = options
-                //self.view.addSubview(self.chartView)
-            }
-            else {
-                //self.view.addSubview(self.chartView)
-            }
-            
+        if(sender.selectedSegmentIndex == 0){
+            self.type = true
+            updateChartData()
         }else{
-            if let viewWithTag = self.view.viewWithTag(1111) {
-                print("1111")
-                //viewWithTag.removeFromSuperview()
-                
-                //title_c.text = "Consumo m3"
-                //let subtitle = HISubtitle()
-                //subtitle.text = "Team statistics"
-                //options.title = title_c
-                //options.subtitle = subtitle
-                //yAxis.min = 0
-                //yAxis.title = HITitle()
-                //yAxis.title.text = "m3"
-                //options.yAxis = [yAxis]
-                //meses.data = [36,22,50,15]
-                //options.series = [meses]
-                //self.chartView.options = options
-                //self.view.addSubview(self.chartView)
-            }
-            else {
-                //self.view.addSubview(self.chartView)
-            }
+            self.type = false
+            updateChartData()
         }
+        
     }
     
 }

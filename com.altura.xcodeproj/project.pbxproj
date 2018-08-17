@@ -429,6 +429,7 @@
 				2201C07920EAB127003BF608 /* DetailThreeViewController.swift */,
 				2201C07B20EAB137003BF608 /* DetailFourViewController.swift */,
 				22112FB620ED596600689974 /* StatusProcessViewController.swift */,
+				2201C08120EADA09003BF608 /* DetailsTabBarViewController.swift */,
 			);
 			path = "Login-Controllers";
 			sourceTree = "<group>";
@@ -530,7 +531,6 @@
 				22441A0620D80DF5008D90C4 /* PageUrlViewController.swift */,
 				2201C04820E3D6A9003BF608 /* TechRequestViewController.swift */,
 				2201C04A20E52213003BF608 /* BillRequestViewController.swift */,
-				2201C08120EADA09003BF608 /* DetailsTabBarViewController.swift */,
 				229D62D220F4F55500B0DE7C /* CustomMap2ViewController.swift */,
 				22D5623E20F6A1F50098526C /* ContactViewController.swift */,
 			);

@@ -39,13 +39,6 @@ class DBase {
     let longitude_agenciesT = Expression<Double>("longitud")
     let date_sync_agenciesT = Expression<String>("date_sync")
     
-    //tabla cuentas----------------------------------------------
-    let accountsT = Table("cuentas")
-    let service_accountsT = Expression<String>("servicio")
-    let alias_accountsT = Expression<String>("nombre")
-    let document_accountsT = Expression<String>("documento")
-    let date_sync_accountsT = Expression<String>("date_sync")
-    
     //tabla notificaciones----------------------------------------------
     let notificationsT = Table("notificaciones")
     let contract_notificationsT = Expression<String>("contrato")
@@ -55,6 +48,80 @@ class DBase {
     let date_gen_notificationsT = Expression<String>("fecha_generacion")
     let date_sync_notificationsT = Expression<String>("date_sync")
     
+    //tabla cuentas----------------------------------------------
+    let accountsT = Table("cuentas")
+    let service_accountsT = Expression<String>("servicio")
+    let alias_accountsT = Expression<String>("nombre")
+    let document_accountsT = Expression<String>("documento")
+    let date_sync_accountsT = Expression<String>("date_sync")
+    
+    
+    //tabla detalle de cuentas----------------------------------------------
+    let detailsAccountT = Table("cuenta_detalle")
+    let facturas_vencidas_detailsAccountT = Expression<String>("facturas_vencidas")
+    let deuda_diferida_detailsAccountT = Expression<String>("deuda_diferida")
+    let max_fecha_pago_detailsAccountT = Expression<String>("max_fecha_pago")
+    let tipo_medidor_detailsAccountT = Expression<String>("tipo_medidor")
+    let serie_medidor_detailsAccountT = Expression<String>("serie_medidor")
+    let consumo_detailsAccountT = Expression<String>("consumo")
+    let estado_corte_detailsAccountT = Expression<String>("estado_corte")
+    let contrato_detailsAccountT = Expression<String>("contrato")
+    let cliente_detailsAccountT = Expression<String>("cliente")
+    let uso_servicio_detailsAccountT = Expression<String>("uso_servicio")
+    let direccion_detailsAccountT = Expression<String>("direccion")
+    let ci_ruc_detailsAccountT = Expression<String>("ci_ruc")
+    let id_direccion_detailsAccountT = Expression<String>("id_direccion")
+    let id_direccion_contrato_detailsAccountT = Expression<String>("id_direccion_contrato")
+    let id_producto_detailsAccountT = Expression<String>("id_producto")
+    let id_cliente_detailsAccountT = Expression<String>("id_cliente")
+    let deuda_pendiente_detailsAccountT = Expression<String>("deuda_pendiente")
+    let servicio_detailsAccountT = Expression<String>("servicio")
+    let alias_servicio_detailsAccountT = Expression<String>("alias")
+    
+    
+    // Tabla facturas de contrato --------------------------------------
+    let billsAccountT = Table("facturas")
+    let cod_factura_billsAccountT = Expression<String>("cod_factura")
+    let fecha_emision_billsAccountT = Expression<String>("fecha_emision")
+    let fecha_vencimiento_billsAccountT = Expression<String>("fecha_vencimiento")
+    let monto_factura_billsAccountT = Expression<String>("monto_factura")
+    let saldo_factura_billsAccountT = Expression<String>("saldo_factura")
+    let estado_factura_billsAccountT = Expression<String>("estado_factura")
+    let consumo_kwh_billsAccountT = Expression<String>("consumo_kwh")
+    let lectura_actual_billsAccountT = Expression<String>("lectura_actual")
+    let servicio_billsAccountT = Expression<String>("servicio")
+    
+    // Tabla detalle de deudas --------------------------------------
+    let detailDebsT = Table("deudas")
+    let nombre_detailDebsT = Expression<String>("nombre")
+    let descripcion_detailDebsT = Expression<String>("descripcion")
+    let valor_detailDebsT = Expression<String>("valor")
+    let servicio_detailDebsT = Expression<String>("servicio")
+    
+    // Tabla detalle de tramites --------------------------------------
+    let detailProcedureT = Table("tramites")
+    let codigo_detailProcedureT = Expression<String>("codigo")
+    let descripcion_detailProcedureT = Expression<String>("descripcion")
+    let fecha_inicio_detailProcedureT = Expression<String>("fecha_inicio")
+    let fecha_fin_detailProcedureT = Expression<String>("fecha_fin")
+    let estado_detailProcedureT = Expression<String>("estado")
+    let json_detailProcedureT = Expression<String>("json")
+    let descripcion2_detailProcedureT = Expression<String>("descripcion2")
+    let descripcion3_detailProcedureT = Expression<String>("descripcion3")
+    let servicio_detailProcedureT = Expression<String>("servicio")
+
+    // Tabla detalle de pagos --------------------------------------
+    let detailPaymentT = Table("pagos")
+    let meses_detailPaymentT = Expression<String>("meses")
+    let monto_pago_detailPaymentT = Expression<String>("monto_pago")
+    let codigo_pago_detailPaymentT = Expression<String>("codigo_pago")
+    let tipo_recaudacion_detailPaymentT = Expression<String>("tipo_recaudacion")
+    let fecha_pago_detailPaymentT = Expression<String>("fecha_pago")
+    let estado_pago_detailPaymentT = Expression<String>("estado_pago")
+    let numero_servicio_detailPaymentT = Expression<String>("numero_servicio")
+    let terminal_detailPaymentT = Expression<String>("terminal")
+    let sync_date_detailPaymentT = Expression<String>("sync_date")
+    let servicio_detailPaymentT = Expression<String>("servicio")
     
     
     
@@ -154,6 +221,30 @@ class DBase {
             print(error)
         }
         
+        let createTableNotifications = self.notificationsT.create { (table) in
+            table.column(self.contract_notificationsT)
+            table.column(self.type_notificationsT)
+            table.column(self.document_code_notificationsT)
+            table.column(self.message_notificationsT)
+            table.column(self.date_gen_notificationsT)
+            table.column(self.date_sync_notificationsT)
+        }
+        
+        do{
+            try self.db.run(createTableNotifications)
+            print("Tabla notificaciones creada")
+        }catch let Result.error(message, code, statement){
+            if( code == 1){
+                print("tabla notificaciones ya existe")
+            }else{
+                ok = false
+                print(" * constraint failed: \(message), in \(String(describing: statement)) , code \(code)")
+            }
+        }catch{
+            ok = false
+            print(error)
+        }
+        
         let createTableAccounts = self.accountsT.create { (table) in
             table.column(self.service_accountsT)
             table.column(self.alias_accountsT)
@@ -176,21 +267,148 @@ class DBase {
             print(error)
         }
         
-        let createTableNotifications = self.notificationsT.create { (table) in
-            table.column(self.contract_notificationsT)
-            table.column(self.type_notificationsT)
-            table.column(self.document_code_notificationsT)
-            table.column(self.message_notificationsT)
-            table.column(self.date_gen_notificationsT)
-            table.column(self.date_sync_notificationsT)
+        
+        let createTableDetailAccount = self.detailsAccountT.create { (table) in
+            table.column(self.facturas_vencidas_detailsAccountT)
+            table.column(self.deuda_diferida_detailsAccountT)
+            table.column(self.max_fecha_pago_detailsAccountT)
+            table.column(self.tipo_medidor_detailsAccountT)
+            table.column(self.serie_medidor_detailsAccountT)
+            table.column(self.consumo_detailsAccountT)
+            table.column(self.estado_corte_detailsAccountT)
+            table.column(self.contrato_detailsAccountT)
+            table.column(self.cliente_detailsAccountT)
+            table.column(self.uso_servicio_detailsAccountT)
+            table.column(self.direccion_detailsAccountT)
+            table.column(self.ci_ruc_detailsAccountT)
+            table.column(self.id_direccion_detailsAccountT)
+            table.column(self.id_direccion_contrato_detailsAccountT)
+            table.column(self.id_producto_detailsAccountT)
+            table.column(self.id_cliente_detailsAccountT)
+            table.column(self.deuda_pendiente_detailsAccountT)
+            table.column(self.servicio_detailsAccountT)
+            table.column(self.alias_servicio_detailsAccountT)
+            
         }
         
         do{
-            try self.db.run(createTableNotifications)
-            print("Tabla notificaciones creada")
+            try self.db.run(createTableDetailAccount)
+            print("Tabla detalle cuentas creada")
         }catch let Result.error(message, code, statement){
             if( code == 1){
-                print("tabla notificaciones ya existe")
+                print("tabla detalle cuentas ya existe")
+            }else{
+                ok = false
+                print(" * constraint failed: \(message), in \(String(describing: statement)) , code \(code)")
+            }
+        }catch{
+            ok = false
+            print(error)
+        }
+        
+        
+        
+        // Tabla facturas de contrato --------------------------------------
+        let createTablebillsAccountT = self.billsAccountT.create { (table) in
+            table.column(self.cod_factura_billsAccountT)
+            table.column(self.fecha_emision_billsAccountT)
+            table.column(self.fecha_vencimiento_billsAccountT)
+            table.column(self.monto_factura_billsAccountT)
+            table.column(self.saldo_factura_billsAccountT)
+            table.column(self.estado_factura_billsAccountT)
+            table.column(self.consumo_kwh_billsAccountT)
+            table.column(self.lectura_actual_billsAccountT)
+            table.column(self.servicio_billsAccountT)
+        }
+        
+        do{
+            try self.db.run(createTablebillsAccountT)
+            print("Tabla facturas creada")
+        }catch let Result.error(message, code, statement){
+            if( code == 1){
+                print("tabla facturas ya existe")
+            }else{
+                ok = false
+                print(" * constraint failed: \(message), in \(String(describing: statement)) , code \(code)")
+            }
+        }catch{
+            ok = false
+            print(error)
+        }
+        
+        // Tabla detalle de deudas --------------------------------------
+        let createTabledetailDebsT = self.detailDebsT.create { (table) in
+            table.column(self.nombre_detailDebsT)
+            table.column(self.descripcion_detailDebsT)
+            table.column(self.valor_detailDebsT)
+            table.column(self.servicio_detailDebsT)
+        }
+        
+        do{
+            try self.db.run(createTabledetailDebsT)
+            print("Tabla deudas creada")
+        }catch let Result.error(message, code, statement){
+            if( code == 1){
+                print("tabla deudas ya existe")
+            }else{
+                ok = false
+                print(" * constraint failed: \(message), in \(String(describing: statement)) , code \(code)")
+            }
+        }catch{
+            ok = false
+            print(error)
+        }
+        
+        
+        // Tabla detalle de tramites --------------------------------------
+        let createTabledetailProcedureT = self.detailProcedureT.create { (table) in
+            table.column(self.codigo_detailProcedureT)
+            table.column(self.descripcion_detailProcedureT)
+            table.column(self.fecha_inicio_detailProcedureT)
+            table.column(self.fecha_fin_detailProcedureT)
+            table.column(self.estado_detailProcedureT)
+            table.column(self.json_detailProcedureT)
+            table.column(self.descripcion2_detailProcedureT)
+            table.column(self.descripcion3_detailProcedureT)
+            table.column(self.servicio_detailProcedureT)
+        }
+        
+        do{
+            try self.db.run(createTabledetailProcedureT)
+            print("Tabla tramites creada")
+        }catch let Result.error(message, code, statement){
+            if( code == 1){
+                print("tabla tramites ya existe")
+            }else{
+                ok = false
+                print(" * constraint failed: \(message), in \(String(describing: statement)) , code \(code)")
+            }
+        }catch{
+            ok = false
+            print(error)
+        }
+        
+        
+        // Tabla detalle de pagos --------------------------------------
+        let createTabledetailPaymentT = self.detailPaymentT.create { (table) in
+            table.column(self.meses_detailPaymentT)
+            table.column(self.monto_pago_detailPaymentT)
+            table.column(self.codigo_pago_detailPaymentT)
+            table.column(self.tipo_recaudacion_detailPaymentT)
+            table.column(self.fecha_pago_detailPaymentT)
+            table.column(self.estado_pago_detailPaymentT)
+            table.column(self.numero_servicio_detailPaymentT)
+            table.column(self.terminal_detailPaymentT)
+            table.column(self.sync_date_detailPaymentT)
+            table.column(self.servicio_detailPaymentT)
+        }
+        
+        do{
+            try self.db.run(createTabledetailPaymentT)
+            print("Tabla pagos creada")
+        }catch let Result.error(message, code, statement){
+            if( code == 1){
+                print("tabla pagos ya existe")
             }else{
                 ok = false
                 print(" * constraint failed: \(message), in \(String(describing: statement)) , code \(code)")
@@ -321,6 +539,24 @@ class DBase {
         }
     }
     
+    //inserta las notificaciones obtenidas del ws
+    func insertNotifications(notificationsList:[notification]){
+        print("entra insert notifications")
+        
+        for notificationItem in notificationsList{
+            
+            let insertNotification = notificationsT.insert(self.contract_notificationsT <- notificationItem.contract,self.type_notificationsT <- notificationItem.type, self.document_code_notificationsT <- notificationItem.document_code, self.message_notificationsT <- notificationItem.message, self.date_gen_notificationsT <- notificationItem.date_gen, self.date_sync_notificationsT <- notificationItem.date_sync)
+            do{
+                try self.db.run(insertNotification)
+                print("Se ingreso la notiificacion \(notificationItem.message) correctamente")
+            }catch let Result.error(message, code, statement){
+                print("mensaje: \(message), codigo: \(code), statment: \(String(describing: statement)) ")
+            }catch {
+                print(error)
+            }
+        }
+    }
+    
     //inserta las cuentas obtenidas del ws
     func insertAccounts(accounts:[account]){
         print("entra insert acoount")
@@ -339,16 +575,112 @@ class DBase {
         }
     }
     
-    //inserta las notificaciones obtenidas del ws
-    func insertNotifications(notificationsList:[notification]){
-        print("entra insert notifications")
+    //inserta los detalles de cuentas obtenidas del ws
+    func insertDetailsAccounts(list: [detailAccount]){
+        print("entra insert  detailsacoount")
         
-        for notificationItem in notificationsList{
+        for item in list{
             
-            let insertNotification = notificationsT.insert(self.contract_notificationsT <- notificationItem.contract,self.type_notificationsT <- notificationItem.type, self.document_code_notificationsT <- notificationItem.document_code, self.message_notificationsT <- notificationItem.message, self.date_gen_notificationsT <- notificationItem.date_gen, self.date_sync_notificationsT <- notificationItem.date_sync)
+            let insertItem = detailsAccountT.insert(self.facturas_vencidas_detailsAccountT <- item.facturas_vencidas,self.deuda_diferida_detailsAccountT <- item.deuda_diferida, self.max_fecha_pago_detailsAccountT <- item.max_fecha_pago, self.tipo_medidor_detailsAccountT <- item.tipo_medidor
+            , self.serie_medidor_detailsAccountT <- item.serie_medidor
+            , self.consumo_detailsAccountT <- item.consumo
+            , self.estado_corte_detailsAccountT <- item.estado_corte
+            , self.contrato_detailsAccountT <- item.contrato
+            , self.cliente_detailsAccountT <- item.cliente
+            , self.uso_servicio_detailsAccountT <- item.uso_servicio
+            , self.direccion_detailsAccountT <- item.direccion
+            , self.ci_ruc_detailsAccountT <- item.ci_ruc
+            , self.id_direccion_detailsAccountT <- item.id_direccion
+            , self.id_direccion_contrato_detailsAccountT <- item.id_direccion_contrato
+            , self.id_producto_detailsAccountT <- item.id_producto
+            , self.id_cliente_detailsAccountT <- item.id_cliente
+            , self.deuda_pendiente_detailsAccountT <- item.deuda_pendiente
+            , self.servicio_detailsAccountT <- item.servicio
+            , self.alias_servicio_detailsAccountT <- item.alias)
             do{
-                try self.db.run(insertNotification)
-                print("Se ingreso la notiificacion \(notificationItem.message) correctamente")
+                try self.db.run(insertItem)
+                print("Se ingreso el detalle de cuenta \(item.facturas_vencidas) correctamente")
+            }catch let Result.error(message, code, statement){
+                print("mensaje: \(message), codigo: \(code), statment: \(String(describing: statement)) ")
+            }catch {
+                print(error)
+            }
+        }
+    }
+    
+    
+    
+    //inserta las facturas obtenidas del ws
+    func insertBillsAccount(list: [billsAccount]){
+        print("entra insert billsAccount")
+        
+        for item in list{
+            //print(placeItem)
+            
+            let insert_item = billsAccountT.insert(self.cod_factura_billsAccountT <- item.codigo_factura,self.fecha_emision_billsAccountT <- item.fecha_emision, self.fecha_vencimiento_billsAccountT <- item.fecha_vencimiento, self.monto_factura_billsAccountT <- item.monto_factura, self.saldo_factura_billsAccountT <- item.saldo_factura, self.estado_factura_billsAccountT <- item.estado_factura , self.consumo_kwh_billsAccountT <- item.consumo_kwh , self.lectura_actual_billsAccountT <- item.lectura_actual , self.servicio_billsAccountT <- item.servicio)
+            do{
+                try self.db.run(insert_item)
+                print("Se ingreso la deuda \(item.codigo_factura) correctamente")
+            }catch let Result.error(message, code, statement){
+                print("mensaje: \(message), codigo: \(code), statment: \(String(describing: statement)) ")
+            }catch {
+                print(error)
+            }
+        }
+    }
+    
+    
+    //inserta las deudas obtenidas del ws
+    func insertDebs(list: [detailDebs]){
+        print("entra insert detailDebs")
+        
+        for item in list{
+            //print(placeItem)
+            
+            let insert_item = detailDebsT.insert(self.nombre_detailDebsT <- item.nombre,self.descripcion_detailDebsT <- item.descripcion, self.valor_detailDebsT <- item.valor, self.servicio_detailDebsT <- item.servicio)
+            do{
+                try self.db.run(insert_item)
+                print("Se ingreso la deuda \(item.nombre) correctamente")
+            }catch let Result.error(message, code, statement){
+                print("mensaje: \(message), codigo: \(code), statment: \(String(describing: statement)) ")
+            }catch {
+                print(error)
+            }
+        }
+    }
+    
+    
+    //inserta los tramites obtenidos del ws
+    func insertDetailProcedure(list: [detailProcedure]){
+        print("entra insert detailProcedure")
+        
+        for item in list{
+            //print(placeItem)
+            
+            let insert_item = detailProcedureT.insert(self.codigo_detailProcedureT <- item.codigo,self.descripcion_detailProcedureT <- item.descripcion, self.fecha_inicio_detailProcedureT <- item.fecha_inicio, self.fecha_fin_detailProcedureT <- item.fecha_fin, self.estado_detailProcedureT <- item.estado, self.json_detailProcedureT <- item.json , self.descripcion2_detailProcedureT <- item.descripcion2 , self.descripcion3_detailProcedureT <- item.descripcion3 , self.servicio_billsAccountT <- item.servicio)
+            do{
+                try self.db.run(insert_item)
+                print("Se ingreso el tramite \(item.codigo) correctamente")
+            }catch let Result.error(message, code, statement){
+                print("mensaje: \(message), codigo: \(code), statment: \(String(describing: statement)) ")
+            }catch {
+                print(error)
+            }
+        }
+    }
+    
+    
+    //inserta los pagos obtenidas del ws
+    func insertDetailPaymentT(list: [detailPayment]){
+        print("entra insert detailPayment")
+        
+        for item in list{
+            //print(placeItem)
+            
+            let insert_item = detailPaymentT.insert(self.meses_detailPaymentT <- item.meses,self.monto_pago_detailPaymentT <- item.monto_pago, self.codigo_pago_detailPaymentT <- item.codigo_pago, self.tipo_recaudacion_detailPaymentT <- item.tipo_recaudacion, self.fecha_pago_detailPaymentT <- item.fecha_pago, self.estado_pago_detailPaymentT <- item.estado_pago , self.numero_servicio_detailPaymentT <- item.numero_servicio , self.terminal_detailPaymentT <- item.terminal , self.sync_date_detailPaymentT <- item.sync_date, self.servicio_billsAccountT <- item.servicio)
+            do{
+                try self.db.run(insert_item)
+                print("Se ingreso el pago \(item.codigo_pago) correctamente")
             }catch let Result.error(message, code, statement){
                 print("mensaje: \(message), codigo: \(code), statment: \(String(describing: statement)) ")
             }catch {
@@ -371,5 +703,123 @@ class DBase {
         }
         return places
     }
+    
+    //imprime todos los usuarios registrados
+    func getAccounts() -> [account]{
+        print("get de account")
+        var List:[account] = []
+        do{
+            
+            for item in try db.prepare(accountsT) {
+                List.append( account.init(service: item[service_accountsT]
+                    , alias: item[alias_accountsT]
+                    , document: item[document_accountsT]
+                    , date_sync: item[date_sync_accountsT]))
+            }
+        }catch{
+            print("error get account")
+            print(error)
+        }
+        return List
+    }
+    
+    //obtiene todos los detalles de cuentas registrados en la DB
+    func getAllDetailsAccounts()-> [detailAccount]{
+        print("get detalle agencias")
+        
+        var List:[detailAccount] = []
+        
+        do{
+            
+            for item in try db.prepare(detailsAccountT) {
+                
+                    List.append( detailAccount.init(facturas_vencidas: item[facturas_vencidas_detailsAccountT]
+                        , deuda_diferida: item[deuda_diferida_detailsAccountT]
+                        , max_fecha_pago: item[max_fecha_pago_detailsAccountT]
+                        , tipo_medidor: item[tipo_medidor_detailsAccountT]
+                        , serie_medidor: item[serie_medidor_detailsAccountT]
+                        , consumo: item[consumo_detailsAccountT]
+                        , estado_corte: item[estado_corte_detailsAccountT]
+                        , contrato: item[contrato_detailsAccountT]
+                        , cliente: item[cliente_detailsAccountT]
+                        , uso_servicio: item[uso_servicio_detailsAccountT]
+                        , direccion: item[direccion_detailsAccountT]
+                        , ci_ruc: item[ci_ruc_detailsAccountT]
+                        , id_direccion: item[id_direccion_detailsAccountT]
+                        , id_direccion_contrato: item[id_direccion_contrato_detailsAccountT]
+                        , id_producto: item[id_producto_detailsAccountT]
+                        , id_cliente: item[id_cliente_detailsAccountT]
+                        , deuda_pendiente: item[deuda_pendiente_detailsAccountT]
+                        , servicio: item[servicio_detailsAccountT]
+                        , alias: item[alias_servicio_detailsAccountT]))
+                
+            }
+        }catch{
+            print("error get detail agencies")
+            print(error)
+        }
+        return List
+    }
+    
+    //devuelve los detalles de deudas de un contrato en especifico
+    func getDetailDebs(service: String) -> [detailDebs]{
+        print("get detalle deudas")
+        
+        var List:[detailDebs] = []
+        
+        do{
+            for item in try db.prepare(detailDebsT) {
+                if( item[servicio_detailDebsT] == service){
+                    List.append(detailDebs.init(nombre: item[nombre_detailDebsT], descripcion: item[descripcion_detailDebsT], valor: item[valor_detailDebsT], servicio: item[servicio_detailDebsT]))
+                }
+                
+            }
+            
+        }catch{
+            print("error get detail debs")
+            print(error)
+        }
+        
+        return List
+    }
+    
+    func getBillsAccount(service: String)-> [billsAccount]{
+        print("entra get billsAccount")
+        
+        var List:[billsAccount] = []
+        
+        do{
+            for item in try db.prepare(billsAccountT) {
+                if( item[servicio_billsAccountT] == service){
+                    List.append(billsAccount.init(codigo_factura: item[cod_factura_billsAccountT], fecha_emision: item[fecha_emision_billsAccountT], fecha_vencimiento: item[fecha_vencimiento_billsAccountT], monto_factura: item[monto_factura_billsAccountT], saldo_factura: item[saldo_factura_billsAccountT], estado_factura: item[estado_factura_billsAccountT], consumo_kwh: item[consumo_kwh_billsAccountT], lectura_actual: item[lectura_actual_billsAccountT], servicio: item[servicio_billsAccountT]))
+                }
+            }
+            
+        }catch{
+            print("error get billsAccount")
+            print(error)
+        }
+        return List
+    }
+    
+    func getDetailPaymentT(service: String)-> [detailPayment]{
+        print("entra get detailPayment")
+        var List:[detailPayment] = []
+        
+        do{
+            for item in try db.prepare(detailPaymentT) {
+                if( item[servicio_detailPaymentT] == service){
+                    List.append(detailPayment.init(meses: item[meses_detailPaymentT], monto_pago: item[monto_pago_detailPaymentT], codigo_pago: item[codigo_pago_detailPaymentT], tipo_recaudacion: item[tipo_recaudacion_detailPaymentT], fecha_pago: item[fecha_pago_detailPaymentT], estado_pago: item[estado_pago_detailPaymentT], numero_servicio: item[numero_servicio_detailPaymentT], terminal: item[terminal_detailPaymentT], sync_date: item[sync_date_detailPaymentT], servicio: item[servicio_billsAccountT]))
+                }
+            }
+            
+        }catch{
+            print("error get detailPayment")
+            print(error)
+        }
+        return List
+           
+    }
+    
     
 }

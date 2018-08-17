@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import SQLite
 
 class BarThreeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     weak var activeField: UITextField?
-    
+    let dbase = DBase();
+    var db: Connection!
     
     @IBOutlet weak var leftConstrain: NSLayoutConstraint!
     @IBOutlet weak var blurView: UIVisualEffectView!
@@ -26,6 +28,7 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var tableView: UITableView!
     
     var data = [cellData]()
+    var accounts_list = [detailAccount]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,11 +46,18 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
         leftView.layer.shadowOffset = CGSize(width: 5, height: 0)
         
         leftConstrain.constant = -80
-        
-        //self.hiddenMenu()
-        
+        let status = dbase.connect_db()
+        if( status.value ){
+            print("entra a buscar detalles de cuenta")
+            accounts_list = self.dbase.getAllDetailsAccounts()
+            
+            for item in accounts_list{
+                print(item)
+                data.append(cellData.init(image: #imageLiteral(resourceName: "contrato-1"), message: "\(item.servicio) - \(item.direccion)", title: item.alias, date: "", service: item.servicio))
+            }
+        }
         //Tabla
-        data = [ cellData.init(image: #imageLiteral(resourceName: "contrato-1"), message: "tramite numero 23 detallado asd asd asd asd asd asd asd a ramite numero 23 detallado asd asd asd asd asd asd asd a", title: "Contrato 1", date: ""),cellData.init(image: #imageLiteral(resourceName: "contrato-1"), message: "tramite numero 2ramite numero 23 detallado asd asd asd asd asd asd asd a ramite numero 23 detallado asd asd asd asd asd asd asd a ramite numero 23 detallado asd asd asd asd asd asd asd a2 detallado", title: "Contrato 2", date: "")]
+        
         
         self.tableView.register(CustomTableViewCell2.self, forCellReuseIdentifier: "customCell")
         self.tableView.rowHeight = UITableViewAutomaticDimension
@@ -154,6 +164,7 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.mainImage.image = data[indexPath.row].image
         cell.mainTitle.text = data[indexPath.row].title
         cell.mainMessage.text = data[indexPath.row].message
+        cell.mainDate.text = data[indexPath.row].date
         return cell
     }
     
@@ -166,6 +177,7 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
         
         let tabBarViewController = self.storyboard?.instantiateViewController(withIdentifier: "detaillsTabBarController") as! DetailsTabBarViewController
         tabBarViewController.contrato = data[indexPath.row].title!
+        tabBarViewController.detailtAccountItem = accounts_list[indexPath.row]
         self.present(tabBarViewController, animated: true)
         
         

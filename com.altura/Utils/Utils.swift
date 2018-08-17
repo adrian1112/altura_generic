@@ -104,3 +104,46 @@ extension URLSession {
         return (data, response, error)
     }
 }
+
+func getMonthString(date: String, _ type: Int) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.locale = Locale(identifier: "es_EC")
+    dateFormatter.dateFormat = "LLLL yyyy"
+    return dateFormatter.string(from: getFormatedDate(date: date, type)).uppercased()
+}
+
+func getOnlyMonthString(date: String, _ type: Int) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.locale = Locale(identifier: "es_EC")
+    dateFormatter.dateFormat = "LLLL"
+    return dateFormatter.string(from: getFormatedDate(date: date, type)).uppercased()
+}
+
+ func getLabelDate(date: String, _ type: Int) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.locale = Locale(identifier: "es_EC")
+    dateFormatter.dateFormat = "dd/MM/yyyy"
+    return dateFormatter.string(from: getFormatedDate(date: date, type)).uppercased()
+}
+
+ func getFormatedDate(date: String, _ type: Int) -> Date {
+    let dateFormatter = DateFormatter()
+    var date = date
+    if(type == 1){
+        dateFormatter.dateFormat = "ddMMyyyy-HH:mm:ss"
+    }
+    if(type == 2){
+        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
+    }
+    if(type == 3){
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        date = date.substring(with: 0..<18)
+    }
+    if(type == 4){
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    }
+    
+    
+    dateFormatter.locale = Locale(identifier: "es_EC")
+    return dateFormatter.date(from: date)!
+}

@@ -9,11 +9,16 @@
 import UIKit
 import Highcharts
 import Charts
+import SQLite
 
 
 
 class DetailOneViewController: UIViewController {
 
+    let dbase = DBase();
+    var db: Connection!
+    
+    
     @IBOutlet weak var dataView: UIView!
     @IBOutlet weak var container: UIView!
     @IBOutlet weak var navigationBar: UINavigationItem!
@@ -33,6 +38,31 @@ class DetailOneViewController: UIViewController {
     //var data2 = PieChartDataEntry(value: 0)
     var data = [PieChartDataEntry]()
     
+    //datos de pestaña DETALLES
+    @IBOutlet weak var cliente: UILabel!
+    @IBOutlet weak var uso_comercial: UILabel!
+    @IBOutlet weak var ci_ruc: UILabel!
+    @IBOutlet weak var direccion: UITextView!
+    
+    @IBOutlet weak var facturas_vencidas: UILabel!
+    @IBOutlet weak var max_fecha_pago: UILabel!
+    @IBOutlet weak var deuda_diferido: UILabel!
+    
+    @IBOutlet weak var tipo_medidor: UILabel!
+    @IBOutlet weak var serie_medidor: UILabel!
+    @IBOutlet weak var ultimo_consumo: UILabel!
+    
+    
+    @IBOutlet weak var cem_label: UILabel!
+    @IBOutlet weak var iva_label: UILabel!
+    @IBOutlet weak var interes_label: UILabel!
+    @IBOutlet weak var interagua_label: UILabel!
+    @IBOutlet weak var trb_label: UILabel!
+    
+    @IBOutlet weak var saldo: UILabel!
+    
+    var colors:[UIColor] = []
+    var total_deb = 0.0
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,18 +70,73 @@ class DetailOneViewController: UIViewController {
         
         let titleView = String(describing: detailController.contrato)
         navigationBar.title = titleView
+        let detailAccountItem = detailController.detailtAccountItem
+        
+        //llenar pestaña DETALLES
+        cliente.text = detailAccountItem.cliente
+        uso_comercial.text = detailAccountItem.uso_servicio
+        ci_ruc.text = detailAccountItem.ci_ruc
+        direccion.text = detailAccountItem.direccion
+        
+        facturas_vencidas.text = detailAccountItem.facturas_vencidas
+        max_fecha_pago.text = detailAccountItem.max_fecha_pago
+        deuda_diferido.text = detailAccountItem.deuda_diferida
+        
+        tipo_medidor.text = detailAccountItem.tipo_medidor
+        serie_medidor.text = detailAccountItem.serie_medidor
+        ultimo_consumo.text = detailAccountItem.consumo
+        
+        //----------------------
         
         //self.heigthPieView.constant = self.container.bounds.height
         
         //print(self.container.bounds.height)
         
         //pieChart.chartDescription?.text = "Detalle de Deudas"
+        print("servicio \(detailAccountItem.servicio)")
+        let status = dbase.connect_db()
+        if( status.value ){
+            print("entra a buscar detalles de cuenta")
+            let debs_list = self.dbase.getDetailDebs(service: detailAccountItem.servicio)
+            
+            for item in debs_list{
+                let detail_data = PieChartDataEntry(value: Double(item.valor)!)
+                detail_data.label = "\(item.nombre) $\(item.valor)"
+                data.append(detail_data)
+                
+                total_deb = total_deb + Double(item.valor)!
+ 
+            }
+        }
+        saldo.text = "Saldo $\(total_deb)"
         
-        for i in [1,2,3,4]{
+        
+        colors.append(UIColor(red:103.00/255.00, green:58.00/255.00, blue:183.00/255.00, alpha: 1))
+        colors.append(UIColor(red:255.00/255.00, green:152.00/255.00, blue:0.00/255.00, alpha: 1))
+        colors.append(UIColor(red:63.00/255.00, green:81.00/255.00, blue:181.00/255.00, alpha: 1))
+        colors.append(UIColor(red:33.00/255.00, green:150.00/255.00, blue:243.00/255.00, alpha: 1))
+        colors.append(UIColor(red:255.00/255.00, green:193.00/255.00, blue:7.00/255.00, alpha: 1))
+        colors.append(UIColor(red:0.00/255.00, green:188.00/255.00, blue:212.00/255.00, alpha: 1))
+        colors.append(UIColor(red:205.00/255.00, green:220.00/255.00, blue:57.00/255.00, alpha: 1))
+        colors.append(UIColor(red:49.00/255.00, green:27.00/255.00, blue:146.00/255.00, alpha: 1))
+        colors.append(UIColor(red:230.00/255.00, green:81.00/255.00, blue:0.00/255.00, alpha: 1))       //#E65100
+        colors.append(UIColor(red:26.00/255.00, green:35.00/255.00, blue:126.00/255.00, alpha: 1))      //#1A237E
+        colors.append(UIColor(red:21.00/255.00, green:101.00/255.00, blue:192.00/255.00, alpha: 1))     //#1565C0
+        colors.append(UIColor(red:255.00/255.00, green:111.00/255.00, blue:0.00/255.00, alpha: 1))      //#FF6F00
+        colors.append(UIColor(red:230.00/255.00, green:81.00/255.00, blue:0.00/255.00, alpha: 1))       //#E65100
+        colors.append(UIColor(red:26.00/255.00, green:35.00/255.00, blue:126.00/255.00, alpha: 1))      //#1A237E
+        colors.append(UIColor(red:21.00/255.00, green:101.00/255.00, blue:192.00/255.00, alpha: 1))     //#1565C0
+        colors.append(UIColor(red:255.00/255.00, green:111.00/255.00, blue:0.00/255.00, alpha: 1))      //#FF6F00
+        colors.append(UIColor(red:230.00/255.00, green:81.00/255.00, blue:0.00/255.00, alpha: 1))       //#E65100
+        colors.append(UIColor(red:26.00/255.00, green:35.00/255.00, blue:126.00/255.00, alpha: 1))      //#1A237E
+        colors.append(UIColor(red:21.00/255.00, green:101.00/255.00, blue:192.00/255.00, alpha: 1))     //#1565C0
+        colors.append(UIColor(red:255.00/255.00, green:111.00/255.00, blue:0.00/255.00, alpha: 1))      //#FF6F00
+        
+        /*for i in [1,2,3,4]{
             var detail_data = PieChartDataEntry(value: 25)
             detail_data.label = "label\(i)"
             data.append(detail_data)
-        }
+        }*/
         
         updateChartData()
         
@@ -154,15 +239,21 @@ class DetailOneViewController: UIViewController {
     
     func updateChartData(){
         let dataSet = PieChartDataSet(values: self.data, label: nil)
+        dataSet.drawValuesEnabled = false
         let charData = PieChartData(dataSet: dataSet)
         
-        //let colors = [HIColor(radialGradient: ["cx": 0.5, "cy": 0.3, "r": 0.7], stops: [[0, "#7cb5ec"], [1, "rgb(48,105,160)"]]), HIColor(radialGradient: ["cx": 0.5, "cy": 0.3, "r": 0.7], stops: [[0, "#434348"], [1, "rgb(0,0,0)"]]), HIColor(radialGradient: ["cx": 0.5, "cy": 0.3, "r": 0.7], stops: [[0, "#90ed7d"], [1, "rgb(68,161,49)"]]), HIColor(radialGradient: ["cx": 0.5, "cy": 0.3, "r": 0.7], stops: [[0, "#f7a35c"], [1, "rgb(171,87,16)"]])]
-        
-        //dataSet.colors = colors as! [NSUIColor]
+        dataSet.colors = colors
         
         pieChart.data = charData
-        pieChart.centerText = "prueba data"
-        pieChart.drawCenterTextEnabled = true
+        pieChart.drawEntryLabelsEnabled = false
+        
+        let legend = pieChart.legend
+        legend.font = UIFont(name: "Verdana", size: 12.0)!
+
+        
+        
+        //pieChart.centerText = "Saldo \(total_deb)"
+        //pieChart.drawCenterTextEnabled = true
         
     }
 

@@ -31,7 +31,7 @@ class BarSixViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.dataSource = self
         tableView.delegate = self
 
-        data = [ cellData.init(image: #imageLiteral(resourceName: "tramite"), message: "tramite numero 23 detallado asd asd asd asd asd asd asd a ramite numero 23 detallado asd asd asd asd asd asd asd a", title: "tramite 23", date: ""),cellData.init(image: #imageLiteral(resourceName: "tramite"), message: "tramite numero 2ramite numero 23 detallado asd asd asd asd asd asd asd a ramite numero 23 detallado asd asd asd asd asd asd asd a ramite numero 23 detallado asd asd asd asd asd asd asd a2 detallado", title: "tramite 22", date: "")]
+        data = [ cellData.init(image: #imageLiteral(resourceName: "tramite"), message: "tramite numero 23 detallado asd asd asd asd asd asd asd a ramite numero 23 detallado asd asd asd asd asd asd asd a", title: "tramite 23", date: "", service: ""),cellData.init(image: #imageLiteral(resourceName: "tramite"), message: "tramite numero 2ramite numero 23 detallado asd asd asd asd asd asd asd a ramite numero 23 detallado asd asd asd asd asd asd asd a ramite numero 23 detallado asd asd asd asd asd asd asd a2 detallado", title: "tramite 22", date: "", service: "")]
         
         self.tableView.register(CustomTableViewCell2.self, forCellReuseIdentifier: "customCell")
         self.tableView.rowHeight = UITableViewAutomaticDimension

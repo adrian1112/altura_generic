@@ -51,11 +51,20 @@ struct Bill {
     let name : String
     let index : Int
     var enabled : Bool
+    let date_ini : String
+    let date_end : String
+    let value : String
+    let type : String
     
-    init(_ name : String, _ enabled : Bool, _ index : Int) {
+    
+    init(name : String, enabled : Bool, index : Int, date_ini : String, date_end : String, value : String, type : String) {
         self.name = name
         self.enabled = enabled
         self.index = index
+        self.date_ini = date_ini
+        self.date_end = date_end
+        self.value = value
+        self.type = type
     }
 }
 
@@ -170,9 +179,11 @@ struct detailAccount {
     let id_producto: String
     let id_cliente: String
     let deuda_pendiente: String
+    let servicio: String
+    let alias: String
     
     
-    init(facturas_vencidas: String, deuda_diferida: String, max_fecha_pago: String, tipo_medidor: String, serie_medidor: String, consumo: String, estado_corte: String, contrato: String, cliente: String, uso_servicio: String, direccion: String, ci_ruc: String, id_direccion: String, id_direccion_contrato: String, id_producto: String, id_cliente: String, deuda_pendiente: String) {
+    init(facturas_vencidas: String, deuda_diferida: String, max_fecha_pago: String, tipo_medidor: String, serie_medidor: String, consumo: String, estado_corte: String, contrato: String, cliente: String, uso_servicio: String, direccion: String, ci_ruc: String, id_direccion: String, id_direccion_contrato: String, id_producto: String, id_cliente: String, deuda_pendiente: String, servicio: String, alias: String) {
         self.facturas_vencidas = facturas_vencidas
         self.deuda_diferida = deuda_diferida
         self.max_fecha_pago = max_fecha_pago
@@ -190,6 +201,8 @@ struct detailAccount {
         self.id_producto = id_producto
         self.id_cliente = id_cliente
         self.deuda_pendiente = deuda_pendiente
+        self.servicio = servicio
+        self.alias = alias
     }
 }
 
@@ -204,8 +217,9 @@ struct billsAccount {
     let estado_factura: String
     let consumo_kwh: String
     let lectura_actual: String
+    let servicio: String
     
-    init(codigo_factura: String, fecha_emision: String, fecha_vencimiento: String, monto_factura: String, saldo_factura: String, estado_factura: String, consumo_kwh: String, lectura_actual: String) {
+    init(codigo_factura: String, fecha_emision: String, fecha_vencimiento: String, monto_factura: String, saldo_factura: String, estado_factura: String, consumo_kwh: String, lectura_actual: String, servicio: String) {
         self.codigo_factura = codigo_factura
         self.fecha_emision = fecha_emision
         self.fecha_vencimiento = fecha_vencimiento
@@ -214,6 +228,7 @@ struct billsAccount {
         self.estado_factura = estado_factura
         self.consumo_kwh = consumo_kwh
         self.lectura_actual = lectura_actual
+        self.servicio = servicio
     }
 }
 
@@ -223,10 +238,13 @@ struct detailDebs {
     let nombre: String
     let descripcion: String
     let valor: String
-    init(nombre: String , descripcion: String , valor: String) {
+    let servicio: String
+    
+    init(nombre: String , descripcion: String , valor: String, servicio: String) {
         self.nombre = nombre
         self.descripcion = descripcion
         self.valor = valor
+        self.servicio = servicio
     }
 }
 
@@ -241,8 +259,9 @@ struct detailProcedure {
     let json: String
     let descripcion2: String
     let descripcion3: String
+    let servicio: String
     
-    init(codigo: String , descripcion: String , fecha_inicio: String , fecha_fin: String , estado: String , json: String , descripcion2: String , descripcion3: String) {
+    init(codigo: String , descripcion: String , fecha_inicio: String , fecha_fin: String , estado: String , json: String , descripcion2: String , descripcion3: String, servicio: String) {
         self.codigo = codigo
         self.descripcion = descripcion
         self.fecha_inicio = fecha_inicio
@@ -251,6 +270,7 @@ struct detailProcedure {
         self.json = json
         self.descripcion2 = descripcion2
         self.descripcion3 = descripcion3
+        self.servicio = servicio
     }
 }
 
@@ -266,8 +286,9 @@ struct detailPayment {
     let numero_servicio: String
     let terminal: String
     let sync_date: String
+    let servicio: String
     
-    init(meses: String , monto_pago: String , codigo_pago: String , tipo_recaudacion: String , fecha_pago: String , estado_pago: String , numero_servicio: String , terminal: String , sync_date: String) {
+    init(meses: String , monto_pago: String , codigo_pago: String , tipo_recaudacion: String , fecha_pago: String , estado_pago: String , numero_servicio: String , terminal: String , sync_date: String, servicio: String) {
         self.meses = meses
         self.monto_pago = monto_pago
         self.codigo_pago = codigo_pago
@@ -277,5 +298,6 @@ struct detailPayment {
         self.numero_servicio = numero_servicio
         self.terminal = terminal
         self.sync_date = sync_date
+        self.servicio = servicio
     }
 }

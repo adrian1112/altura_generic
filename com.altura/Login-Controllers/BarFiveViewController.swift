@@ -46,7 +46,7 @@ class BarFiveViewController: UIViewController, UITableViewDataSource, UITableVie
         //self.hiddenMenu()
         
         //Tabla
-        data = [ cellData.init(image: #imageLiteral(resourceName: "proceso"), message: "Ingrese su reclamo técnico", title: "SOLICITUDES TÉCNICAS", date: ""),cellData.init(image: #imageLiteral(resourceName: "proceso"), message: "Ingrese su reclamo de primera instancia", title: "RECLAMOS POR FACTURACIÓN", date: "")]
+        data = [ cellData.init(image: #imageLiteral(resourceName: "proceso"), message: "Ingrese su reclamo técnico", title: "SOLICITUDES TÉCNICAS", date: "", service: ""),cellData.init(image: #imageLiteral(resourceName: "proceso"), message: "Ingrese su reclamo de primera instancia", title: "RECLAMOS POR FACTURACIÓN", date: "", service: "")]
         
         
         self.tableView.register(CustomTableViewCell2.self, forCellReuseIdentifier: "customCell")
