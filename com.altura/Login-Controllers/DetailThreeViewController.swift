@@ -133,6 +133,7 @@ class DetailThreeViewController: UIViewController {
         
         var i = 0
         data = []
+        var months = [String]()
         if type {
             
             leftAxisFormatter.minimumFractionDigits = 0
@@ -140,8 +141,9 @@ class DetailThreeViewController: UIViewController {
             leftAxisFormatter.positivePrefix = ""
             leftAxisFormatter.negativePrefix = ""
             
+            months = consumo_month
             for item in consumo{
-                let label = consumo_month[i]
+                
                 let detail = BarChartDataEntry(x: Double(i), y: item)
                 data.append(detail)
                 i+=1
@@ -153,7 +155,9 @@ class DetailThreeViewController: UIViewController {
             leftAxisFormatter.negativePrefix = "$ "
             leftAxisFormatter.positivePrefix = "$ "
             
+            months = money_month
             for item in money{
+              
                 let detail = BarChartDataEntry(x: Double(i), y: item)
                 data.append(detail)
                 i+=1
@@ -179,9 +183,13 @@ class DetailThreeViewController: UIViewController {
         let dataSet = BarChartDataSet(values: self.data, label: nil)
         let charData = BarChartData(dataSet: dataSet)
         
+        
+        
         dataSet.colors = colors
         
         barView.data = charData
+        barView.xAxis.valueFormatter = IndexAxisValueFormatter(values:months)
+        barView.xAxis.granularity = 1
         //barView.centerText = "prueba data"
         //barView.drawCenterTextEnabled = true
         

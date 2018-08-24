@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import SQLite
 
 class DetailFourViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    let dbase = DBase();
+    var db: Connection!
     
     @IBOutlet weak var navigationBar: UINavigationItem!
 
@@ -24,13 +28,77 @@ class DetailFourViewController: UIViewController, UITableViewDelegate, UITableVi
         
         let titleView = String(describing: detailController.contrato)
         navigationBar.title = titleView
+        let detailAccountItem = detailController.detailtAccountItem
+        
 
         tableView.delegate = self
         tableView.dataSource = self
         
-        self.process_list = [Process.init("SUSPENSION POR NO PAGO", "REC-CORTE DEL SERVICIO (1/2''-3/4''-1)","13718514","ATENDIDO","11/10/1991",UIImage(named: "proceso")!, false),
+        let status = dbase.connect_db()
+        if( status.value ){
+            print("entra en buscar tramites")
+            
+            let list = self.dbase.getDetailsProcedures(service: detailAccountItem.servicio)
+            for item in list{
+                print(item)
+                
+                var title = ""
+                var descripcion = ""
+                var estado = ""
+                var new_date_ini = ""
+                var new_date_end = ""
+                
+                do{
+                    if item.descripcion != ""{
+                        title = try subStringProcess(text: item.descripcion, char: "-").uppercased()
+                    }
+                }catch{
+                    print("error convirtiendo titulo")
+                }
+                do{
+                    if item.descripcion3 != ""{
+                        descripcion = subStringProcess(text: item.descripcion3, char: "-").uppercased()
+                    }
+                }catch{
+                    print("error convirtiendo descripcion")
+                }
+                
+                do{
+                    if item.estado != ""{
+                       estado = subStringProcess(text: item.estado, char: "-").uppercased()
+                    }
+                 
+                }catch{
+                    print("error convirtiendo estado")
+                }
+                
+                do{
+                    if item.fecha_inicio != ""{
+                        new_date_ini = getLabelDate(date: item.fecha_inicio,3)
+                    }
+                }catch{
+                    print("error convirtiendo fecha ini")
+                }
+                
+                do{
+                    if item.fecha_fin != ""{
+                        new_date_end = getLabelDate(date: item.fecha_fin,3)
+                    }
+                }catch{
+                    print("error convirtiendo fecha ini")
+                }
+                
+                
+                process_list.append(Process.init(title, descripcion, item.codigo, estado , new_date_ini, UIImage(named: "proceso")!, false, new_date_end , item.json))
+                
+            }
+        }
+        
+        
+        
+        /*self.process_list = [Process.init("SUSPENSION POR NO PAGO", "REC-CORTE DEL SERVICIO (1/2''-3/4''-1)","13718514","ATENDIDO","11/10/1991",UIImage(named: "proceso")!, false),
         Process.init("VENTA DE SERVICIOS DE INGENIERIA", "PRUEBA DE GEOFONO","13718514","ATENDIDO","11/10/1991",UIImage(named: "proceso")!, false)
-        ]
+        ]*/
         
     }
 
@@ -68,6 +136,7 @@ class DetailFourViewController: UIViewController, UITableViewDelegate, UITableVi
         
         let viewController = self.storyboard?.instantiateViewController(withIdentifier: "statusProcessViewController") as! StatusProcessViewController
         viewController.titleView = self.navigationBar.title!
+        viewController.process = process_list[indexPath.row]
         self.present(viewController, animated: true)
     }
     

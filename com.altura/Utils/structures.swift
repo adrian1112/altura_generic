@@ -115,8 +115,10 @@ struct Process {
     let date: String
     let img: UIImage
     var enabled : Bool
+    let date_end: String
+    let json: String
     
-    init(_ title : String, _ subtitle : String, _ code : String,_ status: String,_ date: String,_ img: UIImage,_ enabled: Bool) {
+    init(_ title : String, _ subtitle : String, _ code : String,_ status: String,_ date: String,_ img: UIImage,_ enabled: Bool,_ date_end: String , _ json: String) {
         self.title = title
         self.subtitle = subtitle
         self.code = code
@@ -124,7 +126,8 @@ struct Process {
         self.date = date
         self.img = img
         self.enabled = enabled
-        
+        self.date_end = date_end
+        self.json = json
     }
 }
 

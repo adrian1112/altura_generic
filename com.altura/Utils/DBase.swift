@@ -818,7 +818,25 @@ class DBase {
             print(error)
         }
         return List
-           
+    }
+    
+    //devuelve todos los tramites de las cuentas registradas
+    func getDetailsProcedures(service: String)-> [detailProcedure]{
+        print("entra get getDetailsProcedures")
+        var List:[detailProcedure] = []
+        
+        do{
+            for item in try db.prepare(detailProcedureT) {
+                if( item[servicio_billsAccountT] == service){
+                    List.append(detailProcedure.init(codigo: item[codigo_detailProcedureT], descripcion: item[descripcion_detailProcedureT], fecha_inicio: item[fecha_inicio_detailProcedureT], fecha_fin: item[fecha_fin_detailProcedureT], estado: item[estado_detailProcedureT], json: item[json_detailProcedureT], descripcion2: item[descripcion2_detailProcedureT], descripcion3: item[descripcion3_detailProcedureT], servicio: item[servicio_billsAccountT]))
+                }
+            }
+            
+        }catch{
+            print("error get detailPayment")
+            print(error)
+        }
+        return List
     }
     
     

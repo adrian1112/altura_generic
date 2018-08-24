@@ -25,7 +25,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var btn_in: UIButton!
     @IBOutlet weak var btn_reg: UIButton!
     
-    
+    //indicador de proceso
+    @IBOutlet weak var indicadorView: UIView!
+    @IBOutlet weak var spin: UIActivityIndicatorView!
+    @IBOutlet weak var text_spin: UILabel!
     
     var txt_alert=""
     var user = UserDB(id: nil, name: nil, email: nil, identifier: nil, addresss: nil, telephone: nil, contract: nil, pass: nil )
@@ -135,6 +138,8 @@ class ViewController: UIViewController {
             print("No se pudo conectar a la base")
         }
         
+        
+        indicadorView.isHidden = true
         //self.db = nil
         
         
@@ -144,6 +149,8 @@ class ViewController: UIViewController {
     
     
     @IBAction func logIn(_ sender: Any) {
+        
+        self.view.endEditing(true)
         let user_name = user_txt.text!
         let pass = pass_txt.text!
         print(user_name,pass)
@@ -162,7 +169,10 @@ class ViewController: UIViewController {
             self.present(alert, animated: true, completion: nil);
         }
         
+        
         if(user_name != "" && pass != "" && internet){
+            self.indicadorView.isHidden = false
+            self.spin.startAnimating();
             let usr_encrypt = user_name;
             let pass_encrypt = pass;
             
@@ -195,6 +205,9 @@ class ViewController: UIViewController {
             }, error: {
                 (value,user) -> Void in
                 DispatchQueue.main.async {
+                    self.spin.stopAnimating()
+                    self.indicadorView.isHidden = true
+                    
                     print("entra en error: \(value) , \(user)")
                     if(value == 2){
                         self.txt_alert = "Usuario o Contraseña Inválidos"
@@ -214,19 +227,6 @@ class ViewController: UIViewController {
                 
             })
             
-            /*repeat {
-                //print("complete: \(complete) ,error \(error)")
-                if complete{
-                    if error{
-                        print("entra en alerta")
-                        self.showAlert()
-                    }else{
-                        print("entra navigate app")
-                        self.navigateToApp()
-                    }
-                }
-            } while(!complete)*/
-            
         }
     }
     
@@ -245,7 +245,7 @@ class ViewController: UIViewController {
                                 
                                 DispatchQueue.main.async {
                                     self.dbase.insertNotifications(notificationsList: notifications as! [notification])
-                                    self.navigateToApp()
+                                    //self.navigateToApp()
                                 }
                                 
                                 
@@ -265,6 +265,8 @@ class ViewController: UIViewController {
                                 
         },error: {
             (accounts,message) -> Void in
+            self.spin.stopAnimating()
+            self.indicadorView.isHidden = true
             self.txt_alert = message;
             self.showAlert();
         })
@@ -275,13 +277,18 @@ class ViewController: UIViewController {
         var status = false
         var status1 = false
         var status2 = false
-        
+        var text = ""
+        for item in accounts{
+            text += item.alias + " ,"
+        }
+        self.text_spin.text = " Procesando Datos: \(text)"
         self.ws.loadCore(id_user: String(describing: self.user_in.id_user), accounts: accounts,
                                   success: {
                                     (notifications) -> Void in
                                     print("ok notificacion")
                                     status2 = true
-                                    
+                                    self.spin.stopAnimating()
+                                    self.indicadorView.isHidden = true
                                     DispatchQueue.main.async {
                                         //self.dbase.insertNotifications(notificationsList: notifications as! [notification])
                                         self.navigateToApp()
@@ -290,6 +297,9 @@ class ViewController: UIViewController {
                                     
         },error: {
             (accounts,message) -> Void in
+            self.spin.stopAnimating()
+            self.indicadorView.isHidden = true
+            
             self.txt_alert = message;
             self.showAlert();
         })

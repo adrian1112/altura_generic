@@ -82,6 +82,16 @@ func isValidEmail(string: String) -> Bool {
     return emailTest.evaluate(with: string)
 }
 
+func subStringProcess(text: String, char: Character) -> String{
+    var status = ""
+    if let index = text.index(of: char) {
+        var distance = text.distance(from: text.startIndex, to: index)
+        distance += 2
+        status = text.substring(from: distance)
+    }
+    return status
+}
+
 extension URLSession {
     func synchronousDataTask(urlrequest: URLRequest) -> (data: Data?, response: URLResponse?, error: Error?) {
         var data: Data?
