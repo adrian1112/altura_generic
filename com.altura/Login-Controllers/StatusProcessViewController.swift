@@ -20,9 +20,10 @@ class StatusProcessViewController: UIViewController {
     @IBOutlet weak var status_text: UILabel!
     
     
-    @IBOutlet weak var prog1: UIImageView!
-    @IBOutlet weak var prog2: UIImageView!
-    @IBOutlet weak var prog3: UIImageView!
+    @IBOutlet weak var sta1: UILabel!
+    @IBOutlet weak var sta2: UILabel!
+    @IBOutlet weak var sta3: UILabel!
+    
     
     var titleView = ""
     var process = Process.init("", "", "", "", "", UIImage(named: "proceso")!, false, "", "")
@@ -39,13 +40,17 @@ class StatusProcessViewController: UIViewController {
         self.date_end_text.text = process.date_end
         
         if(process.status == "ATENDIDO"){
-            prog1.alpha = 1
-            prog2.alpha = 1
-            prog3.alpha = 1
+            sta1.backgroundColor =  UIColor.green
+            sta2.backgroundColor =  UIColor.green
+            sta3.backgroundColor =  UIColor.green
+        }else if(process.status == "ANULADO"){
+            sta1.backgroundColor =  UIColor.green
+            sta2.backgroundColor =  UIColor.red
+            sta3.backgroundColor = UIColor.red
         }else{
-            prog1.alpha = 1
-            prog2.alpha = 0.3
-            prog3.alpha = 0.3
+            sta1.backgroundColor =  UIColor.green
+            //sta2.backgroundColor =  UIColor.red
+            //sta3.backgroundColor = UIColor.red
         }
         
         

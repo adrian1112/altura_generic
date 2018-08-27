@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Highcharts
+//import Highcharts
 import Charts
 import SQLite
 

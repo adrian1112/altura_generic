@@ -5,14 +5,9 @@ target 'com.altura' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
   # Pods for com.altura
-  pod 'SQLite.swift', '~> 0.11.5'
   source 'https://github.com/CocoaPods/Specs.git'
-  pod 'Highcharts', '~> 6.1.0'
-  #pod 'Charts', '~> 3.0.2'
-  #pod 'Zip', '~> 0.7.0'
   pod 'GoogleMaps'
   pod 'GooglePlaces'
-  #pod 'CryptoSwift'
 
   target 'com.alturaTests' do
     inherit! :search_paths

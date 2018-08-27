@@ -839,5 +839,24 @@ class DBase {
         return List
     }
     
+    //devuelve las notificaciones de la base
+    func getNotifications() -> [notification]{
+        print("entra get notifications")
+        var List:[notification] = []
+        
+        do{
+            for item in try db.prepare(notificationsT) {
+                
+                List.append(notification.init(contract: item[contract_notificationsT], type: item[type_notificationsT], document_code: item[document_code_notificationsT], message: item[message_notificationsT], date_gen: item[date_gen_notificationsT], date_sync: item[date_sync_notificationsT]))
+            }
+            
+        }catch{
+            print("error get notifications")
+            print(error)
+        }
+        
+        return List
+    }
+    
     
 }
