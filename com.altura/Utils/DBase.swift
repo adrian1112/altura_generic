@@ -783,6 +783,8 @@ class DBase {
         return List
     }
     
+    
+    
     func getBillsAccount(service: String)-> [billsAccount]{
         print("entra get billsAccount")
         
@@ -793,6 +795,25 @@ class DBase {
                 if( item[servicio_billsAccountT] == service){
                     List.append(billsAccount.init(codigo_factura: item[cod_factura_billsAccountT], fecha_emision: item[fecha_emision_billsAccountT], fecha_vencimiento: item[fecha_vencimiento_billsAccountT], monto_factura: item[monto_factura_billsAccountT], saldo_factura: item[saldo_factura_billsAccountT], estado_factura: item[estado_factura_billsAccountT], consumo_kwh: item[consumo_kwh_billsAccountT], lectura_actual: item[lectura_actual_billsAccountT], servicio: item[servicio_billsAccountT]))
                 }
+            }
+            
+        }catch{
+            print("error get billsAccount")
+            print(error)
+        }
+        return List
+    }
+    
+    func getAllBillsAccount()-> [billsAccount]{
+        print("entra get billsAccount")
+        
+        var List:[billsAccount] = []
+        
+        do{
+            for item in try db.prepare(billsAccountT) {
+                
+                    List.append(billsAccount.init(codigo_factura: item[cod_factura_billsAccountT], fecha_emision: item[fecha_emision_billsAccountT], fecha_vencimiento: item[fecha_vencimiento_billsAccountT], monto_factura: item[monto_factura_billsAccountT], saldo_factura: item[saldo_factura_billsAccountT], estado_factura: item[estado_factura_billsAccountT], consumo_kwh: item[consumo_kwh_billsAccountT], lectura_actual: item[lectura_actual_billsAccountT], servicio: item[servicio_billsAccountT]))
+                
             }
             
         }catch{

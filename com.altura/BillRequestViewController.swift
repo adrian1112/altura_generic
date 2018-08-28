@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import SQLite
 
 class BillRequestViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource {
     
-    
+    let dbase = DBase();
+    var db: Connection!
     
     var bills : [Bill] = [Bill]() // list of options
     
@@ -27,11 +29,13 @@ class BillRequestViewController: UIViewController, UIPickerViewDelegate, UIPicke
     @IBOutlet weak var tableBills: UITableView!
     @IBOutlet weak var obsText: UITextView!
     
-    let options=["","Opcion1","Opcion2","Opcion3","Opcion4","Opcion5"]
+    //let options=["","Opcion1","Opcion2","Opcion3","Opcion4","Opcion5"]
+    var options = [String]()
+    var options_services = [String]()
     
     let options2=["","Falta de tapa de alcantarilla","Fuga de agua en cajetin de medidor","Fuga de agua en la guía","Limpieza de caja de alcantarillado"]
     
-    let options3=["","Instalación de tapa de alcantarilla domiciliaria.","Se observa fuga en el interior del cajetín medidor.","Se observa fuga en la guía domiciliaria, usualmente ubicada después del medidor o en a vereda","Limpieza de la caja que se encuentra fuera del domicilio y que corresponde a aguas servidas."]
+    let options3=["","Instalación de tapa de alcantarilla domiciliaria.","Se observa fuga en el interior del cajetín medidor.","Se observa fuga en la guía domiciliaria, usualmente ubicada después del medidor o en la vereda","Limpieza de la caja que se encuentra fuera del domicilio y que corresponde a aguas servidas."]
     
     let myBackgroundColor1 = UIColor(red: 121/255.0, green: 190/255.0, blue: 255/255.0, alpha: 1.0)
     
@@ -42,10 +46,15 @@ class BillRequestViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     var contrato = ""
 
+    var accounts = [account]()
+    
+    var bills_list = [billsAccount]()
+    
     @IBOutlet weak var tickButton: UIButton!
     
     let image_r = UIImage(named: "tick-2.png")
     var selectAll = false;
+    var service_selected = "";
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,10 +78,25 @@ class BillRequestViewController: UIViewController, UIPickerViewDelegate, UIPicke
         obsText.layer.borderWidth = 1
         obsText.layer.borderColor = UIColor.lightGray.cgColor
         
+        let status = dbase.connect_db()
+        if( status.value ){
+            print("entra a buscar contratos")
+            accounts = self.dbase.getAccounts()
+            for item in accounts{
+                options.append(item.alias)
+                options_services.append(item.service)
+            }
+            
+            bills_list = self.dbase.getAllBillsAccount()
+            
+        }
+        
         if contrato != "" {
             select1.text = contrato
             select1.isEnabled = false
         }
+        
+        self.select2.isEnabled = false
         
     }
     
@@ -182,13 +206,29 @@ class BillRequestViewController: UIViewController, UIPickerViewDelegate, UIPicke
         if pickerView == pickerView1 {
             self.select1.text = self.options[row]
             self.select1.resignFirstResponder()
+            self.select2.isEnabled = true
+            
+            self.service_selected = self.options_services[row]
+            
+            var i = 0
+            self.bills = []
+            for item in bills_list{
+                if( self.service_selected == item.servicio){
+                    self.bills.append(Bill.init(name: getMonthString(date: item.fecha_emision,2), enabled: false, index: i, date_ini: getLabelDate(date: item.fecha_emision,2), date_end: getLabelDate(date: item.fecha_vencimiento,2), value: item.monto_factura, type: item.estado_factura))
+                    
+                    i += 1
+                }
+                
+            }
+            self.tableBills.reloadData()
+            
         } else if pickerView == pickerView2{
             self.select2.text = self.options2[row]
             self.select2.resignFirstResponder()
             self.textView_label.text = self.options3[row]
             
-            self.bills = [Bill.init(name: "Factura1", enabled: false,index: 1, date_ini: "", date_end: "", value: "", type: ""),Bill.init(name: "Factura2", enabled: false,index: 2, date_ini: "", date_end: "", value: "", type: ""),Bill.init(name: "Factura3", enabled: false,index: 3, date_ini: "", date_end: "", value: "", type: ""),Bill.init(name: "Factura4", enabled: false,index: 4, date_ini: "", date_end: "", value: "", type: "")]
-            self.tableBills.reloadData()
+            /*self.bills = [Bill.init(name: "Factura1", enabled: false,index: 1, date_ini: "", date_end: "", value: "", type: ""),Bill.init(name: "Factura2", enabled: false,index: 2, date_ini: "", date_end: "", value: "", type: ""),Bill.init(name: "Factura3", enabled: false,index: 3, date_ini: "", date_end: "", value: "", type: ""),Bill.init(name: "Factura4", enabled: false,index: 4, date_ini: "", date_end: "", value: "", type: "")]*/
+            
         }
         
     }

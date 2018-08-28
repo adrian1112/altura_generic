@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import SQLite
 
 class TechRequestViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
+    
+    let dbase = DBase();
+    var db: Connection!
     
     @IBOutlet weak var select1: UITextField!
     @IBOutlet weak var select2: UITextField!
@@ -18,7 +22,8 @@ class TechRequestViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     @IBOutlet weak var textView_label: UITextView!
     
-    let options=["","Opcion1","Opcion2","Opcion3","Opcion4","Opcion5"]
+    //let options=["","Opcion1","Opcion2","Opcion3","Opcion4","Opcion5"]
+    var options = [String]()
     
     @IBOutlet weak var obsText: UITextView!
     
@@ -36,6 +41,9 @@ class TechRequestViewController: UIViewController, UIPickerViewDelegate, UIPicke
     let myBackgroundColor = UIColor(red: 235/255.0, green: 235/255.0, blue: 235/255.0, alpha: 1.0)
     
     var keyboardHeight :CGFloat = 216.0
+    
+    
+    var accounts = [account]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,10 +65,21 @@ class TechRequestViewController: UIViewController, UIPickerViewDelegate, UIPicke
         obsText.layer.borderWidth = 1
         obsText.layer.borderColor = UIColor.lightGray.cgColor
         
+        let status = dbase.connect_db()
+        if( status.value ){
+            print("entra a buscar contratos")
+            accounts = self.dbase.getAccounts()
+            for item in accounts{
+                options.append(item.alias)
+            }
+        }
+        
         if contrato != "" {
             select1.text = contrato
             select1.isEnabled = false
         }
+        
+        select2.isEnabled = false
         
     }
     
@@ -110,6 +129,12 @@ class TechRequestViewController: UIViewController, UIPickerViewDelegate, UIPicke
         
         if pickerView == pickerView1 {
             self.select1.text = self.options[row]
+            if( self.select1.text == ""){
+                self.select2.text = ""
+                select2.isEnabled = false
+            }else{
+                select2.isEnabled = true
+            }
             self.select1.resignFirstResponder()
         } else if pickerView == pickerView2{
             self.select2.text = self.options2[row]
