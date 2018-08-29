@@ -31,7 +31,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var text_spin: UILabel!
     
     var txt_alert=""
-    var user = UserDB(id: nil, name: nil, email: nil, identifier: nil, addresss: nil, telephone: nil, contract: nil, pass: nil )
     
     let status: Bool = false
     
@@ -41,7 +40,7 @@ class ViewController: UIViewController {
     
     
     
-    var user_in = User(id_user: 0, document: "", person: "", email: "", phone: "", sync_date: "", adress: "", status: 0, error: "")
+    var user_in = User(id_user: 0, document: "", person: "", email: "", phone: "", sync_date: "", adress: "", status: 1, error: 0)
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
@@ -100,33 +99,41 @@ class ViewController: UIViewController {
                 dbase.printAllUsers()
                 print("Tablas creadas correctamente")
                 
-                ws.loadAgencies(success: {
-                    (agencies) -> Void in
+                let user_temp = dbase.loadUsersDB()
+                
+                if user_temp.error == 1 {
                     
-                    do{
-                        try self.db.execute("DELETE FROM agencias;")
-                        try self.db.execute("DELETE FROM notificaciones;")
-                        try self.db.execute("DELETE FROM cuentas;")
-                        try self.db.execute("DELETE FROM cuenta_detalle;")
-                        try self.db.execute("DELETE FROM facturas;")
-                        try self.db.execute("DELETE FROM deudas;")
-                        try self.db.execute("DELETE FROM tramites;")
-                        try self.db.execute("DELETE FROM pagos;")
-                        print("Se vacio la tabla agenicas correctamente")
-                    }catch let Result.error(message, code, statement){
-                        print("mensaje: \(message), codigo: \(code), statment: \(String(describing: statement)) ")
-                    }catch {
-                        print(error)
-                    }
-                    
-                    self.dbase.insertAgencies(places: agencies as! [place])
-                    print("se inserto correctamente las agencias")
-                }, error: {
-                    (agencies,message) -> Void in
+                    ws.loadAgencies(success: {
+                        (agencies) -> Void in
+                        
+                        do{
+                            try self.db.execute("DELETE FROM agencias;")
+                            try self.db.execute("DELETE FROM notificaciones;")
+                            try self.db.execute("DELETE FROM cuentas;")
+                            try self.db.execute("DELETE FROM cuenta_detalle;")
+                            try self.db.execute("DELETE FROM facturas;")
+                            try self.db.execute("DELETE FROM deudas;")
+                            try self.db.execute("DELETE FROM tramites;")
+                            try self.db.execute("DELETE FROM pagos;")
+                            print("Se vacio la tabla agenicas correctamente")
+                        }catch let Result.error(message, code, statement){
+                            print("mensaje: \(message), codigo: \(code), statment: \(String(describing: statement)) ")
+                        }catch {
+                            print(error)
+                        }
+                        
+                        self.dbase.insertAgencies(places: agencies as! [place])
+                        print("se inserto correctamente las agencias")
+                    }, error: {
+                        (agencies,message) -> Void in
                         print("devolvio null en las agencias")
-                })
+                    })
+                }else{
+                    
+                    self.navigateToApp()
+                }
                 
-                
+    
             }else{
                 self.btn_in.isEnabled = false
                 self.btn_reg.isEnabled = false
@@ -173,8 +180,8 @@ class ViewController: UIViewController {
         if(user_name != "" && pass != "" && internet){
             self.indicadorView.isHidden = false
             self.spin.startAnimating();
-            let usr_encrypt = user_name;
-            let pass_encrypt = pass;
+            //let usr_encrypt = user_name;
+            //let pass_encrypt = pass;
             
             print("usuario: \(user_name) , contraseña: \(pass)")
             
@@ -191,17 +198,8 @@ class ViewController: UIViewController {
                     print("entra en success: \(value) , \(user)")
                     self.user_in = user
                     self.user_in.email = user_name
-                    //self.error = false
-                    //self.complete = true
-                    //self.navigateToApp()
                     self.syncAllDataInit()
                 }
-                
-                //DispatchQueue.global(qos: .background).async{
-                        
-                //}
-                
-                
             }, error: {
                 (value,user) -> Void in
                 DispatchQueue.main.async {
@@ -216,7 +214,7 @@ class ViewController: UIViewController {
                         self.txt_alert = "Usuario no registrado"
                         
                     }else{
-                        self.txt_alert = "Error.."
+                        self.txt_alert = "Usuario o Contraseña Inválidos"
                     }
                     //self.error = true
                     //self.complete = true
@@ -232,65 +230,52 @@ class ViewController: UIViewController {
     
     
     func syncAllDataInit(){
-        var status = false
-        var status1 = false
-        var status2 = false
         
         self.dbase.insertUserLogin(user_in: self.user_in)
         self.ws.loadNotifications(id_user: String(describing: self.user_in.id_user), date: self.user_in.sync_date,
                             success: {
                                 (notifications) -> Void in
                                 print("ok notificacion")
-                                status2 = true
-                                
+                                self.text_spin.text = " Procesando Datos: Notificaciones"
                                 DispatchQueue.main.async {
                                     self.dbase.insertNotifications(notificationsList: notifications as! [notification])
-                                    //self.navigateToApp()
-                                }
-                                
-                                
-        },error: {
-            (accounts,message) -> Void in
-            self.txt_alert = message;
-            self.showAlert();
-        })
+                                    }
+                            },error: {
+                                (accounts,message) -> Void in
+                                self.txt_alert = message;
+                                self.showAlert();
+                            })
         
         self.ws.loadAcounts(id_user: String(describing: self.user_in.id_user), date: self.user_in.sync_date,
                             success: {
                                 (accounts) -> Void in
                                 DispatchQueue.main.async {
+                                    self.text_spin.text = " Procesando Datos: Cuentas"
                                     self.dbase.insertAccounts(accounts: accounts as! [account])
                                     self.syncAllDataCore(accounts: accounts as! [account])
                                 }
                                 
-        },error: {
-            (accounts,message) -> Void in
-            self.spin.stopAnimating()
-            self.indicadorView.isHidden = true
-            self.txt_alert = message;
-            self.showAlert();
-        })
+                            },error: {
+                                (accounts,message) -> Void in
+                                self.spin.stopAnimating()
+                                self.indicadorView.isHidden = true
+                                self.txt_alert = message;
+                                self.showAlert();
+                            })
         
     }
     
     func syncAllDataCore( accounts: [account]){
-        var status = false
-        var status1 = false
-        var status2 = false
-        var text = ""
         for item in accounts{
-            text += item.alias + " ,"
+            self.text_spin.text = " Procesando Datos: Cuentas - \(item.alias)"
         }
-        self.text_spin.text = " Procesando Datos: \(text)"
         self.ws.loadCore(id_user: String(describing: self.user_in.id_user), accounts: accounts,
                                   success: {
                                     (notifications) -> Void in
                                     print("ok notificacion")
-                                    status2 = true
                                     self.spin.stopAnimating()
                                     self.indicadorView.isHidden = true
                                     DispatchQueue.main.async {
-                                        //self.dbase.insertNotifications(notificationsList: notifications as! [notification])
                                         self.navigateToApp()
                                     }
                                     

@@ -12,7 +12,7 @@ import SQLite
 
 class WService {
     let url_master = "http://54.86.88.196/aclientAES2/w?c&q="
-    var user_in = User(id_user: 0, document: "", person: "", email: "", phone: "", sync_date: "", adress: "", status: 0, error: "")
+    var user_in = User(id_user: 0, document: "", person: "", email: "", phone: "", sync_date: "", adress: "", status: 1, error: 1)
     
     let key = "Altura"
     let iv = "gqLOHUioQ0QjhuvI"
@@ -24,7 +24,7 @@ class WService {
         print("entra en load user")
         let n_key = key.md5()
         
-        user_in = User(id_user: 0, document: "", person: "", email: "", phone: "", sync_date: "", adress: "", status: 0, error: "")
+        user_in = User(id_user: 0, document: "", person: "", email: "", phone: "", sync_date: "", adress: "", status: 1, error: 1)
         
         let url_part = "action=login&mail=\(usr_id)&pass=\(pass)&os=2&imei=111"
         let encode = try! url_part.aesEncrypt(key: n_key, iv: iv)
@@ -444,7 +444,6 @@ class WService {
                     }
                     if key as! String == "row"{
                         list = value as! NSArray
-                        
                     }
                 }
                 

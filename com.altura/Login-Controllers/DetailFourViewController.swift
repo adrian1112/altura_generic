@@ -21,13 +21,19 @@ class DetailFourViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var process_list : [Process] = [Process]()
     
+    var contrato = ""
+    var servicio = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let detailController = tabBarController as! DetailsTabBarViewController
         
-        let titleView = String(describing: detailController.contrato)
-        navigationBar.title = titleView
+        contrato = String(describing: detailController.contrato)
+        servicio = String(describing: detailController.servicio)
+        
+        navigationBar.title = contrato
+        
         let detailAccountItem = detailController.detailtAccountItem
         
 
@@ -143,7 +149,8 @@ class DetailFourViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBAction func NewProcess(_ sender: Any) {
         
         let viewController = self.storyboard?.instantiateViewController(withIdentifier: "optionsProcessViewController") as! OptionsProcessViewController
-        viewController.contrato =  self.navigationBar.title!
+        viewController.contrato =  self.contrato
+        viewController.servicio =  self.servicio
         self.present(viewController, animated: true)
         
     }

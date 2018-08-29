@@ -145,6 +145,10 @@ class BarFourViewController: UIViewController, UITableViewDataSource, UITableVie
         
         let alert = UIAlertController(title: nil, message: "Seguro que desea Cerrar Sesión?", preferredStyle: .alert);
         let btn_alert = UIAlertAction(title: "Aceptar", style: .default) { (UIAlertAction) in
+        
+            let status = self.dbase.encerarTables()
+            if status{ print("ok")}else{print("error encerando")}
+            
             self.dismiss(animated: true, completion: nil)
         }
         let btn_cancel = UIAlertAction(title: "Cancelar", style: .cancel) { (UIAlertAction) in

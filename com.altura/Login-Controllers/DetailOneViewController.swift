@@ -150,7 +150,7 @@ class DetailOneViewController: UIViewController {
         //setea el ancho y alto de los view de la secicon detalles
         widthView1.constant = (self.view.bounds.width/2)-12
         widthView2.constant = (self.view.bounds.width/2)-12
-        heigthViewBotton.constant = (self.view.bounds.height/2)-20
+        heigthViewBotton.constant = (self.view.bounds.height/2)-40
         
         
         
@@ -273,4 +273,22 @@ class DetailOneViewController: UIViewController {
             //self.chartView.isHidden = true
         }
     }
+    
+    @IBAction func PayAction(_ sender: UIButton) {
+        
+        
+        let alert = UIAlertController(title: nil, message: "Seguro que desea pagar su deuda de manera Online?", preferredStyle: .alert);
+        let btn_alert = UIAlertAction(title: "Aceptar", style: .default) { (UIAlertAction) in
+            print("pagar deuda")
+            //self.dismiss(animated: true, completion: nil)
+        }
+        let btn_cancel = UIAlertAction(title: "Cancelar", style: .cancel) { (UIAlertAction) in
+            
+        }
+        alert.addAction(btn_alert);
+        alert.addAction(btn_cancel);
+        self.present(alert, animated: true, completion: nil);
+        
+    }
+    
 }

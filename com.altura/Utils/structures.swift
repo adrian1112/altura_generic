@@ -69,15 +69,15 @@ struct Bill {
 }
 
 struct User: Decodable {
-    let id_user: Int
-    let document: String?
-    let person: String
+    var id_user: Int
+    var document: String?
+    var person: String
     var email: String?
-    let phone: String?
-    let sync_date: String
-    let adress: String?
-    let status: Int
-    let error: String?
+    var phone: String?
+    var sync_date: String
+    var adress: String?
+    var status: Int
+    var error: Int?
     
 }
 

@@ -27,8 +27,11 @@ class DBase {
     let usersLoginT = Table("usuarios_logeados")
     let id_users_l_T = Expression<Int>("id")
     let person_l_T = Expression<String>("persona")
-    var email_l_T = Expression<String>("email")
-    let date_l_T = Expression<String>("fecha_ingreso")
+    let document_l_T = Expression<String>("documento")
+    let email_l_T = Expression<String>("email")
+    let phone_l_T = Expression<String>("telefono")
+    let sync_date_l_T = Expression<String>("fecha_ingreso")
+    let adress_l_T = Expression<String>("direccion")
     
     //tabla agencias--------------------------------------
     let agenciesT = Table("agencias")
@@ -174,12 +177,15 @@ class DBase {
             print(error)
         }
         
-        
+
         let createTableUsersLogin = self.usersLoginT.create { (table) in
             table.column(self.id_users_l_T)
             table.column(self.person_l_T)
             table.column(self.email_l_T)
-            table.column(self.date_l_T)
+            table.column(self.phone_l_T)
+            table.column(self.document_l_T)
+            table.column(self.sync_date_l_T)
+            table.column(self.adress_l_T)
         }
         
         do{
@@ -423,47 +429,43 @@ class DBase {
     }
     
     //Cargar usuario mediante DB
-    func loadUsersDB(usr:String , pass:String) -> Int {
-        var user = UserDB();
+    func loadUsersDB() -> User {
+        var user = User.init(id_user: 0, document: "", person: "", email: "", phone: "", sync_date: "", adress: "", status: 1, error: 1);
+
+        //let sql = self.usersLoginT.select(id_usersT,name_userT,email_user_T,identifier_user_T,address_user_T,telephone_user_T,contract_user_T,password_user_T).filter(email_user_T == usr)
+        let sql = self.usersLoginT.select(id_users_l_T,person_l_T,document_l_T,email_l_T,phone_l_T,sync_date_l_T,adress_l_T)
         
-        let sql = self.usersT.select(id_usersT,name_userT,email_user_T,identifier_user_T,address_user_T,telephone_user_T,contract_user_T,password_user_T)
-            .filter(email_user_T == usr)
         do{
             let request = Array(try self.db.prepare(sql))
-            //print(request)
             if(request.count > 0){
                 for us in request {
                     do {
-                        print("name: \(try us.get(id_usersT))")
-                        user.id = try us.get(id_usersT)
-                        user.addresss = try us.get(address_user_T)
-                        user.contract = try us.get(contract_user_T)
-                        user.email = try us.get(email_user_T)
-                        user.identifier = try us.get(identifier_user_T)
-                        user.name = try us.get(name_userT)
-                        user.telephone = try us.get(telephone_user_T)
-                        user.pass = try us.get(password_user_T)
+                        print("name: \(try us.get(id_users_l_T))")
+                        user.id_user = try us.get(id_users_l_T)
+                        user.document = try us.get(document_l_T)
+                        user.person = try us.get(person_l_T)
+                        user.email = try us.get(email_l_T)
+                        user.phone = try us.get(phone_l_T)
+                        user.sync_date = try us.get(sync_date_l_T)
+                        user.adress = try us.get(adress_l_T)
+                        user.error = 0
                         
                     } catch {
                         print(error)
-                        return 4
+                        
                     }
                 }
-                if (user.pass == pass){
-                    return 1 //usuario existe y esta correcto
-                }else{
-                    return 2 // contraseña incorrecta
-                }
+                
                 
             }else{
-                return 3 // usuario no existe
+                return user // usuario no existe
             }
             
         }catch{
             print(error)
         }
         
-        return 1
+        return user
     }
     
     //inserta en base el usuario logeado
@@ -471,7 +473,7 @@ class DBase {
         print("entra log")
         print("usuario: \(String(describing: user_in.id_user)) ,email: \(String(describing: user_in.email)), persona: \(String(describing: user_in.person)), fecha: \(String(describing: user_in.sync_date))")
         
-        let insertUser_l = usersLoginT.insert(self.id_users_l_T <- user_in.id_user,self.email_l_T <- user_in.email!, self.person_l_T <- user_in.person, self.date_l_T <- user_in.sync_date)
+        let insertUser_l = usersLoginT.insert(self.id_users_l_T <- user_in.id_user,self.document_l_T <- user_in.document!,self.email_l_T <- user_in.email!, self.person_l_T <- user_in.person, self.sync_date_l_T <- user_in.sync_date, self.phone_l_T <- user_in.phone!, self.adress_l_T <- user_in.adress!)
         do{
             try self.db.run(insertUser_l)
             print("Se ingreso el usuario log correctamente")
@@ -486,7 +488,7 @@ class DBase {
     
     //imprime todos los usuarios registrados
     func printAllUsers(){
-        print("muestra todos usuarios")
+        /*print("muestra todos usuarios")
         do{
             for user in try db.prepare(usersT) {
                 print("id: \(user[id_usersT]), email: \(user[email_user_T]), name: \(user[name_userT]),  pass: \(user[password_user_T])")
@@ -495,12 +497,12 @@ class DBase {
         }catch{
             print("error whi")
             print(error)
-        }
+        }*/
         
         print("muestra todos logins")
         do{
             for user in try db.prepare(usersLoginT) {
-                print("id: \(user[id_users_l_T]), email: \(user[email_l_T]), name: \(user[person_l_T]),  date: \(user[date_l_T])")
+                print("id: \(user[id_users_l_T]), email: \(user[email_l_T]), name: \(user[person_l_T]),  date: \(user[sync_date_l_T])")
                 // id: 1, email: alice@mac.com, name: Optional("Alice")
             }
         }catch{
@@ -877,6 +879,30 @@ class DBase {
         }
         
         return List
+    }
+    
+    func encerarTables()->Bool{
+        
+        do{
+            try db.execute("DELETE FROM agencias;")
+            try db.execute("DELETE FROM notificaciones;")
+            try db.execute("DELETE FROM cuentas;")
+            try db.execute("DELETE FROM cuenta_detalle;")
+            try db.execute("DELETE FROM facturas;")
+            try db.execute("DELETE FROM deudas;")
+            try db.execute("DELETE FROM tramites;")
+            try db.execute("DELETE FROM pagos;")
+            try db.execute("DELETE FROM usuarios_logeados;")
+            print("Se vacio las tablas")
+        }catch let Result.error(message, code, statement){
+            print("mensaje: \(message), codigo: \(code), statment: \(String(describing: statement)) ")
+            return false
+        }catch {
+            print(error)
+            return false
+        }
+        
+        return true
     }
     
     

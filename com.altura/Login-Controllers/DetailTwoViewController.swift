@@ -108,7 +108,7 @@ class DetailTwoViewController: UIViewController, UITableViewDelegate, UITableVie
             cell.label_date_second.text = ""
             cell.date_first.text = ""
             cell.date_second.text = ""
-            cell.img.image = UIImage(named: "pago1_2")
+            cell.img.image = UIImage(named: "pago_2")  //pago1_2
             //cell.accessoryType = bills[indexPath.row].enabled ? UITableViewCellAccessoryType.checkmark : UITableViewCellAccessoryType.none
             //cell.mainMessage.text = data[indexPath.row].message
             //cell.mainDate.text = ""

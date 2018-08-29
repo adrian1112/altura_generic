@@ -11,6 +11,7 @@ import UIKit
 class OptionsProcessViewController: UIViewController {
     
     var contrato = ""
+    var servicio = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +22,7 @@ class OptionsProcessViewController: UIViewController {
     @IBAction func NewProcess1(_ sender: UIButton) {
         
         let viewController = self.storyboard?.instantiateViewController(withIdentifier: "techRequestViewController") as! TechRequestViewController
-        viewController.contrato = self.contrato
+        viewController.servicio = self.servicio
             self.present(viewController, animated: true, completion: nil)
         
         
@@ -30,7 +31,7 @@ class OptionsProcessViewController: UIViewController {
     @IBAction func newProcess2(_ sender: UIButton) {
         
         let viewController = self.storyboard?.instantiateViewController(withIdentifier: "billRequestViewController") as! BillRequestViewController
-        viewController.contrato = self.contrato
+        viewController.servicio = self.servicio
         self.present(viewController, animated: true, completion: nil)
     }
     

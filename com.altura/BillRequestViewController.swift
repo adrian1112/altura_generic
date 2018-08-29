@@ -44,17 +44,19 @@ class BillRequestViewController: UIViewController, UIPickerViewDelegate, UIPicke
     var pickerView1 = UIPickerView()
     var pickerView2 = UIPickerView()
     
-    var contrato = ""
-
+    var servicio = ""
+    
     var accounts = [account]()
     
     var bills_list = [billsAccount]()
+    
+    var account_selected = ""
+    var id_account_selected = ""
     
     @IBOutlet weak var tickButton: UIButton!
     
     let image_r = UIImage(named: "tick-2.png")
     var selectAll = false;
-    var service_selected = "";
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,12 +93,36 @@ class BillRequestViewController: UIViewController, UIPickerViewDelegate, UIPicke
             
         }
         
-        if contrato != "" {
-            select1.text = contrato
-            select1.isEnabled = false
-        }
+        select2.isEnabled = false
         
-        self.select2.isEnabled = false
+        if servicio != "" {
+            for item in accounts{
+                if item.service == servicio{
+                    self.account_selected = item.alias
+                    self.id_account_selected = item.service
+                    select1.text = item.alias
+                    select1.isEnabled = false
+                    select2.isEnabled = true
+                    
+                    self.account_selected = item.alias
+                    self.id_account_selected = item.service
+                    
+                    var i = 0
+                    self.bills = []
+                    for item in bills_list{
+                        if( self.id_account_selected == item.servicio){
+                            self.bills.append(Bill.init(name: getMonthString(date: item.fecha_emision,2), enabled: false, index: i, date_ini: getLabelDate(date: item.fecha_emision,2), date_end: getLabelDate(date: item.fecha_vencimiento,2), value: item.monto_factura, type: item.estado_factura))
+                            
+                            i += 1
+                        }
+                        
+                    }
+                    self.tableBills.reloadData()
+                    
+                }
+            }
+            
+        }
         
     }
     
@@ -208,12 +234,13 @@ class BillRequestViewController: UIViewController, UIPickerViewDelegate, UIPicke
             self.select1.resignFirstResponder()
             self.select2.isEnabled = true
             
-            self.service_selected = self.options_services[row]
+            self.account_selected = self.options[row]
+            self.id_account_selected = self.options_services[row]
             
             var i = 0
             self.bills = []
             for item in bills_list{
-                if( self.service_selected == item.servicio){
+                if( self.id_account_selected == item.servicio){
                     self.bills.append(Bill.init(name: getMonthString(date: item.fecha_emision,2), enabled: false, index: i, date_ini: getLabelDate(date: item.fecha_emision,2), date_end: getLabelDate(date: item.fecha_vencimiento,2), value: item.monto_factura, type: item.estado_factura))
                     
                     i += 1

@@ -7,9 +7,13 @@
 //
 
 import UIKit
+import SQLite
 
 class BarFiveViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    let dbase = DBase();
+    var db: Connection!
+    
     weak var activeField: UITextField?
     
     @IBOutlet weak var leftConstrain: NSLayoutConstraint!
@@ -51,6 +55,8 @@ class BarFiveViewController: UIViewController, UITableViewDataSource, UITableVie
         
         self.tableView.register(CustomTableViewCell2.self, forCellReuseIdentifier: "customCell")
         self.tableView.rowHeight = UITableViewAutomaticDimension
+        
+        let status = dbase.connect_db()
         
     }
     
@@ -123,6 +129,10 @@ class BarFiveViewController: UIViewController, UITableViewDataSource, UITableVie
         
         let alert = UIAlertController(title: nil, message: "Seguro que desea Cerrar Sesión?", preferredStyle: .alert);
         let btn_alert = UIAlertAction(title: "Aceptar", style: .default) { (UIAlertAction) in
+            
+            let status = self.dbase.encerarTables()
+            if status{ print("ok")}else{print("error encerando")}
+            
             self.dismiss(animated: true, completion: nil)
         }
         let btn_cancel = UIAlertAction(title: "Cancelar", style: .cancel) { (UIAlertAction) in
@@ -166,8 +176,6 @@ class BarFiveViewController: UIViewController, UITableViewDataSource, UITableVie
         default:
             break
         }
-        
-        
         
     }
     

@@ -24,10 +24,11 @@ class TechRequestViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     //let options=["","Opcion1","Opcion2","Opcion3","Opcion4","Opcion5"]
     var options = [String]()
+    var options_services = [String]()
     
     @IBOutlet weak var obsText: UITextView!
     
-    var contrato = ""
+    var servicio = ""
     
     let options2=["","Falta de tapa de alcantarilla","Fuga de agua en cajetin de medidor","Fuga de agua en la guía","Limpieza de caja de alcantarillado"]
     
@@ -44,6 +45,9 @@ class TechRequestViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     
     var accounts = [account]()
+    
+    var account_selected = ""
+    var id_account_selected = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,15 +75,26 @@ class TechRequestViewController: UIViewController, UIPickerViewDelegate, UIPicke
             accounts = self.dbase.getAccounts()
             for item in accounts{
                 options.append(item.alias)
+                options_services.append(item.service)
             }
         }
         
-        if contrato != "" {
-            select1.text = contrato
-            select1.isEnabled = false
+        select2.isEnabled = false
+        
+        if servicio != "" {
+            for item in accounts{
+                if item.service == servicio{
+                    self.account_selected = item.alias
+                    self.id_account_selected = item.service
+                    select1.text = item.alias
+                    select1.isEnabled = false
+                    select2.isEnabled = true
+                }
+            }
+            
         }
         
-        select2.isEnabled = false
+        
         
     }
     
@@ -121,14 +136,15 @@ class TechRequestViewController: UIViewController, UIPickerViewDelegate, UIPicke
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
         return ""
-        
-        
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         if pickerView == pickerView1 {
             self.select1.text = self.options[row]
+            self.account_selected = self.options[row]
+            self.id_account_selected = self.options_services[row]
+            
             if( self.select1.text == ""){
                 self.select2.text = ""
                 select2.isEnabled = false
@@ -227,7 +243,6 @@ class TechRequestViewController: UIViewController, UIPickerViewDelegate, UIPicke
             UIView.animate(withDuration: 0.3) {
                 self.view.frame = newViewFrame
             }
-            
         }
     }
     

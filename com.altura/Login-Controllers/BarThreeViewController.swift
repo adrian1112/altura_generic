@@ -141,6 +141,10 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
         
         let alert = UIAlertController(title: nil, message: "Seguro que desea Cerrar Sesión?", preferredStyle: .alert);
         let btn_alert = UIAlertAction(title: "Aceptar", style: .default) { (UIAlertAction) in
+            
+            let status = self.dbase.encerarTables()
+            if status{ print("ok")}else{print("error encerando")}
+            
             self.dismiss(animated: true, completion: nil)
         }
         let btn_cancel = UIAlertAction(title: "Cancelar", style: .cancel) { (UIAlertAction) in
@@ -177,6 +181,7 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
         
         let tabBarViewController = self.storyboard?.instantiateViewController(withIdentifier: "detaillsTabBarController") as! DetailsTabBarViewController
         tabBarViewController.contrato = data[indexPath.row].title!
+        tabBarViewController.servicio = data[indexPath.row].service!
         tabBarViewController.detailtAccountItem = accounts_list[indexPath.row]
         self.present(tabBarViewController, animated: true)
         
