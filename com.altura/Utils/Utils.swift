@@ -10,9 +10,12 @@ import Foundation
 
 func verificarCedula(cedula: String) -> Bool {
     var cedulaCorrecta = false
+    var cedula = cedula
     if (cedula.count == 13){
-        
+        cedula = cedula.substring(with: 0..<10)
+        print("cedula \(cedula.substring(with: 0..<10))" )
     }
+    
     if (cedula.count == 10){
         
         let tercerDigito = Int(cedula.substring(with: 2..<3))!
@@ -156,4 +159,15 @@ func getOnlyMonthString(date: String, _ type: Int) -> String {
     
     dateFormatter.locale = Locale(identifier: "es_EC")
     return dateFormatter.date(from: date)!
+}
+
+func getDate() -> String{
+    
+    let date = Date()
+
+    let dateFormatter = DateFormatter()
+    
+    dateFormatter.locale = Locale(identifier: "es_EC")
+    dateFormatter.setLocalizedDateFormatFromTemplate("dd/MM/yyyy")
+    return dateFormatter.string(from: date)
 }

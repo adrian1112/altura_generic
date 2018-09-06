@@ -423,8 +423,6 @@ class DBase {
             ok = false
             print(error)
         }
-        
-        
         return ok
     }
     
@@ -440,15 +438,25 @@ class DBase {
             if(request.count > 0){
                 for us in request {
                     do {
-                        print("name: \(try us.get(id_users_l_T))")
-                        user.id_user = try us.get(id_users_l_T)
-                        user.document = try us.get(document_l_T)
-                        user.person = try us.get(person_l_T)
-                        user.email = try us.get(email_l_T)
-                        user.phone = try us.get(phone_l_T)
-                        user.sync_date = try us.get(sync_date_l_T)
-                        user.adress = try us.get(adress_l_T)
-                        user.error = 0
+                        let date = try us.get(sync_date_l_T)
+                        let base_date = getLabelDate(date: date,4)
+                        print("fecha_base: \(base_date)")
+                        
+                        let now = getDate()
+                        print("fecha_actual: \(now)")
+                        
+                        if base_date == now {
+                            print("name: \(try us.get(id_users_l_T))")
+                            user.id_user = try us.get(id_users_l_T)
+                            user.document = try us.get(document_l_T)
+                            user.person = try us.get(person_l_T)
+                            user.email = try us.get(email_l_T)
+                            user.phone = try us.get(phone_l_T)
+                            user.sync_date = date
+                            user.adress = try us.get(adress_l_T)
+                            user.error = 0
+                        }
+                        
                         
                     } catch {
                         print(error)

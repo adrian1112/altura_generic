@@ -8,9 +8,13 @@
 
 import UIKit
 import Foundation
-import SQLite
+import WebKit
 
 class RegisterSecondController: UIViewController {
+    
+    let ws = WService();
+    
+    
     @IBOutlet weak var contract_txt: UITextField!
     @IBOutlet weak var names_txt: UITextField!
     @IBOutlet weak var address_txt: UITextField!
@@ -18,6 +22,13 @@ class RegisterSecondController: UIViewController {
     
     @IBOutlet weak var acept_term_select: UISwitch!
     @IBOutlet weak var send_data_select: UISwitch!
+    
+    @IBOutlet weak var send: UIButton!
+    
+    
+    @IBOutlet weak var termsView: UIView!
+    @IBOutlet weak var termspage: WKWebView!
+    @IBOutlet weak var btnterms: UIButton!
     
     var txt_alert=""
     
@@ -29,26 +40,25 @@ class RegisterSecondController: UIViewController {
     var address = ""
     var telephone = ""
     
-    var db: Connection!
-    let usersT = Table("usuarios")
-    let id_usersT = Expression<Int>("id")
-    let name_userT = Expression<String>("nombre")
-    var email_user_T = Expression<String>("email")
-    let identifier_user_T = Expression<String>("cedula")
-    let address_user_T = Expression<String>("direccion")
-    let telephone_user_T = Expression<String>("telefono")
-    let contract_user_T = Expression<String>("contrato")
-    let password_user_T = Expression<String>("contrasena")
+    
+    let url = "https://www.google.com"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         print("second")
-        print(self.db)
         contract_txt.text = self.contract
         names_txt.text = self.names
         address_txt.text = self.address
         telephone_txt.text = self.telephone
+        
+        
+        
+        self.termsView.isHidden = true
+        let url_page = URL(string: self.url)
+        let request = URLRequest(url: url_page!)
+        termspage.load(request)
+        
         
     }
     
@@ -62,7 +72,6 @@ class RegisterSecondController: UIViewController {
             registro.names = self.names_txt.text!
             registro.address = self.address_txt.text!
             registro.telephone = self.telephone_txt.text!
-            registro.db = self.db
         }
     }
     
@@ -83,12 +92,12 @@ class RegisterSecondController: UIViewController {
         let myColor = UIColor.red
         var texto = "* "
         
-        if(contract == "" ){
+        /*if(contract == "" ){
             self.contract_txt.layer.borderColor = myColor.cgColor
             self.contract_txt.layer.borderWidth = 1.0
         }else{
             self.contract_txt.layer.borderWidth = 0
-        }
+        }*/
         if(names == "" ){
             self.names_txt.layer.borderColor = myColor.cgColor
             self.names_txt.layer.borderWidth = 1.0
@@ -129,8 +138,34 @@ class RegisterSecondController: UIViewController {
             
         }
         
-        if(contract != "" && names != "" && address != "" && telephone != "" && term_ok){
-            let insertUser = self.usersT.insert(self.identifier_user_T <- identifier,self.email_user_T <- email, self.password_user_T <- pass, self.contract_user_T <- contract, self.name_userT <- names, self.address_user_T <- address, self.telephone_user_T <- telephone)
+        if( names != "" && address != "" && telephone != "" && term_ok){
+
+            let imei = UserDefaults.standard.object(forKey: "token") != nil ? UserDefaults.standard.object(forKey: "token") as! String : ""
+            
+            let document = ["document" : identifier,
+                            "mail" : email,
+                            "pass" : pass,
+                            "phone" : telephone,
+                            "imei" : imei,
+                            "person" : names,
+                            "adress" : address,
+                            "service" : contract]
+            
+            ws.registerUser(user: document, success:{
+                (message) -> Void in
+                print(message)
+                self.txt_alert = "Ya estas a un paso de completar el registro, INTERAGUA enviará un correo electrónico para que puedas activar tu cuenta"
+                self.showAlert(status: 1)
+                
+            }, error: {
+                (message) -> Void in
+                print(message)
+                self.txt_alert = message
+                self.showAlert(status: 0)
+                
+            })
+            
+            /*let insertUser = self.usersT.insert(self.identifier_user_T <- identifier,self.email_user_T <- email, self.password_user_T <- pass, self.contract_user_T <- contract, self.name_userT <- names, self.address_user_T <- address, self.telephone_user_T <- telephone)
             do{
                 try self.db.run(insertUser)
                 self.txt_alert = "Se creo el usuario correctamente"
@@ -151,7 +186,7 @@ class RegisterSecondController: UIViewController {
                 self.showAlert(status: 3)
                 print(error)
                 print("no se creo el usuario")
-            }
+            }*/
         }
         
         
@@ -161,10 +196,6 @@ class RegisterSecondController: UIViewController {
         if(status == 1){
             let viewController = self.storyboard?.instantiateViewController(withIdentifier: "initController") as! InitController
             self.present(viewController, animated: true, completion: nil)
-        }else if( status == 2){
-            
-        }else{
-            
         }
     }
     
@@ -177,4 +208,14 @@ class RegisterSecondController: UIViewController {
         alert.addAction(btn_alert);
         self.present(alert, animated: true, completion: nil);
     }
+    
+    @IBAction func showTerms(_ sender: Any) {
+        
+        self.termsView.isHidden = false
+    }
+    
+    @IBAction func hiddenTerms(_ sender: Any) {
+        self.termsView.isHidden = true
+    }
+    
 }

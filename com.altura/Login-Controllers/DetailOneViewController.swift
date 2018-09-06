@@ -23,6 +23,7 @@ class DetailOneViewController: UIViewController {
     @IBOutlet weak var container: UIView!
     @IBOutlet weak var navigationBar: UINavigationItem!
     @IBOutlet weak var pieChart: PieChartView!
+    @IBOutlet weak var debView: UIView!
     
     //var chartView: HIChartView!
     //let options = HIOptions()
@@ -30,7 +31,6 @@ class DetailOneViewController: UIViewController {
     
     @IBOutlet weak var widthView1: NSLayoutConstraint!
     @IBOutlet weak var widthView2: NSLayoutConstraint!
-    @IBOutlet weak var heigthViewBotton: NSLayoutConstraint!
     
     @IBOutlet weak var heigthPieView: NSLayoutConstraint!
     
@@ -110,6 +110,12 @@ class DetailOneViewController: UIViewController {
         }
         saldo.text = "Saldo $\(total_deb)"
         
+        if total_deb == 0.0{
+            debView.isHidden = true
+        }else{
+            debView.isHidden = false
+        }
+        
         
         colors.append(UIColor(red:103.00/255.00, green:58.00/255.00, blue:183.00/255.00, alpha: 1))
         colors.append(UIColor(red:255.00/255.00, green:152.00/255.00, blue:0.00/255.00, alpha: 1))
@@ -150,7 +156,7 @@ class DetailOneViewController: UIViewController {
         //setea el ancho y alto de los view de la secicon detalles
         widthView1.constant = (self.view.bounds.width/2)-12
         widthView2.constant = (self.view.bounds.width/2)-12
-        heigthViewBotton.constant = (self.view.bounds.height/2)-40
+        //heigthViewBotton.constant = (self.view.bounds.height/2)-40
         
         
         

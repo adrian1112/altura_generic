@@ -57,6 +57,10 @@
 		2293BED9213494D7002D13B9 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2293BED121349188002D13B9 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2293BEE0213499C7002D13B9 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2293BE8C21348B34002D13B9 /* SQLite.framework */; };
 		2293BEE1213499C7002D13B9 /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2293BE8C21348B34002D13B9 /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2293BEF6213DBE68002D13B9 /* Zip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2293BEED213DBE53002D13B9 /* Zip.framework */; };
+		2293BEF7213DBE68002D13B9 /* Zip.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2293BEED213DBE53002D13B9 /* Zip.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2293BEFC21407BF2002D13B9 /* customTableTableViewCell5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2293BEFA21407BF2002D13B9 /* customTableTableViewCell5.swift */; };
+		2293BEFD21407BF2002D13B9 /* customTableTableViewCell5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2293BEFB21407BF2002D13B9 /* customTableTableViewCell5.xib */; };
 		229D62D320F4F55500B0DE7C /* CustomMap2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229D62D220F4F55500B0DE7C /* CustomMap2ViewController.swift */; };
 		22A9E67520B0F00C0092E555 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9E67420B0F00C0092E555 /* AppDelegate.swift */; };
 		22A9E67720B0F00C0092E555 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9E67620B0F00C0092E555 /* ViewController.swift */; };
@@ -197,6 +201,48 @@
 			remoteGlobalIDString = EE247AD21C3F04ED00AE3E12;
 			remoteInfo = "SQLite iOS";
 		};
+		2293BEEC213DBE53002D13B9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2293BEE4213DBE52002D13B9 /* Zip.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 347E3A741C1DFFB500A11FD3;
+			remoteInfo = Zip;
+		};
+		2293BEEE213DBE53002D13B9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2293BEE4213DBE52002D13B9 /* Zip.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 347E3A7E1C1DFFB500A11FD3;
+			remoteInfo = ZipTests;
+		};
+		2293BEF0213DBE53002D13B9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2293BEE4213DBE52002D13B9 /* Zip.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 343F50FF1C8DAEEC0028C434;
+			remoteInfo = "Zip OSX";
+		};
+		2293BEF2213DBE53002D13B9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2293BEE4213DBE52002D13B9 /* Zip.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 343F51081C8DAEEC0028C434;
+			remoteInfo = "Zip OSXTests";
+		};
+		2293BEF4213DBE53002D13B9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2293BEE4213DBE52002D13B9 /* Zip.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 342545B51CE525B200336074;
+			remoteInfo = "Zip tvOS";
+		};
+		2293BEF8213DBE68002D13B9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2293BEE4213DBE52002D13B9 /* Zip.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 347E3A731C1DFFB500A11FD3;
+			remoteInfo = Zip;
+		};
 		22A9E68620B0F00E0092E555 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 22A9E66920B0F00C0092E555 /* Project object */;
@@ -280,6 +326,7 @@
 				2293BEC8213490CA002D13B9 /* CryptoSwift.framework in Embed Frameworks */,
 				2293BEE1213499C7002D13B9 /* SQLite.framework in Embed Frameworks */,
 				22AFA5B12108E9BF00E08444 /* Alamofire.framework in Embed Frameworks */,
+				2293BEF7213DBE68002D13B9 /* Zip.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -335,6 +382,9 @@
 		2293BE8121348B34002D13B9 /* SQLite.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SQLite.xcodeproj; path = Alamofire/../SQLite/SQLite.xcodeproj; sourceTree = "<group>"; };
 		2293BEB5213490A0002D13B9 /* CryptoSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CryptoSwift.xcodeproj; path = CryptoSwift/CryptoSwift.xcodeproj; sourceTree = "<group>"; };
 		2293BECB21349187002D13B9 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = Charts/Charts.xcodeproj; sourceTree = "<group>"; };
+		2293BEE4213DBE52002D13B9 /* Zip.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Zip.xcodeproj; path = "Zip-master/Zip.xcodeproj"; sourceTree = "<group>"; };
+		2293BEFA21407BF2002D13B9 /* customTableTableViewCell5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customTableTableViewCell5.swift; sourceTree = "<group>"; };
+		2293BEFB21407BF2002D13B9 /* customTableTableViewCell5.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = customTableTableViewCell5.xib; sourceTree = "<group>"; };
 		229D62D220F4F55500B0DE7C /* CustomMap2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMap2ViewController.swift; sourceTree = "<group>"; };
 		22A9E67120B0F00C0092E555 /* com.altura.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = com.altura.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22A9E67420B0F00C0092E555 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -378,6 +428,7 @@
 				2293BEE0213499C7002D13B9 /* SQLite.framework in Frameworks */,
 				2293BED8213494D7002D13B9 /* Charts.framework in Frameworks */,
 				2293BEC7213490CA002D13B9 /* CryptoSwift.framework in Frameworks */,
+				2293BEF6213DBE68002D13B9 /* Zip.framework in Frameworks */,
 				22AFA5B02108E9BF00E08444 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -443,7 +494,8 @@
 				2201C07D20EAB955003BF608 /* CustomTableViewCell4.swift */,
 				2201C07E20EAB955003BF608 /* CustomTableViewCell4.xib */,
 				22112FB820ED6DD000689974 /* OptionsProcessViewController.swift */,
-				22112FBA20ED78FF00689974 /* NewContractViewController.swift */,
+				2293BEFA21407BF2002D13B9 /* customTableTableViewCell5.swift */,
+				2293BEFB21407BF2002D13B9 /* customTableTableViewCell5.xib */,
 			);
 			path = CustomElements;
 			sourceTree = "<group>";
@@ -497,9 +549,22 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		2293BEE5213DBE52002D13B9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2293BEED213DBE53002D13B9 /* Zip.framework */,
+				2293BEEF213DBE53002D13B9 /* ZipTests.xctest */,
+				2293BEF1213DBE53002D13B9 /* Zip.framework */,
+				2293BEF3213DBE53002D13B9 /* Zip OSXTests.xctest */,
+				2293BEF5213DBE53002D13B9 /* Zip.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		22A9E66820B0F00C0092E555 = {
 			isa = PBXGroup;
 			children = (
+				2293BEE4213DBE52002D13B9 /* Zip.xcodeproj */,
 				22D5623A20F666D20098526C /* include */,
 				2293BE8121348B34002D13B9 /* SQLite.xcodeproj */,
 				22AFA5932108E7A100E08444 /* Alamofire.xcodeproj */,
@@ -539,6 +604,7 @@
 				221CC56120BC481000CFC265 /* InitController.swift */,
 				22A9E68020B0F00E0092E555 /* Info.plist */,
 				224419BF20CB183D008D90C4 /* Assets.xcassets */,
+				22112FBA20ED78FF00689974 /* NewContractViewController.swift */,
 				22441A0620D80DF5008D90C4 /* PageUrlViewController.swift */,
 				2201C04820E3D6A9003BF608 /* TechRequestViewController.swift */,
 				2201C04A20E52213003BF608 /* BillRequestViewController.swift */,
@@ -634,6 +700,7 @@
 				2293BECA213490CA002D13B9 /* PBXTargetDependency */,
 				2293BEDB213494D7002D13B9 /* PBXTargetDependency */,
 				2293BEE3213499C7002D13B9 /* PBXTargetDependency */,
+				2293BEF9213DBE68002D13B9 /* PBXTargetDependency */,
 			);
 			name = com.altura;
 			productName = com.altura;
@@ -729,6 +796,10 @@
 				{
 					ProductGroup = 2293BE8221348B34002D13B9 /* Products */;
 					ProjectRef = 2293BE8121348B34002D13B9 /* SQLite.xcodeproj */;
+				},
+				{
+					ProductGroup = 2293BEE5213DBE52002D13B9 /* Products */;
+					ProjectRef = 2293BEE4213DBE52002D13B9 /* Zip.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -839,6 +910,41 @@
 			remoteRef = 2293BED221349188002D13B9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		2293BEED213DBE53002D13B9 /* Zip.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Zip.framework;
+			remoteRef = 2293BEEC213DBE53002D13B9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2293BEEF213DBE53002D13B9 /* ZipTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ZipTests.xctest;
+			remoteRef = 2293BEEE213DBE53002D13B9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2293BEF1213DBE53002D13B9 /* Zip.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Zip.framework;
+			remoteRef = 2293BEF0213DBE53002D13B9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2293BEF3213DBE53002D13B9 /* Zip OSXTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Zip OSXTests.xctest";
+			remoteRef = 2293BEF2213DBE53002D13B9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2293BEF5213DBE53002D13B9 /* Zip.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Zip.framework;
+			remoteRef = 2293BEF4213DBE53002D13B9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		22AFA59F2108E7A200E08444 /* Alamofire.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -904,6 +1010,7 @@
 				22D5623B20F666D20098526C /* include in Resources */,
 				2201C07420E6EBA6003BF608 /* PopupCustom.storyboard in Resources */,
 				224419C620CB183D008D90C4 /* Assets.xcassets in Resources */,
+				2293BEFD21407BF2002D13B9 /* customTableTableViewCell5.xib in Resources */,
 				22A9E67A20B0F00C0092E555 /* Main.storyboard in Resources */,
 				2201C04220E1556A003BF608 /* AboutViewController.storyboard in Resources */,
 			);
@@ -1038,6 +1145,7 @@
 				228804CE20C8462100C94AAC /* WService.swift in Sources */,
 				228804E420C9D4C500C94AAC /* ThirdViewController.swift in Sources */,
 				2201C07120E6E8CC003BF608 /* PopUpCustomViewController.swift in Sources */,
+				2293BEFC21407BF2002D13B9 /* customTableTableViewCell5.swift in Sources */,
 				22D5623D20F688D00098526C /* CustomWebViewController.swift in Sources */,
 				2201C05320E58734003BF608 /* CustomPinMap.swift in Sources */,
 				221CC56220BC481000CFC265 /* InitController.swift in Sources */,
@@ -1088,6 +1196,11 @@
 			isa = PBXTargetDependency;
 			name = "SQLite iOS";
 			targetProxy = 2293BEE2213499C7002D13B9 /* PBXContainerItemProxy */;
+		};
+		2293BEF9213DBE68002D13B9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Zip;
+			targetProxy = 2293BEF8213DBE68002D13B9 /* PBXContainerItemProxy */;
 		};
 		22A9E68720B0F00E0092E555 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

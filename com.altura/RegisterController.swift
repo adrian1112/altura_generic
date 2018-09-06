@@ -25,14 +25,12 @@ class RegisterController: UIViewController {
     var address = ""
     var telephone = ""
     
-    var db: Connection!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
      
         print("first")
-        print(self.db)
         identifier_txt.text = self.identifier
         email_txt.text = self.email
         pass1_txt.text = self.pass
@@ -136,7 +134,6 @@ class RegisterController: UIViewController {
                 viewController.names = self.names
                 viewController.address = self.address
                 viewController.telephone = self.telephone
-                viewController.db = self.db
                 self.present(viewController, animated: true)
         }else{
             self.label_error.text = text

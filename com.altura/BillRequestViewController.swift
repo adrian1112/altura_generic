@@ -8,6 +8,7 @@
 
 import UIKit
 import SQLite
+import Zip
 
 class BillRequestViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource {
     
@@ -22,7 +23,7 @@ class BillRequestViewController: UIViewController, UIPickerViewDelegate, UIPicke
     @IBOutlet weak var select2: UITextField!
     @IBOutlet weak var picture: UIImageView!
     
-    @IBOutlet weak var textView: UITextView!
+   
     
     @IBOutlet weak var textView_label: UITextView!
     
@@ -319,6 +320,41 @@ class BillRequestViewController: UIViewController, UIPickerViewDelegate, UIPicke
         let btn_alert = UIAlertAction(title: "Cerrar", style: .cancel)
         alert.addAction(btn_alert);
         self.present(alert, animated: true, completion: nil);
+    }
+    
+    func saveImage(image: UIImage) -> Bool {
+        guard let data = UIImageJPEGRepresentation(image, 1) ?? UIImagePNGRepresentation(image) else {
+            return false
+        }
+        guard let directory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) as NSURL else {
+            return false
+        }
+        
+        do {
+            try data.write(to: directory.appendingPathComponent("rec_facturacion.png")!)
+            return true
+        } catch {
+            print(error.localizedDescription)
+            return false
+        }
+    }
+    
+    func zipImage() -> Bool{
+        guard let directory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) as NSURL else {
+            return false
+        }
+        
+        let n_directory = directory.appendingPathComponent("rec_facturacion.png")
+        do {
+            let zipFilePath = try Zip.quickZipFiles([n_directory!], fileName: "archive") // Zip
+            
+        }
+        catch {
+            print("Something went wrong")
+            return false
+        }
+        
+        return true
     }
 
    

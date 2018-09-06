@@ -59,7 +59,7 @@ class WService {
                     if( user.status > 0){
                         self.user_in = user
                         print("usuario en funcion despues de if: \(user)")
-                        if(user.status == 1 ){
+                        if(user.status == 1 ){ // no valida email
                             req = 2
                             print("retorna error")
                             error(req,self.user_in)
@@ -71,7 +71,7 @@ class WService {
                             //self.txt_alert = "usuario:"+user.person!
                         }
                         
-                    }else{
+                    }else{ // no existe
                         req = 3
                         print("retorna error")
                         error(req,self.user_in)
@@ -192,8 +192,8 @@ class WService {
             print(jsn_url)
             
             guard var url = try? URLRequest(url: NSURL(string: jsn_url) as! URL) else {
-                print("error")
-                error( false,"Error al generar la url")
+                print("Error al generar la url")
+                error( false,"Error de comunicación con el servidor. Por favor contacte al administrador del sistema.")
                 
             }
             
@@ -203,14 +203,19 @@ class WService {
             let (data, response, err) = URLSession.shared.synchronousDataTask(urlrequest: url)
             if let error2 = err {
                 print("Synchronous task ended with error: \(error)")
-                error( false,"Error al obtener data: \(error2)")
+                error( false,"Error de comunicación con el servidor. Por favor contacte al administrador del sistema.")
             }else {
                 print("Synchronous task ended without errors.")
                 //print(data)
-                guard let data = data else { return error( false,"Error al obtener la data") }
+                guard let data = data else { return error( false,"Error de comunicación con el servidor. Por favor contacte al administrador del sistema.") }
                 
                 do{
-                    guard let data_received = String(data: data, encoding: .utf8) else{ return error( false,"Error encodign utf8") }
+                    guard let data_received = String(data: data, encoding: .utf8) else{
+                        
+                        print("Error en codificacion utf8")
+                        return error( false,"Error de comunicación con el servidor. Por favor contacte al administrador del sistema.")
+                        
+                    }
                     print("data received: \(data_received)")
                     
                     let data2 = try! data_received.aesDecrypt(key: n_key, iv: self.iv)
@@ -229,6 +234,9 @@ class WService {
                                 }
                                 if key as! String == "row"{
                                     list = value as! NSArray
+                                }
+                                if key as! String == "error"{
+                                    error( false,value as! String)
                                 }
                             }
                             for value in list {
@@ -260,6 +268,9 @@ class WService {
                                 if key as! String == "row"{
                                     list = value as! NSArray
                                 }
+                                if key as! String == "error"{
+                                    error( false,value as! String)
+                                }
                             }
                             for value in list {
                                 let value = value as! NSArray
@@ -287,6 +298,9 @@ class WService {
                                 }
                                 if key as! String == "row"{
                                     list = value as! NSArray
+                                }
+                                if key as! String == "error"{
+                                    error( false,value as! String)
                                 }
                             }
                             for value in list {
@@ -316,6 +330,9 @@ class WService {
                                 if key as! String == "row"{
                                     list = value as! NSArray
                                 }
+                                if key as! String == "error"{
+                                    error( false,value as! String)
+                                }
                             }
                             for value in list {
                                 let value = value as! NSArray
@@ -343,6 +360,9 @@ class WService {
                                 }
                                 if key as! String == "row"{
                                     list = value as! NSArray
+                                }
+                                if key as! String == "error"{
+                                    error( false,value as! String)
                                 }
                             }
                             for value in list {
@@ -534,5 +554,213 @@ class WService {
         }.resume()
         
     }
+    
+    
+    func registerUser(user: Dictionary<String, String>, success: @escaping (_ message: String) -> Void, error: @escaping (_ message: String) -> Void) {
+        let n_key = key.md5()
+        
+        var url_part = "action=register"
+        for item in user{
+            url_part = url_part+"&\(item.key)=\(item.value)"
+        }
+        print(url_part)
+        
+        let encode = try! url_part.aesEncrypt(key: n_key, iv: iv)
+        
+        print("codificado: \(encode)")
+        
+        let jsn_url = url_master + (encode.urlEncode() as String)
+        print(jsn_url)
+        
+        guard var url = try? URLRequest(url: NSURL(string: jsn_url) as! URL) else {
+            print("error registrando usuario")
+            error("Error al generar la url registro usuario")
+            
+        }
+        
+        //var request = URLRequest(url: url1)
+        //url.httpBody = body
+        url.httpMethod = "POST"
+        let (data, response, err) = URLSession.shared.synchronousDataTask(urlrequest: url)
+        if let error2 = err {
+            print("Synchronous task ended with error: \(error)")
+            error("Error al obtener data: \(error2)")
+        }
+        else {
+            print("Synchronous task ended without errors.")
+            //print(data)
+            guard let data = data else { return error("Error al obtener la data") }
+            
+            do{
+                guard let data_received = String(data: data, encoding: .utf8) else{ return error("Error encodign utf8") }
+                print("data received: \(data_received)")
+                
+                let data2 = try! data_received.aesDecrypt(key: n_key, iv: self.iv)
+                print("datos decript notificaciones \(data2)")
+                
+                let dictionary: Dictionary<NSObject, AnyObject> = try JSONSerialization.jsonObject(with: data2.data(using: .utf8)!, options: JSONSerialization.ReadingOptions.mutableContainers) as! Dictionary<NSObject, AnyObject>
+                
+                var status = 0
+                var message = ""
+                for (key,value) in dictionary {
+                    if key as! String == "status" {
+                        status = value as! Int
+                    }
+                    if key as! String == "error"{
+                        message = value as! String
+                    }
+                }
+                
+                if status == 1{
+                    success("succ")
+                }else{
+                    error( message )
+                }
+                
+                
+            }catch let errJson {
+                print(errJson)
+                error( "Error \(errJson)")
+            }
+            
+        }
+        
+        
+    }
+    
+    func reSendEmail(email: String, success: @escaping (_ message: String) -> Void, error: @escaping (_ message: String) -> Void) {
+        let n_key = key.md5()
+        
+        var url_part = "action=reSendMail&mail=\(email)"
+        
+        print(url_part)
+        
+        let encode = try! url_part.aesEncrypt(key: n_key, iv: iv)
+        
+        print("codificado: \(encode)")
+        
+        let jsn_url = url_master + (encode.urlEncode() as String)
+        print(jsn_url)
+        
+        guard var url = try? URLRequest(url: NSURL(string: jsn_url) as! URL) else {
+            print("error reenviando correo")
+            error("Error al generar la url reenvio de correo")
+            
+        }
+        
+        //var request = URLRequest(url: url1)
+        //url.httpBody = body
+        url.httpMethod = "POST"
+        let (data, response, err) = URLSession.shared.synchronousDataTask(urlrequest: url)
+        if let error2 = err {
+            print("Synchronous task ended with error: \(error)")
+            error("Error al obtener data: \(error2)")
+        }
+        else {
+            print("Synchronous task ended without errors.")
+            //print(data)
+            guard let data = data else { return error("Error al obtener la data") }
+            
+            do{
+                guard let data_received = String(data: data, encoding: .utf8) else{ return error("Error encodign utf8") }
+                print("data received: \(data_received)")
+                
+                let data2 = try! data_received.aesDecrypt(key: n_key, iv: self.iv)
+                print("datos decript reenvio \(data2)")
+                
+                let dictionary: Dictionary<NSObject, AnyObject> = try JSONSerialization.jsonObject(with: data2.data(using: .utf8)!, options: JSONSerialization.ReadingOptions.mutableContainers) as! Dictionary<NSObject, AnyObject>
+                
+                var status = 0
+                var message = ""
+                for (key,value) in dictionary {
+                    if key as! String == "status" {
+                        status = value as! Int
+                    }
+                    if key as! String == "error"{
+                        message = value as! String
+                    }
+                }
+                
+                if status == 1{
+                    success("succ")
+                }else{
+                    error( message )
+                }
+                
+                
+            }catch let errJson {
+                print(errJson)
+                error( "Error \(errJson)")
+            }
+            
+        }
+        
+        
+    }
+    
+    func searchService(user: String, id: String, service: String , success: @escaping (_ status: Int, _ message: String) -> Void, error: @escaping (_ message: String) -> Void) {
+        let n_key = key.md5()
+        
+        var url_part = "action=query&id_query=41&ID=\(id)&NS=\(service)&ID_USER=\(user)&os_type=2"
+        
+        print(url_part)
+        
+        let encode = try! url_part.aesEncrypt(key: n_key, iv: iv)
+        
+        print("codificado: \(encode)")
+        
+        let jsn_url = url_master + (encode.urlEncode() as String)
+        print(jsn_url)
+        
+        guard var url = try? URLRequest(url: NSURL(string: jsn_url) as! URL) else {
+            print("error reenviando correo")
+            error("Error al generar la consulta de servicio")
+            
+        }
+        
+        //var request = URLRequest(url: url1)
+        //url.httpBody = body
+        url.httpMethod = "POST"
+        let (data, response, err) = URLSession.shared.synchronousDataTask(urlrequest: url)
+        if let error2 = err {
+            print("Synchronous task ended with error: \(error)")
+            error("Error al obtener data: \(error2)")
+        }
+        else {
+            print("Synchronous task ended without errors.")
+            //print(data)
+            guard let data = data else { return error("Error al obtener la data") }
+            
+            do{
+                guard let data_received = String(data: data, encoding: .utf8) else{ return error("Error encodign utf8") }
+                print("data received: \(data_received)")
+                
+                let data2 = try! data_received.aesDecrypt(key: n_key, iv: self.iv)
+                print("datos decript reenvio \(data2)")
+                
+                let dictionary: Dictionary<NSObject, AnyObject> = try JSONSerialization.jsonObject(with: data2.data(using: .utf8)!, options: JSONSerialization.ReadingOptions.mutableContainers) as! Dictionary<NSObject, AnyObject>
+                
+                var status = 0
+                var message = "ok"
+                for (key,value) in dictionary {
+                    if key as! String == "status" {
+                        status = value as! Int
+                    }
+                    if key as! String == "error"{
+                        message = value as! String
+                    }
+                }
+                
+                success( status,message )
+                
+                
+            }catch let errJson {
+                print(errJson)
+                error( "Error \(errJson)")
+            }
+            
+        }
+    }
+    
     
 }

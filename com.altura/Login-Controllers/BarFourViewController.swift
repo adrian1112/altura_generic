@@ -16,6 +16,7 @@ class BarFourViewController: UIViewController, UITableViewDataSource, UITableVie
     var db: Connection!
     
     @IBOutlet weak var leftConstrain: NSLayoutConstraint!
+    @IBOutlet weak var rigthConstrain: NSLayoutConstraint!
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var leftView: UIView!
     
@@ -29,6 +30,8 @@ class BarFourViewController: UIViewController, UITableViewDataSource, UITableVie
     
     var data = [cellData]()
     var notificationsList = [notification]()
+    
+    var width = 0;
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +49,8 @@ class BarFourViewController: UIViewController, UITableViewDataSource, UITableVie
         leftView.layer.shadowOpacity = 0.8
         leftView.layer.shadowOffset = CGSize(width: 5, height: 0)
         
-        leftConstrain.constant = -80
+        width = Int(self.view.bounds.width)
+        rigthConstrain.constant = 0
         
         //self.hiddenMenu()
         
@@ -79,7 +83,7 @@ class BarFourViewController: UIViewController, UITableViewDataSource, UITableVie
     
     @IBAction func menuActions(_ sender: Any) {
         
-        if(self.leftConstrain.constant == -80){
+        if(self.rigthConstrain.constant == 0){
             self.showMenu()
         }else{
             self.hiddenMenu()
@@ -126,7 +130,7 @@ class BarFourViewController: UIViewController, UITableViewDataSource, UITableVie
     func showMenu(){
         
         UIView.animate(withDuration: 0.2) {
-            self.leftConstrain.constant = 0
+            self.rigthConstrain.constant = CGFloat(self.width)
             self.view.layoutIfNeeded()
             self.menuButton.image = self.image_l
         }
@@ -135,7 +139,7 @@ class BarFourViewController: UIViewController, UITableViewDataSource, UITableVie
     func hiddenMenu(){
         
         UIView.animate(withDuration: 0.2) {
-            self.leftConstrain.constant = -80
+            self.rigthConstrain.constant = 0
             self.view.layoutIfNeeded()
             self.menuButton.image = self.image_r
         }
@@ -181,6 +185,8 @@ class BarFourViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("selected", indexPath.row)
+        hiddenMenu()
+        
         let title_string = data[indexPath.row].title
         let body_string = data[indexPath.row].message
         let image_string =  data[indexPath.row].image

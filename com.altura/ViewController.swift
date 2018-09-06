@@ -32,6 +32,7 @@ class ViewController: UIViewController {
     
     var txt_alert=""
     
+    var re_confirm = false
     let status: Bool = false
     
     
@@ -186,7 +187,7 @@ class ViewController: UIViewController {
             print("usuario: \(user_name) , contraseña: \(pass)")
             
             
-            self.user_txt.text = ""
+            //self.user_txt.text = ""
             self.pass_txt.text = ""
             
             self.complete = false
@@ -208,13 +209,15 @@ class ViewController: UIViewController {
                     
                     print("entra en error: \(value) , \(user)")
                     if(value == 2){
-                        self.txt_alert = "Usuario o Contraseña Inválidos"
+                        self.txt_alert = "Falta de confirmar su cuenta de correo electrónico, desea reenviar el correo de confirmación?"
+                        self.re_confirm = true
                         
                     }else if( value == 3){
                         self.txt_alert = "Usuario no registrado"
-                        
+                        self.re_confirm = false
                     }else{
                         self.txt_alert = "Usuario o Contraseña Inválidos"
+                        self.re_confirm = false
                     }
                     //self.error = true
                     //self.complete = true
@@ -231,7 +234,6 @@ class ViewController: UIViewController {
     
     func syncAllDataInit(){
         
-        self.dbase.insertUserLogin(user_in: self.user_in)
         self.ws.loadNotifications(id_user: String(describing: self.user_in.id_user), date: self.user_in.sync_date,
                             success: {
                                 (notifications) -> Void in
@@ -272,9 +274,12 @@ class ViewController: UIViewController {
         self.ws.loadCore(id_user: String(describing: self.user_in.id_user), accounts: accounts,
                                   success: {
                                     (notifications) -> Void in
-                                    print("ok notificacion")
+                                    print("ok load core")
                                     self.spin.stopAnimating()
                                     self.indicadorView.isHidden = true
+                                    
+                                    self.dbase.insertUserLogin(user_in: self.user_in)
+                                    
                                     DispatchQueue.main.async {
                                         self.navigateToApp()
                                     }
@@ -333,14 +338,39 @@ class ViewController: UIViewController {
         let alert = UIAlertController(title: nil, message: self.txt_alert, preferredStyle: .alert);
         let btn_alert = UIAlertAction(title: "Reintentar", style: .default) { (UIAlertAction) in
             self.setValues()
-            self.notificationPop()
         }
-        alert.addAction(btn_alert);
+        let btn_acept = UIAlertAction(title: "Aceptar", style: .default) { (UIAlertAction) in
+            
+            self.ws.reSendEmail(email: self.user_txt.text!,
+                             success: {
+                                (message) -> Void in
+                                print(message)
+                                self.notificationPop(title: "INTERAGUA", subtitle: "Cofirmación de Email", body: "Se reenvio el correo de confirmación. Por favor ingrese a su correo y active su cuenta para tener acceso a la aplicación")
+                                self.setValues()
+                            },error: {
+                                (message) -> Void in
+                                print(message)
+                                self.setValues()
+                            })
+            
+            print("reenvio de correo")
+        }
+        let btn_cancel = UIAlertAction(title: "Cancelar", style: .default) { (UIAlertAction) in
+            self.setValues()
+        }
+        
+        if re_confirm {
+            alert.addAction(btn_cancel);
+            alert.addAction(btn_acept);
+        }else{
+            alert.addAction(btn_alert);
+        }
+        
         self.present(alert, animated: true, completion: nil);
     }
     
     func setValues(){
-        self.pass_txt.text = "";
+        self.pass_txt.text = ""
     }
     
     private func navigateToApp(){
@@ -348,14 +378,14 @@ class ViewController: UIViewController {
         self.present(mainTabViewController, animated: true, completion: nil)
     }
     
-    func notificationPop(){
+    func notificationPop(title: String, subtitle: String, body: String){
         //se accede a la central de notificaciones
         let notificationCenter = UNUserNotificationCenter.current()
         //se crea el contenido de la notificacion
         let content = UNMutableNotificationContent()
-        content.title = "Titulo de mi notificación"
-        content.subtitle = "Subtitulo de la notificación"
-        content.body = "Descripción de notificacion"
+        content.title = title
+        content.subtitle = subtitle
+        content.body = body
         
         /*Ahora debemos crear un Schedule de disparo de nuestra notificación. Para
          ello, usaremos UNTimeIntervalNotificationTrigger, el cual recibe un
@@ -363,7 +393,7 @@ class ViewController: UIViewController {
          agregada nuestra notificación ésta será disparada. El siguiente parámetro
          "repeats" sirve para indicar si la notificación se repetirá después de
          su primer disparo.*/
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 2, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
         
         /*Ahora crearemos una petición, la cual debe tener un "identifier" que
          puede ser el de nuestra preferencia, un "content" y un "trigger" que
@@ -375,9 +405,9 @@ class ViewController: UIViewController {
         notificationCenter.add(request) { (error) in
             
             if error == nil {
-                print("Se agrego correctamente")
+                print("Se agrego correctamente la notificacion")
             }else{
-                print("Se presento un problema")
+                print("Se presento un problema con la notificacion")
             }
         }
     }

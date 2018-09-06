@@ -8,6 +8,7 @@
 
 import UIKit
 import SQLite
+import Zip
 
 class TechRequestViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
     
@@ -17,6 +18,7 @@ class TechRequestViewController: UIViewController, UIPickerViewDelegate, UIPicke
     @IBOutlet weak var select1: UITextField!
     @IBOutlet weak var select2: UITextField!
     @IBOutlet weak var picture: UIImageView!
+    @IBOutlet weak var telephone: UITextField!
     
     @IBOutlet weak var textView: UITextView!
     
@@ -48,6 +50,7 @@ class TechRequestViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     var account_selected = ""
     var id_account_selected = ""
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -164,6 +167,12 @@ class TechRequestViewController: UIViewController, UIPickerViewDelegate, UIPicke
         
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
         
+        let success = saveImage(image: image)
+        print("resultado: \(success)")
+        
+        let res = zipImage()
+        print(res)
+        
         self.picture.image = image
         picker.dismiss(animated: true, completion: nil)
         
@@ -199,12 +208,24 @@ class TechRequestViewController: UIViewController, UIPickerViewDelegate, UIPicke
         self.present(actionSheet, animated: true, completion: nil)
     }
     
+    
     @IBAction func Back(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
     }
     
     @IBAction func Send(_ sender: UIButton) {
         print("Envia")
+        
+        var service = ""
+        
+        if self.id_account_selected != "" {
+            service = self.id_account_selected
+        }
+        
+        let telephone = self.telephone.text
+        let obs = self.textView.text
+        
+        
         dismiss(animated: true)
     }
     
@@ -253,6 +274,42 @@ class TechRequestViewController: UIViewController, UIPickerViewDelegate, UIPicke
         
         
     }
+    
+    func saveImage(image: UIImage) -> Bool {
+        guard let data = UIImageJPEGRepresentation(image, 1) ?? UIImagePNGRepresentation(image) else {
+            return false
+        }
+        guard let directory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) as NSURL else {
+            return false
+        }
+        
+        do {
+            try data.write(to: directory.appendingPathComponent("sol_tecnicas.png")!)
+            return true
+        } catch {
+            print(error.localizedDescription)
+            return false
+        }
+    }
+    
+    func zipImage() -> Bool{
+        guard let directory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) as NSURL else {
+            return false
+        }
+        
+        let n_directory = directory.appendingPathComponent("sol_tecnicas.png")
+        do {
+            let zipFilePath = try Zip.quickZipFiles([n_directory!], fileName: "archive") // Zip
+            
+        }
+        catch {
+            print("Something went wrong")
+            return false
+        }
+        
+        return true
+    }
+    
     
 }
     

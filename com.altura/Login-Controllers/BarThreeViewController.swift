@@ -16,6 +16,7 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
     var db: Connection!
     
     @IBOutlet weak var leftConstrain: NSLayoutConstraint!
+    @IBOutlet weak var rigthConstrain: NSLayoutConstraint!
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var leftView: UIView!
     
@@ -29,6 +30,8 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
     
     var data = [cellData]()
     var accounts_list = [detailAccount]()
+    
+    var width = 0;
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +48,9 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
         leftView.layer.shadowOpacity = 0.8
         leftView.layer.shadowOffset = CGSize(width: 5, height: 0)
         
-        leftConstrain.constant = -80
+        width = Int(self.view.bounds.width)
+        rigthConstrain.constant = 0
+        
         let status = dbase.connect_db()
         if( status.value ){
             print("entra a buscar detalles de cuenta")
@@ -70,7 +75,7 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
     
     @IBAction func menuActions(_ sender: Any) {
         
-        if(self.leftConstrain.constant == -80){
+        if(self.rigthConstrain.constant == 0){
             self.showMenu()
         }else{
             self.hiddenMenu()
@@ -120,7 +125,7 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
     func showMenu(){
         
         UIView.animate(withDuration: 0.2) {
-            self.leftConstrain.constant = 0
+            self.rigthConstrain.constant = CGFloat(self.width)
             self.view.layoutIfNeeded()
             self.menuButton.image = self.image_l
         }
@@ -129,7 +134,7 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
     func hiddenMenu(){
         
         UIView.animate(withDuration: 0.2) {
-            self.leftConstrain.constant = -80
+            self.rigthConstrain.constant = 0
             self.view.layoutIfNeeded()
             self.menuButton.image = self.image_r
         }
@@ -178,6 +183,7 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("selected", indexPath.row)
+        hiddenMenu()
         
         let tabBarViewController = self.storyboard?.instantiateViewController(withIdentifier: "detaillsTabBarController") as! DetailsTabBarViewController
         tabBarViewController.contrato = data[indexPath.row].title!

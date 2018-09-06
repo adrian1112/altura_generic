@@ -17,6 +17,7 @@ class BarFiveViewController: UIViewController, UITableViewDataSource, UITableVie
     weak var activeField: UITextField?
     
     @IBOutlet weak var leftConstrain: NSLayoutConstraint!
+    @IBOutlet weak var rigthConstrain: NSLayoutConstraint!
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var leftView: UIView!
     
@@ -28,6 +29,8 @@ class BarFiveViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var tableView: UITableView!
     
     var data = [cellData]()
+    
+    var width = 0;
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +48,8 @@ class BarFiveViewController: UIViewController, UITableViewDataSource, UITableVie
         leftView.layer.shadowOpacity = 0.8
         leftView.layer.shadowOffset = CGSize(width: 5, height: 0)
         
-        leftConstrain.constant = -80
+        width = Int(self.view.bounds.width)
+        rigthConstrain.constant = 0
         
         //self.hiddenMenu()
         
@@ -62,7 +66,7 @@ class BarFiveViewController: UIViewController, UITableViewDataSource, UITableVie
     
     @IBAction func menuActions(_ sender: Any) {
         
-        if(self.leftConstrain.constant == -80){
+        if(self.rigthConstrain.constant == 0){
             self.showMenu()
         }else{
             self.hiddenMenu()
@@ -109,7 +113,7 @@ class BarFiveViewController: UIViewController, UITableViewDataSource, UITableVie
     func showMenu(){
         
         UIView.animate(withDuration: 0.2) {
-            self.leftConstrain.constant = 0
+            self.rigthConstrain.constant = CGFloat(self.width)
             self.view.layoutIfNeeded()
             self.menuButton.image = self.image_l
         }
@@ -118,7 +122,7 @@ class BarFiveViewController: UIViewController, UITableViewDataSource, UITableVie
     func hiddenMenu(){
         
         UIView.animate(withDuration: 0.2) {
-            self.leftConstrain.constant = -80
+            self.rigthConstrain.constant = 0
             self.view.layoutIfNeeded()
             self.menuButton.image = self.image_r
         }
@@ -165,6 +169,7 @@ class BarFiveViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("selected", indexPath.row)
+        hiddenMenu()
         
         switch indexPath.row {
         case 0:
