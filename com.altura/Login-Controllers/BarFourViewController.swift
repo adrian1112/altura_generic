@@ -153,7 +153,10 @@ class BarFourViewController: UIViewController, UITableViewDataSource, UITableVie
             let status = self.dbase.encerarTables()
             if status{ print("ok")}else{print("error encerando")}
             
-            self.dismiss(animated: true, completion: nil)
+            //self.dismiss(animated: true, completion: nil)
+            let viewController = self.storyboard?.instantiateInitialViewController()
+            self.present(viewController!, animated: true)
+            
         }
         let btn_cancel = UIAlertAction(title: "Cancelar", style: .cancel) { (UIAlertAction) in
             

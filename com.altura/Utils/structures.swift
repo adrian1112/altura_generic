@@ -304,3 +304,104 @@ struct detailPayment {
         self.servicio = servicio
     }
 }
+
+struct detailContract {
+
+    let id_cliente: String
+    let id_contrato: String
+    let direccion_tradicional: String
+    let nombre_beneficiario: String
+    let identificacion_benef: String
+    let nombre_propietario: String
+    let identifiacion_propietario: String
+    let id_cliente_propietario: String
+    let factcodi: String
+    let factnufi: String
+    let fecha_emision: String
+    let id_producto: String
+    let fecha_venc_fact: String
+    let numdoc: String
+    let tipodocu: String
+    let rucempresa: String
+    let deuda_pendiente: String
+    let account_with_balance: String
+    let def_balance: String
+    let consumo: String
+    let sbitemtipo: String
+    let sbitem: String
+    let sbserie: String
+    let categoria: String
+    let subcategoria: String
+    let estado_corte: String
+    let ult_fecha_pago: String
+    let id_direccion_contrato: String
+    let address_id: String
+    let telefono: String
+    var status: Bool
+    
+    init(id_cliente: String
+    ,id_contrato: String
+    ,direccion_tradicional: String
+    ,nombre_beneficiario: String
+    ,identificacion_benef: String
+    ,nombre_propietario: String
+    ,identifiacion_propietario: String
+    ,id_cliente_propietario: String
+    ,factcodi: String
+    ,factnufi: String
+    ,fecha_emision: String
+    ,id_producto: String
+    ,fecha_venc_fact: String
+    ,numdoc: String
+    ,tipodocu: String
+    ,rucempresa: String
+    ,deuda_pendiente: String
+    ,account_with_balance: String
+    ,def_balance: String
+    ,consumo: String
+    ,sbitemtipo: String
+    ,sbitem: String
+    ,sbserie: String
+    ,categoria: String
+    ,subcategoria: String
+    ,estado_corte: String
+    ,ult_fecha_pago: String
+    ,id_direccion_contrato: String
+    ,address_id: String
+    ,telefono: String
+    ,status: Bool) {
+    
+    self.id_cliente = id_cliente
+    self.id_contrato = id_contrato
+    self.direccion_tradicional = direccion_tradicional
+    self.nombre_beneficiario = nombre_beneficiario
+    self.identificacion_benef = identificacion_benef
+    self.nombre_propietario = nombre_propietario
+    self.identifiacion_propietario = identifiacion_propietario
+    self.id_cliente_propietario = id_cliente_propietario
+    self.factcodi = factcodi
+    self.factnufi = factnufi
+    self.fecha_emision = fecha_emision
+    self.id_producto = id_producto
+    self.fecha_venc_fact = fecha_venc_fact
+    self.numdoc = numdoc
+    self.tipodocu = tipodocu
+    self.rucempresa = rucempresa
+    self.deuda_pendiente = deuda_pendiente
+    self.account_with_balance = account_with_balance
+    self.def_balance = def_balance
+    self.consumo = consumo
+    self.sbitemtipo = sbitemtipo
+    self.sbitem = sbitem
+    self.sbserie = sbserie
+    self.categoria = categoria
+    self.subcategoria = subcategoria
+    self.estado_corte = estado_corte
+    self.ult_fecha_pago = ult_fecha_pago
+    self.id_direccion_contrato = id_direccion_contrato
+    self.address_id = address_id
+    self.telefono = telefono
+    self.status = status
+    }
+
+}

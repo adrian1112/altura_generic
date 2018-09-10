@@ -51,6 +51,8 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
         width = Int(self.view.bounds.width)
         rigthConstrain.constant = 0
         
+        data = [cellData]()
+        
         let status = dbase.connect_db()
         if( status.value ){
             print("entra a buscar detalles de cuenta")
@@ -58,14 +60,16 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
             
             for item in accounts_list{
                 print(item)
-                data.append(cellData.init(image: #imageLiteral(resourceName: "contrato-1"), message: "\(item.servicio) - \(item.direccion)", title: item.alias, date: "", service: item.servicio))
+                self.data.append(cellData.init(image: #imageLiteral(resourceName: "contrato-1"), message: "\(item.servicio) - \(item.direccion)", title: item.alias, date: "", service: item.servicio))
             }
         }
-        //Tabla
+        print(data)
+        
+        self.tableView.reloadData()
         
         
-        self.tableView.register(CustomTableViewCell2.self, forCellReuseIdentifier: "customCell")
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        //self.tableView.register(CustomTableViewCell2.self, forCellReuseIdentifier: "customCell")
+        //self.tableView.rowHeight = UITableViewAutomaticDimension
         
         self.hiddenMenu()
         
@@ -150,7 +154,9 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
             let status = self.dbase.encerarTables()
             if status{ print("ok")}else{print("error encerando")}
             
-            self.dismiss(animated: true, completion: nil)
+            //self.dismiss(animated: true, completion: nil)
+            let viewController = self.storyboard?.instantiateInitialViewController()
+            self.present(viewController!, animated: true)
         }
         let btn_cancel = UIAlertAction(title: "Cancelar", style: .cancel) { (UIAlertAction) in
             
@@ -194,8 +200,30 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
         
     }
     
+    /*func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let delete = UITableViewRowAction(style: .destructive, title: "Eliminar") { (action, indexPath) in
+            // delete item at indexPath
+            self.data.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            print(self.data)
+        }
+        
+        let share = UITableViewRowAction(style: .default, title: "Alias") { (action, indexPath) in
+            // share item at indexPath
+            print("I want to share: \(self.data[indexPath.row])")
+        }
+        
+        share.backgroundColor = UIColor.lightGray
+        
+        return [delete, share]
+        
+    }*/
+    
+    
     @IBAction func NewContract(_ sender: Any) {
         let viewController = self.storyboard?.instantiateViewController(withIdentifier: "newContractViewController") as! NewContractViewController
+        
         self.present(viewController, animated: true)
     }
     

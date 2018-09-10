@@ -714,7 +714,7 @@ class DBase {
         return places
     }
     
-    //imprime todos los usuarios registrados
+    //devuelve todos los contratos registrados
     func getAccounts() -> [account]{
         print("get de account")
         var List:[account] = []
@@ -733,9 +733,51 @@ class DBase {
         return List
     }
     
+    // actualiza un contrato de la base
+    func updateAccount(account: String, alias: String) -> Bool{
+        print("update de account")
+        
+        do{
+            
+            let account_item = accountsT.filter(service_accountsT == account)
+            try db.run(account_item.update(alias_accountsT <- alias))
+            
+            return true
+            
+        }catch{
+            print("error update account")
+            print(error)
+            
+        }
+        return false
+    }
+    
+    // elimina detalles de un contrato de la base
+    func deleteDetaillsAccount(account: String) -> Bool{
+        print("delete details de account")
+            
+            do{
+                try self.db.execute("DELETE FROM cuenta_detalle where servicio = \(account);")
+                try self.db.execute("DELETE FROM facturas where servicio = \(account);")
+                try self.db.execute("DELETE FROM deudas where servicio = \(account);")
+                try self.db.execute("DELETE FROM tramites where servicio = \(account);")
+                try self.db.execute("DELETE FROM pagos where servicio = \(account);")
+                
+                print("Se elimino los registros de la cuenta")
+                
+                return true
+                
+            }catch let Result.error(message, code, statement){
+                print("mensaje: \(message), codigo: \(code), statment: \(String(describing: statement)) ")
+            }catch {
+                print(error)
+            }
+        return false
+    }
+    
     //obtiene todos los detalles de cuentas registrados en la DB
     func getAllDetailsAccounts()-> [detailAccount]{
-        print("get detalle agencias")
+        print("get detalle cuentas")
         
         var List:[detailAccount] = []
         
@@ -765,7 +807,7 @@ class DBase {
                 
             }
         }catch{
-            print("error get detail agencies")
+            print("error get detail cuentas")
             print(error)
         }
         return List

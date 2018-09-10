@@ -291,7 +291,25 @@ class ViewController: UIViewController {
             self.indicadorView.isHidden = true
             
             self.txt_alert = message;
+            
+            do{
+                try self.db.execute("DELETE FROM usuarios_logeados;")
+                try self.db.execute("DELETE FROM notificaciones;")
+                try self.db.execute("DELETE FROM cuentas;")
+                try self.db.execute("DELETE FROM cuenta_detalle;")
+                try self.db.execute("DELETE FROM facturas;")
+                try self.db.execute("DELETE FROM deudas;")
+                try self.db.execute("DELETE FROM tramites;")
+                try self.db.execute("DELETE FROM pagos;")
+                print("Se vacio la tabla agenicas correctamente")
+            }catch let Result.error(message, code, statement){
+                print("mensaje: \(message), codigo: \(code), statment: \(String(describing: statement)) ")
+            }catch {
+                print(error)
+            }
+            
             self.showAlert();
+            
         })
         
     }

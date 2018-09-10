@@ -227,6 +227,7 @@ class WService {
                         if keyT as! String == "2" {
                             let data_temp = valueT as! Dictionary<NSObject, AnyObject>
                             var date_sync = ""
+                            var message = ""
                             var list: NSArray = []
                             for (key,value) in data_temp {
                                 if key as! String == "sync_date" {
@@ -236,7 +237,13 @@ class WService {
                                     list = value as! NSArray
                                 }
                                 if key as! String == "error"{
-                                    error( false,value as! String)
+                                    message = value as! String
+                                }
+                                
+                                if key as! String == "status"{
+                                    if value as! Int == -1{
+                                        return error( false,message)
+                                    }
                                 }
                             }
                             for value in list {
@@ -260,6 +267,7 @@ class WService {
                         if keyT as! String == "3" {
                             let data_temp = valueT as! Dictionary<NSObject, AnyObject>
                             var date_sync = ""
+                            var message = ""
                             var list: NSArray = []
                             for (key,value) in data_temp {
                                 if key as! String == "sync_date" {
@@ -269,7 +277,13 @@ class WService {
                                     list = value as! NSArray
                                 }
                                 if key as! String == "error"{
-                                    error( false,value as! String)
+                                    message = value as! String
+                                }
+                                
+                                if key as! String == "status"{
+                                    if value as! Int == -1{
+                                        return error( false,message)
+                                    }
                                 }
                             }
                             for value in list {
@@ -291,6 +305,7 @@ class WService {
                         if keyT as! String == "5" {
                             let data_temp = valueT as! Dictionary<NSObject, AnyObject>
                             var date_sync = ""
+                            var message = ""
                             var list: NSArray = []
                             for (key,value) in data_temp {
                                 if key as! String == "sync_date" {
@@ -300,7 +315,13 @@ class WService {
                                     list = value as! NSArray
                                 }
                                 if key as! String == "error"{
-                                    error( false,value as! String)
+                                    message = value as! String
+                                }
+                                
+                                if key as! String == "status"{
+                                    if value as! Int == -1{
+                                        return error( false,message)
+                                    }
                                 }
                             }
                             for value in list {
@@ -322,6 +343,7 @@ class WService {
                         if keyT as! String == "9" {
                             let data_temp = valueT as! Dictionary<NSObject, AnyObject>
                             var date_sync = ""
+                            var message = ""
                             var list: NSArray = []
                             for (key,value) in data_temp {
                                 if key as! String == "sync_date" {
@@ -331,7 +353,13 @@ class WService {
                                     list = value as! NSArray
                                 }
                                 if key as! String == "error"{
-                                    error( false,value as! String)
+                                    message = value as! String
+                                }
+                                
+                                if key as! String == "status"{
+                                    if value as! Int == -1{
+                                        return error( false,message)
+                                    }
                                 }
                             }
                             for value in list {
@@ -353,6 +381,7 @@ class WService {
                         if keyT as! String == "48" {
                             let data_temp = valueT as! Dictionary<NSObject, AnyObject>
                             var date_sync = ""
+                            var message = ""
                             var list: NSArray = []
                             for (key,value) in data_temp {
                                 if key as! String == "sync_date" {
@@ -362,7 +391,13 @@ class WService {
                                     list = value as! NSArray
                                 }
                                 if key as! String == "error"{
-                                    error( false,value as! String)
+                                    message = value as! String
+                                }
+                                
+                                if key as! String == "status"{
+                                    if value as! Int == -1{
+                                        return error( false,message)
+                                    }
                                 }
                             }
                             for value in list {
@@ -698,10 +733,13 @@ class WService {
         
     }
     
-    func searchService(user: String, id: String, service: String , success: @escaping (_ status: Int, _ message: String) -> Void, error: @escaping (_ message: String) -> Void) {
+    func searchService(user: String, id: String, service: String , success: @escaping (_ status: Int, _ contratos: [detailContract], _ message: String) -> Void, error: @escaping (_ message: String) -> Void) {
         let n_key = key.md5()
         
-        var url_part = "action=query&id_query=41&ID=\(id)&NS=\(service)&ID_USER=\(user)&os_type=2"
+        //action=query&ID=0901226498&os_type=2&id_user=4192&CONTRATO=104044&id_query=41&id_ws_soap=8&TYPE=2
+        
+        var contratos = [detailContract]()
+        var url_part = "action=query&id_query=41&ID=\(id)&CONTRATO=\(service)&id_user=\(user)&os_type=2&TYPE=2&id_ws_soap=8"
         
         print(url_part)
         
@@ -740,18 +778,32 @@ class WService {
                 
                 let dictionary: Dictionary<NSObject, AnyObject> = try JSONSerialization.jsonObject(with: data2.data(using: .utf8)!, options: JSONSerialization.ReadingOptions.mutableContainers) as! Dictionary<NSObject, AnyObject>
                 
-                var status = 0
-                var message = "ok"
+                var list: NSArray = []
+                var message = ""
+                var status = 1
                 for (key,value) in dictionary {
-                    if key as! String == "status" {
-                        status = value as! Int
+                    if key as! String == "row"{
+                        list = value as! NSArray
                     }
+                    
                     if key as! String == "error"{
                         message = value as! String
+                        status = 0
                     }
                 }
                 
-                success( status,message )
+                
+                
+                for value in list {
+                    let val = value as! NSArray
+                    
+                    let contrato = detailContract.init(id_cliente: val[0] as! String, id_contrato: val[1] as! String, direccion_tradicional: val[2] as! String, nombre_beneficiario: val[3] as! String, identificacion_benef: val[4] as! String, nombre_propietario: val[5] as! String, identifiacion_propietario: val[6] as! String, id_cliente_propietario: val[7] as! String, factcodi: val[8] as! String, factnufi: val[9] as! String, fecha_emision: val[10] as! String, id_producto: val[11] as! String, fecha_venc_fact: val[12] as! String, numdoc: val[13] as! String, tipodocu: val[14] as! String, rucempresa: val[15] as! String, deuda_pendiente: val[16] as! String, account_with_balance: val[17] as! String, def_balance: val[18] as! String, consumo: val[19] as! String, sbitemtipo: val[20] as! String, sbitem: val[21] as! String, sbserie: val[22] as! String, categoria: val[23] as! String, subcategoria: val[24] as! String, estado_corte: val[25] as! String, ult_fecha_pago: val[26] as! String, id_direccion_contrato: val[27] as! String, address_id: val[28] as! String, telefono: val[29] as! String, status: false)
+                    
+                    contratos.append(contrato)
+                    
+                }
+                
+                success( status, contratos ,message )
                 
                 
             }catch let errJson {
@@ -761,6 +813,227 @@ class WService {
             
         }
     }
+    
+    
+    func addService(id: Int,document: String, alias: String, service: String, success: @escaping (_ message: String) -> Void, error: @escaping (_ message: String) -> Void) {
+        let n_key = key.md5()
+        
+        var url_part = "action=addservice&id_user=\(id)&service=\(service)&document=\(document)&alternative=\(alias)&os_type=2"
+        
+        print(url_part)
+        
+        let encode = try! url_part.aesEncrypt(key: n_key, iv: iv)
+        
+        print("codificado: \(encode)")
+        
+        let jsn_url = url_master + (encode.urlEncode() as String)
+        print(jsn_url)
+        
+        guard var url = try? URLRequest(url: NSURL(string: jsn_url) as! URL) else {
+            print("error agregando servicio")
+            error("Error al generar la url agregando servicio")
+            
+        }
+        
+        //var request = URLRequest(url: url1)
+        //url.httpBody = body
+        url.httpMethod = "POST"
+        let (data, response, err) = URLSession.shared.synchronousDataTask(urlrequest: url)
+        if let error2 = err {
+            print("Synchronous task ended with error: \(error)")
+            error("Error al obtener data: \(error2)")
+        }
+        else {
+            print("Synchronous task ended without errors.")
+            //print(data)
+            guard let data = data else { return error("Error al obtener la data") }
+            
+            do{
+                guard let data_received = String(data: data, encoding: .utf8) else{ return error("Error encodign utf8") }
+                print("data received: \(data_received)")
+                
+                let data2 = try! data_received.aesDecrypt(key: n_key, iv: self.iv)
+                print("datos decript reenvio \(data2)")
+                
+                let dictionary: Dictionary<NSObject, AnyObject> = try JSONSerialization.jsonObject(with: data2.data(using: .utf8)!, options: JSONSerialization.ReadingOptions.mutableContainers) as! Dictionary<NSObject, AnyObject>
+                
+                var status = 0
+                var message = ""
+                var sync_date = ""
+                for (key,value) in dictionary {
+                    if key as! String == "sync_date"{
+                        sync_date = value as! String
+                    }
+                    if key as! String == "status" {
+                        status = value as! Int
+                    }
+                    if key as! String == "error"{
+                        message = value as! String
+                    }
+                }
+                
+                if status == 1{
+                    success(sync_date)
+                }else{
+                    error( message )
+                }
+                
+                
+            }catch let errJson {
+                print(errJson)
+                error( "Error \(errJson)")
+            }
+            
+        }
+        
+        
+    }
+    
+    func updateService(id: Int, alias: String, service: String, success: @escaping (_ message: String) -> Void, error: @escaping (_ message: String) -> Void) {
+        let n_key = key.md5()
+        
+        var url_part = "action=changeAlias&id=\(id)&service=\(service)&alternative=\(alias)&os_type=2"
+        
+        print(url_part)
+        
+        let encode = try! url_part.aesEncrypt(key: n_key, iv: iv)
+        
+        print("codificado: \(encode)")
+        
+        let jsn_url = url_master + (encode.urlEncode() as String)
+        print(jsn_url)
+        
+        guard var url = try? URLRequest(url: NSURL(string: jsn_url) as! URL) else {
+            print("error cambiando alias servicio")
+            error("Error al generar la url cambiando alias servicio")
+            
+        }
+        
+        //var request = URLRequest(url: url1)
+        //url.httpBody = body
+        url.httpMethod = "POST"
+        let (data, response, err) = URLSession.shared.synchronousDataTask(urlrequest: url)
+        if let error2 = err {
+            print("Synchronous task ended with error: \(error)")
+            error("Error al obtener data: \(error2)")
+        }
+        else {
+            print("Synchronous task ended without errors.")
+            //print(data)
+            guard let data = data else { return error("Error al obtener la data") }
+            
+            do{
+                guard let data_received = String(data: data, encoding: .utf8) else{ return error("Error encodign utf8") }
+                print("data received: \(data_received)")
+                
+                let data2 = try! data_received.aesDecrypt(key: n_key, iv: self.iv)
+                print("datos decript reenvio \(data2)")
+                
+                let dictionary: Dictionary<NSObject, AnyObject> = try JSONSerialization.jsonObject(with: data2.data(using: .utf8)!, options: JSONSerialization.ReadingOptions.mutableContainers) as! Dictionary<NSObject, AnyObject>
+                
+                var status = 0
+                var message = ""
+                var sync_date = ""
+                for (key,value) in dictionary {
+                    if key as! String == "sync_date"{
+                        sync_date = value as! String
+                    }
+                    if key as! String == "status" {
+                        status = value as! Int
+                    }
+                    if key as! String == "error"{
+                        message = value as! String
+                    }
+                }
+                
+                if status == 1{
+                    success(sync_date)
+                }else{
+                    error( message )
+                }
+                
+                
+            }catch let errJson {
+                print(errJson)
+                error( "Error \(errJson)")
+            }
+        }
+    }
+    
+    func deleteService(id: Int, service: String, success: @escaping (_ message: String) -> Void, error: @escaping (_ message: String) -> Void) {
+        let n_key = key.md5()
+        
+        var url_part = "action=deleteservice&id_user=\(id)&service=\(service)&os_type=2"
+        
+        print(url_part)
+        
+        let encode = try! url_part.aesEncrypt(key: n_key, iv: iv)
+        
+        print("codificado: \(encode)")
+        
+        let jsn_url = url_master + (encode.urlEncode() as String)
+        print(jsn_url)
+        
+        guard var url = try? URLRequest(url: NSURL(string: jsn_url) as! URL) else {
+            print("error cambiando alias servicio")
+            error("Error al generar la url cambiando alias servicio")
+            
+        }
+        
+        //var request = URLRequest(url: url1)
+        //url.httpBody = body
+        url.httpMethod = "POST"
+        let (data, response, err) = URLSession.shared.synchronousDataTask(urlrequest: url)
+        if let error2 = err {
+            print("Synchronous task ended with error: \(error)")
+            error("Error al obtener data: \(error2)")
+        }
+        else {
+            print("Synchronous task ended without errors.")
+            //print(data)
+            guard let data = data else { return error("Error al obtener la data") }
+            
+            do{
+                guard let data_received = String(data: data, encoding: .utf8) else{ return error("Error encodign utf8") }
+                print("data received: \(data_received)")
+                
+                let data2 = try! data_received.aesDecrypt(key: n_key, iv: self.iv)
+                print("datos decript reenvio \(data2)")
+                
+                let dictionary: Dictionary<NSObject, AnyObject> = try JSONSerialization.jsonObject(with: data2.data(using: .utf8)!, options: JSONSerialization.ReadingOptions.mutableContainers) as! Dictionary<NSObject, AnyObject>
+                
+                var status = 0
+                var message = ""
+                var sync_date = ""
+                for (key,value) in dictionary {
+                    if key as! String == "sync_date"{
+                        sync_date = value as! String
+                    }
+                    if key as! String == "status" {
+                        status = value as! Int
+                    }
+                    if key as! String == "error"{
+                        message = value as! String
+                    }
+                }
+                
+                if status == 1{
+                    success(sync_date)
+                }else{
+                    error( message )
+                }
+                
+                
+            }catch let errJson {
+                print(errJson)
+                error( "Error \(errJson)")
+            }
+            
+        }
+        
+        
+    }
+    
     
     
 }
