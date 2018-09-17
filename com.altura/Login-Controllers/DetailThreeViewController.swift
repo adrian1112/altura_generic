@@ -47,9 +47,11 @@ class DetailThreeViewController: UIViewController {
         
         let detailController = tabBarController as! DetailsTabBarViewController
         
-        let titleView = String(describing: detailController.contrato)
-        navigationBar.title = titleView
         let detailAccountItem = detailController.detailtAccountItem
+        let titleView = detailAccountItem.alias
+        let title2View = detailAccountItem.contrato
+        //String(describing: detailController.contrato)
+        navigationBar.title = " \(titleView) - \(title2View)"
         
         
         let status = dbase.connect_db()
@@ -69,6 +71,10 @@ class DetailThreeViewController: UIViewController {
                 consumo_month.append(getOnlyMonthString(date: item.fecha_emision,2))
                 
             }
+            money.reverse()
+            money_month.reverse()
+            consumo.reverse()
+            consumo_month.reverse()
             
         }
         print(money)

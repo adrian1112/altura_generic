@@ -75,6 +75,7 @@
 		22AFA5B02108E9BF00E08444 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22AFA59F2108E7A200E08444 /* Alamofire.framework */; };
 		22AFA5B12108E9BF00E08444 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22AFA59F2108E7A200E08444 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		22AFA5B5210A1BE800E08444 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AFA5B4210A1BE700E08444 /* Utils.swift */; };
+		22C7C42421502F48000EF8D8 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C7C42321502F48000EF8D8 /* ChatViewController.swift */; };
 		22D5623620F65BC80098526C /* PBEwithMD5andDes.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D5623520F65BC80098526C /* PBEwithMD5andDes.m */; };
 		22D5623B20F666D20098526C /* include in Resources */ = {isa = PBXBuildFile; fileRef = 22D5623A20F666D20098526C /* include */; };
 		22D5623D20F688D00098526C /* CustomWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D5623C20F688D00098526C /* CustomWebViewController.swift */; };
@@ -404,6 +405,7 @@
 		22AFA5932108E7A100E08444 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		22AFA5AD2108E82000E08444 /* structures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = structures.swift; sourceTree = "<group>"; };
 		22AFA5B4210A1BE700E08444 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		22C7C42321502F48000EF8D8 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		22D5623120F65B590098526C /* PBEwithMD5andDes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PBEwithMD5andDes.h; sourceTree = "<group>"; };
 		22D5623520F65BC80098526C /* PBEwithMD5andDes.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PBEwithMD5andDes.m; sourceTree = "<group>"; };
 		22D5623920F662770098526C /* com.altura-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "com.altura-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -610,6 +612,7 @@
 				2201C04A20E52213003BF608 /* BillRequestViewController.swift */,
 				229D62D220F4F55500B0DE7C /* CustomMap2ViewController.swift */,
 				22D5623E20F6A1F50098526C /* ContactViewController.swift */,
+				22C7C42321502F48000EF8D8 /* ChatViewController.swift */,
 			);
 			path = com.altura;
 			sourceTree = "<group>";
@@ -1125,6 +1128,7 @@
 				228804E820C9E4F600C94AAC /* PinMap.swift in Sources */,
 				227D7ECE20DD5D60003E11BB /* AboutViewController.swift in Sources */,
 				2201C04920E3D6A9003BF608 /* TechRequestViewController.swift in Sources */,
+				22C7C42421502F48000EF8D8 /* ChatViewController.swift in Sources */,
 				22112FB920ED6DD000689974 /* OptionsProcessViewController.swift in Sources */,
 				2201C07820EAB117003BF608 /* DetailTwoViewController.swift in Sources */,
 				225772F820B3C841006CFB3B /* CustomCollectionViewCell.swift in Sources */,
@@ -1386,6 +1390,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JQS4797YPX;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1420,6 +1425,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JQS4797YPX;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

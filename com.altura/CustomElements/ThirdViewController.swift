@@ -15,15 +15,21 @@ class ThirdViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     @IBOutlet weak var select: UITextField!
     @IBOutlet weak var picture: UIImageView!
     
+    @IBOutlet weak var direccion: UITextField!
+    @IBOutlet weak var telefono: UITextField!
+    @IBOutlet weak var mail: UITextField!
+    @IBOutlet weak var obs: UITextField!
+    
+    
     @IBOutlet weak var footViewController: UIView!
     
     weak var activeField: UITextField?
     
-    let options=["","Opcion1","Opcion2","Opcion3","Opcion4","Opcion5"]
+    let options=["","Fugas de Agua Potable","Falta de Tapa de Alcantarillado","Desborde de Aguas Servidas","Denuncia Fraudes"]
     var pickerView = UIPickerView()
     
     let locationManager = CLLocationManager()
-    var userLatLong = CLLocationCoordinate2D(latitude: -2.162870, longitude: -79.898407)
+    var userLatLong = CLLocationCoordinate2D(latitude: -2, longitude: -79)
     
     var pins = [PinMap]()
     
@@ -60,26 +66,6 @@ class ThirdViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         select.inputView = pickerView
         
     }
-    
-    //****funciones de mapa****
-    /*func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        
-        if annotation is MKUserLocation{
-            return nil
-        }
-        
-        let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "customannotation")
-        //annotationView.image = UIImage(named:"user-2")
-        annotationView.canShowCallout = true
-        return annotationView
-        
-    }
-    
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        print("seleccionado: \(view.annotation?.coordinate)")
-    }*/
-    
-    //*************
     
     @IBAction func Back(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
@@ -145,23 +131,6 @@ class ThirdViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         self.map.camera = camera
         
     }
-    
-    /*private func setMapCamera(){
-        CATransaction.begin()
-        CATransaction.setValue(2, forKey: kCATransactionAnimationDuration)
-        let center = CLLocationCoordinate2D(latitude: userLatLong.latitude, longitude: userLatLong.longitude)
-        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-        
-        self.map.setRegion(region, animated: true)
-        
-        CATransaction.commit();
-        
-    }*/
-    
-    /*@IBAction func myUbication(_ sender: Any) {
-        
-        self.setMapCamera()
-    }*/
     
     public func numberOfComponents(in pickerView: UIPickerView) -> Int{
         return 1
@@ -245,8 +214,60 @@ class ThirdViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         activeField = nil
     }
  
-
+    @IBAction func send(_ sender: UIButton) {
+        print("validando los campos")
+        let tipo_txt = select.text
+        let direccion_txt = direccion.text
+        let telefono_txt = telefono.text?.trimmingCharacters(in: .whitespaces)
+        let mail_txt = mail.text?.trimmingCharacters(in: .whitespaces)
+        let obs_txt = obs.text
+        let img = picture.image
+        
+        if tipo_txt == ""{
+            showAlert(txt_alert: "Por favor, Seleccione un Tipo de daño")
+            return
+        }
+        if direccion_txt?.trimmingCharacters(in: .whitespaces) == ""{
+            showAlert(txt_alert: "El campo Dirección no puede quedar vacío")
+            return
+        }
+        
+        if telefono_txt! == "" {
+            showAlert(txt_alert: "El campo Teléfono no puede quedar vacío")
+            return
+        }
+        if (telefono_txt?.count)! < 7{
+            showAlert(txt_alert: "Por favor, ingrese un teléfono/celular válido")
+            return
+        }
+        if !isValidEmail(string: mail_txt!){
+            showAlert(txt_alert: "Por favor, ingrese un correo válido")
+            return
+        }
+        if obs_txt?.trimmingCharacters(in: .whitespaces) == ""{
+            showAlert(txt_alert: "El campo Descripción no puede quedar vacío")
+            return
+        }
+        
+        if img == nil {
+            showAlert(txt_alert: "Por favor, cargar una imagen del motivo del reporte")
+            return
+        }
+        
+        if userLatLong.latitude == -2 && userLatLong.longitude == -79{
+            showAlert(txt_alert: "No se pud actualizar las coordenadas actuales, estas son necesarias para enviar el reporte")
+            return
+        }
+        
+        print("ok")
+        
+        //enviar por ws el formulario
+        
+    }
+    
 }
+
+
 
 extension ThirdViewController: UITextFieldDelegate {
     // FUNCIONES PARA ESCUCHAR NOTIFICACIONES O EN ESTE CASO EVENTOS DEL TECLADO

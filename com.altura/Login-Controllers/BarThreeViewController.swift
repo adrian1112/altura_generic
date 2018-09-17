@@ -12,10 +12,11 @@ import SQLite
 class BarThreeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     weak var activeField: UITextField?
+    let ws = WService()
     let dbase = DBase();
     var db: Connection!
     
-    @IBOutlet weak var leftConstrain: NSLayoutConstraint!
+    
     @IBOutlet weak var rigthConstrain: NSLayoutConstraint!
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var leftView: UIView!
@@ -30,8 +31,16 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
     
     var data = [cellData]()
     var accounts_list = [detailAccount]()
-    
+    var user = User.init(id_user: 0, document: "", person: "", email: "", phone: "", sync_date: "", adress: "", status: 1, error: 1)
     var width = 0;
+    
+    
+    @IBOutlet weak var viewalias: UIView!
+    @IBOutlet weak var titleAlias: UILabel!
+    @IBOutlet weak var newAlias: UITextField!
+    @IBOutlet weak var errAlias: UILabel!
+    
+    var selectedAcount = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,11 +71,14 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
                 print(item)
                 self.data.append(cellData.init(image: #imageLiteral(resourceName: "contrato-1"), message: "\(item.servicio) - \(item.direccion)", title: item.alias, date: "", service: item.servicio))
             }
+            
+            user = self.dbase.loadUsersDB()
         }
         print(data)
         
         self.tableView.reloadData()
         
+        self.viewalias.isHidden = true
         
         //self.tableView.register(CustomTableViewCell2.self, forCellReuseIdentifier: "customCell")
         //self.tableView.rowHeight = UITableViewAutomaticDimension
@@ -84,7 +96,6 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
         }else{
             self.hiddenMenu()
         }
-        
     }
     
     @IBAction func puntosRecaudo(_ sender: Any) {
@@ -200,17 +211,51 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
         
     }
     
-    /*func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let delete = UITableViewRowAction(style: .destructive, title: "Eliminar") { (action, indexPath) in
             // delete item at indexPath
-            self.data.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            print(self.data)
+            let alert = UIAlertController(title: nil, message: "Seguro desea eliminar la cuenta \(self.data[indexPath.row].service as! String)?", preferredStyle: .alert);
+            let btn_alert = UIAlertAction(title: "Aceptar", style: .default) { (UIAlertAction) in
+                
+                //funcion para eliminar cuenta
+                self.ws.deleteService(id: self.user.id_user, service: self.data[indexPath.row].service as! String,
+                                      success: {
+                                        (message) -> Void in
+                                        print("eliminado \(message)")
+                                        
+                                        let ok2 = self.dbase.deleteDetaillsAccount(account: self.data[indexPath.row].service as! String)
+                                        if ok2 {
+                                            self.data.remove(at: indexPath.row)
+                                            tableView.deleteRows(at: [indexPath], with: .fade)
+                                            print(self.data)
+                                        }
+                                        
+                                        
+                },error: {
+                    (message) -> Void in
+                    print("eliminado err \(message)")
+                    self.showAlert(message: "Se produjo un error al eliminar la cuenta \(self.data[indexPath.row].service as! String)")
+                })
+                
+            }
+            let btn_cancel = UIAlertAction(title: "Cancelar", style: .cancel) { (UIAlertAction) in
+                
+            }
+            alert.addAction(btn_alert);
+            alert.addAction(btn_cancel);
+            self.present(alert, animated: true, completion: nil);
+            
+            
         }
         
         let share = UITableViewRowAction(style: .default, title: "Alias") { (action, indexPath) in
             // share item at indexPath
+            self.selectedAcount = self.data[indexPath.row].service as! String
+            
+            self.viewalias.isHidden = false
+            self.errAlias.isHidden = true
+            self.titleAlias.text = "Cambiar Alias a cuenta \(self.data[indexPath.row].service as! String)"
             print("I want to share: \(self.data[indexPath.row])")
         }
         
@@ -218,7 +263,7 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
         
         return [delete, share]
         
-    }*/
+    }
     
     
     @IBAction func NewContract(_ sender: Any) {
@@ -231,6 +276,85 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
         self.hiddenMenu()
+    }
+    
+    @IBAction func aceptAlias(_ sender: Any) {
+        self.view.endEditing(true)
+        if self.newAlias.text?.trimmingCharacters(in: .whitespaces) != ""{
+            let id_usuario = self.user.id_user
+            let alias = self.newAlias.text?.trimmingCharacters(in: .whitespaces)
+            let num_contrato = self.selectedAcount
+            
+            print("entra en actualizar servicio")
+            
+            //DispatchQueue.global(qos: .background).async
+               // {
+                    self.ws.updateService(id: id_usuario, alias: alias!, service: num_contrato, success:{
+                        (message) -> Void in
+                        print(message)
+                        
+                        let ok = self.dbase.updateAccount(account: num_contrato, alias: alias!)
+                        if ok{
+                            self.refreshTable()
+                            
+                        }
+                        
+                    }, error:{
+                        (message) -> Void in
+                        print(message)
+                        
+                        DispatchQueue.main.async {
+                            //self.spin.stopAnimating()
+                            //self.spinView.isHidden = true
+                            self.showAlert(message: "Se produjo un error al cambiar el alias a la cuenta \(num_contrato)")
+                        }
+                        
+                    })
+            //}
+            
+            
+        }else{
+            
+            self.errAlias.isHidden = false
+  
+        }
+    }
+    
+    func refreshTable(){
+        
+        self.data = []
+        accounts_list = self.dbase.getAllDetailsAccounts()
+        
+        for item in accounts_list{
+            print(item)
+            self.data.append(cellData.init(image: #imageLiteral(resourceName: "contrato-1"), message: "\(item.servicio) - \(item.direccion)", title: item.alias, date: "", service: item.servicio))
+        }
+        
+        self.tableView.reloadData()
+        
+        self.newAlias.text = ""
+        self.titleAlias.text = "Cambiar Alias a cuenta"
+        self.viewalias.isHidden = true
+        
+    }
+    
+    @IBAction func cancelAlias(_ sender: Any) {
+        self.view.endEditing(true)
+        self.newAlias.text = ""
+        self.titleAlias.text = "Cambiar Alias a cuenta"
+        self.viewalias.isHidden = true
+    }
+    
+    //funcion para mostrar alerta
+    func showAlert(message: String){
+        print("entra a alerta")
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert);
+        let btn_alert = UIAlertAction(title: "Aceptar", style: .default) { (UIAlertAction) in
+            
+        }
+        
+        alert.addAction(btn_alert);
+        self.present(alert, animated: true, completion: nil);
     }
     
 }

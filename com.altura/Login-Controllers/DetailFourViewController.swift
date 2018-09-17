@@ -32,9 +32,11 @@ class DetailFourViewController: UIViewController, UITableViewDelegate, UITableVi
         contrato = String(describing: detailController.contrato)
         servicio = String(describing: detailController.servicio)
         
-        navigationBar.title = contrato
-        
         let detailAccountItem = detailController.detailtAccountItem
+        let titleView = detailAccountItem.alias
+        let title2View = detailAccountItem.contrato
+        //String(describing: detailController.contrato)
+        navigationBar.title = " \(titleView) - \(title2View)"
         
 
         tableView.delegate = self

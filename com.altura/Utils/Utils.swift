@@ -55,6 +55,11 @@ func verificarCedula(cedula: String) -> Bool {
     return cedulaCorrecta
 }
 
+func codeUtf8(data: String) -> String{
+    let customAllowedSet = CharacterSet(charactersIn:" &+=\"#%/<>?@\\^`{|}:[],").inverted
+    return data.addingPercentEncoding(withAllowedCharacters: customAllowedSet)!
+}
+
 
 
 extension String {
@@ -170,4 +175,19 @@ func getDate() -> String{
     dateFormatter.locale = Locale(identifier: "es_EC")
     dateFormatter.setLocalizedDateFormatFromTemplate("dd/MM/yyyy")
     return dateFormatter.string(from: date)
+}
+
+extension NSMutableArray {
+    func reverse() {
+        if count <= 1 {
+            return
+        }
+        var i: Int = 0
+        var j: Int = count - 1
+        while i < j {
+            exchangeObject(at: i, withObjectAt: j)
+            i += 1
+            j -= 1
+        }
+    }
 }

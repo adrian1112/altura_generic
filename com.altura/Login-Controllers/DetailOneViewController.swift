@@ -68,9 +68,12 @@ class DetailOneViewController: UIViewController {
         
         let detailController = tabBarController as! DetailsTabBarViewController
         
-        let titleView = String(describing: detailController.contrato)
-        navigationBar.title = titleView
+        
         let detailAccountItem = detailController.detailtAccountItem
+        let titleView = detailAccountItem.alias
+        let title2View = detailAccountItem.contrato
+        //String(describing: detailController.contrato)
+        navigationBar.title = " \(titleView) - \(title2View)"
         
         //llenar pestaña DETALLES
         cliente.text = detailAccountItem.cliente

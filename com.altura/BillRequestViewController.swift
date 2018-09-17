@@ -22,9 +22,10 @@ class BillRequestViewController: UIViewController, UIPickerViewDelegate, UIPicke
     @IBOutlet weak var select1: UITextField!
     @IBOutlet weak var select2: UITextField!
     @IBOutlet weak var picture: UIImageView!
+    @IBOutlet weak var telefono: UITextField!
+    @IBOutlet weak var obs: UITextView!
     
    
-    
     @IBOutlet weak var textView_label: UITextView!
     
     @IBOutlet weak var tableBills: UITableView!
@@ -112,7 +113,7 @@ class BillRequestViewController: UIViewController, UIPickerViewDelegate, UIPicke
                     self.bills = []
                     for item in bills_list{
                         if( self.id_account_selected == item.servicio){
-                            self.bills.append(Bill.init(name: getMonthString(date: item.fecha_emision,2), enabled: false, index: i, date_ini: getLabelDate(date: item.fecha_emision,2), date_end: getLabelDate(date: item.fecha_vencimiento,2), value: item.monto_factura, type: item.estado_factura))
+                            self.bills.append(Bill.init(name: getMonthString(date: item.fecha_emision,2), enabled: false, index: i, date_ini: getLabelDate(date: item.fecha_emision,2), date_end: getLabelDate(date: item.fecha_vencimiento,2), value: item.monto_factura, type: item.estado_factura, code: item.codigo_factura))
                             
                             i += 1
                         }
@@ -241,8 +242,9 @@ class BillRequestViewController: UIViewController, UIPickerViewDelegate, UIPicke
             var i = 0
             self.bills = []
             for item in bills_list{
+                
                 if( self.id_account_selected == item.servicio){
-                    self.bills.append(Bill.init(name: getMonthString(date: item.fecha_emision,2), enabled: false, index: i, date_ini: getLabelDate(date: item.fecha_emision,2), date_end: getLabelDate(date: item.fecha_vencimiento,2), value: item.monto_factura, type: item.estado_factura))
+                    self.bills.append(Bill.init(name: getMonthString(date: item.fecha_emision,2), enabled: false, index: i, date_ini: getLabelDate(date: item.fecha_emision,2), date_end: getLabelDate(date: item.fecha_vencimiento,2), value: item.monto_factura, type: item.estado_factura, code: item.codigo_factura))
                     
                     i += 1
                 }
@@ -305,8 +307,46 @@ class BillRequestViewController: UIViewController, UIPickerViewDelegate, UIPicke
     }
     
     @IBAction func Send(_ sender: UIButton) {
-        print("Envia")
-        dismiss(animated: true)
+        let service = self.id_account_selected
+        let telefono = self.telefono.text?.trimmingCharacters(in: .whitespaces)
+        let obs = self.obs.text
+        let tipo = select2.text
+        var facturas = [String]()
+        
+        for item in self.bills{
+            if item.enabled {
+                facturas .append(item.code)
+            }
+        }
+        if service == ""{
+            showAlert(txt_alert: "Por favor, seleccione el contrato")
+            return
+        }
+        if telefono == ""{
+            showAlert(txt_alert: "El campo Teléfono no puede quedar vacío")
+            return
+        }
+        if (telefono?.count)! < 7{
+            showAlert(txt_alert: "Por favor, ingrese un teléfono válido")
+            return
+        }
+        if obs?.trimmingCharacters(in: .whitespaces) == ""{
+            showAlert(txt_alert: "Por favor, seleccione el contrato")
+            return
+        }
+        if service == ""{
+            showAlert(txt_alert: "Por favor, seleccione el contrato")
+            return
+        }
+        if facturas.count == 0{
+            showAlert(txt_alert: "Por favor, seleccione la(s) facturas relacionadas")
+            return
+        }
+        
+        print("ok")
+        
+        
+        //dismiss(animated: true)
     }
     
     //HABILITA LA OPCION DE OCULTAR EL TECLADO CUANDO SE LE DA EN CUALQUIER PARTE DE LA PANTALLA Y PARA MOVER LA VIEW SI EL TECLADO OCULTA EL TEXTFIELD

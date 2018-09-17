@@ -29,9 +29,11 @@ class DetailTwoViewController: UIViewController, UITableViewDelegate, UITableVie
         
         let detailController = tabBarController as! DetailsTabBarViewController
         
-        let titleView = String(describing: detailController.contrato)
-        navigationBar.title = titleView
         let detailAccountItem = detailController.detailtAccountItem
+        let titleView = detailAccountItem.alias
+        let title2View = detailAccountItem.contrato
+        //String(describing: detailController.contrato)
+        navigationBar.title = " \(titleView) - \(title2View)"
 
         tableBills.delegate = self
         tableBills.dataSource = self
@@ -49,7 +51,7 @@ class DetailTwoViewController: UIViewController, UITableViewDelegate, UITableVie
             for item in detail_payment_list{
                 //let name = getMonthString(item.fecha_pago)
                 //print( getMonthString(date: item.fecha_pago,1) )
-                self.payments.append(Bill.init(name: getMonthString(date: item.fecha_pago,1), enabled: false, index: i, date_ini: getLabelDate(date: item.fecha_pago,1), date_end: "", value: item.monto_pago, type: ""))
+                self.payments.append(Bill.init(name: getMonthString(date: item.fecha_pago,1), enabled: false, index: i, date_ini: getLabelDate(date: item.fecha_pago,1), date_end: "", value: item.monto_pago, type: "", code: item.codigo_pago))
                 
                 i += 1
             }
@@ -58,7 +60,7 @@ class DetailTwoViewController: UIViewController, UITableViewDelegate, UITableVie
             for item in bills_list{
                 //let name = getMonthString(item.fecha_pago)
                 //print(getMonthString(date: item.fecha_emision,2) )
-                self.bills.append(Bill.init(name: getMonthString(date: item.fecha_emision,2), enabled: false, index: i, date_ini: getLabelDate(date: item.fecha_emision,2), date_end: getLabelDate(date: item.fecha_vencimiento,2), value: item.monto_factura, type: item.estado_factura))
+                self.bills.append(Bill.init(name: getMonthString(date: item.fecha_emision,2), enabled: false, index: i, date_ini: getLabelDate(date: item.fecha_emision,2), date_end: getLabelDate(date: item.fecha_vencimiento,2), value: item.monto_factura, type: item.estado_factura, code: item.codigo_factura))
                 
                 i += 1
             }

@@ -25,6 +25,9 @@ class ContactViewController: UIViewController {
     
     @IBAction func chatOnline(_ sender: Any) {
         
+        let mainTabViewController = self.storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
+        self.present(mainTabViewController, animated: true, completion: nil)
+        
     }
     
     @IBAction func close(_ sender: Any) {

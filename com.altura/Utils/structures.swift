@@ -55,9 +55,10 @@ struct Bill {
     let date_end : String
     let value : String
     let type : String
+    let code : String
     
     
-    init(name : String, enabled : Bool, index : Int, date_ini : String, date_end : String, value : String, type : String) {
+    init(name : String, enabled : Bool, index : Int, date_ini : String, date_end : String, value : String, type : String, code : String) {
         self.name = name
         self.enabled = enabled
         self.index = index
@@ -65,6 +66,7 @@ struct Bill {
         self.date_end = date_end
         self.value = value
         self.type = type
+        self.code = code
     }
 }
 

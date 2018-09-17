@@ -213,33 +213,57 @@ class TechRequestViewController: UIViewController, UIPickerViewDelegate, UIPicke
         dismiss(animated: true)
     }
     
-    @IBAction func Send(_ sender: UIButton) {
-        print("Envia")
-        
-        var service = ""
-        
-        if self.id_account_selected != "" {
-            service = self.id_account_selected
-        }
-        
-        let telephone = self.telephone.text
-        let obs = self.textView.text
-        
-        
-        dismiss(animated: true)
-    }
-    
-    //HABILITA LA OPCION DE OCULTAR EL TECLADO CUANDO SE LE DA EN CUALQUIER PARTE DE LA PANTALLA Y PARA MOVER LA VIEW SI EL TECLADO OCULTA EL TEXTFIELD
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
-    }
-    
     func showAlert(txt_alert: String){
         print("entra a alerta")
         let alert = UIAlertController(title: nil, message: txt_alert, preferredStyle: .alert);
         let btn_alert = UIAlertAction(title: "Cerrar", style: .cancel)
         alert.addAction(btn_alert);
         self.present(alert, animated: true, completion: nil);
+    }
+    
+    @IBAction func Send(_ sender: UIButton) {
+        print("Envia")
+        
+        let service = self.id_account_selected
+        let telephone = self.telephone.text?.trimmingCharacters(in: .whitespaces)
+        let obs = self.textView.text
+        let tipo = self.select2.text
+        let img = picture.image
+        
+        if service == ""{
+            showAlert(txt_alert: "Por favor, Seleccione el contrato")
+            return
+        }
+        if telephone == "" {
+            showAlert(txt_alert: "El campo Teléfono no puede quedar vacío")
+            return
+        }
+        if (telephone?.count)! < 7 {
+            showAlert(txt_alert: "Por favor, Ingrese  un telefono válido")
+            return
+        }
+        if obs?.trimmingCharacters(in: .whitespaces) == ""{
+            showAlert(txt_alert: "El campo Observación no puede quedar vacío")
+            return
+        }
+        if tipo == ""{
+            showAlert(txt_alert: "Por favor, Seleccione el Tipo de Reclamo")
+            return
+        }
+        
+        if img == nil {
+            showAlert(txt_alert: "Por favor, cargar una imagen del motivo del reporte")
+            return
+        }
+        
+        print("ok")
+        
+        //dismiss(animated: true)
+    }
+    
+    //HABILITA LA OPCION DE OCULTAR EL TECLADO CUANDO SE LE DA EN CUALQUIER PARTE DE LA PANTALLA Y PARA MOVER LA VIEW SI EL TECLADO OCULTA EL TEXTFIELD
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {

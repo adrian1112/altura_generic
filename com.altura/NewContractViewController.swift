@@ -97,6 +97,7 @@ class NewContractViewController: UIViewController, UITableViewDelegate, UITableV
             }
             
         }else{
+            
             if cedula == ""{
                 self.err_id.text = "Por favor igrese la cédula o RUC"
             }else if !ok_ced{
@@ -110,6 +111,11 @@ class NewContractViewController: UIViewController, UITableViewDelegate, UITableV
                 self.err_number.text = ""
             }
             
+            DispatchQueue.main.async {
+                self.spin.stopAnimating()
+                self.spinView.isHidden = true
+            }
+            
         }
     }
     
@@ -120,29 +126,44 @@ class NewContractViewController: UIViewController, UITableViewDelegate, UITableV
                 print("ok service")
                 if status == 1{
                     self.contratos = list_contract
-                    self.tableView.reloadData()
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                        
+                        self.view1.isHidden = true
+                        self.view2.isHidden = false
+                        
+                        self.spin.stopAnimating()
+                        self.spinView.isHidden = true
+                        
+                        self.err_number.text = ""
+                        self.err_id.text = ""
+                    }
     
-                    self.view1.isHidden = true
-                    self.view2.isHidden = false
-    
-                    self.err_number.text = ""
-                    self.err_id.text = ""
+                    
     
                 }else{
                 //self.ok = false
                     print(message)
+                    
+                    DispatchQueue.main.async {
+                        self.spin.stopAnimating()
+                        self.spinView.isHidden = true
+                        self.showAlert(message: message)
+                    }
                 }
             },
         error: {
             (message) -> Void in
             print("error service: \(message)")
+            DispatchQueue.main.async {
+                self.spin.stopAnimating()
+                self.spinView.isHidden = true
+                self.showAlert(message: message)
+            }
     
             })
         
-        DispatchQueue.main.async {
-            self.spin.stopAnimating()
-            self.spinView.isHidden = true
-        }
+        
     }
     
     @IBAction func exit(_ sender: UIButton) {
@@ -163,6 +184,11 @@ class NewContractViewController: UIViewController, UITableViewDelegate, UITableV
     @IBAction func save(_ sender: Any) {
         print("accion guardar")
         
+        DispatchQueue.main.async {
+            self.spin.startAnimating()
+            self.spinView.isHidden = false
+        }
+        
         var list_selected = [detailContract]()
         for item in contratos {
             if item.status {
@@ -181,9 +207,6 @@ class NewContractViewController: UIViewController, UITableViewDelegate, UITableV
                     //let now = getDate()
                     //verificar si se encuentra en la base
                     
-                    self.spin.startAnimating()
-                    self.spinView.isHidden = false
-                    
                     self.accounts = self.dbase.getAccounts()
                     var update = false
                     for item_ac in self.accounts{
@@ -195,17 +218,77 @@ class NewContractViewController: UIViewController, UITableViewDelegate, UITableV
                     
                     if update{
                         print("entra en actualizar servicio")
-                        let ok = self.dbase.updateAccount(account: num_contrato, alias: alias!)
-                        self.ws.updateService(id: id_usuario, alias: alias!, service: num_contrato, success:{
-                            (message) -> Void in
-                            print(message)
-                            
-                            if ok{
-                                let ok2 = self.dbase.deleteDetaillsAccount(account: num_contrato)
-                                //vuelve a consultar los detalles de la cuenta actualizada
-                                if ok2{
+                        
+                        DispatchQueue.global(qos: .background).async
+                            {
+                                self.ws.updateService(id: id_usuario, alias: alias!, service: num_contrato, success:{
+                                    (message) -> Void in
+                                    print(message)
                                     
+                                    let ok = self.dbase.updateAccount(account: num_contrato, alias: alias!)
+                                    if ok{
+                                        let ok2 = self.dbase.deleteDetaillsAccount(account: num_contrato)
+                                        //vuelve a consultar los detalles de la cuenta actualizada
+                                        if ok2{
+                                            
+                                            let new_account = account.init(service: num_contrato, alias: alias!, document: documento, date_sync: message)
+                                            
+                                            self.ws.loadCore(id_user: String(describing: self.user.id_user), accounts: [new_account],
+                                                             success: {
+                                                                (notifications) -> Void in
+                                                                print("ok load core")
+                                                                
+                                                                DispatchQueue.main.async {
+                                                                    self.spin.stopAnimating()
+                                                                    self.spinView.isHidden = true
+                                                                    
+                                                                    let mainTabViewController = self.storyboard?.instantiateViewController(withIdentifier: "mainTabViewController") as! MainTabViewController
+                                                                    self.present(mainTabViewController, animated: true, completion: nil)
+                                                                }
+                                                                
+                                                                
+                                            },error: {
+                                                (accounts,message) -> Void in
+                                                print("error \(message)")
+                                                
+                                                DispatchQueue.main.async {
+                                                    self.spin.stopAnimating()
+                                                    self.spinView.isHidden = true
+                                                    self.showAlert(message: "\(message) , Contrato \(num_contrato)")
+                                                }
+                                            })
+                                            
+                                        }
+                                    }
+                                    
+                         
+                                    
+                                }, error:{
+                                    (message) -> Void in
+                                    print(message)
+                                    
+                                    DispatchQueue.main.async {
+                                        self.spin.stopAnimating()
+                                        self.spinView.isHidden = true
+                                        self.showAlert(message: "Se produjo un error al cambiar el alias a la cuenta \(num_contrato)")
+                                    }
+                                    
+                                })
+                        }
+                        
+                    }else{
+                        print("entra en ingresar servicio")
+                        
+                        DispatchQueue.global(qos: .background).async
+                            {
+                                self.ws.addService(id: id_usuario,document: documento, alias: alias!, service: num_contrato, success:{
+                                    (message) -> Void in
+                                    print(message)
+                                    
+                                    // agregar la sincronización del core
                                     let new_account = account.init(service: num_contrato, alias: alias!, document: documento, date_sync: message)
+                                    
+                                    self.dbase.insertAccounts(accounts: [new_account] as! [account])
                                     
                                     self.ws.loadCore(id_user: String(describing: self.user.id_user), accounts: [new_account],
                                                      success: {
@@ -213,89 +296,60 @@ class NewContractViewController: UIViewController, UITableViewDelegate, UITableV
                                                         print("ok load core")
                                                         
                                                         DispatchQueue.main.async {
+                                                            
                                                             self.spin.stopAnimating()
                                                             self.spinView.isHidden = true
-                                                            
                                                             
                                                             let mainTabViewController = self.storyboard?.instantiateViewController(withIdentifier: "mainTabViewController") as! MainTabViewController
                                                             self.present(mainTabViewController, animated: true, completion: nil)
                                                         }
-                                                        
-                                                        
+
                                     },error: {
                                         (accounts,message) -> Void in
+                                        
                                         print("error \(message)")
                                         
+                                        DispatchQueue.main.async {
+                                            self.spin.stopAnimating()
+                                            self.spinView.isHidden = true
+                                            self.showAlert(message: message )
+                                        }
+                                    })
+                                    //self.syncAllDataCore(accounts: [new_account] as! [account])
+                                    
+                                    
+                                }, error:{
+                                    (message) -> Void in
+                                    print(message)
+                                    
+                                    DispatchQueue.main.async {
                                         self.spin.stopAnimating()
                                         self.spinView.isHidden = true
-                                    })
-                                }
-                            }
-                            
-                 
-                            
-                        }, error:{
-                            (message) -> Void in
-                            print(message)
-                            self.spin.stopAnimating()
-                            self.spinView.isHidden = true
-                        })
-                        
-                    }else{
-                        print("entra en ingresar servicio")
-                        ws.addService(id: id_usuario,document: documento, alias: alias!, service: num_contrato, success:{
-                            (message) -> Void in
-                            print(message)
-                            
-                            // agregar la sincronización del core
-                            let new_account = account.init(service: num_contrato, alias: alias!, document: documento, date_sync: message)
-                            
-                            self.dbase.insertAccounts(accounts: [new_account] as! [account])
-                            
-                            self.ws.loadCore(id_user: String(describing: self.user.id_user), accounts: [new_account],
-                                             success: {
-                                                (notifications) -> Void in
-                                                print("ok load core")
-                                                
-                                                DispatchQueue.main.async {
-                                                    
-                                                    self.spin.stopAnimating()
-                                                    self.spinView.isHidden = true
-                                                    
-                                                    let mainTabViewController = self.storyboard?.instantiateViewController(withIdentifier: "mainTabViewController") as! MainTabViewController
-                                                    self.present(mainTabViewController, animated: true, completion: nil)
-                                                }
-
-                            },error: {
-                                (accounts,message) -> Void in
-                                
-                                print("error \(message)")
-                                self.spin.stopAnimating()
-                                self.spinView.isHidden = true
-                            })
-                            //self.syncAllDataCore(accounts: [new_account] as! [account])
-                            
-                            
-                        }, error:{
-                            (message) -> Void in
-                            print(message)
-                            self.spin.stopAnimating()
-                            self.spinView.isHidden = true
-                        })
+                                        self.showAlert(message: message )
+                                    }
+                                })
+                        }
                         
                     }
                     
                     print(item)
-                    self.spin.stopAnimating()
-                    self.spinView.isHidden = true
+                   
                     
                 }
                 
             }else{
+                DispatchQueue.main.async {
+                    self.spin.stopAnimating()
+                    self.spinView.isHidden = true
+                }
                 showAlert(message: "Por favor ingrese un Alias para el contrato")
             }
         }else{
-            showAlert(message: "Por favor seleccione un contrato")
+            DispatchQueue.main.async {
+                self.spin.stopAnimating()
+                self.spinView.isHidden = true
+                self.showAlert(message: "Por favor seleccione un contrato")
+            }
         }
         
     }
