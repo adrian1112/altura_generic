@@ -74,9 +74,11 @@ class RegisterController: UIViewController {
     @IBAction func validatePass(_ sender: Any) {
         let txt1 = self.pass1_txt.text
         let txt2 = self.pass2_txt.text
+        let email = self.email_txt.text!.trimmingCharacters(in: .whitespaces)
+        let cedula = self.identifier_txt.text!.trimmingCharacters(in: .whitespaces)
         var pass_ok = false
         var text = "* "
-        if( (txt1 == txt2) && txt1 != "" && txt2 != "" ){
+        if( (txt1 == txt2) && txt1 != "" && txt2 != "" && txt1?.count ?? 0 > 7){
             pass_ok = true
             self.pass1_txt.layer.borderWidth = 0
             self.pass2_txt.layer.borderWidth = 0
@@ -87,10 +89,15 @@ class RegisterController: UIViewController {
             self.pass1_txt.layer.borderWidth = 1.0
             self.pass2_txt.layer.borderWidth = 1.0
             pass_ok = false
-            text = text + "Las contraseñas no coinciden"
+            if txt1?.count ?? 0 > 7{
+                text = text + "Las contraseñas no coinciden"
+            }else{
+                text = text + "Las contraseñas deben tener un mínimo de 7 caracteres"
+            }
+            
         }
         
-        let identifier_ok = verificarCedula(cedula: self.identifier_txt.text!)
+        let identifier_ok = verificarCedula(cedula: cedula)
         if !identifier_ok {
             let myColor = UIColor.red
             self.identifier_txt.layer.borderColor = myColor.cgColor
@@ -106,7 +113,7 @@ class RegisterController: UIViewController {
         }
         
         
-        let email_ok = isValidEmail(string: self.email_txt.text!)
+        let email_ok = isValidEmail(string: email)
         
         if !email_ok {
             
@@ -127,8 +134,8 @@ class RegisterController: UIViewController {
         
         if pass_ok && identifier_ok && email_ok{
             let viewController = self.storyboard?.instantiateViewController(withIdentifier: "RegisterSecondController") as! RegisterSecondController
-                viewController.identifier = identifier_txt.text!
-                viewController.email = email_txt.text!
+                viewController.identifier = cedula
+                viewController.email = email
                 viewController.pass = pass1_txt.text!
                 viewController.contract = self.contract
                 viewController.names = self.names

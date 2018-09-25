@@ -44,7 +44,7 @@ class WService {
 
         URLSession.shared.dataTask(with: url!){ (data , response ,err ) in
                 
-                print("entra en shared")
+                print("entra en shared 1")
                 
                 guard let data = data else {return error(4,self.user_in)}
                 
@@ -186,6 +186,14 @@ class WService {
             var billsAccountList:[billsAccount] = []
             var detailAccountList:[detailAccount] = []
             
+            var q1 = true
+            var q2 = true
+            var q3 = true
+            var q4 = true
+            var q5 = true
+            
+            var message = ""
+            
             print("codificado: \(encode)")
             
             let jsn_url = url_master + (encode.urlEncode() as String)
@@ -227,7 +235,7 @@ class WService {
                         if keyT as! String == "2" {
                             let data_temp = valueT as! Dictionary<NSObject, AnyObject>
                             var date_sync = ""
-                            var message = ""
+                            //var message = ""
                             var list: NSArray = []
                             for (key,value) in data_temp {
                                 if key as! String == "sync_date" {
@@ -237,12 +245,14 @@ class WService {
                                     list = value as! NSArray
                                 }
                                 if key as! String == "error"{
+                                    q1 = false
                                     message = value as! String
                                 }
                                 
                                 if key as! String == "status"{
                                     if value as! Int == -1{
-                                        return error( false,message)
+                                        q1 = false
+                                        //return error( false,message)
                                     }
                                 }
                             }
@@ -267,7 +277,7 @@ class WService {
                         if keyT as! String == "3" {
                             let data_temp = valueT as! Dictionary<NSObject, AnyObject>
                             var date_sync = ""
-                            var message = ""
+                            //var message = ""
                             var list: NSArray = []
                             for (key,value) in data_temp {
                                 if key as! String == "sync_date" {
@@ -277,12 +287,14 @@ class WService {
                                     list = value as! NSArray
                                 }
                                 if key as! String == "error"{
+                                    q2 = false
                                     message = value as! String
                                 }
                                 
                                 if key as! String == "status"{
                                     if value as! Int == -1{
-                                        return error( false,message)
+                                        q2 = false
+                                        //return error( false,message)
                                     }
                                 }
                             }
@@ -305,7 +317,7 @@ class WService {
                         if keyT as! String == "5" {
                             let data_temp = valueT as! Dictionary<NSObject, AnyObject>
                             var date_sync = ""
-                            var message = ""
+                            //var message = ""
                             var list: NSArray = []
                             for (key,value) in data_temp {
                                 if key as! String == "sync_date" {
@@ -315,12 +327,14 @@ class WService {
                                     list = value as! NSArray
                                 }
                                 if key as! String == "error"{
+                                    q3 = false
                                     message = value as! String
                                 }
                                 
                                 if key as! String == "status"{
                                     if value as! Int == -1{
-                                        return error( false,message)
+                                        q3 = false
+                                        //return error( false,message)
                                     }
                                 }
                             }
@@ -343,7 +357,7 @@ class WService {
                         if keyT as! String == "9" {
                             let data_temp = valueT as! Dictionary<NSObject, AnyObject>
                             var date_sync = ""
-                            var message = ""
+                            //var message = ""
                             var list: NSArray = []
                             for (key,value) in data_temp {
                                 if key as! String == "sync_date" {
@@ -353,12 +367,14 @@ class WService {
                                     list = value as! NSArray
                                 }
                                 if key as! String == "error"{
+                                    q4 = false
                                     message = value as! String
                                 }
                                 
                                 if key as! String == "status"{
                                     if value as! Int == -1{
-                                        return error( false,message)
+                                        q4 = false
+                                        //return error( false,message)
                                     }
                                 }
                             }
@@ -381,7 +397,7 @@ class WService {
                         if keyT as! String == "48" {
                             let data_temp = valueT as! Dictionary<NSObject, AnyObject>
                             var date_sync = ""
-                            var message = ""
+                            //var message = ""
                             var list: NSArray = []
                             for (key,value) in data_temp {
                                 if key as! String == "sync_date" {
@@ -391,12 +407,14 @@ class WService {
                                     list = value as! NSArray
                                 }
                                 if key as! String == "error"{
+                                    q5 = false
                                     message = value as! String
                                 }
                                 
                                 if key as! String == "status"{
                                     if value as! Int == -1{
-                                        return error( false,message)
+                                        q5 = false
+                                        //return error( false,message)
                                     }
                                 }
                             }
@@ -418,14 +436,70 @@ class WService {
                         
                     }
                     
+                    if !q1 && !q2 && !q3 && !q4 && !q5 {
+                        return error( false,message)
+                    }
+                    
                     let status = dbase.connect_db()
                     if( status.value ){
                         self.db = status.conec
-                        self.dbase.insertDetailsAccounts(list: detailAccountList)
-                        self.dbase.insertDebs(list: detailDebsList)
-                        self.dbase.insertDetailPaymentT(list: detailPaymentList)
-                        self.dbase.insertDetailProcedure(list: detailProcedureList)
-                        self.dbase.insertBillsAccount(list: billsAccountList)
+                        if q1{
+                            do{
+                                try self.db.execute("DELETE FROM cuenta_detalle where servicio = '\(accountItem.service)';")
+                                self.dbase.insertDetailsAccounts(list: detailAccountList)
+                                
+                            }catch let Result.error(message, code, statement){
+                                print("mensaje: \(message), codigo: \(code), statment: \(String(describing: statement)) ")
+                            }catch {
+                                print(error)
+                            }
+                        }
+                        if q2{
+                            do{
+                                try self.db.execute("DELETE FROM deudas where servicio = '\(accountItem.service)';")
+                                self.dbase.insertDebs(list: detailDebsList)
+                                
+                            }catch let Result.error(message, code, statement){
+                                print("mensaje: \(message), codigo: \(code), statment: \(String(describing: statement)) ")
+                            }catch {
+                                print(error)
+                            }
+                        }
+                        if q3{
+                            do{
+                                try self.db.execute("DELETE FROM facturas where servicio = '\(accountItem.service)';")
+                                self.dbase.insertBillsAccount(list: billsAccountList)
+                                
+                            }catch let Result.error(message, code, statement){
+                                print("mensaje: \(message), codigo: \(code), statment: \(String(describing: statement)) ")
+                            }catch {
+                                print(error)
+                            }
+                        }
+                        if q4{
+                            do{
+                                try self.db.execute("DELETE FROM tramites where servicio = '\(accountItem.service)';")
+                                self.dbase.insertDetailProcedure(list: detailProcedureList)
+                                
+                                
+                            }catch let Result.error(message, code, statement){
+                                print("mensaje: \(message), codigo: \(code), statment: \(String(describing: statement)) ")
+                            }catch {
+                                print(error)
+                            }
+                        }
+                        if q5{
+                            do{
+                                try self.db.execute("DELETE FROM pagos where servicio = '\(accountItem.service)';")
+                                self.dbase.insertDetailPaymentT(list: detailPaymentList)
+                                
+                            }catch let Result.error(message, code, statement){
+                                print("mensaje: \(message), codigo: \(code), statment: \(String(describing: statement)) ")
+                            }catch {
+                                print(error)
+                            }
+                        }
+                        
                         
                     }
                     
@@ -450,12 +524,11 @@ class WService {
         
     }
     
-    func loadNotifications(id_user: String, date: String, success: @escaping (_ list: Array<Any>) -> Void, error: @escaping (_ list: Array<Any>, _ message: String) -> Void) {
+    func loadNotifications(id_user: String, date: String, success: @escaping (_ list: Array<notification>) -> Void, error: @escaping (_ list: Array<Any>, _ message: String) -> Void) {
         let n_key = key.md5()
         
         let url_part = "action=query&id_query=65&id_user=\(id_user)&ID_USER=\(id_user)&FECHA=\(date)"
         let encode = try! url_part.aesEncrypt(key: n_key, iv: iv)
-        //2,3,5,9,48
         var notificationsList:[notification] = []
         
         print("codificado: \(encode)")
@@ -465,7 +538,7 @@ class WService {
         
         guard var url = try? URLRequest(url: NSURL(string: jsn_url) as! URL) else {
             print("error Notificaciones")
-            error( [],"Error al generar la url Notificaciones")
+            error(notificationsList,"Error al generar la url Notificaciones")
             
         }
         
@@ -475,15 +548,15 @@ class WService {
         let (data, response, err) = URLSession.shared.synchronousDataTask(urlrequest: url)
         if let error2 = err {
             print("Synchronous task ended with error: \(error)")
-            error( [],"Error al obtener data: \(error2)")
+            error(notificationsList,"Error al obtener data: \(error2)")
         }
         else {
             print("Synchronous task ended without errors.")
             //print(data)
-            guard let data = data else { return error( [],"Error al obtener la data") }
+            guard let data = data else { return error(notificationsList,"Error al obtener la data") }
             
             do{
-                guard let data_received = String(data: data, encoding: .utf8) else{ return error( [],"Error encodign utf8") }
+                guard let data_received = String(data: data, encoding: .utf8) else{ return error(notificationsList,"Error encodign utf8") }
                 print("data received: \(data_received)")
                 
                 let data2 = try! data_received.aesDecrypt(key: n_key, iv: self.iv)
@@ -542,10 +615,12 @@ class WService {
         
         URLSession.shared.dataTask(with: url!){ (data , response ,err ) in
             
-            print("entra en shared")
             
+            print(data)
             guard let data = data else {return error(places, "data recibida invalida")}
+            print("data : \(data.base64EncodedData())")
             
+
             do{
                 guard let data_received = String(data: data, encoding: .utf8) else{ return error(places, "data recibida invalida") }
                 print("data received: \(data_received)")

@@ -8,12 +8,19 @@
 
 import UIKit
 import SQLite
+import FirebaseCore
+import FirebaseAuth
+import FirebaseDatabase
 
 class BarFourViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     weak var activeField: UITextField?
     let dbase = DBase();
     var db: Connection!
+    
+    //firebase
+    //var ref_fb: DatabaseReference!
+    
     
     @IBOutlet weak var leftConstrain: NSLayoutConstraint!
     @IBOutlet weak var rigthConstrain: NSLayoutConstraint!
@@ -42,6 +49,9 @@ class BarFourViewController: UIViewController, UITableViewDataSource, UITableVie
         navigationController?.hidesBarsOnSwipe = false
         //navigationController?.hidesBarsOnTap = true
         navigationController?.hidesBarsWhenKeyboardAppears = false
+        
+        //setea el contador de badge de notificaciones
+        UIApplication.shared.applicationIconBadgeNumber = 0
         
         //Menu
         blurView.layer.cornerRadius = 15
@@ -79,6 +89,36 @@ class BarFourViewController: UIViewController, UITableViewDataSource, UITableVie
         
         self.tableView.register(CustomTableViewCell2.self, forCellReuseIdentifier: "customCell")
         self.tableView.rowHeight = UITableViewAutomaticDimension
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("aparecio las notificaciones")
+        hiddenMenu()
+        let status = dbase.connect_db()
+        if( status.value ){
+            print("entra a buscar detalles de cuenta")
+            data = []
+            notificationsList = self.dbase.getNotifications()
+            
+            var i = 0
+            for item in notificationsList{
+                print(item)
+                i += 1
+                var img = UIImage(named: "alerta_mensaje_2"  )
+                if(item.type == "1"){
+                    img = UIImage(named: "alerta_mensaje_2" )
+                }else{
+                    img = UIImage(named: "info_mensaje_2" )
+                }
+                
+                data.append(cellData.init(image: img, message: item.message, title: "titulo", date: item.date_gen, service: item.contract))
+            }
+            if 1>0{
+                data = [ cellData.init(image: #imageLiteral(resourceName: "alerta_mensaje"), message: "Interrupción Programada del servicio: A partir del 01/01/1991 se realizarán trabajos en RECINTO POSORJA por trabajo programado. Agradecemos si compresion", title: "INTERRUPCIÓN PROGRAMADA DE SERVICIO", date: "29 Jun", service: ""),cellData.init(image: #imageLiteral(resourceName: "info_mensaje_2"), message: "INTERAGUA,informa que se ha generado en su contrato No.111 -222-3333333 por el valor de USD 15.26 correspondiente a JUNIO de 2018 con fecha de vencimiento 01/01/1991", title: "EMISIÓN DE FACTURA", date: "29 Jun", service: "")]
+            }
+            
+            self.tableView.reloadData()
+        }
     }
     
     @IBAction func menuActions(_ sender: Any) {
@@ -152,13 +192,18 @@ class BarFourViewController: UIViewController, UITableViewDataSource, UITableVie
         
             let status = self.dbase.encerarTables()
             if status{ print("ok")}else{print("error encerando")}
+            /*do{
+                try Auth.auth().signOut()
+            }catch let LogoutError{
+                print("LogoutError : \(LogoutError)")
+            }*/
             
             //self.dismiss(animated: true, completion: nil)
             let viewController = self.storyboard?.instantiateInitialViewController()
             self.present(viewController!, animated: true)
             
         }
-        let btn_cancel = UIAlertAction(title: "Cancelar", style: .cancel) { (UIAlertAction) in
+        let btn_cancel = UIAlertAction(title: "Cancelar", style: .destructive) { (UIAlertAction) in
             
         }
         alert.addAction(btn_alert);

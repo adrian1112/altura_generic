@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gXY-HW-J8e">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gXY-HW-J8e">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -55,6 +56,7 @@
                                 <items>
                                     <navigationItem title="Sugerencias" id="D7l-EU-ybN">
                                         <barButtonItem key="leftBarButtonItem" tag="2" title="Item" image="regresar" id="vL3-3A-6JZ">
+                                            <color key="tintColor" red="0.10980392160000001" green="0.31764705879999999" blue="0.86666666670000003" alpha="0.74403058980000003" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
                                                 <action selector="Back:" destination="gXY-HW-J8e" id="Rf1-if-LP3"/>
                                             </connections>

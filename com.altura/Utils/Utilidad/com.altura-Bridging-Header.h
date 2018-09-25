@@ -6,8 +6,8 @@
 //  Copyright © 2018 Altura S.A. All rights reserved.
 //
 
-#import "PBEwithMD5andDes.h"
-#include <openssl/opensslv.h>
+
+
 
 
 #ifndef com_altura_Bridging_Header_h

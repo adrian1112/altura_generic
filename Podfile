@@ -8,6 +8,11 @@ target 'com.altura' do
   source 'https://github.com/CocoaPods/Specs.git'
   pod 'GoogleMaps'
   pod 'GooglePlaces'
+pod 'Firebase/Database'
+pod 'Firebase/Auth'
+pod 'Firebase/Storage'
+pod 'Firebase/Core'
+pod 'Firebase/Messaging'
 
   target 'com.alturaTests' do
     inherit! :search_paths

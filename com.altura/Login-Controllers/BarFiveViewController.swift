@@ -8,6 +8,7 @@
 
 import UIKit
 import SQLite
+import FirebaseAuth
 
 class BarFiveViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -62,6 +63,9 @@ class BarFiveViewController: UIViewController, UITableViewDataSource, UITableVie
         
         let status = dbase.connect_db()
         
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        hiddenMenu()
     }
     
     @IBAction func menuActions(_ sender: Any) {
@@ -136,12 +140,17 @@ class BarFiveViewController: UIViewController, UITableViewDataSource, UITableVie
             
             let status = self.dbase.encerarTables()
             if status{ print("ok")}else{print("error encerando")}
+            /*do{
+                try Auth.auth().signOut()
+            }catch let LogoutError{
+                print("LogoutError : \(LogoutError)")
+            }*/
             
             //self.dismiss(animated: true, completion: nil)
             let viewController = self.storyboard?.instantiateInitialViewController()
             self.present(viewController!, animated: true)
         }
-        let btn_cancel = UIAlertAction(title: "Cancelar", style: .cancel) { (UIAlertAction) in
+        let btn_cancel = UIAlertAction(title: "Cancelar", style: .destructive) { (UIAlertAction) in
             
         }
         alert.addAction(btn_alert);

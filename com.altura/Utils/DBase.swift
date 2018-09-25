@@ -775,6 +775,25 @@ class DBase {
         return false
     }
     
+    // elimina detalles de un contrato de la base
+    func deleteAccount(account: String) -> Bool{
+        print("delete details de account")
+        
+        do{
+            try self.db.execute("DELETE FROM cuentas where servicio = \(account);")
+            
+            print("Se elimino el registro de la cuenta")
+            
+            return true
+            
+        }catch let Result.error(message, code, statement){
+            print("mensaje: \(message), codigo: \(code), statment: \(String(describing: statement)) ")
+        }catch {
+            print(error)
+        }
+        return false
+    }
+    
     //obtiene todos los detalles de cuentas registrados en la DB
     func getAllDetailsAccounts()-> [detailAccount]{
         print("get detalle cuentas")

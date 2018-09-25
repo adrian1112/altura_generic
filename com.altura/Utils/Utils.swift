@@ -7,6 +7,41 @@
 //
 
 import Foundation
+import UserNotifications
+
+func notificationPop(title: String, subtitle: String, body: String){
+    //se accede a la central de notificaciones
+    let notificationCenter = UNUserNotificationCenter.current()
+    //se crea el contenido de la notificacion
+    let content = UNMutableNotificationContent()
+    content.title = title
+    content.subtitle = subtitle
+    content.body = body
+    
+    /*Ahora debemos crear un Schedule de disparo de nuestra notificación. Para
+     ello, usaremos UNTimeIntervalNotificationTrigger, el cual recibe un
+     "timeInterval". Este parámetro indica cuantos segundos a partir de ser
+     agregada nuestra notificación ésta será disparada. El siguiente parámetro
+     "repeats" sirve para indicar si la notificación se repetirá después de
+     su primer disparo.*/
+    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+    
+    /*Ahora crearemos una petición, la cual debe tener un "identifier" que
+     puede ser el de nuestra preferencia, un "content" y un "trigger" que
+     hemos generado lineas arriba.*/
+    let request = UNNotificationRequest(identifier: "initNotification", content: content, trigger: trigger)
+    
+    /*El siguiente paso será agregar nuestra petición a la central
+     de notificaciones de nuestra aplicación.*/
+    notificationCenter.add(request) { (error) in
+        
+        if error == nil {
+            print("Se agrego correctamente la notificacion")
+        }else{
+            print("Se presento un problema con la notificacion")
+        }
+    }
+}
 
 func verificarCedula(cedula: String) -> Bool {
     var cedulaCorrecta = false

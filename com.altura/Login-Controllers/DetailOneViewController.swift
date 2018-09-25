@@ -291,7 +291,7 @@ class DetailOneViewController: UIViewController {
             print("pagar deuda")
             //self.dismiss(animated: true, completion: nil)
         }
-        let btn_cancel = UIAlertAction(title: "Cancelar", style: .cancel) { (UIAlertAction) in
+        let btn_cancel = UIAlertAction(title: "Cancelar", style: .destructive) { (UIAlertAction) in
             
         }
         alert.addAction(btn_alert);

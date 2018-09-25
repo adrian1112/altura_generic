@@ -8,6 +8,7 @@
 
 import UIKit
 import SQLite
+import FirebaseAuth
 
 class BarThreeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -87,6 +88,31 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        hiddenMenu()
+        print("entra en view did appear cuentas")
+        let status = dbase.connect_db()
+        if( status.value ){
+            self.data = []
+            print("entra a buscar detalles de cuenta")
+            accounts_list = self.dbase.getAllDetailsAccounts()
+            
+            for item in accounts_list{
+                print(item)
+                self.data.append(cellData.init(image: #imageLiteral(resourceName: "contrato-1"), message: "\(item.servicio) - \(item.direccion)", title: item.alias, date: "", service: item.servicio))
+            }
+            
+            user = self.dbase.loadUsersDB()
+        }
+        print(data)
+        
+        //let range = NSMakeRange(0, self.tableView.numberOfSections)
+        //let sections = NSIndexSet(indexesIn: range)
+        //self.tableView.reloadSections(sections as IndexSet, with: .left)
+        self.tableView.reloadData()
+    }
+    
+    
     
     
     @IBAction func menuActions(_ sender: Any) {
@@ -162,14 +188,20 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
         let alert = UIAlertController(title: nil, message: "Seguro que desea Cerrar Sesión?", preferredStyle: .alert);
         let btn_alert = UIAlertAction(title: "Aceptar", style: .default) { (UIAlertAction) in
             
+            
             let status = self.dbase.encerarTables()
             if status{ print("ok")}else{print("error encerando")}
+            /*do{
+                try Auth.auth().signOut()
+            }catch let LogoutError{
+                print("LogoutError : \(LogoutError)")
+            }*/
             
             //self.dismiss(animated: true, completion: nil)
             let viewController = self.storyboard?.instantiateInitialViewController()
             self.present(viewController!, animated: true)
         }
-        let btn_cancel = UIAlertAction(title: "Cancelar", style: .cancel) { (UIAlertAction) in
+        let btn_cancel = UIAlertAction(title: "Cancelar", style: .destructive) { (UIAlertAction) in
             
         }
         alert.addAction(btn_alert);
@@ -225,11 +257,12 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
                                         print("eliminado \(message)")
                                         
                                         let ok2 = self.dbase.deleteDetaillsAccount(account: self.data[indexPath.row].service as! String)
-                                        if ok2 {
-                                            self.data.remove(at: indexPath.row)
-                                            tableView.deleteRows(at: [indexPath], with: .fade)
-                                            print(self.data)
-                                        }
+                                        let ok3 = self.dbase.deleteAccount(account: self.data[indexPath.row].service as! String)
+                                        
+                                        self.data.remove(at: indexPath.row)
+                                        tableView.deleteRows(at: [indexPath], with: .fade)
+                                        print(self.data)
+                                        
                                         
                                         
                 },error: {
@@ -239,7 +272,7 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
                 })
                 
             }
-            let btn_cancel = UIAlertAction(title: "Cancelar", style: .cancel) { (UIAlertAction) in
+            let btn_cancel = UIAlertAction(title: "Cancelar", style: .destructive) { (UIAlertAction) in
                 
             }
             alert.addAction(btn_alert);
@@ -269,7 +302,10 @@ class BarThreeViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBAction func NewContract(_ sender: Any) {
         let viewController = self.storyboard?.instantiateViewController(withIdentifier: "newContractViewController") as! NewContractViewController
         
+        viewController.modalPresentationStyle = UIModalPresentationStyle.fullScreen
+        //self.modalPresentationStyle = UIModalPresentationStyle.fullScreen
         self.present(viewController, animated: true)
+        
     }
     
     //HABILITA LA OPCION DE OCULTAR EL TECLADO CUANDO SE LE DA EN CUALQUIER PARTE DE LA PANTALLA Y PARA MOVER LA VIEW SI EL TECLADO OCULTA EL TEXTFIELD

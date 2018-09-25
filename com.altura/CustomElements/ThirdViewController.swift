@@ -114,7 +114,7 @@ class ThirdViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
             self.present(imagePickerController, animated: true, completion: nil)
         }))
         
-        actionSheet.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+        actionSheet.addAction(UIAlertAction(title: "Cancelar", style: .destructive, handler: nil))
         
         self.present(actionSheet, animated: true, completion: nil)
     }

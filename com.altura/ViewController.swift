@@ -63,15 +63,18 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad();
         
+        
+        
+        
         //** opcion de notificacion **
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge,  .sound]) { (success, error) in
+        /*UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge,  .sound]) { (success, error) in
                 if error != nil {
                     print("Se denegaron los permisos para recibir notificaciones")
                 }else{
                     //self.notificationPop()
                     print("Se autorizó las notificaciones")
                 }
-            }
+            }*/
         
         //** opciones de navegacion **
         navigationController?.hidesBarsOnSwipe = true
@@ -159,7 +162,7 @@ class ViewController: UIViewController {
     @IBAction func logIn(_ sender: Any) {
         
         self.view.endEditing(true)
-        let user_name = user_txt.text!
+        let user_name = user_txt.text!.trimmingCharacters(in: .whitespaces)
         let pass = pass_txt.text!
         print(user_name,pass)
         
@@ -187,8 +190,8 @@ class ViewController: UIViewController {
             print("usuario: \(user_name) , contraseña: \(pass)")
             
             
-            //self.user_txt.text = ""
-            self.pass_txt.text = ""
+            self.user_txt.text = ""
+            //self.pass_txt.text = ""
             
             self.complete = false
             self.error = true
@@ -199,6 +202,22 @@ class ViewController: UIViewController {
                     print("entra en success: \(value) , \(user)")
                     self.user_in = user
                     self.user_in.email = user_name
+                    //Autentica usuario en firebase
+                    /*Auth.auth().signIn(withEmail: user_name, password: pass) { (user, error) in
+                        // ...
+                    }
+                    //Crea usuario en firebase
+                    Auth.auth().createUser(withEmail: user_name, password: pass) { (authResult, error) in */
+                    //Autentica usuario en firebase
+                    //Auth.auth().signIn(withEmail: user_name, password: pass) { (user_r, error) in
+                    
+                    /*Auth.auth().signIn(withEmail: user_name, password: pass) { (user_r, error) in
+                        if error != nil{
+                            print("Error generado al autenticar usuario en firebase: \(error)")
+                        }else{
+                            print("Usuario logoneado en firebase: \(user_r?.user.uid)")
+                        }
+                    }*/
                     self.syncAllDataInit()
                 }
             }, error: {
@@ -318,6 +337,7 @@ class ViewController: UIViewController {
     @IBAction func resetPass(_ sender: Any) {
         txt_alert = " Recuperar Contraseña para usuario:" + user_txt.text!;
         self.showAlert();
+        notificationPop(title: "Recuperar Contraseña", subtitle: "sbtitulo", body: "prueba de notificacion")
         
     }
     @IBAction func register(_ sender: Any) {
@@ -363,7 +383,7 @@ class ViewController: UIViewController {
                              success: {
                                 (message) -> Void in
                                 print(message)
-                                self.notificationPop(title: "INTERAGUA", subtitle: "Cofirmación de Email", body: "Se reenvio el correo de confirmación. Por favor ingrese a su correo y active su cuenta para tener acceso a la aplicación")
+                                notificationPop(title: "INTERAGUA", subtitle: "Cofirmación de Email", body: "Se reenvio el correo de confirmación. Por favor ingrese a su correo y active su cuenta para tener acceso a la aplicación")
                                 self.setValues()
                             },error: {
                                 (message) -> Void in
@@ -373,7 +393,7 @@ class ViewController: UIViewController {
             
             print("reenvio de correo")
         }
-        let btn_cancel = UIAlertAction(title: "Cancelar", style: .default) { (UIAlertAction) in
+        let btn_cancel = UIAlertAction(title: "Cancelar", style: .destructive) { (UIAlertAction) in
             self.setValues()
         }
         
@@ -396,40 +416,6 @@ class ViewController: UIViewController {
         self.present(mainTabViewController, animated: true, completion: nil)
     }
     
-    func notificationPop(title: String, subtitle: String, body: String){
-        //se accede a la central de notificaciones
-        let notificationCenter = UNUserNotificationCenter.current()
-        //se crea el contenido de la notificacion
-        let content = UNMutableNotificationContent()
-        content.title = title
-        content.subtitle = subtitle
-        content.body = body
-        
-        /*Ahora debemos crear un Schedule de disparo de nuestra notificación. Para
-         ello, usaremos UNTimeIntervalNotificationTrigger, el cual recibe un
-         "timeInterval". Este parámetro indica cuantos segundos a partir de ser
-         agregada nuestra notificación ésta será disparada. El siguiente parámetro
-         "repeats" sirve para indicar si la notificación se repetirá después de
-         su primer disparo.*/
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-        
-        /*Ahora crearemos una petición, la cual debe tener un "identifier" que
-         puede ser el de nuestra preferencia, un "content" y un "trigger" que
-         hemos generado lineas arriba.*/
-        let request = UNNotificationRequest(identifier: "initNotification", content: content, trigger: trigger)
-        
-        /*El siguiente paso será agregar nuestra petición a la central
-         de notificaciones de nuestra aplicación.*/
-        notificationCenter.add(request) { (error) in
-            
-            if error == nil {
-                print("Se agrego correctamente la notificacion")
-            }else{
-                print("Se presento un problema con la notificacion")
-            }
-        }
-    }
-    
     
     func loadCore(){
         var places: [place] = []
@@ -444,9 +430,6 @@ class ViewController: UIViewController {
             print(message)
         })
     }
-    
-    
-    
     
 }
 

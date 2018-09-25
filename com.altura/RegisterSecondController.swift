@@ -82,7 +82,7 @@ class RegisterSecondController: UIViewController {
     @IBAction func registerUser(_ sender: Any) {
         
         let identifier = self.identifier
-        let email = self.email
+        let email = self.email.trimmingCharacters(in: .whitespaces)
         let pass = self.pass
         let contract = self.contract_txt.text!
         let names = self.names_txt.text!
@@ -104,7 +104,7 @@ class RegisterSecondController: UIViewController {
         }else{
             self.names_txt.layer.borderWidth = 0
         }
-        if(address == "" ){
+        /*if(address == "" ){
             self.address_txt.layer.borderColor = myColor.cgColor
             self.address_txt.layer.borderWidth = 1.0
         }else{
@@ -115,7 +115,7 @@ class RegisterSecondController: UIViewController {
             self.telephone_txt.layer.borderWidth = 1.0
         }else{
             self.telephone_txt.layer.borderWidth = 0
-        }
+        }*/
         
         var term_ok = false
         if send_data_select.isOn && acept_term_select.isOn{
@@ -138,7 +138,7 @@ class RegisterSecondController: UIViewController {
             
         }
         
-        if( names != "" && address != "" && telephone != "" && term_ok){
+        if( names != "" && term_ok){
 
             let imei = UserDefaults.standard.object(forKey: "token") != nil ? UserDefaults.standard.object(forKey: "token") as! String : ""
             

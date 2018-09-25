@@ -139,8 +139,6 @@ class NewContractViewController: UIViewController, UITableViewDelegate, UITableV
                         self.err_id.text = ""
                     }
     
-                    
-    
                 }else{
                 //self.ok = false
                     print(message)
@@ -208,13 +206,13 @@ class NewContractViewController: UIViewController, UITableViewDelegate, UITableV
                     //verificar si se encuentra en la base
                     
                     self.accounts = self.dbase.getAccounts()
+                    print("cuentas en base antes de agregar: \(self.accounts)")
                     var update = false
                     for item_ac in self.accounts{
                         if item_ac.service == num_contrato{
                             update = true
                         }
                     }
-                    
                     
                     if update{
                         print("entra en actualizar servicio")
@@ -242,8 +240,9 @@ class NewContractViewController: UIViewController, UITableViewDelegate, UITableV
                                                                     self.spin.stopAnimating()
                                                                     self.spinView.isHidden = true
                                                                     
-                                                                    let mainTabViewController = self.storyboard?.instantiateViewController(withIdentifier: "mainTabViewController") as! MainTabViewController
-                                                                    self.present(mainTabViewController, animated: true, completion: nil)
+                                                                    self.dismiss(animated: true, completion: nil)
+                                                                    /*let mainTabViewController = self.storyboard?.instantiateViewController(withIdentifier: "mainTabViewController") as! MainTabViewController
+                                                                    self.present(mainTabViewController, animated: true, completion: nil)*/
                                                                 }
                                                                 
                                                                 
@@ -300,8 +299,10 @@ class NewContractViewController: UIViewController, UITableViewDelegate, UITableV
                                                             self.spin.stopAnimating()
                                                             self.spinView.isHidden = true
                                                             
-                                                            let mainTabViewController = self.storyboard?.instantiateViewController(withIdentifier: "mainTabViewController") as! MainTabViewController
-                                                            self.present(mainTabViewController, animated: true, completion: nil)
+                                                            
+                                                            self.dismiss(animated: true, completion: nil)
+                                                            /*let mainTabViewController = self.storyboard?.instantiateViewController(withIdentifier: "mainTabViewController") as! MainTabViewController
+                                                            self.present(mainTabViewController, animated: true, completion: nil)*/
                                                         }
 
                                     },error: {
